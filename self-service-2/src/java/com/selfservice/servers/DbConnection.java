@@ -5,25 +5,39 @@
  */
 package com.selfservice.servers;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 
 /**
  *
  * @author francisco
  */
 @WebServlet(name = "DbConnection", urlPatterns = {"/DbConnection"})
-public class DbConnection extends HttpServlet {
+public class DbConnection   {
+    
+    
 	public static Connection getConnection() throws SQLException{ //making a static connection,shares to all classes
 		Connection con=null; // creating connection
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://104.196.137.158:3306/self_service_db?useSSL=false","TALEND_USER","TALEND_USER/talend123!");
-						
-		} catch (ClassNotFoundException | SQLException e) {
+                    //get the db connection from the configuration.properties file
+                    InputStream in;
+                    in = DbConnection.class.getResourceAsStream("/configuration.properties");
+                    Properties p =new Properties();
+                    p.load(in);
+                    String dburl=p.getProperty("database.url");
+                    String dbdriver=p.getProperty("database.driver");
+                    String dbuser=p.getProperty("database.username");
+                    String dbpasswd=p.getProperty("database.password");
+                    
+                    Class.forName(dbdriver);
+                    con=DriverManager.getConnection(dburl,dbuser,dbpasswd);
+
+		} catch (ClassNotFoundException | SQLException | IOException e) {
 			con.close();
 			//throws an error if at all its unable to create an connection
 			System.out.println(e);
