@@ -59,12 +59,14 @@ public class Login extends HttpServlet {
             } else {
                 //if no values are found then the User does not exist
                 req.getRequestDispatcher("login.jsp").include(req, resp);
-                out.print("<p align='center' color='red' >User Does Not Exist! Please Register");
-                out.print("<a href='index.jsp'>Register Here</a></p>");
+                out.print("<p  class='save_err' >User Does Not Exist!");
+                out.print("<a href='register.jsp'>Register Here</a></p>");
             }
-        } catch (IOException | ServletException e) {
+        } catch (Exception e) {
             req.getRequestDispatcher("login.jsp").include(req, resp);
-            out.print("<p>Please Enter Valid Details To Login</p>");
+            String err=e.getMessage();
+            String errmsg= "<p class='save_err'>Login failed! "+ err + "</p>";
+            out.print(errmsg);
 //executes when user enters invalid details
 
         }

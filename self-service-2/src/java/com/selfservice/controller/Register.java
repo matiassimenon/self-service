@@ -68,14 +68,14 @@ public class Register extends HttpServlet {
             int ret=ps.executeUpdate();
             if(ret ==1){
                  request.getRequestDispatcher("register.jsp").include(request, response);
-                 out.print("<tr><td/><td/><td/><td>Register Successfully!!</td></tr>");
+                 out.print("<h3 class='save_ok'>Register Successfully!!</h3>");
             }
            
         } catch (SQLException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
             request.getRequestDispatcher("register.jsp").include(request, response);
             String err=ex.getLocalizedMessage();
-            String outstr= "<tr><td/><td>Register Failed!  </td>"+ err+ "</td></tr>";
+            String outstr= "<h3 class='save_err'>Register Failed!  "+ err+ "</h3>";
             out.print(outstr);
             
         }

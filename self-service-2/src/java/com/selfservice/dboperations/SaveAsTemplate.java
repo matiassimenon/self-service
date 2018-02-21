@@ -79,13 +79,15 @@ public class SaveAsTemplate extends HttpServlet {
                         //save successfully
                         if(ret ==1){
                             request.getRequestDispatcher("provisionForm.jsp").include(request, response);
-                            out.print("<tr><td/><td/><td/><td>Save Successfully!!</td></tr>");
+                            out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
                         }
                     
             } catch (SQLException ex) {
                 Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
                 request.getRequestDispatcher("provisionForm.jsp").include(request, response);
-                out.print("<tr><td/><td/><td/><td>Save failed, please try again</td></tr>");
+                String err=ex.getLocalizedMessage();
+                String outstr= "<h3 class='save_err'>Save Failed!  "+ err+ "</h3>";
+                out.print(outstr);
             }
   
     }

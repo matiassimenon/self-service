@@ -21,10 +21,10 @@ import com.selfservice.model.User;
  * @author francisco
  */
 public class UserLoginValidate {
-	public static List<User> getUsers(String username, String password){		
+	public static List<User> getUsers(String username, String password) throws Exception{		
 		List<User>list = new ArrayList<>();
 		//take a list to store the values which are in db
-		 try{  
+		   
 			Connection con=DbConnection.getConnection();  
 			PreparedStatement ps=con.prepareStatement("select * from self_service_db.USER where username=? and password=?"); 
 			ps.setString(1,username);
@@ -37,7 +37,7 @@ public class UserLoginValidate {
 				list.add(pObject);
 			}  
 			con.close();  
-		}catch(Exception ex){ex.printStackTrace();}  		  
+			  
 		return list;  //returns the list		
 	}
 }

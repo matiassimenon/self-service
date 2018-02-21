@@ -5,6 +5,18 @@ text-align:center;
 background-color:#fff;
 color:#003366;
 }
+.save_err{
+    margin:25px;
+    text-align:center;
+    background-color:#fff;
+    color:red;
+}
+.save_ok{
+    margin:25px;
+    text-align:center;
+    background-color:#fff;
+    color:green;
+}
 tableForm{ 
 border:2px solid green;
 margin: 5em;
