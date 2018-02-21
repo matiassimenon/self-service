@@ -15,7 +15,7 @@
     <body>
         <%@include file="navigator.jsp"%>
         <%@include file="menu.jsp"%>
-        <h1>History</h1>
+        <h3>History</h3>
         <form  id="historyForm" method="post" action="">
             <table  align="center" style="border:2px solid green; padding:15px 15px; height:400px; width: 400px; "></table>
         </form>

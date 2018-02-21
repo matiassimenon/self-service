@@ -22,7 +22,7 @@
 			<tr><td>Talend username:</td><td><input type="text" id="id" name="username" placeholder="Enter your Talend username" required="required"></td></tr>
 			<tr><td>Password:</td><td> <input type="password" name="password" placeholder="Enter your password" required></td></tr>
 			<tr><td colspan=5 align="center"><button type="submit">Login </button></td></tr></table>
-                        <p>If not registered yet, <a href="register.jsp">Register</a></p>
+                    <p> <a href="register.jsp">Sign up</a></p>
 		</form>
 	</body>
 </html>

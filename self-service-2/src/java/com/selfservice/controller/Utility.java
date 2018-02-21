@@ -40,7 +40,8 @@ public class Utility {
     public static void addUserToCookie(HttpServletResponse resp, String username){
             Cookie loginCookie = new Cookie(USER,username);
             //setting cookie to expiry in 30 mins
-            loginCookie.setMaxAge(30*60);
+            loginCookie.setMaxAge(30*60);            
             resp.addCookie(loginCookie);
+            
     }
 }

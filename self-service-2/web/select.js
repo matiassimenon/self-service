@@ -43,3 +43,19 @@ function removeOptions(selectObj)
          start ++;
     }
  }
+ 
+function setSelected(selectObj, selectedValue){
+    if (typeof selectObj !== 'object')
+    {
+         selectObj = document.getElementById(selectObj);
+    }
+    var len = selectObj.options.length;
+    for (var i=0; i < len; i++) {
+        // set option
+        var value1=selectObj.options[i];
+        if(selectedValue == value1.value)  {
+            selectObj.options[i].selected = true;
+            return;
+         }       
+    }
+}

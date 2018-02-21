@@ -5,6 +5,7 @@
         <td><a href="provisionForm.jsp">Provision Form</a></td>
         <td><a href="templateList.jsp">My Templates</a></td>
         <td><a href="previousRequestList.jsp">My Previous Requests</a></td>
-        <td><a href="historyList.jsp">History</a></td>       
+        <td><a href="historyList.jsp">History</a></td>  
+        <td><a href="Logout">Logout</a></td> 
     </tr>
 </table>
