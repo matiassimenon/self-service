@@ -17,9 +17,15 @@ color:#003366;
     background-color:#fff;
     color:green;
 }
-tableForm{ 
-border:2px solid green;
-margin: 5em;
+
+.form{
+    text-align:justify;
+    padding:5px 5px;
+    background-color:#fff;    
+    border-radius:5px;
+    border:2px solid green;
+    margin: 2em;
+
 }
 p{
 text-align:center;

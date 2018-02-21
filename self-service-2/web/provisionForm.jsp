@@ -10,13 +10,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Self service</title>
-        <style>
+        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
+        <style>             
             input,select{
                 width: 255px;
                 color:#003366;
 		background-color:#fff;
             }
         </style>
+       
         <script src="select.js"> </script>
 <script >
 
@@ -48,8 +50,11 @@ function generateImageName(){
 </script>
     </head>
     <body>
-        <form id="templateForm" method="post" action="SaveAsTemplate">
-            <table>
+        <%@include file="navigator.jsp"%>
+         <%@include file="menu.jsp"%>
+        <h3>Provision Form</h3>
+        <form  id="templateForm" method="post" action="SaveAsTemplate">
+            <table  align="center" style="border:2px solid green; padding:15px 15px;">
                 <tr>
                     <td >OS:</td> 
                     <td> <select id="os" name="os" required="required" onchange="if(this.value != '') setOsVersion(this.options[this.selectedIndex].value);"> 
