@@ -5,40 +5,31 @@ they are not accessible except through controller process.
 This JSP is here to provide a redirect to the dispatcher
 servlet but should be the only JSP outside of WEB-INF.
 --%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Support Self Service</title>
+                <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
 		<style>
 			#reg_form{
 			text-align:justify;
 			padding:15px 15px;
-			background-color:#003366;
+			background-color:#fff;
 			height:400px;
 			border-radius:15px;
 			}
                         
 			td{
 			width:100px;
-			color:white;
+			color:#003366;;
 			}
                         select{
                             width: 100px;
                         }
-			p{
-			text-align:center;
-			font-size:16pt;
-			color:#000066;
-			}
-			h1{
-			margin:25px;
-			text-align:center;
-			background-color:#003366;
-			color:#fff;
-			}
+			
 		</style>
                 <script src="select.js"> </script>
                 <script>
@@ -63,7 +54,7 @@ servlet but should be the only JSP outside of WEB-INF.
                  {txt:'Barcelona', val:'bar'},
                  {txt:'Bonn', val:'bon'},
                  {txt:'Feldkirchen', val:'fel'},
-                 {txt:'Nürnberg', val:'nur'},
+                 {txt:'NÃ¼rnberg', val:'nur'},
                  {txt:'Suresnes', val:'sur'},
                  {txt:'Switzerland', val:'swi'}
                  ];
@@ -85,9 +76,12 @@ servlet but should be the only JSP outside of WEB-INF.
 
 	</head>
 	<body>
-	<h1>Self service Platform Registration</h1>
+	
+        <%@include file="navigator.jsp"%>
+        <h1>Self service Platform Registration</h1>
+        <h3>Register</h3>
 	<form id="registerForm" action="Register" method="post">
-		<table id="reg_form"  align="center">
+		<table id="reg_form"  align="center" style="border:2px solid green;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required"></td>
                     <td>Department:</td>

@@ -53,6 +53,7 @@ public class Register extends HttpServlet {
         
         try {
             Connection con=DbConnection.getConnection();
+            //insert to User
             String sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin)values(?,?,?,?,?,?,?,?,?)";
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1, firstname);
@@ -69,7 +70,7 @@ public class Register extends HttpServlet {
                  request.getRequestDispatcher("register.jsp").include(request, response);
                  out.print("<tr><td/><td/><td/><td>Register Successfully!!</td></tr>");
             }
-            
+           
         } catch (SQLException ex) {
             Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
             request.getRequestDispatcher("register.jsp").include(request, response);

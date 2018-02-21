@@ -1,0 +1,15 @@
+
+h1,h2,h3{
+margin:25px;
+text-align:center;
+background-color:#fff;
+color:#003366;
+}
+tableForm{ 
+border:2px solid green;
+margin: 5em;
+}
+p{
+text-align:center;
+font-size: 16pt;
+}
