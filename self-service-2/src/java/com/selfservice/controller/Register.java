@@ -5,8 +5,14 @@
  */
 package com.selfservice.controller;
 
+import com.selfservice.servers.DbConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,18 +38,47 @@ public class Register extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Register</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Register at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        PrintWriter out=response.getWriter();
+        String firstname=request.getParameter("firstname");
+        String lastname=request.getParameter("lastname");
+        String username=request.getParameter("username");
+        String email=request.getParameter("email");
+        String department=request.getParameter("department");
+        String region=request.getParameter("region");
+        String city=request.getParameter("city");
+        String admin=request.getParameter("admin");
+        int  isAdmin="true".equals(admin)?1:0;
+        String password1=request.getParameter("password1");
+        String password2=request.getParameter("password2");
+        
+        try {
+            Connection con=DbConnection.getConnection();
+            String sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin)values(?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps=con.prepareStatement(sql);
+            ps.setString(1, firstname);
+            ps.setString(2, lastname);
+            ps.setString(3, username);
+            ps.setString(4, email);
+            ps.setString(5, department.toUpperCase());
+            ps.setString(6, city);
+            ps.setString(7, password1);
+            ps.setString(8, region);
+            ps.setInt(9, isAdmin);
+            int ret=ps.executeUpdate();
+            if(ret ==1){
+                 request.getRequestDispatcher("register.jsp").include(request, response);
+                 out.print("<tr><td/><td/><td/><td>Register Successfully!!</td></tr>");
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Register.class.getName()).log(Level.SEVERE, null, ex);
+            request.getRequestDispatcher("register.jsp").include(request, response);
+            String err=ex.getLocalizedMessage();
+            String outstr= "<tr><td/><td>Register Failed!  </td>"+ err+ "</td></tr>";
+            out.print(outstr);
+            
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

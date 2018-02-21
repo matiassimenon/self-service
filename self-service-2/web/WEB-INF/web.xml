@@ -9,6 +9,10 @@
         <servlet-name>SaveAsTemplate</servlet-name>
         <servlet-class>com.selfservice.dboperations.SaveAsTemplate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>com.selfservice.controller.Register</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -16,6 +20,10 @@
     <servlet-mapping>
         <servlet-name>SaveAsTemplate</servlet-name>
         <url-pattern>/SaveAsTemplate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/Register</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

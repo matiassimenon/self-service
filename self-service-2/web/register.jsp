@@ -20,10 +20,14 @@ servlet but should be the only JSP outside of WEB-INF.
 			height:400px;
 			border-radius:15px;
 			}
+                        
 			td{
 			width:100px;
 			color:white;
 			}
+                        select{
+                            width: 100px;
+                        }
 			p{
 			text-align:center;
 			font-size:16pt;
@@ -36,22 +40,90 @@ servlet but should be the only JSP outside of WEB-INF.
 			color:#fff;
 			}
 		</style>
+                <script src="select.js"> </script>
+                <script>
+                //define the city  data array
+                var cityArr = [];
+                cityArr['apac'] =
+                [
+                 {txt:'Bangalore', val:'ban'},
+                 {txt:'Beijing', val:'bei'},
+                 {txt:'Singapore', val:'sin'},
+                 {txt:'Sydney', val:'syd'}
+                 ];
+                cityArr['us'] =
+                [
+                 {txt:'Boston', val:'bos'},
+                 {txt:'Irvine', val:'irv'},
+                 {txt:'Redwood', val:'red'}
+                 ];
+                 cityArr['emea'] =
+                [
+                 {txt:'Berkshire', val:'ber'},
+                 {txt:'Barcelona', val:'bar'},
+                 {txt:'Bonn', val:'bon'},
+                 {txt:'Feldkirchen', val:'fel'},
+                 {txt:'Nürnberg', val:'nur'},
+                 {txt:'Suresnes', val:'sur'},
+                 {txt:'Switzerland', val:'swi'}
+                 ];
+                function setCity(city)
+                {
+                    setSelectOption('city', cityArr[city], 'Please select...');
+                }
+                function checkPasswd(){
+                    var pwd1=document.getElementById("password1").value;
+                    var pwd2=document.getElementById("password2").value;
+                    if(pwd1 !== pwd2){
+                        document.getElementById("passwdMsg").innerHTML="Password Not Matched!";
+                        return;
+                    }
+                    document.getElementById("passwdMsg").innerHTML="Password Matched!";
+               
+                }
+                </script>
+
 	</head>
 	<body>
 	<h1>Self service Platform Registration</h1>
-	<form action="controller" method="post">
-		<table id="reg_form" cellspacing="20" align="center">
-		<tr><td>First Name:</td><td><input type="text" name="firstname" placeholder="firstname" required="required"></td></tr>
-		<tr><td>Last Name:</td><td><input type="text" name="lastname" placeholder="lastname" required></td></tr>
-                <tr><td>Username:</td><td> <input type="text" id="id" name="username" placeholder="talend username" required></td></tr>
-                <tr><td>Talend Email:</td><td> <input type="email" name="email" placeholder="email@talend.com" required></td></tr>
-                <tr><td>Department:</td><td><input type="text" name="department" placeholder="support, sales, rnd" required="required"></td></tr>
-		<tr><td>Password:</td><td> <input type="password" name="password" placeholder="alphanumeric password" required></td></tr>
-		<tr><td>City:</td><td><input type="text" name="city" placeholder="ATL, BLR, CGN, IRV, LON" required="required"></td></tr>
-		<tr><td>Region:</td><td><input type="text" name="region" placeholder="APAC, EMEA, US" required="required"></td></tr>
-                <tr><td>Admin:</td><td><input type="checkbox" name="admin" value="false"></td></tr>
-		<tr><td colspan=5 align="center"><button type="submit">REGISTER</button></td></tr></table>
-		<p>If already registered, <a href="login.jsp">login</a></p>
+	<form id="registerForm" action="Register" method="post">
+		<table id="reg_form"  align="center">
+		<tr>
+                    <td>First Name:</td><td><input type="text" name="firstname"  maxlength="30" required="required"></td>
+                    <td>Department:</td>
+                    <td><select name="department" required="required">
+                        <option value="sales">Sales</option>
+                        <option value="rd">RD</option>
+                        <option value="support">Support</option>
+                    </select></td>
+                </tr>
+		<tr>
+                    <td>Last Name:</td><td><input type="text" name="lastname" maxlength="50"  required="required"></td>
+                    <td>Region:</td>
+                    <td> <select id="region" name="region" required="required" onchange="if(this.value != '') setCity(this.options[this.selectedIndex].value);">
+                            <option value="">Please select...</option>
+                            <option value="apac">APAC</option>
+                            <option value="emea">EMEA</option>
+                            <option value="us">US</option>
+                        </select> </td>
+                </tr>
+                <tr>
+                    <td>Username:</td><td> <input type="text" id="username" name="username"  maxlength="30" required="required"></td>
+                    <td>City:</td><td> <select id="city" name="city" required="required">
+                            <option value="">Please select...</option>
+                            
+                        </select> </td>
+                </tr>
+                <tr>
+                    <td>Talend Email:</td><td> <input type="email" name="email" maxlength="50" required="required"></td>
+                    <td>Admin:</td><td><input type="checkbox" id="admin" name="admin"  value="true"></td>
+                </tr>
+                
+                <tr><td>Password:</td><td> <input type="password" id="password1" name="password1" maxlength="20"  required="required" onblur="checkPasswd();"></td><td> <input type="password" maxlength="20"  id="password2" name="password2" required="required" onblur="checkPasswd();"></td> 
+                    <td><span id="passwdMsg"></span></td></tr>
+		
+                <tr><td colspan=5 align="center"><button type="submit" >REGISTER</button></td></tr></table>
+		<p>Have an Account? <a href="login.jsp">login</a></p>
 	</form>
 </body>
 </html>

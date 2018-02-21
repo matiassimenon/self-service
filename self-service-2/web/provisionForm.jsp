@@ -17,49 +17,9 @@
 		background-color:#fff;
             }
         </style>
+        <script src="select.js"> </script>
 <script >
- function removeOptions(selectObj)
- {
-    if (typeof selectObj !== 'object')
-    {
-        selectObj = document.getElementById(selectObj);
-    }
-    var len = selectObj.options.length;
-    for (var i=0; i < len; i++) {
-        //clear current option
-        selectObj.options[0] = null;
-    }
- }
- /*
- * @param {String || Object]} selectObj 
- * @param {Array} optionList e.g. [{txt:'beijing', val:'010'}, {txt:'shangai', val:'020'}], required
- * @param {String} firstOption e.g. "..."
- * @param {String} selected, optional
- */
- function setSelectOption(selectObj, optionList, firstOption, selected) {
-    if (typeof selectObj !== 'object')
-    {
-         selectObj = document.getElementById(selectObj);
-    }
-    // clear options
-    removeOptions(selectObj);
-    // count
-    var start = 0;
 
-    if (firstOption) {
-        selectObj.options[0] = new Option(firstOption, '');
-        start ++;
-    }
-    var len = optionList.length;
-    for (var i=0; i < len; i++) {
-        // set option
-        selectObj.options[start] = new Option(optionList[i].txt, optionList[i].val);
-        if(selected == optionList[i].val)  {
-            selectObj.options[start].selected = true;
-         }
-         start ++;
-    }
- }
 //define the os version data array
 var osArr = [];
 osArr['ubuntu'] =
@@ -92,7 +52,7 @@ function generateImageName(){
             <table>
                 <tr>
                     <td >OS:</td> 
-                    <td> <select id="os" name="os" onchange="if(this.value != '') setOsVersion(this.options[this.selectedIndex].value);"> 
+                    <td> <select id="os" name="os" required="required" onchange="if(this.value != '') setOsVersion(this.options[this.selectedIndex].value);"> 
                              <option value="">Please select...</option>
                             <option value="ubuntu">Ubuntu</option>
                             <option value="centos">CentOS</option>
@@ -102,7 +62,7 @@ function generateImageName(){
                 </tr>                
                 <tr>
                     <td>OS Version: </td>
-                    <td><select id="osVersion" name="osVersion" onchange="generateImageName();">
+                    <td><select id="osVersion" required="required" name="osVersion" onchange="generateImageName();">
                              <option value="">Please select...</option>
                              <!--
                             <option value="14.04">14.04</option>
@@ -161,9 +121,9 @@ function generateImageName(){
                             <option value="8.5">8.5</option>
                         </select> 
                     </td>
-                    <td colspan="2"><span id="saveStatus"></span></td>
+                    
                 </tr>
-                <tr><td></td><td></td> <td></td><td><button type="button" onclick="document.getElementById('templateForm').submit();">Save as Template</button> <button type=""button>Request</button></td></tr>
+                <tr><td></td><td></td> <td></td><td><button type="submit" >Save as Template</button> <button type=""button>Request</button></td></tr>
                 
             </table>
             
