@@ -5,10 +5,21 @@
  */
 package com.selfservice.dboperations;
 
+import com.selfservice.controller.Utility;
+import com.selfservice.servers.DbConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,19 +42,52 @@ public class SaveAsTemplate extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SaveAsTemplate</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SaveAsTemplate at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+            PrintWriter out = response.getWriter();
+            
+            response.setContentType("text/html;charset=UTF-8");
+            String os = request.getParameter("os");
+            String osVersion = request.getParameter("osVersion");
+            String registry = request.getParameter("registry");
+            String talendComponent = request.getParameter("talendComponent");
+            String imageName = request.getParameter("imageName");
+            String componentVersion = request.getParameter("componentVersion");
+            String jdk = request.getParameter("jdk");
+            String jdkUpdate = request.getParameter("jdkUpdate");
+            String tomcatVersion = request.getParameter("tomcatVersion");
+            String uuid=UUID.randomUUID().toString().substring(0,20);
+            String username=Utility.getUserName(request);
+            username=(username==null?"test":username);
+            try {  
+                Connection con=DbConnection.getConnection();
+                String sql="insert into TEMPLATE(template_uuid, template_name, username, creation_date, last_edit, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version) values(?,?,?,?,?,?,?,?,?,?,?,?) ";
+                	System.out.println("saveToTemplate sql-->"+ sql);
+                        PreparedStatement ps=con.prepareStatement(sql); 
+                        
+			ps.setString(1,uuid);
+			ps.setString(2,imageName);
+                        ps.setString(3, username);
+                        ps.setDate(4, new Date(System.currentTimeMillis()));
+                        ps.setDate(5, new Date(System.currentTimeMillis()));
+                        ps.setString(6, os);
+                        ps.setString(7, osVersion);
+                        ps.setString(8,componentVersion);
+                        ps.setString(9, talendComponent);
+                        ps.setString(10, jdk);
+                        ps.setString(11, jdkUpdate);
+                        ps.setString(12, tomcatVersion);
+			int ret=ps.executeUpdate();
+                        //save successfully
+                        if(ret ==1){
+                            request.getRequestDispatcher("provisionForm.jsp").include(request, response);
+                            out.print("<tr><td/><td/><td/><td>Save Successfully!!</td></tr>");
+                        }
+                    
+            } catch (SQLException ex) {
+                Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
+                request.getRequestDispatcher("provisionForm.jsp").include(request, response);
+                out.print("<tr><td/><td/><td/><td>Save failed, please try again</td></tr>");
+            }
+  
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
