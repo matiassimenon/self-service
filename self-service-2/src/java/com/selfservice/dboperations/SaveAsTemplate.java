@@ -5,21 +5,19 @@
  */
 package com.selfservice.dboperations;
 
-import com.selfservice.controller.Utility;
+import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -55,7 +53,8 @@ public class SaveAsTemplate extends HttpServlet {
             String jdkUpdate = request.getParameter("jdkUpdate");
             String tomcatVersion = request.getParameter("tomcatVersion");
             String uuid=UUID.randomUUID().toString().substring(0,20);
-            String username=Utility.getUserName(request);
+            User user=(User)request.getSession().getAttribute("user");
+            String username=user.getUsername();
             username=(username==null?"test":username);
             try {  
                 Connection con=DbConnection.getConnection();

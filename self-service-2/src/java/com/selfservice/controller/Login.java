@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 
             list = UserLoginValidate.getUsers(username, password); //send the values user_name and password to vadlidate class of getUsers method and storing the resultset in list
             if (!(list.isEmpty())) {                   
-                    Utility.addUserToCookie(resp, username); 
+
                     User user=list.get(0);                   
                     req.getSession().setAttribute("user", user);
                     

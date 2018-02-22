@@ -4,7 +4,6 @@
     Author     : francisco
 --%>
 <%@page import="java.util.List"%>
-<%@page import="com.selfservice.controller.Utility"%>
 <%@page import="com.selfservice.controller.UserLoginValidate"%>
 <%@page import="com.selfservice.model.User"%>
 <%
@@ -78,7 +77,7 @@
         <%@include file="navigator.jsp"%>
         <%@include file="menu.jsp"%>
         <h3>Profile</h3>
-        <form   method="post" action="">
+        <form   method="post" action="SaveUser?regularUserProfile.jsp">
             	<table id="reg_form"  align="center" style="border:2px solid green; padding:10px 10px;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=firstname%>"></td>
@@ -100,7 +99,7 @@
                         </select> </td>
                 </tr>
                 <tr>
-                    <td>Username:</td><td> <input type="text" id="username" name="username" placeholder="Talend username"  maxlength="30" required="required" value="<%=username%>"></td>
+                    <td>Username:</td><td> <input type="text" id="username" name="username" placeholder="Talend username"  maxlength="30" required="required" readonly="true" value="<%=username%>"></td>
                     <td>City:</td><td> <select id="city" name="city" required="required">
                             <option value="">Please select...</option>
                             

@@ -80,7 +80,7 @@ servlet but should be the only JSP outside of WEB-INF.
         <%@include file="navigator.jsp"%>
         <h1>Self service Platform Registration</h1>
         <h3>Register</h3>
-	<form id="registerForm" action="Register" method="post">
+	<form id="registerForm" action="SaveUser?register.jsp" method="post">
 		<table id="reg_form"  align="center" style="border:2px solid green; padding:10px 10px;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required"></td>

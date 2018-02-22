@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>self-service</display-name>
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>com.selfservice.controller.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.selfservice.controller.Login</servlet-class>
@@ -10,12 +18,12 @@
         <servlet-class>com.selfservice.dboperations.SaveAsTemplate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Register</servlet-name>
-        <servlet-class>com.selfservice.controller.Register</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Logout</servlet-name>
         <servlet-class>com.selfservice.controller.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveUser</servlet-name>
+        <servlet-class>com.selfservice.dboperations.SaveUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -26,12 +34,12 @@
         <url-pattern>/SaveAsTemplate</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Register</servlet-name>
-        <url-pattern>/Register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveUser</servlet-name>
+        <url-pattern>/SaveUser</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
