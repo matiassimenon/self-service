@@ -53,18 +53,40 @@ public class SaveUser extends HttpServlet {
         Connection con=null;
         try {
             con=DbConnection.getConnection();
+            
             //insert to User
-            String sql="replace into USER(firstname, lastname, username, email, department, city, password, region, admin)values(?,?,?,?,?,?,?,?,?)";
-            PreparedStatement ps=con.prepareStatement(sql);
-            ps.setString(1, firstname);
-            ps.setString(2, lastname);
-            ps.setString(3, username);
-            ps.setString(4, email);
-            ps.setString(5, department.toUpperCase());
-            ps.setString(6, city);
-            ps.setString(7, password1);
-            ps.setString(8, region);
-            ps.setInt(9, isAdmin);
+            String sql;
+            PreparedStatement ps=null;
+            boolean isInsert="register.jsp".equals(jspPage);
+            if(isInsert){
+                sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin)values(?,?,?,?,?,?,?,?,?)";
+                ps=con.prepareStatement(sql);
+                ps.setString(1, firstname);
+                ps.setString(2, lastname);
+                ps.setString(3, username);
+                ps.setString(4, email);
+                ps.setString(5, department.toUpperCase());
+                ps.setString(6, city);
+                ps.setString(7, password1);
+                ps.setString(8, region);
+                ps.setInt(9, isAdmin);
+            }
+            
+            //update user           
+            if(!isInsert ){
+                sql="update USER set firstname=?, lastname=?, email=?, department=?, city=?, password=?, region=?, admin=? where username=?";
+                ps=con.prepareStatement(sql);
+                ps.setString(1, firstname);
+                ps.setString(2, lastname);
+                ps.setString(3, email);
+                ps.setString(4, department.toUpperCase());
+                ps.setString(5, city);
+                ps.setString(6, password1);
+                ps.setString(7, region);
+                ps.setInt(8, isAdmin);
+                ps.setString(9, username);                
+            }
+           
             int ret=ps.executeUpdate();
             if(ret >0){
                  request.getRequestDispatcher(jspPage).include(request, response);
