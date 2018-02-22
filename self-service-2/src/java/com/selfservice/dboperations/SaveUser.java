@@ -66,7 +66,7 @@ public class SaveUser extends HttpServlet {
             ps.setString(8, region);
             ps.setInt(9, isAdmin);
             int ret=ps.executeUpdate();
-            if(ret ==1){
+            if(ret >0){
                  request.getRequestDispatcher(jspPage).include(request, response);
                  out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
             }
