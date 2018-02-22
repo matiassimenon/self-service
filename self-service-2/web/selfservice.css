@@ -1,0 +1,33 @@
+
+h1,h2,h3{
+margin:25px;
+text-align:center;
+background-color:#fff;
+color:#003366;
+}
+.save_err{
+    margin:25px;
+    text-align:center;
+    background-color:#fff;
+    color:red;
+}
+.save_ok{
+    margin:25px;
+    text-align:center;
+    background-color:#fff;
+    color:green;
+}
+
+.form{
+    
+    padding:5px 5px;
+    background-color:#fff;    
+    border-radius:5px;
+    border:2px solid green;
+    margin: 2em;
+
+}
+p{
+text-align:center;
+font-size: 16pt;
+}

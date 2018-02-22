@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.Cookie;
 
 /**
  *
@@ -31,6 +32,7 @@ public class Login extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         try {
+            
             String username = req.getParameter("username");
             String password = req.getParameter("password");
 
@@ -41,8 +43,17 @@ public class Login extends HttpServlet {
             List<User> list = new ArrayList<>(); //take a list
 
             list = UserLoginValidate.getUsers(username, password); //send the values user_name and password to vadlidate class of getUsers method and storing the resultset in list
-            if (!(list.isEmpty())) {
-                req.getRequestDispatcher("profile.jsp").include(req, resp);
+            if (!(list.isEmpty())) {                   
+
+                    User user=list.get(0);                   
+                    req.getSession().setAttribute("user", user);
+                    
+                    if(user.getAdmin()){
+                        req.getRequestDispatcher("adminProfile.jsp").include(req, resp);
+                    }else{
+                        req.getRequestDispatcher("regularUserProfile.jsp").include(req, resp);
+                    }
+                    
 //                //if list has some values then you are logged in
 //                out.print("<h1 align='center'>Successful Log In</h1>");
 //                out.print("<table align ='center' border='1' cellspacing='5' cellpadding='5'><tr><th>ID</th><th>NAME</th><th>Password</th><th>Email</th></tr>");
@@ -56,12 +67,14 @@ public class Login extends HttpServlet {
             } else {
                 //if no values are found then the User does not exist
                 req.getRequestDispatcher("login.jsp").include(req, resp);
-                out.print("<p align='center'>User Does Not Exist! Please Register");
-                out.print("<a href='index.jsp'>Register Here</a></p>");
+                out.print("<p  class='save_err' >User Does Not Exist!");
+                out.print("<a href='register.jsp'>Register Here</a></p>");
             }
-        } catch (IOException | ServletException e) {
+        } catch (Exception e) {
             req.getRequestDispatcher("login.jsp").include(req, resp);
-            out.print("<p>Please Enter Valid Details To Login</p>");
+            String err=e.getMessage();
+            String errmsg= "<p class='save_err'>Login failed! "+ err + "</p>";
+            out.print(errmsg);
 //executes when user enters invalid details
 
         }
