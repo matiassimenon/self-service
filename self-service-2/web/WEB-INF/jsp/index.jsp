@@ -2,18 +2,48 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Welcome to Spring Web MVC project</title>
-    </head>
+<html lang="en">
+ <head>
+ <title>Self Service Provisioning Platform</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" type="text/css" href="self-service.css">
 
-    <body>
-        <p>Hello! This is the default welcome page for a Spring Web MVC project.</p>
-        <p><i>To display a different welcome page for this project, modify</i>
-            <tt>index.jsp</tt> <i>, or create your own welcome page then change
-                the redirection in</i> <tt>redirect.jsp</tt> <i>to point to the new
-                welcome page and also update the welcome-file setting in</i>
-            <tt>web.xml</tt>.</p>
-    </body>
-</html>
+ </head>
+ <body>
+
+ <div class="top-bar">
+   <a href="#">help.talend</a>
+   <a href="#">Google Cloud</a>
+   <a href="#">AWS</a>
+   <a href="#">APAC Repository</a>
+   <a href="#">EMEA Repository</a>
+   <a href="#">US Repository</a>
+   <a href="#">Support Wiki</a>
+ </div>
+
+ <div class="main-content">
+   <h2>Self Service Provisioning Platform</h2>
+   <div class="tab-content">
+     <button class="button">Save</button>
+     <button class="button">Request</button>
+     <div class="dropdown">
+    <button class="dropbtn" onclick="myFunction()">Dropdown
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content" id="myDropdown">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+   </div>
+
+ </div>
+
+ <div class="footer">
+   <p>Footer</p>
+ </div>
+
+ </body>
+ </html>
+
