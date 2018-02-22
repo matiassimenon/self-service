@@ -3,16 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.selfservice.dboperations;
+package com.selfservice.controller;
 
+import com.selfservice.model.Request;
+import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author aiming
  */
-public class SaveUser extends HttpServlet {
+public class HistoryServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,53 +40,57 @@ public class SaveUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out=response.getWriter();
-        String jspPage=request.getQueryString();
-        
-        String firstname=request.getParameter("firstname");
-        String lastname=request.getParameter("lastname");
-        String username=request.getParameter("username");
-        String email=request.getParameter("email");
-        String department=request.getParameter("department");
-        String region=request.getParameter("region");
-        String city=request.getParameter("city");
-        String admin=request.getParameter("admin");
-        int  isAdmin="true".equals(admin)?1:0;
-        String password1=request.getParameter("password1");
-        String password2=request.getParameter("password2");
-        Connection con=null;
+        Connection con = null;
+        List<Request> list = new ArrayList<>();
         try {
-            con=DbConnection.getConnection();
-            //insert to User
-            String sql="replace into USER(firstname, lastname, username, email, department, city, password, region, admin)values(?,?,?,?,?,?,?,?,?)";
-            PreparedStatement ps=con.prepareStatement(sql);
-            ps.setString(1, firstname);
-            ps.setString(2, lastname);
-            ps.setString(3, username);
-            ps.setString(4, email);
-            ps.setString(5, department.toUpperCase());
-            ps.setString(6, city);
-            ps.setString(7, password1);
-            ps.setString(8, region);
-            ps.setInt(9, isAdmin);
-            int ret=ps.executeUpdate();
-            if(ret >0){
-                 request.getRequestDispatcher(jspPage).include(request, response);
-                 out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
+            con = DbConnection.getConnection();
+            User user = (User) request.getSession().getAttribute("user");
+            String username = user.getUsername();
+            String page = request.getQueryString();
+
+            String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
+            sql = sql + " and req.username='" + username + "'";
+
+            if (page != null) {
+                //MyPrvious request
+                if (page.contains("previousRequestList")) {
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                    sql = sql + " and req.request_date < '" + df.format(new Date()) + "'";
+                }               
             }
-           
+            //Search Request
+            String sTxt = request.getParameter("search");
+            if (sTxt != null && sTxt.length() > 0) {
+
+                sql = sql + " and ( template_name like '%" + sTxt + "%' or salesforce_case like '%" + sTxt + "%' or request_status like '%" + sTxt + "%' )";
+            }
+            System.out.println("history sql-->" + sql);
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Request object = new Request();
+
+                object.setRequest_date(rs.getDate(1));
+                object.setRequest_status(rs.getString(2));
+                object.setImagename(rs.getString(3));
+                object.setSalesforce_case(rs.getString(4));
+                object.setUsername(rs.getString(5));
+
+                list.add(object);
+            }
+            request.setAttribute("historyList", list);
+            request.getRequestDispatcher(page).include(request, response);
+            rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
-            request.getRequestDispatcher(jspPage).include(request, response);
-            String err=ex.getLocalizedMessage();
-            String outstr= "<h3 class='save_err'>Save Failed!  "+ err+ "</h3>";
-            out.print(outstr);
-            
-        }finally{
-            if(con!=null) try {
-                con.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
     }

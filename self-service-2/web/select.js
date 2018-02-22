@@ -59,3 +59,15 @@ function setSelected(selectObj, selectedValue){
          }       
     }
 }
+
+
+//function for table data row
+function clickRow(row){                
+    if(row.selected === 'true'){
+        row.bgColor='#fff';
+        row.selected='false';
+    }else{
+        row.bgColor='#22CCCC';
+        row.selected='true';
+    }               
+}

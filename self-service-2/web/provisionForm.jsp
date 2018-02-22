@@ -47,6 +47,14 @@ function generateImageName(){
     //window.alert(imagename);
     document.getElementById("imageName").value=imagename;
 }
+function saveAsTemplate(){
+    document.getElementById("templateForm").action="SaveAsTemplate";
+    document.getElementById("templateForm").submit();
+}
+function requestAction(){
+    document.getElementById("templateForm").action="RequestServlet";
+    document.getElementById("templateForm").submit();
+}
 </script>
     </head>
     <body>
@@ -63,7 +71,7 @@ function generateImageName(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase"></input> </td>
+                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase" maxlength="10" required="required" ></input> </td>
                 </tr>                
                 <tr>
                     <td>OS Version: </td>
@@ -128,7 +136,10 @@ function generateImageName(){
                     </td>
                     
                 </tr>
-                <tr><td></td><td></td> <td></td><td><button type="submit" >Save as Template</button> <button type=""button>Request</button></td></tr>
+                <tr><td></td><td></td> <td></td>
+                    <td><button type="submit" onclick="saveAsTemplate()">Save as Template</button> 
+                        <button type="submit" onclick="requestAction()">Request</button></td></tr>
+                
                 
             </table>
             

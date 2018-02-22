@@ -25,6 +25,14 @@
         <servlet-name>SaveUser</servlet-name>
         <servlet-class>com.selfservice.dboperations.SaveUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RequestServlet</servlet-name>
+        <servlet-class>com.selfservice.dboperations.RequestServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryServlet</servlet-name>
+        <servlet-class>com.selfservice.controller.HistoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -40,6 +48,14 @@
     <servlet-mapping>
         <servlet-name>SaveUser</servlet-name>
         <url-pattern>/SaveUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RequestServlet</servlet-name>
+        <url-pattern>/RequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryServlet</servlet-name>
+        <url-pattern>/HistoryServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

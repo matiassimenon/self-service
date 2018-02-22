@@ -1,0 +1,11 @@
+
+.td1{
+    border: solid 0px #fff;
+}
+
+td{
+    border: solid 1px #a0c6e5; height: 20px;               
+}
+th{
+    border: solid 1px #a0c6e5; height: 20px;   background-color: green; color: #fff            
+}

@@ -7,6 +7,7 @@ package com.selfservice.dboperations;
 
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
+import com.selfservice.util.SFUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -52,17 +53,19 @@ public class SaveAsTemplate extends HttpServlet {
             String jdk = request.getParameter("jdk");
             String jdkUpdate = request.getParameter("jdkUpdate");
             String tomcatVersion = request.getParameter("tomcatVersion");
-            String uuid=UUID.randomUUID().toString().substring(0,20);
+            String template_uuid=SFUtils.getUUID(9);
             User user=(User)request.getSession().getAttribute("user");
             String username=user.getUsername();
             username=(username==null?"test":username);
+             Connection con=null;
             try {  
-                Connection con=DbConnection.getConnection();
+                 con=DbConnection.getConnection();
+                 //save to TEMPLATE 
                 String sql="insert into TEMPLATE(template_uuid, template_name, username, creation_date, last_edit, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version) values(?,?,?,?,?,?,?,?,?,?,?,?) ";
                 	System.out.println("saveToTemplate sql-->"+ sql);
                         PreparedStatement ps=con.prepareStatement(sql); 
                         
-			ps.setString(1,uuid);
+			ps.setString(1,template_uuid);
 			ps.setString(2,imageName);
                         ps.setString(3, username);
                         ps.setDate(4, new Date(System.currentTimeMillis()));
@@ -75,18 +78,26 @@ public class SaveAsTemplate extends HttpServlet {
                         ps.setString(11, jdkUpdate);
                         ps.setString(12, tomcatVersion);
 			int ret=ps.executeUpdate();
+                        
                         //save successfully
-                        if(ret ==1){
+                        if(ret >0){
                             request.getRequestDispatcher("provisionForm.jsp").include(request, response);
                             out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
                         }
-                    
             } catch (SQLException ex) {
                 Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
                 request.getRequestDispatcher("provisionForm.jsp").include(request, response);
                 String err=ex.getLocalizedMessage();
                 String outstr= "<h3 class='save_err'>Save Failed!  "+ err+ "</h3>";
                 out.print(outstr);
+            }finally{
+                if(con!=null){
+                    try {
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
             }
   
     }
