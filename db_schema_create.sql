@@ -22,7 +22,7 @@ CREATE TABLE `USER` (
   `username` VARCHAR(30) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
   `department` CHAR(12) NOT NULL,
-  `city` CHAR(3) NOT NULL,
+  `city` CHAR(20) NOT NULL,
   `password` VARCHAR(30) NOT NULL,
   `region` CHAR(4) NOT NULL,
   `admin` TINYINT(1) NOT NULL,
