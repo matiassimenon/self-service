@@ -2,26 +2,26 @@
                 var cityArr = [];
                 cityArr['apac'] =
                 [
-                 {txt:'Bangalore', val:'ban'},
-                 {txt:'Beijing', val:'bei'},
-                 {txt:'Singapore', val:'sin'},
-                 {txt:'Sydney', val:'syd'}
+                 {txt:'Bangalore', val:'Bangalore'},
+                 {txt:'Beijing', val:'Beijing'},
+                 {txt:'Singapore', val:'Singapore'},
+                 {txt:'Sydney', val:'Sydney'}
                  ];
                 cityArr['us'] =
                 [
-                 {txt:'Boston', val:'bos'},
-                 {txt:'Irvine', val:'irv'},
-                 {txt:'Redwood', val:'red'}
+                 {txt:'Boston', val:'Boston'},
+                 {txt:'Irvine', val:'Irvine'},
+                 {txt:'Redwood', val:'Redwood'}
                  ];
                  cityArr['emea'] =
                 [
-                 {txt:'Berkshire', val:'ber'},
-                 {txt:'Barcelona', val:'bar'},
-                 {txt:'Bonn', val:'bon'},
-                 {txt:'Feldkirchen', val:'fel'},
-                 {txt:'Nürnberg', val:'nur'},
-                 {txt:'Suresnes', val:'sur'},
-                 {txt:'Switzerland', val:'swi'}
+                 {txt:'Berkshire', val:'Berkshire'},
+                 {txt:'Barcelona', val:'Barcelona'},
+                 {txt:'Bonn', val:'Bonn'},
+                 {txt:'Feldkirchen', val:'Feldkirchen'},
+                 {txt:'Nürnberg', val:'Nürnberg'},
+                 {txt:'Suresnes', val:'Suresnes'},
+                 {txt:'Switzerland', val:'Switzerland'}
                  ];
                 function setCity(city)
                 {

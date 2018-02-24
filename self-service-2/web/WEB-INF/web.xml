@@ -41,6 +41,10 @@
         <servlet-name>UseForRequestServlet</servlet-name>
         <servlet-class>com.selfservice.controller.UseForRequestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserListServlet</servlet-name>
+        <servlet-class>com.selfservice.controller.UserListServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -72,6 +76,10 @@
     <servlet-mapping>
         <servlet-name>UseForRequestServlet</servlet-name>
         <url-pattern>/UseForRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserListServlet</servlet-name>
+        <url-pattern>/UserListServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

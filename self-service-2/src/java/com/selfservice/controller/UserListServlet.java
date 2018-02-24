@@ -5,6 +5,7 @@
  */
 package com.selfservice.controller;
 
+import com.selfservice.dboperations.SaveAsTemplate;
 import com.selfservice.model.Template;
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author aiming
  */
-public class TemplateListServlet extends HttpServlet {
+public class UserListServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,62 +41,88 @@ public class TemplateListServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-               response.setContentType("text/html;charset=UTF-8");
         Connection con = null;
-        List<Template> list = new ArrayList<>();
-        request.setAttribute("templateList", list);
+        List<User> list = new ArrayList<>();
         PrintWriter out=response.getWriter();
         try {
             con = DbConnection.getConnection();
-            User user = (User) request.getSession().getAttribute("user");
-            String username = user.getUsername();
+            //User user = (User) request.getSession().getAttribute("user");
+            //String username = user.getUsername();
             String deleteString = request.getQueryString();
+            
             PreparedStatement ps;
             String sql =null;
-            //delete template
+            int ret=0;
+            //delete users
             if(deleteString !=null && deleteString.contains("delete")){
                 
                 String[] deleteNames=deleteString.replace("delete=", "").split("&");
-                sql="delete from TEMPLATE where template_uuid in ";
+                sql="delete from USER where username in ";
                 String names="(";
                 for(int i=0; i<deleteNames.length; i++){
+                     String name=deleteNames[i].replace("&", "");
                     if(i== deleteNames.length-1){
-                        names += "'"+deleteNames[i] + "'";
+                       
+                        names += "'"+name + "'";
                     }else{
-                         names += "'"+ deleteNames[i] + "',";
+                         names += "'"+ name+ "',";
                     }
                 }
                 names += ")";
                 sql += names;
-                System.out.println("deleteTemplate sql-->" + sql);
+                System.out.println("deleteUser sql-->" + sql);
                 ps = con.prepareStatement(sql);
-                ps.executeUpdate();
+                ret=ps.executeUpdate();
             }
-            //TO check if salesforce_case come from Template or request
-            sql = "select  temp.last_edit,  temp.template_name, req.salesforce_case, temp.template_uuid from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
-            sql = sql + " and req.username='" + username + "'";
+           //save users
+            if(deleteString !=null && deleteString.contains("save")){
+               
+                String[] saveusers=deleteString.replace("save", "").split("&");
+                
+                for(String user1: saveusers){
+                    //format: username=admin
+                    if(user1.length()>0){
+                        String[] update=user1.split("=");
+                        String username=update[0];
+                        String isAdmin=update[1];
+                        sql="update USER set admin=? where username=?";
+                        ps=con.prepareStatement(sql);
+                        ps.setInt(1,isAdmin.equalsIgnoreCase("true")?1:0);
+                        ps.setString(2, username);
+                        ret=ps.executeUpdate();                        
+                    }
+                }
+            }   
 
-            //Search Request
+            //get user list 
+            sql = "select  firstname, lastname, username, email, department, city, password, region, admin from user";
+
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' )";
+                sql = sql + " where  firstname like '%" + sTxt + "%' or lastname like '%" + sTxt + "%' or username like '%" + sTxt + "%' or email like '%" + sTxt + "%' or department like '%" + sTxt + "%'";
+                sql +=  " or city like '%" + sTxt + "%' or region like '%" + sTxt + "%'";
             }
-            sql = sql + " order by last_edit DESC";
-            System.out.println("templateList sql-->" + sql);
+            sql = sql + " order by firstname ASC";
+            System.out.println("userList sql-->" + sql);
 
             ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Template object = new Template();
-                
-                object.setLast_edit(rs.getDate(1));
-                object.setTemplate_name(rs.getString(2));
-                object.setSalesforce_case(rs.getString(3));
-                object.setTemplate_uuid(rs.getString(4));
+                User object = new User();
+                object.setFirstname(rs.getString(1));
+                object.setLastname(rs.getString(2));
+                object.setUsername(rs.getString(3));
+                object.setEmail(rs.getString(4));
+                object.setDepartment(rs.getString(5));
+                object.setCity(rs.getString(6));
+                object.setPassword(rs.getString(7));
+                object.setRegion(rs.getString(8));
+                int  iadmin=rs.getInt(9);
+                object.setAdmin( iadmin == 1? true:false);
                 list.add(object);
             }
-            
-            request.getRequestDispatcher("templateList.jsp").include(request, response);
+            request.setAttribute("userList", list);
+            request.getRequestDispatcher("userList.jsp").include(request, response);
             rs.close();
         } catch (SQLException ex) {
                 if (con != null) {
@@ -106,9 +133,9 @@ public class TemplateListServlet extends HttpServlet {
                     }
                 }
                 Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex);
-                request.getRequestDispatcher("templateList.jsp").include(request, response);
+                request.getRequestDispatcher("userList.jsp").include(request, response);
                 String err = ex.getLocalizedMessage();
-                String outstr = "<h3 class='save_err'>Delete Failed!  " + err + "</h3>";
+                String outstr = "<h3 class='save_err'>Save Failed!  " + err + "</h3>";
                 out.print(outstr);
         } finally {
             if (con != null) {
