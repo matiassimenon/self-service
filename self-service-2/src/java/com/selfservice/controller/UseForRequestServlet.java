@@ -5,28 +5,30 @@
  */
 package com.selfservice.controller;
 
-import com.selfservice.model.Request;
+import com.selfservice.dboperations.RequestServlet;
+import com.selfservice.dboperations.SaveAsTemplate;
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
+import com.selfservice.util.SFUtils;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 'Use for request' from templateList.jsp
  *
  * @author aiming
  */
-public class HistoryServlet extends HttpServlet {
+public class UseForRequestServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,58 +42,58 @@ public class HistoryServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        User user = (User) request.getSession().getAttribute("user");
+        String username = user.getUsername();
+        username = (username == null ? "test" : username);
         Connection con = null;
-        List<Request> list = new ArrayList<>();
+        PreparedStatement ps;
         try {
             con = DbConnection.getConnection();
-            User user = (User) request.getSession().getAttribute("user");
-            String username = user.getUsername();
-            String page = request.getQueryString();
-
-            String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
-            sql = sql + " and req.username='" + username + "'";
-
-            if (page != null) {
-                //MyPrvious request
-                if (page.contains("previousRequestList")) {
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                    sql = sql + " and req.request_date < '" + df.format(new Date()) + "'";
-                }               
+            String insertString=request.getQueryString();
+            if(insertString !=null && insertString.contains("request")){
+                
+                String[] templateNames=insertString.replace("request=", "").split("&");
+                
             }
-            //Search Request
-            String sTxt = request.getParameter("search");
-            if (sTxt != null && sTxt.length() > 0) {
+            //save to REQUEST table
+            String request_uuid = SFUtils.getUUID(9);
+            String sql = "insert into REQUEST(request_uuid, request_date, request_status, salesforce_case, username, template_uuid) values(?,?,?,?,?,?)";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, request_uuid);
+            ps.setDate(2, new Date(System.currentTimeMillis()));
+            ps.setString(3, "pending"); //init status is 'pending'
+           // ps.setString(4, salesforceCase);
+            ps.setString(5, username);
+           // ps.setString(6, template_uuid);
+            int ret = ps.executeUpdate();
+            //save successfully
+            //TODO Request to backend
 
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' or request_status like '%" + sTxt + "%' )";
+            if (ret > 0) {
+                request.getRequestDispatcher("provisionForm.jsp").include(request, response);
+                out.print("<h3 class='save_ok'>Request Successfully!!</h3>");
             }
-            //add order
-            sql = sql + " order by last_edit DESC";
-            System.out.println("history sql-->" + sql);
-
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Request object = new Request();
-
-                object.setRequest_date(rs.getDate(1));
-                object.setRequest_status(rs.getString(2));
-                object.setImagename(rs.getString(3));
-                object.setSalesforce_case(rs.getString(4));
-                object.setUsername(rs.getString(5));
-
-                list.add(object);
-            }
-            request.setAttribute("historyList", list);
-            request.getRequestDispatcher(page).include(request, response);
-            rs.close();
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            try {
+                if (con != null) {
+                    con.rollback();
+                }
+                Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
+                request.getRequestDispatcher("provisionForm.jsp").include(request, response);
+                String err = ex.getLocalizedMessage();
+                String outstr = "<h3 class='save_err'>Request Failed!  " + err + "</h3>";
+                out.print(outstr);
+            } catch (SQLException ex1) {
+                Logger.getLogger(RequestServlet.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         } finally {
             if (con != null) {
                 try {
                     con.close();
                 } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

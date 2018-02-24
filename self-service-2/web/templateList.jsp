@@ -30,13 +30,26 @@ User user = (User)request.getSession().getAttribute("user");
         function deleteTemplate(){
             var rows=document.getElementById("templateTable").rows;          
             var deleteString="delete=";
+            var isSelected=false;
             for( var i=0; i< rows.length; i++){
                 if(rows[i].selected == 'true'){
-                    deleteString += rows[i].cells[1].innerText + "#";
+                    deleteString += rows[i].cells[3].innerText + "&";
+                    isSelected=true;
                 }
             }
-            
+            if(isSelected == false) return;
             document.getElementById("templateForm").action="TemplateListServlet?"+deleteString;
+            document.getElementById("templateForm").submit();
+        }
+        function useForRequst(){
+            var rows=document.getElementById("templateTable").rows;          
+            var requestString="request=";
+            for( var i=0; i< rows.length; i++){
+                if(rows[i].selected == 'true'){
+                    requestString += rows[i].cells[1].innerText + "&";
+                }
+            }
+            document.getElementById("templateForm").action="UseForRequestServlet?"+requestString;
             document.getElementById("templateForm").submit();
         }
         </script>
@@ -73,6 +86,7 @@ User user = (User)request.getSession().getAttribute("user");
                     <td><%=his.getLast_edit().toString()%></td>
                     <td><%=his.getTemplate_name().toString()%></td>         
                     <td><%=his.getSalesforce_case()%></td>
+                    <td hidden="hidden"><%=his.getTemplate_uuid()%></td>
                 </tr>
                 <%}%>
             </table>

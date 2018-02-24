@@ -15,6 +15,16 @@ public class Template {
     private Date last_edit;
     private String template_name;
     private String salesforce_case;
+    private String template_uuid;
+
+    public String getTemplate_uuid() {
+        return template_uuid;
+    }
+
+    public void setTemplate_uuid(String template_uuid) {
+        this.template_uuid = template_uuid;
+    }
+   
 
     public Template() {
     }

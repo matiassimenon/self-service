@@ -50,8 +50,8 @@ public class TemplateListServlet extends HttpServlet {
             //delete template
             if(deleteString !=null && deleteString.contains("delete")){
                 
-                String[] deleteNames=deleteString.replace("delete=", "").split("#");
-                sql="delete from TEMPLATE where template_name in ";
+                String[] deleteNames=deleteString.replace("delete=", "").split("&");
+                sql="delete from TEMPLATE where template_uuid in ";
                 String names="(";
                 for(int i=0; i<deleteNames.length; i++){
                     if(i== deleteNames.length-1){
@@ -67,13 +67,13 @@ public class TemplateListServlet extends HttpServlet {
                 ps.executeUpdate();
             }
             //TO check if salesforce_case come from Template or request
-            sql = "select temp.last_edit,  temp.template_name, req.salesforce_case from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
+            sql = "select  temp.last_edit,  temp.template_name, req.salesforce_case, temp.template_uuid from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
             sql = sql + " and req.username='" + username + "'";
 
             //Search Request
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or salesforce_case like '%" + sTxt + "%' )";
+                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' )";
             }
             sql = sql + " order by last_edit DESC";
             System.out.println("templateList sql-->" + sql);
@@ -82,11 +82,11 @@ public class TemplateListServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Template object = new Template();
-
+                
                 object.setLast_edit(rs.getDate(1));
                 object.setTemplate_name(rs.getString(2));
                 object.setSalesforce_case(rs.getString(3));
-              
+                object.setTemplate_uuid(rs.getString(4));
                 list.add(object);
             }
             request.setAttribute("templateList", list);
