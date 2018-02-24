@@ -18,6 +18,14 @@ public class User {
     private boolean admin;
 
     public User() {
+        username="";
+        firstname="";
+        lastname="";
+        department="";
+        city="";
+        region="";
+        email="";
+        password="";
     }
     
     public User(String email, String username, String department, boolean admin, String city, String firstname,String lastname,String password, String region ) {

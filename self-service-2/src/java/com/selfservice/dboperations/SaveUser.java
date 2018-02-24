@@ -17,7 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import com.selfservice.model.User;
 /**
  *
  * @author aiming
@@ -87,6 +87,20 @@ public class SaveUser extends HttpServlet {
                 ps.setString(9, username);                
             }
            
+            User user =new User();
+            user.setFirstname(firstname);
+            user.setLastname(lastname);
+            user.setUsername(username);
+            user.setDepartment(department);
+            user.setCity(city);
+            user.setAdmin(isAdmin==1?true:false);
+            user.setRegion(region);
+            user.setEmail(email);
+            user.setPassword(password1);
+            
+            //put user to request
+            request.setAttribute("user", user);
+            
             int ret=ps.executeUpdate();
             if(ret >0){
                  request.getRequestDispatcher(jspPage).include(request, response);
