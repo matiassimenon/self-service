@@ -69,7 +69,7 @@ User user = (User)request.getSession().getAttribute("user");
         <h3>Users</h3>
         <form  id="userForm" method="post" >
                 <div >
-                    <table  align="center"  style="  width: 800px;">
+                    <table  align="center"  style="  width: 1000px;">
                         <tr>
                             <td width="650px" class="td1"></td>
                             <td class="td1" align="right" >                                
@@ -78,7 +78,7 @@ User user = (User)request.getSession().getAttribute("user");
                         </tr>
                     </table>                   
                 </div>            
-            <table  id ="userTable" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px;">
+            <table  id ="userTable" align="center"  bordercolor="#a0c6e5" style="  width: 1000px; border-collapse: collapse;">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</td>
@@ -109,9 +109,9 @@ User user = (User)request.getSession().getAttribute("user");
                 <%}%>
             </table>
                 <div >
-                    <table  align="center"  style="  width: 800px;">
+                    <table  align="center"  style="  width: 1000px;">
                         <tr>
-                            <td width="550px" class="td1"></td>
+                            <td width="800px" class="td1"></td>
                              <td class="td1"  align="right">
                              <button type="submit" onclick="deleteUsers();" >Delete User</button>
                             </td>

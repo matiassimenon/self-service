@@ -39,7 +39,7 @@ User user = (User)request.getSession().getAttribute("user");
         <h3>History</h3>
         <form  id="historyForm" method="post" action="">
                 <div >
-                    <table  align="center"  style="  width: 800px;">
+                    <table  align="center"  style="  width: 800px; border-collapse: collapse;">
                         <tr>
                             <td width="650px" class="td1"></td>
                             <td class="td1" align="right" >                                
@@ -48,7 +48,7 @@ User user = (User)request.getSession().getAttribute("user");
                         </tr>
                     </table>                   
                 </div>            
-            <table  align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px;">
+            <table  align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <th>Request Date</th>
                     <th>Request Status</td>

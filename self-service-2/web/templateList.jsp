@@ -73,7 +73,7 @@ User user = (User)request.getSession().getAttribute("user");
                         </tr>
                     </table>                   
                 </div>            
-            <table  id ="templateTable" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px;">
+            <table  id ="templateTable" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <th>Last Edit</th>
                     <th>Template Name</td>
