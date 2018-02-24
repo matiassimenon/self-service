@@ -4,12 +4,13 @@
     Author     : francisco
 --%>
 
+<%@page import="com.selfservice.model.User"%>
 <%@page import="com.selfservice.model.Request"%>
 <%@page import="java.util.List"%>
 <%
 
  List<Request> list  =(List<Request>)request.getAttribute("historyList");
-     
+ User user = (User)request.getSession().getAttribute("user");    
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -30,14 +31,19 @@
     </head>
     <body>
         <%@include file="navigator.jsp"%>
-        <%@include file="menu.jsp"%>
+        <% if(user.getAdmin()){%>
+            <%@include file="adminMenu.jsp"%>
+        <%}else{%>
+            <%@include file="menu.jsp"%>
+        <%}%>
         <h3>My Previous Requests</h3>
         <form  id="historyForm" method="post" action="">
                 <div >
                     <table  align="center"  style="  width: 800px;">
                         <tr>
-                            <td class="td1" >
-                                <input placeholder="Search..." type="search" id="search" name="search" onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
+                            <td width="650px" class="td1"></td>
+                            <td class="td1" align="right" >                                
+                                <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
                             </td>
                         </tr>
                     </table>                   
@@ -65,10 +71,10 @@
                 <div >
                     <table  align="center"  style="  width: 800px;">
                         <tr>
-                            <td colspan="2"class="td1" >
+                            <td width="650px" class="td1"></td>
+                            <td class="td1" align="right" >
                                 <button type="submit" >Use for Request</button>
-                            </td>
-                            
+                            </td>                            
                         </tr>
                     </table>
                     

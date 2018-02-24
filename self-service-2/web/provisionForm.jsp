@@ -4,6 +4,7 @@
     Author     : francisco
 --%>
 
+<%@page import="com.selfservice.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -55,11 +56,18 @@ function requestAction(){
     document.getElementById("templateForm").action="RequestServlet";
     document.getElementById("templateForm").submit();
 }
+<%
+     User user = (User)request.getSession().getAttribute("user");
+%>
 </script>
     </head>
     <body>
         <%@include file="navigator.jsp"%>
-        <%@include file="menu.jsp"%>
+        <% if(user.getAdmin()){%>
+            <%@include file="adminMenu.jsp"%>
+        <%}else{%>
+            <%@include file="menu.jsp"%>
+        <%}%>
         <h3>Provision Form</h3>
         <form  id="templateForm" method="post" action="SaveAsTemplate">
             <table  align="center" style="border:2px solid green; padding:15px 15px;">

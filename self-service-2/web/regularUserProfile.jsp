@@ -32,7 +32,11 @@
     </head>
     <body>
         <%@include file="navigator.jsp"%>
-        <%@include file="menu.jsp"%>
+        <% if(user.getAdmin()){%>
+            <%@include file="adminMenu.jsp"%>
+        <%}else{%>
+            <%@include file="menu.jsp"%>
+        <%}%>
         <h3>Profile</h3>
         <form   method="post" action="SaveUser?regularUserProfile.jsp">
             	<table id="reg_form"  align="center" style="border:2px solid green; padding:10px 10px;" >

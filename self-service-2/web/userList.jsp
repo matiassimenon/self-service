@@ -21,7 +21,7 @@
     </head>
     <body>
         <%@include file="navigator.jsp"%>
-        <%@include file="menu.jsp"%>
+        <%@include file="adminMenu.jsp"%>
         <h3>Users</h3>
         <form   method="post" action="">
             <table  align="center" style="border:2px solid green; padding:15px 15px; height:400px; width: 400px; "></table>

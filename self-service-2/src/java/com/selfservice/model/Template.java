@@ -12,16 +12,36 @@ import java.util.Date;
  * @author francisco
  */
 public class Template {
-    String template_uuid;
-    String template_name;
-    String username;
-    Date creation_date;
-    Date last_edit;
-    String os;
-    String os_version;
-    String talend_version;
-    String talend_component;
-    String jdk_version;
-    String jdk_update;
-    String tomcat_version;    
+    private Date last_edit;
+    private String template_name;
+    private String salesforce_case;
+
+    public Template() {
+    }
+
+    public Date getLast_edit() {
+        return last_edit;
+    }
+
+    public void setLast_edit(Date last_edit) {
+        this.last_edit = last_edit;
+    }
+
+    public String getTemplate_name() {
+        return template_name;
+    }
+
+    public void setTemplate_name(String template_name) {
+        this.template_name = template_name;
+    }
+
+    public String getSalesforce_case() {
+        return salesforce_case;
+    }
+
+    public void setSalesforce_case(String salesforce_case) {
+        this.salesforce_case = salesforce_case;
+    }
+    
+    
 }

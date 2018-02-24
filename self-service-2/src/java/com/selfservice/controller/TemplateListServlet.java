@@ -5,7 +5,7 @@
  */
 package com.selfservice.controller;
 
-import com.selfservice.model.Request;
+import com.selfservice.model.Template;
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
 import java.io.IOException;
@@ -13,9 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author aiming
  */
-public class HistoryServlet extends HttpServlet {
+public class TemplateListServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,50 +37,60 @@ public class HistoryServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+               response.setContentType("text/html;charset=UTF-8");
         Connection con = null;
-        List<Request> list = new ArrayList<>();
+        List<Template> list = new ArrayList<>();
         try {
             con = DbConnection.getConnection();
             User user = (User) request.getSession().getAttribute("user");
             String username = user.getUsername();
-            String page = request.getQueryString();
-
-            String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
+            String deleteString = request.getQueryString();
+            PreparedStatement ps;
+            String sql =null;
+            //delete template
+            if(deleteString !=null && deleteString.contains("delete")){
+                
+                String[] deleteNames=deleteString.replace("delete=", "").split("#");
+                sql="delete from TEMPLATE where template_name in ";
+                String names="(";
+                for(int i=0; i<deleteNames.length; i++){
+                    if(i== deleteNames.length-1){
+                        names += "'"+deleteNames[i] + "'";
+                    }else{
+                         names += "'"+ deleteNames[i] + "',";
+                    }
+                }
+                names += ")";
+                sql += names;
+                System.out.println("deleteTemplate sql-->" + sql);
+                ps = con.prepareStatement(sql);
+                ps.executeUpdate();
+            }
+            //TO check if salesforce_case come from Template or request
+            sql = "select temp.last_edit,  temp.template_name, req.salesforce_case from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
             sql = sql + " and req.username='" + username + "'";
 
-            if (page != null) {
-                //MyPrvious request
-                if (page.contains("previousRequestList")) {
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                    sql = sql + " and req.request_date < '" + df.format(new Date()) + "'";
-                }               
-            }
             //Search Request
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
-
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or salesforce_case like '%" + sTxt + "%' or request_status like '%" + sTxt + "%' )";
+                sql = sql + " and ( template_name like '%" + sTxt + "%' or salesforce_case like '%" + sTxt + "%' )";
             }
-            //add order
             sql = sql + " order by last_edit DESC";
-            System.out.println("history sql-->" + sql);
+            System.out.println("templateList sql-->" + sql);
 
-            PreparedStatement ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Request object = new Request();
+                Template object = new Template();
 
-                object.setRequest_date(rs.getDate(1));
-                object.setRequest_status(rs.getString(2));
-                object.setImagename(rs.getString(3));
-                object.setSalesforce_case(rs.getString(4));
-                object.setUsername(rs.getString(5));
-
+                object.setLast_edit(rs.getDate(1));
+                object.setTemplate_name(rs.getString(2));
+                object.setSalesforce_case(rs.getString(3));
+              
                 list.add(object);
             }
-            request.setAttribute("historyList", list);
-            request.getRequestDispatcher(page).include(request, response);
+            request.setAttribute("templateList", list);
+            request.getRequestDispatcher("templateList.jsp").include(request, response);
             rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
