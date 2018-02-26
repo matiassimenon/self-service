@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Actions in template.jsp
  * @author aiming
  */
 public class TemplateListServlet extends HttpServlet {

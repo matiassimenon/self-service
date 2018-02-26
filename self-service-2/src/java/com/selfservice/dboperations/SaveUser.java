@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.selfservice.model.User;
 /**
- *
+ * Register in register.jsp, and save action in adminProfile.jsp or reqularUserProfile.jsp
  * @author aiming
  */
 public class SaveUser extends HttpServlet {
@@ -66,7 +66,7 @@ public class SaveUser extends HttpServlet {
                 ps.setString(3, username);
                 ps.setString(4, email);
                 ps.setString(5, department.toUpperCase());
-                ps.setString(6, city);
+                ps.setString(6, city.substring(0,3).toLowerCase()); //only save the first 3 chars, need to check with fransisco
                 ps.setString(7, password1);
                 ps.setString(8, region);
                 ps.setInt(9, isAdmin);

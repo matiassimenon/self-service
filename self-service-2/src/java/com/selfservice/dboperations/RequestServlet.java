@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Reqest from provisionForm.jsp
+ * 'Reqest' in provisionForm.jsp
  * @author aiming
  */
 public class RequestServlet extends HttpServlet {

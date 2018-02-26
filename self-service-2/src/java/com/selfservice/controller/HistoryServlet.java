@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Actions in history.jsp
  * @author aiming
  */
 public class HistoryServlet extends HttpServlet {

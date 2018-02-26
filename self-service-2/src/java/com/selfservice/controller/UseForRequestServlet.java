@@ -54,7 +54,7 @@ public class UseForRequestServlet extends HttpServlet {
             String insertString=request.getQueryString();
             if(insertString !=null && insertString.contains("request")){
                 
-                String[] templateNames=insertString.replace("request=", "").split("&");
+                //TODO request to backend
                 
             }
             //save to REQUEST table

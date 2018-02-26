@@ -61,7 +61,7 @@ User user = (User)request.getSession().getAttribute("user");
         <%}else{%>
             <%@include file="menu.jsp"%>
         <%}%>
-        <h3>History</h3>
+        <h3>My Templates</h3>
         <form  id="templateForm" method="post" action="">
                 <div >
                     <table  align="center"  style="  width: 800px;">

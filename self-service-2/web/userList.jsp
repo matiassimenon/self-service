@@ -103,8 +103,7 @@ User user = (User)request.getSession().getAttribute("user");
                     <td><%=user1.getPassword()%></td>
                     <td><%=user1.getRegion()%></td> 
                     <td><input type="checkbox" onclick="this.value='1'" <%if(user1.getAdmin()){%>checked="checked"<%}%> /></td>
-                     <!--additional -->
-                    <td hidden="hidden"><%=user1.getAdmin()%></td>    
+                    
                 </tr>
                 <%}%>
             </table>

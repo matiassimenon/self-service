@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Actions in userList.jsp
  * @author aiming
  */
 public class UserListServlet extends HttpServlet {

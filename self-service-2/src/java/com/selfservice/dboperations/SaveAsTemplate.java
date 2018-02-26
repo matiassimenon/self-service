@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * 'Save as Template' in provisionForm.jsp
  * @author francisco
  */
 @WebServlet(name = "SaveAsTemplate", urlPatterns = {"/SaveAsTemplate"})

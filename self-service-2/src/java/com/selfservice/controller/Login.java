@@ -17,7 +17,7 @@ import java.util.List;
 import javax.servlet.http.Cookie;
 
 /**
- *
+ * Login action in login.jsp
  * @author francisco
  */
 public class Login extends HttpServlet {
