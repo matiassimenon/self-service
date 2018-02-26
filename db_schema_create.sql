@@ -92,22 +92,6 @@ END IF;
 END ||
 delimiter ;
 
--- Trigger for UPDATE ON `USER`
-delimiter ||
-
-CREATE TRIGGER TRGGR_update_REGULAR_USER_or_ADMIN_USER AFTER UPDATE ON `USER`
-FOR EACH ROW
-BEGIN
-IF (NEW.`admin` = 0) THEN
-	DELETE FROM `ADMIN_USER` WHERE `username`= NEW.`username`;
-    INSERT INTO `REGULAR_USER` (`username`) VALUES (NEW.`username`);
-ELSE
-	DELETE FROM `REGULAR_USER` WHERE `username`= NEW.`username`;
-    INSERT INTO `ADMIN_USER` (`username`) VALUES (NEW.`username`);
-END IF;
-END
-||
-delimiter ;
 
 
 -- Constraints: Foreign Keys: FK_CHILD_TABLE_child_Column_PATENT_TABLE_parent_Column

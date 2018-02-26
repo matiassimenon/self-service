@@ -51,12 +51,13 @@ public class SaveUser extends HttpServlet {
         String password1=request.getParameter("password1");
         String password2=request.getParameter("password2");
         Connection con=null;
+        PreparedStatement ps=null;
         try {
             con=DbConnection.getConnection();
             
             //insert to User
             String sql;
-            PreparedStatement ps=null;
+            
             boolean isInsert="register.jsp".equals(jspPage);
             if(isInsert){
                 sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin)values(?,?,?,?,?,?,?,?,?)";
@@ -65,8 +66,8 @@ public class SaveUser extends HttpServlet {
                 ps.setString(2, lastname);
                 ps.setString(3, username);
                 ps.setString(4, email);
-                ps.setString(5, department.toUpperCase());
-                ps.setString(6, city.substring(0,3).toLowerCase()); //only save the first 3 chars, need to check with fransisco
+                ps.setString(5, department);
+                ps.setString(6, city); 
                 ps.setString(7, password1);
                 ps.setString(8, region);
                 ps.setInt(9, isAdmin);
@@ -79,8 +80,8 @@ public class SaveUser extends HttpServlet {
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
                 ps.setString(3, email);
-                ps.setString(4, department.toUpperCase());
-                ps.setString(5, city);
+                ps.setString(4, department);
+                ps.setString(5, city); 
                 ps.setString(6, password1);
                 ps.setString(7, region);
                 ps.setInt(8, isAdmin);
@@ -115,7 +116,11 @@ public class SaveUser extends HttpServlet {
             out.print(outstr);
             
         }finally{
-            if(con!=null) try {
+            try {
+                if(ps!=null){
+                    ps.close();
+                }
+            if(con!=null) 
                 con.close();
             } catch (SQLException ex) {
                 Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
