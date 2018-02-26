@@ -1,0 +1,17 @@
+CREATE USER IF NOT EXISTS 'TALEND_USER'@'%' IDENTIFIED BY 'TALEND_USER/talend123!';
+
+DROP DATABASE IF EXISTS `self_service_db_django`;
+SET default_storage_engine=InnoDB;
+SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+CREATE DATABASE IF NOT EXISTS `self_service_db_django`
+    DEFAULT CHARACTER SET utf8mb4
+    DEFAULT COLLATE utf8mb4_unicode_ci;
+USE self_service_db;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, FILE ON *.* TO 'TALEND_USER'@'%';
+GRANT ALL PRIVILEGES ON `TALEND_USER`.* TO 'TALEND_USER'@'%';
+GRANT ALL PRIVILEGES ON `self_service_db_django`.* TO 'TALEND_USER'@'%';
+FLUSH PRIVILEGES;
+
+COMMIT;

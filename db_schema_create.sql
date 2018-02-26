@@ -14,7 +14,6 @@ GRANT ALL PRIVILEGES ON `TALEND_USER`.* TO 'TALEND_USER'@'%';
 GRANT ALL PRIVILEGES ON `self_service_db`.* TO 'TALEND_USER'@'%';
 FLUSH PRIVILEGES;
 
-
 -- Tables ---------------------------------------------------------------------
 CREATE TABLE `USER` (
   `firstname` VARCHAR(30) NOT NULL,
@@ -26,6 +25,7 @@ CREATE TABLE `USER` (
   `password` VARCHAR(30) NOT NULL,
   `region` CHAR(4) NOT NULL,
   `admin` TINYINT(1) NOT NULL,
+  `admin_request` TINYINT(1) NOT NULL,
   UNIQUE (email),
   PRIMARY KEY (`username`)
 );
@@ -59,6 +59,14 @@ CREATE TABLE `REQUEST` (
   -- FOREIGN KEY (template_uuid) REFERENCES `TEMPLATE` (template_uuid)
 );
 
+CREATE TABLE `IMAGE` (
+  `template_uuid` VARCHAR(30) NOT NULL,
+  `image_name` VARCHAR(100) NOT NULL,
+  `dockerfile_name` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`template_uuid`)
+  -- FOREIGN KEY (template_uuid) REFERENCES `TEMPLATE` (template_uuid)
+);
+
 CREATE TABLE `REGULAR_USER` (
   `username` VARCHAR(30) NOT NULL,
   UNIQUE (`username`)
@@ -70,7 +78,6 @@ CREATE TABLE `ADMIN_USER` (
   UNIQUE (`username`)
   -- FOREIGN KEY (`username`) REFERENCES `USER` (`username`)
 );
-
 
 -- Trigger for INSERT ON `USER`
 delimiter ||
@@ -103,9 +110,12 @@ END
 delimiter ;
 
 
--- Constraints: Foreign Keys: FK_ChildTable_childColumn_ParentTable_parentColumn
+-- Constraints: Foreign Keys: FK_CHILD_TABLE_child_Column_PATENT_TABLE_parent_Column
 ALTER TABLE `TEMPLATE`
   ADD CONSTRAINT FK_TEMPLATE_username_USER_username FOREIGN KEY (`username`) REFERENCES `USER`(`username`) ON DELETE CASCADE;
+
+ALTER TABLE `IMAGE`
+  ADD CONSTRAINT FK_IMAGE_username_TEMPLATE_UUID_template FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE`(`template_uuid`) ON DELETE CASCADE;
 
 ALTER TABLE `REQUEST`
   ADD CONSTRAINT FK_REQUEST_username_USER_username FOREIGN KEY (`username`) REFERENCES `USER`(`username`) ON DELETE CASCADE,
@@ -116,3 +126,5 @@ ALTER TABLE `REGULAR_USER`
 
 ALTER TABLE `ADMIN_USER`
   ADD CONSTRAINT FK_ADMIN_USER_username_USER_username FOREIGN KEY (`username`) REFERENCES `USER`(`username`) ON DELETE CASCADE;
+
+COMMIT;
