@@ -95,7 +95,7 @@ public class UserListServlet extends HttpServlet {
             }   
 
             //get user list 
-            sql = "select  firstname, lastname, username, email, department, city, password, region, admin from user";
+            sql = "select  firstname, lastname, username, email, department, city, password, region, admin from USER";
 
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
