@@ -123,6 +123,18 @@ public class UserListServlet extends HttpServlet {
             }
             request.setAttribute("userList", list);
             request.getRequestDispatcher("userList.jsp").include(request, response);
+            //detroy the current user's session if it's deleted
+            Boolean isUserExists=false;
+            User user = (User) request.getSession().getAttribute("user");
+            for(User user1: list){
+                if(user1.getUsername().equals(user.getUsername())){
+                    isUserExists=true;
+                    break;
+                }
+            }
+            if(!isUserExists){
+                request.getSession().invalidate();
+            }
             rs.close();
         } catch (SQLException ex) {
                 if (con != null) {

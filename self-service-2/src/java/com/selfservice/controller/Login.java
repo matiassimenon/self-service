@@ -1,4 +1,5 @@
 package com.selfservice.controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.Cookie;
 
 /**
  * Login action in login.jsp
+ *
  * @author francisco
  */
 public class Login extends HttpServlet {
@@ -32,37 +33,31 @@ public class Login extends HttpServlet {
         PrintWriter out = resp.getWriter();
 
         try {
-            
+
             String username = req.getParameter("username");
             String password = req.getParameter("password");
 
-            User pObject = new User(username, password);
-
-            //pObject.setUsername(username);  //setting them to setters and getters
-            //pObject.setPass(password);
             List<User> list = new ArrayList<>(); //take a list
-
-            list = UserLoginValidate.getUsers(username, password); //send the values user_name and password to vadlidate class of getUsers method and storing the resultset in list
-            if (!(list.isEmpty())) {                   
-
-                    User user=list.get(0);                   
-                    req.getSession().setAttribute("user", user);
-                    
-                    if(user.getAdmin()){
-                        req.getRequestDispatcher("adminProfile.jsp").include(req, resp);
-                    }else{
-                        req.getRequestDispatcher("regularUserProfile.jsp").include(req, resp);
+            list = UserLoginValidate.getUsers(username); //send the values user_name and password to vadlidate class of getUsers method and storing the resultset in list
+            if (!(list.isEmpty())) {
+                User user = null;
+                for (User user1 : list) {
+                    if (user1.getPassword().equals(password)) {
+                        user = user1;
                     }
-                    
-//                //if list has some values then you are logged in
-//                out.print("<h1 align='center'>Successful Log In</h1>");
-//                out.print("<table align ='center' border='1' cellspacing='5' cellpadding='5'><tr><th>ID</th><th>NAME</th><th>Password</th><th>Email</th></tr>");
-//                for (User i : list) {
-//                    //printing all the values in the list
-//                    out.print("<td>" + i.getUsername() + "</td>");
-//                    out.print("<td>" + i.getPassword() + "</td>");
-//                }
-//                out.print("</table>");
+                }
+                if (user == null) {//password is not correct
+                    req.getRequestDispatcher("login.jsp").include(req, resp);
+                    out.print("<p  class='save_err' >Login failed! Password is invalid!");
+                    return;
+                }
+                req.getSession().setAttribute("user", user);
+
+                if (user.getAdmin()) {
+                    req.getRequestDispatcher("adminProfile.jsp").include(req, resp);
+                } else {
+                    req.getRequestDispatcher("regularUserProfile.jsp").include(req, resp);
+                }
 
             } else {
                 //if no values are found then the User does not exist
@@ -72,10 +67,9 @@ public class Login extends HttpServlet {
             }
         } catch (Exception e) {
             req.getRequestDispatcher("login.jsp").include(req, resp);
-            String err=e.getMessage();
-            String errmsg= "<p class='save_err'>Login failed! "+ err + "</p>";
+            String err = e.getMessage();
+            String errmsg = "<p class='save_err'>Login failed! " + err + "</p>";
             out.print(errmsg);
-//executes when user enters invalid details
 
         }
     }
