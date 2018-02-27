@@ -52,6 +52,7 @@ public class SaveUser extends HttpServlet {
         String password2=request.getParameter("password2");
         Connection con=null;
         PreparedStatement ps=null;
+        User user =new User();
         try {
             con=DbConnection.getConnection();
             
@@ -89,16 +90,6 @@ public class SaveUser extends HttpServlet {
                 ps.setString(9, username);                
             }
            
-            //User user =new User();
-            //user.setFirstname(firstname);
-            //user.setLastname(lastname);
-            //user.setUsername(username);
-            //user.setDepartment(department);
-            //user.setCity(city);
-            //user.setAdmin(isAdmin==1?true:false);
-            //user.setRegion(region);
-            //user.setEmail(email);
-            //user.setPassword(password1);
             
             //put user to request
             //request.setAttribute("user", user);
@@ -172,3 +163,13 @@ public class SaveUser extends HttpServlet {
     }// </editor-fold>
 
 }
+            //User user =new User();
+            //user.setFirstname(firstname);
+            //user.setLastname(lastname);
+            //user.setUsername(username);
+            //user.setDepartment(department);
+            //user.setCity(city);
+            //user.setAdmin(isAdmin==1?true:false);
+            //user.setRegion(region);
+            //user.setEmail(email);
+            //user.setPassword(password1);

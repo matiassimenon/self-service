@@ -20,7 +20,7 @@
             }
         </style>
        
-        <script src="select.js"> </script>
+        <script src="selfservice.js"> </script>
 <script >
 
 //define the os version data array

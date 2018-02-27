@@ -16,7 +16,7 @@ public class User {
     private String firstname, lastname;
     private String department, city, region;
     private boolean admin;
-
+    private boolean adminRequest;
     public User() {
         username="";
         firstname="";
@@ -98,4 +98,13 @@ public class User {
     public void setRegion(String region) {
             this.region = region;
     }
+
+    public boolean isAdminRequest() {
+        return adminRequest;
+    }
+
+    public void setAdminRequest(boolean adminRequest) {
+        this.adminRequest = adminRequest;
+    }
+    
 }

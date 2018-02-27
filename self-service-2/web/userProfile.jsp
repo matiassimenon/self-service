@@ -61,7 +61,7 @@
                 <tr>
                     <td>Talend Email:</td><td> <input type="email" name="email" placeholder="test@talend.com" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
                     <%if (!user.getAdmin()) {%>
-                    <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="false"></td>
+                    <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="true"></td>
                     <%}%>
                 </tr>
                 

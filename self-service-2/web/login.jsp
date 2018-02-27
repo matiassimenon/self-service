@@ -3,9 +3,7 @@
     Created on : Jan 19, 2018, 11:53:44 AM
     Author     : francisco
 --%>
-
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 	<head>

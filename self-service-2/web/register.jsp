@@ -25,7 +25,7 @@ servlet but should be the only JSP outside of WEB-INF.
 			}
                         
 			td{
-			width:100px;
+			width:120px;
 			color:#003366;;
 			}
                         select{
@@ -35,8 +35,6 @@ servlet but should be the only JSP outside of WEB-INF.
 		</style>
                 <script src="selfservice.js"> </script>
                        
-                </script>
-
 	</head>
 	<body>
 	
