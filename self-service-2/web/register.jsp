@@ -26,12 +26,11 @@ servlet but should be the only JSP outside of WEB-INF.
 			text-align:justify;
 			padding:15px 15px;
 			background-color:#fff;
-			height:350px;
 			border-radius:15px;
 			}
                         
 			td{
-			width:100px;
+			width:120px;
 			color:#003366;;
 			}
                         select{
