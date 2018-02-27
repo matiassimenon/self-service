@@ -21,7 +21,7 @@
         <title>Self service</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
-        <script src="select.js"></script>
+        <script src="selfservice.js"></script>
         <script>
         function doSearch(txt){
             document.getElementById("historyForm").action="HistoryServlet?previousRequestList.jsp";

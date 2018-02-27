@@ -21,7 +21,7 @@ User user = (User)request.getSession().getAttribute("user");
         <title>Self service</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
-        <script src="select.js"></script>
+        <script src="selfservice.js"></script>
         <script>
         function doSearch(txt){
             document.getElementById("templateForm").action="TemplateListServlet";

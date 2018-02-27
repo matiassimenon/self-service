@@ -41,8 +41,6 @@ servlet but should be the only JSP outside of WEB-INF.
 		</style>
                 <script src="selfservice.js"> </script>
                        
-                </script>
-
 	</head>
 	<body>
 	
