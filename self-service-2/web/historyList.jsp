@@ -8,9 +8,7 @@
 <%@page import="com.selfservice.model.Request"%>
 <%@page import="java.util.List"%>
 <%
-User user = (User)request.getSession().getAttribute("user");
  List<Request> list  =(List<Request>)request.getAttribute("historyList");
-     
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,11 +29,6 @@ User user = (User)request.getSession().getAttribute("user");
     </head>
     <body>
         <%@include file="navigator.jsp"%>
-        <% if(user.getAdmin()){%>
-            <%@include file="adminMenu.jsp"%>
-        <%}else{%>
-            <%@include file="menu.jsp"%>
-        <%}%>
         <h3>History</h3>
         <form  id="historyForm" method="post" action="">
                 <div >

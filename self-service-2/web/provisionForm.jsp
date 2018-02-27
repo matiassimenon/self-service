@@ -56,18 +56,10 @@ function requestAction(){
     document.getElementById("templateForm").action="RequestServlet";
     document.getElementById("templateForm").submit();
 }
-<%
-     User user = (User)request.getSession().getAttribute("user");
-%>
 </script>
     </head>
     <body>
         <%@include file="navigator.jsp"%>
-        <% if(user.getAdmin()){%>
-            <%@include file="adminMenu.jsp"%>
-        <%}else{%>
-            <%@include file="menu.jsp"%>
-        <%}%>
         <h3>Provision Form</h3>
         <form  id="templateForm" method="post" action="SaveAsTemplate">
             <table  align="center" style="border:2px solid green; padding:15px 15px;">

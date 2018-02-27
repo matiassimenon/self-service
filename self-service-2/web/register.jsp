@@ -8,12 +8,6 @@ servlet but should be the only JSP outside of WEB-INF.
 <%@page import="com.selfservice.model.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%
-   User user= (User)request.getAttribute("user");
-   if(user ==null){
-       user = new User();
-   }
-%>
 <!DOCTYPE html>
 
 <html>
@@ -47,6 +41,13 @@ servlet but should be the only JSP outside of WEB-INF.
 	<body>
 	
         <%@include file="navigator.jsp"%>
+        
+        <%
+            user= (User)request.getAttribute("user");
+            if(user ==null){
+                user = new User();
+            }
+        %>
         <h1>Self service Platform Registration</h1>
         <h3>Register</h3>
 	<form id="registerForm" action="SaveUser?register.jsp" method="post">
@@ -79,11 +80,11 @@ servlet but should be the only JSP outside of WEB-INF.
                 </tr>
                 <tr>
                     <td>Talend Email:</td><td> <input type="email" name="email" placeholder="test@talend.com" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
-                    <td>Admin:</td><td><input type="checkbox" id="admin" name="admin"  value="true"></td>
+                    <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="true"></td>
                 </tr>
                 
                 <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onblur="checkPasswd();" value="<%=user.getPassword()%>"></td>
-                    <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onblur="checkPasswd();" value="<%=user.getPassword()%>"></td> 
+                    <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td> 
                     <td><span id="passwdMsg"></span></td></tr>
 		
                 <tr><td colspan=5 align="center"><button type="submit" >REGISTER</button></td></tr></table>

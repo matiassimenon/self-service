@@ -44,7 +44,7 @@ public class UserLoginValidate {
                                 pObject.setPassword(rs.getString(7));
                                 pObject.setRegion(rs.getString(8));
                                 int admin=rs.getInt(9);
-                                pObject.setAdmin(admin==1?true: false);
+                                pObject.setAdmin((admin==1));
 				list.add(pObject);
 			}  
 			con.close();  
@@ -73,7 +73,7 @@ public class UserLoginValidate {
                     pObject.setPassword(rs.getString(7));
                     pObject.setRegion(rs.getString(8));
                     int admin=rs.getInt(9);
-                    pObject.setAdmin(admin==1?true: false);
+                    pObject.setAdmin((admin==1));
                     list.add(pObject);
                 }
                 con.close();

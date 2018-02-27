@@ -7,9 +7,7 @@
 <%@page import="com.selfservice.model.User"%>
 <%@page import="java.util.List"%>
 <%
-User user = (User)request.getSession().getAttribute("user");
- List<User> list  =(List<User>)request.getAttribute("userList");
-     
+List<User> list  =(List<User>)request.getAttribute("userList");   
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -61,11 +59,6 @@ User user = (User)request.getSession().getAttribute("user");
     </head>
     <body>
         <%@include file="navigator.jsp"%>
-        <% if(user.getAdmin()){%>
-            <%@include file="adminMenu.jsp"%>
-        <%}else{%>
-            <%@include file="menu.jsp"%>
-        <%}%>
         <h3>Users</h3>
         <form  id="userForm" method="post" >
                 <div >

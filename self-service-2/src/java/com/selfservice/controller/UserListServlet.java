@@ -40,7 +40,7 @@ public class UserListServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {        
         Connection con = null;
         List<User> list = new ArrayList<>();
         PrintWriter out=response.getWriter();
