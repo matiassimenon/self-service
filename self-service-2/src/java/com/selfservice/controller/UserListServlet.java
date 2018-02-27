@@ -44,6 +44,7 @@ public class UserListServlet extends HttpServlet {
         Connection con = null;
         List<User> list = new ArrayList<>();
         PrintWriter out=response.getWriter();
+        User user = (User) request.getSession().getAttribute("user");
         try {
             con = DbConnection.getConnection();
             //User user = (User) request.getSession().getAttribute("user");
@@ -87,9 +88,14 @@ public class UserListServlet extends HttpServlet {
                         String isAdmin=update[1];
                         sql="update USER set admin=? where username=?";
                         ps=con.prepareStatement(sql);
+                        
                         ps.setInt(1,isAdmin.equalsIgnoreCase("true")?1:0);
                         ps.setString(2, username);
-                        ret=ps.executeUpdate();                        
+                        ret=ps.executeUpdate();   
+                        //update the session if it's the current user
+                        if(username.equalsIgnoreCase(user.getUsername())){
+                            user.setAdmin(isAdmin.equalsIgnoreCase("true"));
+                        }
                     }
                 }
             }   
@@ -125,7 +131,7 @@ public class UserListServlet extends HttpServlet {
             request.getRequestDispatcher("userList.jsp").include(request, response);
             //detroy the current user's session if it's deleted
             Boolean isUserExists=false;
-            User user = (User) request.getSession().getAttribute("user");
+            
             for(User user1: list){
                 if(user1.getUsername().equals(user.getUsername())){
                     isUserExists=true;

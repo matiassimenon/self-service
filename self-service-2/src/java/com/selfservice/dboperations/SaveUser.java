@@ -47,11 +47,14 @@ public class SaveUser extends HttpServlet {
         String region=request.getParameter("region");
         String city=request.getParameter("city");
         String admin=request.getParameter("admin");
+        String adminReqeust=request.getParameter("adminRequest");
         int  isAdmin="true".equals(admin)?1:0;
+        int isAdminReqeust="true".equals(adminReqeust)?1:0;
         String password1=request.getParameter("password1");
         String password2=request.getParameter("password2");
         Connection con=null;
         PreparedStatement ps=null;
+        User user =new User();
         try {
             con=DbConnection.getConnection();
             
@@ -60,7 +63,7 @@ public class SaveUser extends HttpServlet {
             
             boolean isInsert="register.jsp".equals(jspPage);
             if(isInsert){
-                sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin)values(?,?,?,?,?,?,?,?,?)";
+                sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin, admin_request)values(?,?,?,?,?,?,?,?,?,0)";
                 ps=con.prepareStatement(sql);
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
@@ -75,7 +78,7 @@ public class SaveUser extends HttpServlet {
             
             //update user           
             if(!isInsert ){
-                sql="update USER set firstname=?, lastname=?, email=?, department=?, city=?, password=?, region=?, admin=? where username=?";
+                sql="update USER set firstname=?, lastname=?, email=?, department=?, city=?, password=?, region=?, admin_request=? where username=?";
                 ps=con.prepareStatement(sql);
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
@@ -84,17 +87,18 @@ public class SaveUser extends HttpServlet {
                 ps.setString(5, city); 
                 ps.setString(6, password1);
                 ps.setString(7, region);
-                ps.setInt(8, isAdmin);
-                ps.setString(9, username);                
+                ps.setInt(8, isAdminReqeust);
+                ps.setString(9, username);         
+                request.getSession().setAttribute("user", user);
             }
            
-            User user =new User();
+            
             user.setFirstname(firstname);
             user.setLastname(lastname);
             user.setUsername(username);
             user.setDepartment(department);
             user.setCity(city);
-            user.setAdmin(isAdmin==1?true:false);
+            user.setAdminRequest(isAdminReqeust==1?true:false);
             user.setRegion(region);
             user.setEmail(email);
             user.setPassword(password1);
