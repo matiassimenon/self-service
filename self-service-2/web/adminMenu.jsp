@@ -3,7 +3,7 @@
     <tr>
         <td class="td1"><a href="UserListServlet">Users</a></td>
         <td class="td1"><a href="adminRoleRequestList.jsp">Admin Role Requests</a></td>
-        <td class="td1"><a href="adminProfile.jsp">Profile</a></td>
+        <td class="td1"><a href="userProfile.jsp">Profile</a></td>
         <td class="td1"><a href="provisionForm.jsp">Provision Form</a></td>
         <td class="td1"><a href="TemplateListServlet">My Templates</a></td>
         <td class="td1"><a href="HistoryServlet?previousRequestList.jsp">My Previous Requests</a></td>

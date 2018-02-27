@@ -39,8 +39,8 @@ servlet but should be the only JSP outside of WEB-INF.
                         }
 			
 		</style>
-                <script src="select.js"> </script>
-                <script src="city.js">               
+                <script src="selfservice.js"> </script>
+                       
                 </script>
 
 	</head>

@@ -26,9 +26,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Self service</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-                <script src="select.js"> </script>
-                <script src="city.js">                  
-                </script>
+        <script src="selfservice.js"> </script>
+                
     </head>
     <body>
         <%@include file="navigator.jsp"%>
@@ -38,7 +37,7 @@
             <%@include file="menu.jsp"%>
         <%}%>
         <h3>Profile</h3>
-        <form   method="post" action="SaveUser?regularUserProfile.jsp">
+        <form   method="post" action="SaveUser?userProfile.jsp">
             	<table id="reg_form"  align="center" style="border:2px solid green; padding:10px 10px;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=firstname%>"></td>

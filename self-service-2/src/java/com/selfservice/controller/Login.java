@@ -5,7 +5,6 @@ package com.selfservice.controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import com.selfservice.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,11 +52,7 @@ public class Login extends HttpServlet {
                 }
                 req.getSession().setAttribute("user", user);
 
-                if (user.getAdmin()) {
-                    req.getRequestDispatcher("adminProfile.jsp").include(req, resp);
-                } else {
-                    req.getRequestDispatcher("regularUserProfile.jsp").include(req, resp);
-                }
+                req.getRequestDispatcher("userProfile.jsp").include(req, resp);
 
             } else {
                 //if no values are found then the User does not exist
