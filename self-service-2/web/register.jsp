@@ -76,7 +76,7 @@ servlet but should be the only JSP outside of WEB-INF.
                 </tr>
                 <tr>
                     <td>Talend Email:</td><td> <input type="email" name="email" placeholder="test@talend.com" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
-                    <td>Admin:</td><td><input type="checkbox" id="admin" name="admin"  value="true"></td>
+                    <td>Admin Request:</td><td><input type="checkbox" id="adminRequest" name="adminRequest"  value="true" <%if(user.isAdminRequest()){%> checked="checked" <%}%>></td>
                 </tr>
                 
                 <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onblur="checkPasswd();" value="<%=user.getPassword()%>"></td>

@@ -63,7 +63,7 @@ public class SaveUser extends HttpServlet {
             
             boolean isInsert="register.jsp".equals(jspPage);
             if(isInsert){
-                sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin, admin_request)values(?,?,?,?,?,?,?,?,?,0)";
+                sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin, admin_request)values(?,?,?,?,?,?,?,?,0,?)";
                 ps=con.prepareStatement(sql);
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
@@ -73,7 +73,7 @@ public class SaveUser extends HttpServlet {
                 ps.setString(6, city); 
                 ps.setString(7, password1);
                 ps.setString(8, region);
-                ps.setInt(9, isAdmin);
+                ps.setInt(9, isAdminReqeust);
             }
             
             //update user           
