@@ -9,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%
  List<Request> list  =(List<Request>)request.getAttribute("historyList");
+ String type=(String)request.getAttribute("type");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -22,25 +23,29 @@
         <script src="selfservice.js"></script>
         <script>
         function doSearch(txt){
-            document.getElementById("historyForm").action="HistoryServlet?historyList.jsp";
+            document.getElementById("historyForm").action="HistoryServlet";
             document.getElementById("historyForm").submit();
         }
         </script>
     </head>
     <body>
         <%@include file="navigator.jsp"%>
+        <%if("historyList".equals(type)){%>
         <h3>History</h3>
+        <%} else{ %>
+        <h3>My Previous Requests</h3>
+        <%}%>
         <form  id="historyForm" method="post" action="">
-                <div >
-                    <table  align="center"  style="  width: 800px; border-collapse: collapse;">
-                        <tr>
-                            <td width="650px" class="td1"></td>
-                            <td class="td1" align="right" >                                
-                                <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
-                            </td>
-                        </tr>
-                    </table>                   
-                </div>            
+            <input type="hidden" name="type" value="<%=type%>" />     
+            <table  align="center"  style="  width: 800px; border-collapse: collapse;">
+                <tr>
+                    <td width="650px" class="td1"></td>
+                    <td class="td1" align="right" >                                
+                        <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
+                    </td>
+                </tr>
+            </table>                   
+                       
             <table  align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <th>Request Date</th>
@@ -61,18 +66,16 @@
                 </tr>
                 <%}%>
             </table>
-                <div >
-                    <table  align="center"  style="  width: 800px;">
-                        <tr>
-                            <td width="650px" class="td1"></td>
-                            <td class="td1"  align="right">
-                                <button type="submit" >Use for Request</button>
-                            </td>
-                            
-                        </tr>
-                    </table>
-                    
-                </div>
+
+            <table  align="center"  style="  width: 800px;">
+                <tr>
+                    <td width="650px" class="td1"></td>
+                    <td class="td1"  align="right">
+                        <button type="submit" >Use for Request</button>
+                    </td>
+                </tr>
+            </table>
+
         </form>
     </body>
 </html>

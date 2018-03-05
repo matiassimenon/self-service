@@ -62,7 +62,7 @@ function setSelected(selectObj, selectedValue) {
 //function for table data row
 function clickRow(row) {
     if (row.selected === 'true') {
-        row.bgColor = '#fff';
+        row.bgColor = 'white';
         row.selected = 'false';
     } else {
         row.bgColor = '#22CCCC';
@@ -81,6 +81,7 @@ cityArr['apac'] =
         ];
 cityArr['us'] =
         [
+            {txt: 'Atlanta', val: 'Atlanta'},
             {txt: 'Boston', val: 'Boston'},
             {txt: 'Irvine', val: 'Irvine'},
             {txt: 'Redwood', val: 'Redwood'}
@@ -103,9 +104,11 @@ function checkPasswd() {
     var pwd1 = document.getElementById("password1").value;
     var pwd2 = document.getElementById("password2").value;
     if (pwd1 !== pwd2) {
-        document.getElementById("passwdMsg").innerHTML = "Password Not Matched!";
+        document.getElementById("passwdMsg").style.color="red";
+        document.getElementById("passwdMsg").innerHTML = "Not Matched!";
         return;
     }
-    document.getElementById("passwdMsg").innerHTML = "Password Matched!";
+    document.getElementById("passwdMsg").style.color="green";
+    document.getElementById("passwdMsg").innerHTML = "Matched!";
 
 }

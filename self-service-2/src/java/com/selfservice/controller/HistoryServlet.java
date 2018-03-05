@@ -46,23 +46,26 @@ public class HistoryServlet extends HttpServlet {
             con = DbConnection.getConnection();
             User user = (User) request.getSession().getAttribute("user");
             String username = user.getUsername();
-            String page = request.getQueryString();
+            String typeString = request.getQueryString();
+            String type=request.getParameter("type");
 
             String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
             sql = sql + " and req.username='" + username + "'";
 
-            if (page != null) {
+      
                 //MyPrvious request
-                if (page.contains("previousRequestList")) {
+                if ((typeString != null && typeString.contains("previousRequest")) || (type != null && type.contains("previousRequest"))) {
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                     sql = sql + " and req.request_date < '" + df.format(new Date()) + "'";
-                }               
-            }
+                    type="previousRequest";
+                }else{
+                    type="historyList";
+                }                           
             //Search Request
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
 
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' or request_status like '%" + sTxt + "%' )";
+                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt +  "%' or req.username like '%" + sTxt +"%' or request_status like '%" + sTxt + "%' )";
             }
             //add order
             sql = sql + " order by last_edit DESC";
@@ -82,7 +85,9 @@ public class HistoryServlet extends HttpServlet {
                 list.add(object);
             }
             request.setAttribute("historyList", list);
-            request.getRequestDispatcher(page).include(request, response);
+            //set back the type: historyList or previousRequestList
+            request.setAttribute("type", type);
+            request.getRequestDispatcher("historyList.jsp").include(request, response);
             rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();

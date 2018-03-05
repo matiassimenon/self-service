@@ -56,7 +56,7 @@
         <%@include file="navigator.jsp"%>
         <h3>My Templates</h3>
         <form  id="templateForm" method="post" action="">
-                <div >
+
                     <table  align="center"  style="  width: 800px;">
                         <tr>
                             <td width="650px" class="td1"></td>
@@ -65,7 +65,7 @@
                             </td>
                         </tr>
                     </table>                   
-                </div>            
+            
             <table  id ="templateTable" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <th>Last Edit</th>
@@ -83,10 +83,10 @@
                 </tr>
                 <%}%>
             </table>
-                <div >
+
                     <table  align="center"  style="  width: 800px;">
                         <tr>
-                            <td width="550px" class="td1"></td>
+                            <td width="500px" class="td1"></td>
                              <td class="td1"  align="right">
                              <button type="submit" onclick="deleteTemplate()" >Delete Template</button>
                             </td>
@@ -97,7 +97,6 @@
                         </tr>
                     </table>
                     
-                </div>
         </form>
     </body>
 </html>
