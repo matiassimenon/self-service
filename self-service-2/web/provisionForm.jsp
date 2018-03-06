@@ -63,7 +63,7 @@ function requestAction(){
     <body>
         <%@include file="navigator.jsp"%>
         <h3>Provision Form</h3>
-        <form  id="templateForm" method="post" action="SaveAsTemplate">
+        <form  id="templateForm" method="post" action="">
             <table  align="center" style="border:2px solid green; padding:15px 15px;">
                 <tr>
                     <td >OS:</td> 
