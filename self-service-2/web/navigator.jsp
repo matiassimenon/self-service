@@ -6,7 +6,7 @@
 
 <%@page import="com.selfservice.model.User"%>
 <%
-User user = (User)request.getSession().getAttribute("user");
+User user = (User)request.getSession(false).getAttribute("user");
 %>
 
 <table cellspacing="10" align="center" style="border:2px solid green; ">

@@ -44,7 +44,7 @@ public class UseForRequestServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession(false).getAttribute("user");
         String username = user.getUsername();
         username = (username == null ? "test" : username);
         Connection con = null;

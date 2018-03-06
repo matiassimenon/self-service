@@ -49,12 +49,14 @@ function generateImageName(){
     document.getElementById("imageName").value=imagename;
 }
 function saveAsTemplate(){
+    document.getElementById("salesforceCase").removeAttribute("required");
     document.getElementById("templateForm").action="SaveAsTemplate";
-    document.getElementById("templateForm").submit();
+    //document.getElementById("templateForm").submit();
 }
 function requestAction(){
-    document.getElementById("templateForm").action="RequestServlet";
-    document.getElementById("templateForm").submit();
+    document.getElementById("salesforceCase").required="required";
+    document.getElementById("templateForm").action="RequestServlet";    
+    //document.getElementById("templateForm").submit();
 }
 </script>
     </head>
@@ -71,7 +73,7 @@ function requestAction(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase" maxlength="10" required="required" ></input> </td>
+                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase" maxlength="10" ></input> </td>
                 </tr>                
                 <tr>
                     <td>OS Version: </td>

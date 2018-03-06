@@ -50,9 +50,10 @@ public class Login extends HttpServlet {
                     out.print("<p  class='save_err' >Login failed! Password is invalid!");
                     return;
                 }
-                req.getSession().setAttribute("user", user);
-
-                req.getRequestDispatcher("userProfile.jsp").include(req, resp);
+                req.getSession(false).setAttribute("user", user);
+                //setup session timeout, never timeout
+                req.getSession(false).setMaxInactiveInterval(-1);
+                req.getRequestDispatcher("userProfile.jsp").forward(req, resp);
 
             } else {
                 //if no values are found then the User does not exist
