@@ -155,7 +155,7 @@ public class UserListServlet extends HttpServlet {
             request.setAttribute("userList", list);
             request.getRequestDispatcher("userList.jsp").include(request, response);
             //detroy the current user's session if it's deleted
-            sql = "select count(*) from USER where username='" + user.getUsername() + "'";
+            sql = "select * from USER where username='" + user.getUsername() + "'";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (!rs.next()) {
