@@ -28,7 +28,7 @@ String greetString=SFUtils.getGreetingString();
 <%if (user != null) {%>
 <table cellspacing="5" align="center" style="font-size: small">
     <tr>
-        <td  style="border: solid 0px #fff; color: green; font-family: sans-serif">Good <%=greetString%>! <%=user.getFirstname()%></td>
+        <td  style="border: solid 0px #fff; color: green;">Good <%=greetString%>! <%=user.getFirstname()%></td>
         <td class="td1" width="30px"></td>
         <%
         if (user.getAdmin()) {

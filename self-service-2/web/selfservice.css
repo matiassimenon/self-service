@@ -2,7 +2,7 @@
 h1,h2,h3{
 margin:25px;
 text-align:center;
-background-color:#fff;
+background-color:#fff; 
 color:#003366;
 }
 .save_err{
