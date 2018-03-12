@@ -67,7 +67,7 @@ public class AdminRequestServlet extends HttpServlet {
                         
                         ps = conn.prepareStatement(sql);                        
                         ps.setString(1, username);
-                        ps.executeUpdate();                        
+                        ps.executeUpdate();
                     }
                 }
             }
@@ -82,7 +82,17 @@ public class AdminRequestServlet extends HttpServlet {
             }
             sql = sql + " order by firstname ASC";
             
-            ps = conn.prepareStatement(sql);
+            //add paging sql
+            int page = 1; //current page;
+            int recordsPerPage = 15;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+            int beginIndex = (page - 1) * recordsPerPage;
+
+            String pageSql = "select o.* from (" + sql + ") o limit " + beginIndex + ", " + recordsPerPage;
+            
+            ps = conn.prepareStatement(pageSql);
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
@@ -95,10 +105,23 @@ public class AdminRequestServlet extends HttpServlet {
                 user.setCity(rs.getString(6));
                 user.setRegion(rs.getString(7));
                 list.add(user);
-            }
+            }           
             
+            String totalSql = "select count(*) from (" + sql + ") o";
+            ps = conn.prepareStatement(totalSql);
+            rs = ps.executeQuery();
+            int total = 0;
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
             rs.close();
+            ps.close();
             conn.close();
+            
+            //setup the paging attribute
+            int noOfPages = (int) Math.ceil(total * 1.0 / recordsPerPage);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
             
             request.setAttribute("adminReqList", list);
             request.getRequestDispatcher("/adminRoleRequestList.jsp").include(request, response);
@@ -108,17 +131,17 @@ public class AdminRequestServlet extends HttpServlet {
                         conn.rollback();
                     } catch (SQLException ex1) {
                         Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex1);
-                    } finally {
-                        if (conn != null) {
-                            try {
-                                conn.close();
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                }
+                    }
             }
-        }
+        } finally {
+                if (conn != null) {
+                    try {
+                        conn.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+         }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

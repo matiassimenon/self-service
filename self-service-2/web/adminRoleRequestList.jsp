@@ -3,7 +3,7 @@
     Created on : Jan 19, 2018, 11:54:19 AM
     Author     : francisco
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -84,6 +84,28 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                 </tr>
                 <%}%>
             </table>
+            <!-- pageing table-->
+             <table align="center">
+                 <tr>
+                    <c:if test="${currentPage != 1}">
+                        <td class="td1"><a href="AdminRequestServlet?page=${currentPage - 1}">Previous</a></td>
+                    </c:if>
+                    <c:forEach begin="1" end="${noOfPages}" var="i">
+                       <c:choose>
+                           <c:when test="${currentPage eq i}">
+                               <td class="td1">${i}</td>
+                           </c:when>
+                           <c:otherwise>
+                               <td class="td1"><a href="AdminRequestServlet?page=${i}">${i}</a></td>
+                           </c:otherwise>
+                       </c:choose>
+                   </c:forEach>    
+                    <%--For displaying Next link --%>
+                    <c:if test="${currentPage lt noOfPages}">
+                        <td class="td1"><a href="AdminRequestServlet?page=${currentPage + 1}">Next</a></td>
+                    </c:if>                               
+                 </tr>
+             </table> 
                 <div >
                     <table  align="center"  style="  width: 1000px;">
                         <tr>

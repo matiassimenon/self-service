@@ -132,7 +132,7 @@ public class UserListServlet extends HttpServlet {
                 object.setPassword(rs.getString(7));
                 object.setRegion(rs.getString(8));
                 int iadmin = rs.getInt(9);
-                object.setAdmin(iadmin == 1 ? true : false);
+                object.setAdmin((iadmin == 1));
                 list.add(object);
             }
             rs.close();
