@@ -93,18 +93,22 @@ public class RequestServlet extends HttpServlet {
                         //TODO Request to backend
                         
                         if(ret >0){
-                            request.getRequestDispatcher("provisionForm.jsp").include(request, response);
-                            out.print("<h3 class='save_ok'>Request Successfully!!</h3>");
+                               request.setAttribute("errMessage", "Save Successfully!!");
+                                request.setAttribute("saveOK", "true");                               
+                             request.getRequestDispatcher("provisionForm.jsp").include(request, response);
+                            //out.print("<h3 class='save_ok'>Request Successfully!!</h3>");
                         }
             } catch (SQLException ex) {
                     try {
                         if(con!=null)
                             con.rollback();
+                        request.setAttribute("errMessage", "Save Failed!" + ex.getLocalizedMessage());
+                        request.setAttribute("saveOK", "false");                           
                         Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
                         request.getRequestDispatcher("provisionForm.jsp").include(request, response);
-                        String err=ex.getLocalizedMessage();
-                        String outstr= "<h3 class='save_err'>Request Failed!  "+ err+ "</h3>";
-                        out.print(outstr);
+                        //String err=ex.getLocalizedMessage();
+                        //String outstr= "<h3 class='save_err'>Request Failed!  "+ err+ "</h3>";
+                        //out.print(outstr);
                     } catch (SQLException ex1) {
                         Logger.getLogger(RequestServlet.class.getName()).log(Level.SEVERE, null, ex1);
                     }

@@ -29,5 +29,16 @@ color:#003366;
 }
 p{
 text-align:center;
-font-size: 16pt;
+font-size: 12pt;
 }
+#content {
+    width: 99%;
+   min-height:  800px;
+}
+
+#footer {     
+    width: 99%; 
+    color: green;  
+    text-align: center;  
+    margin: 0;  
+}  

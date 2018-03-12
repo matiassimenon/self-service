@@ -3,6 +3,11 @@
     Created on : Jan 19, 2018, 11:54:19 AM
     Author     : francisco
 --%>
+<%@page import="org.eclipse.jdt.internal.compiler.ast.FalseLiteral"%>
+<%
+    Boolean saveOK=request.getAttribute("saveOK")!=null? Boolean.valueOf(request.getAttribute("saveOK").toString()):true;
+    Object errMessage=request.getAttribute("errMessage");
+%>
 <%@page import="java.util.List"%>
 <%@page import="com.selfservice.controller.UserLoginValidate"%>
 <%@page import="com.selfservice.model.User"%>
@@ -17,6 +22,7 @@
                 
     </head>
     <body>
+        <div  style="height: 900px">
         <%@include file="navigator.jsp"%>
         <%  
         String firstname=user.getFirstname();
@@ -71,5 +77,9 @@
 		
                 <tr><td colspan=5 align="center"><button type="submit" >Save</button></td></tr></table>
         </form>
+         <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
+        </div>               
     </body>
+    <%@include file="footer.jsp"%>
+    
 </html>

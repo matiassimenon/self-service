@@ -29,6 +29,7 @@
         </script>
     </head>
     <body>
+        <div  style="height: 900px">
         <%@include file="navigator.jsp"%>
         <%if("historyList".equals(type)){%>
         <h3>History</h3>
@@ -98,5 +99,8 @@
             </table>
 
         </form>
+        </div>
     </body>
+
+    <%@include file="footer.jsp"%>
 </html>

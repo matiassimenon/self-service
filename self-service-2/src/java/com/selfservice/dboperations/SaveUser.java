@@ -96,19 +96,23 @@ public class SaveUser extends HttpServlet {
             if (sql != null) {
                 int ret=ps.executeUpdate();
                 if(ret >0){
+                 request.setAttribute("saveOK", "true");
+                 request.setAttribute("errMessage", "Save Successfully!!");
                  request.getRequestDispatcher(jspPage).include(request, response);
-                 out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
+                 //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
             }
             }
 
 
            
         } catch (SQLException ex) {
-            Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);           
+            String err=ex.getLocalizedMessage();                      
+            String outstr= "Save Failed!  "+ err;
+            request.setAttribute("errMessage", outstr);
+            request.setAttribute("saveOK", "true");
             request.getRequestDispatcher(jspPage).include(request, response);
-            String err=ex.getLocalizedMessage();
-            String outstr= "<h3 class='save_err'>Save Failed!  "+ err+ "</h3>";
-            out.print(outstr);
+            //out.print(outstr);
             
         }finally{
             try {

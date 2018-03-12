@@ -37,7 +37,7 @@ servlet but should be the only JSP outside of WEB-INF.
                        
 	</head>
 	<body>
-	
+	<div  style="height: 900px">
         <%@include file="navigator.jsp"%>
         
         <%
@@ -88,5 +88,7 @@ servlet but should be the only JSP outside of WEB-INF.
                 <tr><td colspan=5 align="center"><button type="submit" >REGISTER</button></td></tr></table>
 		<p>Have an Account? <a href="login.jsp">login</a></p>
 	</form>
+        </div>                   
 </body>
+<%@include file="footer.jsp"%>
 </html>

@@ -3,7 +3,10 @@
     Created on : Jan 19, 2018, 11:56:16 AM
     Author     : francisco
 --%>
-
+<%
+    Boolean saveOK=request.getAttribute("saveOK")!=null? Boolean.valueOf(request.getAttribute("saveOK").toString()):true;
+    Object errMessage=request.getAttribute("errMessage");
+%>
 <%@page import="com.selfservice.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -85,7 +88,7 @@ function checkOsVersion(){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }     
-    if(componentVersion.value === '6.5.1'){
+    if(componentVersion.value === '6.5.1' || componentVersion.value === '7.0.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }      
@@ -113,6 +116,7 @@ function requestAction(){
 </script>
     </head>
     <body>
+        <div  style="height: 900px">
         <%@include file="navigator.jsp"%>
         <h3>Provision Form</h3>
         <form  id="templateForm" method="post" action="">
@@ -158,6 +162,7 @@ function requestAction(){
                             <option value="6.3.1">6.3.1</option>
                             <option value="6.4.1">6.4.1</option>
                             <option value="6.5.1">6.5.1</option>
+                            <option value="7.0.1">7.0.1</option>
                         </select> 
                     </td>
                 </tr>
@@ -192,5 +197,8 @@ function requestAction(){
             </table>
             
         </form>
+        <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
+        </div>
     </body>
+    <%@include file="footer.jsp"%>
 </html>

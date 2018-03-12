@@ -46,8 +46,10 @@ public class Login extends HttpServlet {
                     }
                 }
                 if (user == null) {//password is not correct
-                    req.getRequestDispatcher("login.jsp").include(req, resp);
-                    out.print("<p  class='save_err' >Login failed! Password is invalid!");
+                    req.setAttribute("errMessage", "Login failed! Password is invalid!");   
+                    req.getRequestDispatcher("login.jsp").forward(req, resp);
+
+                    //out.print("<p  class='save_err' >Login failed! Password is invalid!");
                     return;
                 }
                 req.getSession(false).setAttribute("user", user);
@@ -56,16 +58,21 @@ public class Login extends HttpServlet {
                 req.getRequestDispatcher("userProfile.jsp").forward(req, resp);
 
             } else {
+                req.setAttribute("errMessage", "User Does Not Exist! <a href='register.jsp'>Register Here</a>");                
                 //if no values are found then the User does not exist
-                req.getRequestDispatcher("login.jsp").include(req, resp);
-                out.print("<p  class='save_err' >User Does Not Exist!");
-                out.print("<a href='register.jsp'>Register Here</a></p>");
+                req.getRequestDispatcher("login.jsp").forward(req, resp);
+                //out.print("<p  class='save_err' >User Does Not Exist!");
+                //out.print("<a href='register.jsp'>Register Here</a></p>");
+
             }
         } catch (Exception e) {
-            req.getRequestDispatcher("login.jsp").include(req, resp);
             String err = e.getMessage();
-            String errmsg = "<p class='save_err'>Login failed! " + err + "</p>";
-            out.print(errmsg);
+            String errmsg = "Login failed! " + err ;            
+            req.setAttribute("errMessage", errmsg);            
+            req.getRequestDispatcher("login.jsp").forward(req, resp);
+
+           // out.print(errmsg);
+
 
         }
     }

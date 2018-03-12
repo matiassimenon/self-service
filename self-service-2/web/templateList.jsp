@@ -31,7 +31,7 @@
             var isSelected=false;
             for( var i=0; i< rows.length; i++){
                 if(rows[i].selected == 'true'){
-                    deleteString += rows[i].cells[3].innerText + "&";
+                    deleteString += rows[i].cells[2].innerText + "&";
                     isSelected=true;
                 }
             }
@@ -53,6 +53,7 @@
         </script>
     </head>
     <body>
+        <div  style="height: 900px">
         <%@include file="navigator.jsp"%>
         <h3>My Templates</h3>
         <form  id="templateForm" method="post" action="">
@@ -70,7 +71,7 @@
                 <tr>
                     <th>Last Edit</th>
                     <th>Template Name</td>
-                    <th>Salesforce Case</th>
+                    
                 </tr>
                 <%
                     for(Template his: list){
@@ -78,7 +79,7 @@
                 <tr onclick="clickRow(this)">
                     <td><%=his.getLast_edit().toString()%></td>
                     <td><%=his.getTemplate_name().toString()%></td>         
-                    <td><%=his.getSalesforce_case()%></td>
+                    
                     <td hidden="hidden"><%=his.getTemplate_uuid()%></td>
                 </tr>
                 <%}%>
@@ -119,5 +120,7 @@
                     </table>
                     
         </form>
+  </div>                    
     </body>
+    <%@include file="footer.jsp"%>
 </html>

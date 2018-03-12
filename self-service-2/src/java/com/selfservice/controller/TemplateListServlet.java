@@ -72,13 +72,13 @@ public class TemplateListServlet extends HttpServlet {
                 ps.executeUpdate();
             }
             //TO check if salesforce_case come from Template or request
-            sql = "select  temp.last_edit,  temp.template_name, req.salesforce_case, temp.template_uuid from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
-            sql = sql + " and req.username='" + username + "'";
+            sql = "select  temp.last_edit,  temp.template_name, temp.template_uuid  from TEMPLATE temp ";
+            sql = sql + " where  temp.username='" + username + "'";
 
             //Search Request
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' )";
+                sql = sql + " and ( template_name like '%" + sTxt + "%' or last_edit like '%" + sTxt + "%' )";
             }
             sql = sql + " order by last_edit DESC";
             //add paging sql
@@ -98,8 +98,8 @@ public class TemplateListServlet extends HttpServlet {
                 Template object = new Template();              
                 object.setLast_edit(rs.getDate(1));
                 object.setTemplate_name(rs.getString(2));
-                object.setSalesforce_case(rs.getString(3));
-                object.setTemplate_uuid(rs.getString(4));
+                //object.setSalesforce_case(rs.getString(3));
+                object.setTemplate_uuid(rs.getString(3));
                 list.add(object);
             }
             rs.close();

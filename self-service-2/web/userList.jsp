@@ -58,6 +58,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
         </script>
     </head>
     <body>
+        <div  style="height: 900px">
         <%@include file="navigator.jsp"%>
         <h3>Users</h3>
         <form  id="userForm" method="post" >
@@ -137,5 +138,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
                     
                 
         </form>
+        </div>                    
     </body>
+    <%@include file="footer.jsp"%>
 </html>
