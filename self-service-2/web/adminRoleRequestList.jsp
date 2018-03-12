@@ -24,22 +24,18 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
             document.getElementById("adminReqForm").submit();
         }
         
-        function saveUsers(){
-            var rows=document.getElementById("adminReqTable").rows;          
+        function saveUsers(){      
             var saveString="save";
-            var isSelected=false;
-
-            for( var i=0; i< rows.length; i++){
-                var accept = rows[i].cells[8].children[0];
-                
-                 if (accept.checked) {
-                      saveString += "&"+rows[i].cells[2].innerText + "=" + accept.checked + "&";
-                      isSelected=true;
-                 }
-                
+            
+            var acceptReq = document.getElementsByName("acceptReq");
+            var denyReq = document.getElementsByName("denyReq");
+            for (var i=0; i<acceptReq.length; i++) {
+                if(acceptReq[i].checked || denyReq[i].checked) {
+                    var user = (acceptReq[i].checked === true)?acceptReq[i].value:denyReq[i].value;
+                    saveString += "&" + user + "=" + acceptReq[i].checked;
+                }
             }
-            //if(isSelected === false) return;
-            document.getElementById("msg").innerHTML = saveString;
+            
             document.getElementById("adminReqForm").action="AdminRequestServlet?"+saveString;
             document.getElementById("adminReqForm").submit();
         }
@@ -71,9 +67,10 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                     <th>Deny Request</th>
                 </tr>
                 <%
-                    for(User user1: list)   {         
+                    for(int i=0;i<list.size(); i++)   {   
+                       User user1 = list.get(i);
                 %>
-                <tr onclick="clickRow(this)">
+                <tr>
                     <td><%=user1.getFirstname()%></td>
                     <td><%=user1.getLastname()%></td>
                     <td><%=user1.getUsername()%></td>
@@ -81,8 +78,8 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                     <td><%=user1.getDepartment()%></td>
                     <td><%=user1.getCity()%></td>
                     <td><%=user1.getRegion()%></td> 
-                    <td><input type="checkbox" onclick="this.value='1'; document.getElementById('denyReq').checked = false; document.getElementById('denyReq').value='0'" id ="acceptReq" /></td>
-                    <td><input type="checkbox" onclick="this.value='1'; document.getElementById('acceptReq').checked = false; document.getElementById('acceptReq').value='0'" id ="denyReq" /></td>
+                    <td><input type="checkbox" name="acceptReq" onclick="this.value='<%=user1.getUsername()%>'; document.getElementById('denyReq<%=i%>').checked = false;" id ="acceptReq<%=i%>" /></td>
+                    <td><input type="checkbox" name="denyReq" onclick="this.value='<%=user1.getUsername()%>'; document.getElementById('acceptReq<%=i%>').checked = false;" id ="denyReq<%=i%>" /></td>
                     
                 </tr>
                 <%}%>

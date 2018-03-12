@@ -45,10 +45,35 @@ public class AdminRequestServlet extends HttpServlet {
         List<User> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
+        String sql;
         
         try{
             conn = DbConnection.getConnection();
-            String sql = "select  firstname, lastname, username, email, department, city, region from USER where admin_request=1";
+            
+            String queryStr = request.getQueryString();
+            if (queryStr != null && queryStr.contains("save&")) {
+               
+                String[] saveusers = queryStr.substring("save&".length(), queryStr.length()).split("&");
+                if (saveusers.length != 0) {
+                    for (String user1 : saveusers) {
+                        String[] update = user1.split("=");
+                        String username = update[0];
+                        String acceptOrDeny = update[1];
+                        
+                        sql = "UPDATE `self_service_db`.`USER` SET `admin_request`=0 WHERE `username`=?";
+                        if (acceptOrDeny.equalsIgnoreCase("true")) {
+                            sql = "UPDATE `self_service_db`.`USER` SET `admin`=1,`admin_request`=0 WHERE `username`=?";
+                        }
+                        
+                        ps = conn.prepareStatement(sql);                        
+                        ps.setString(1, username);
+                        ps.executeUpdate();                        
+                    }
+                }
+            }
+            
+            
+            sql = "select  firstname, lastname, username, email, department, city, region from USER where admin_request=1";
             
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
@@ -56,7 +81,6 @@ public class AdminRequestServlet extends HttpServlet {
                 sql +=  " or city like '%" + sTxt + "%' or region like '%" + sTxt + "%')";
             }
             sql = sql + " order by firstname ASC";
-            System.out.println("userList sql-->" + sql);
             
             ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
