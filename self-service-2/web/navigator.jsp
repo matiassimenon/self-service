@@ -30,7 +30,7 @@ User user = (User)request.getSession().getAttribute("user");
         if (user.getAdmin()) {
         %>
         <td class="td1"><a href="UserListServlet">Users</a></td>
-        <td class="td1"><a href="adminRoleRequestList.jsp">Admin Role Requests</a></td>
+        <td class="td1"><a href="AdminRequestServlet">Admin Role Requests</a></td>
         <%}%>
         <td class="td1"><a href="userProfile.jsp">Profile</a></td>
         <td class="td1"><a href="provisionForm.jsp">Provision Form</a></td>
