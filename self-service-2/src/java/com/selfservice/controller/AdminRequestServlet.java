@@ -84,7 +84,7 @@ public class AdminRequestServlet extends HttpServlet {
             
             //add paging sql
             int page = 1; //current page;
-            int recordsPerPage = 2;
+            int recordsPerPage = 15;
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
@@ -108,7 +108,7 @@ public class AdminRequestServlet extends HttpServlet {
             }           
             
             String totalSql = "select count(*) from (" + sql + ") o";
-            ps = con.prepareStatement(totalSql);
+            ps = conn.prepareStatement(totalSql);
             rs = ps.executeQuery();
             int total = 0;
             if (rs.next()) {
