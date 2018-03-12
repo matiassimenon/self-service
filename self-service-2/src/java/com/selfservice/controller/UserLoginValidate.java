@@ -50,6 +50,8 @@ public class UserLoginValidate {
             pObject.setAdminRequest(adminRequest == 1 ? true : false);
             list.add(pObject);
         }
+        rs.close();
+        ps.close();
         con.close();
 
         return list;  //returns the list		
@@ -80,6 +82,9 @@ public class UserLoginValidate {
                 pObject.setAdminRequest(adminRequest == 1 ? true : false);
                 list.add(pObject);
             }
+            rs.close();
+            ps.close();
+           
             con.close();
 
         } catch (SQLException ex) {

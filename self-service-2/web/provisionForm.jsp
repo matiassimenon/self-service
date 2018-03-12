@@ -27,63 +27,110 @@
 var osArr = [];
 osArr['ubuntu'] =
 [
+ {txt:'12.04', val:'12.04'},
  {txt:'14.04', val:'14.04'},
  {txt:'16.04', val:'16.04'},
  {txt:'17.04', val:'17.04'}
  ];
 osArr['centos'] =
 [
- {txt:'7.3', val:'7.3'},
- {txt:'7.4', val:'7.4'}
+{txt:'6.7', val:'6.7'},
+{txt:'6.8', val:'6.8'},
+{txt:'6.9', val:'6.9'},
+{txt:'7.1', val:'7.1'},
+ {txt:'7.2', val:'7.2'},
+ {txt:'7.3', val:'7.3'}
  ];
 function setOsVersion(osVersion)
 {
-    setSelectOption('osVersion', osArr[osVersion], 'Please select...');
+    if(this.value !== '') 
+        setSelectOption('osVersion', osArr[osVersion.options[osVersion.selectedIndex].value], 'Please select...');
+}
+function checkTomcat(){
+    var versions=[{txt:'7.0', val: '7.0'},{txt:'8.0', val: '8.0'}];
+    var ver=[{txt:'8.0', val: '8.0'}];
+    var tomcatVersion=document.getElementById("tomcatVersion");
+    if(document.getElementById("talendComponent").value ===  "tac"){
+        tomcatVersion.removeAttribute("disabled");
+        tomcatVersion.style="background-color:white";
+        if(document.getElementById("componentVersion").value === "6.5.1")
+            setSelectOption('tomcatVersion',ver);
+        else
+            setSelectOption('tomcatVersion',versions);
+    }else{
+        tomcatVersion.disabled="disabled";
+        tomcatVersion.style="background-color:graytext";
+    }
+}
+function checkOsVersion(){
+    var os =document.getElementById("os");
+    var componentVersion=document.getElementById("componentVersion");
+    if(componentVersion.value === '6.0.1'){
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'}]);
+        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
+    }
+    if(componentVersion.value === '6.1.1'){
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
+        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
+    }    
+    if(componentVersion.value === '6.2.1'){
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'}]);
+        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
+    }     
+    if(componentVersion.value === '6.3.1'){
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'}]);
+        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
+    }  
+    if(componentVersion.value === '6.4.1'){
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
+        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
+    }     
+    if(componentVersion.value === '6.5.1'){
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
+        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
+    }      
 }
 function generateImageName(){
     var imagename=document.getElementById("os").value + document.getElementById("osVersion").value.toString().replace("\.","")+ "-"+            
             document.getElementById("talendComponent").value+ document.getElementById("componentVersion").value.toString().replace("\.","").replace("\.","") + "-" +
-            "jdk" + document.getElementById("jdk").value + "u" + document.getElementById("jdkUpdate").value + "-"+
-            "tomcat" + document.getElementById("tomcatVersion").value.toString().replace("\.","");
+            "jdk" + document.getElementById("jdk").value + "u" + document.getElementById("jdkUpdate").value ;
+    if (!document.getElementById("tomcatVersion").disabled){
+            imagename += "-tomcat" + document.getElementById("tomcatVersion").value.toString().replace("\.","");
+        }
     //window.alert(imagename);
     document.getElementById("imageName").value=imagename;
 }
 function saveAsTemplate(){
+    document.getElementById("salesforceCase").removeAttribute("required");
     document.getElementById("templateForm").action="SaveAsTemplate";
-    document.getElementById("templateForm").submit();
+    //document.getElementById("templateForm").submit();
 }
 function requestAction(){
-    document.getElementById("templateForm").action="RequestServlet";
-    document.getElementById("templateForm").submit();
+    document.getElementById("salesforceCase").required="required";
+    document.getElementById("templateForm").action="RequestServlet";    
+    //document.getElementById("templateForm").submit();
 }
 </script>
     </head>
     <body>
         <%@include file="navigator.jsp"%>
         <h3>Provision Form</h3>
-        <form  id="templateForm" method="post" action="SaveAsTemplate">
+        <form  id="templateForm" method="post" action="">
             <table  align="center" style="border:2px solid green; padding:15px 15px;">
                 <tr>
                     <td >OS:</td> 
-                    <td> <select id="os" name="os" required="required" onchange="if(this.value != '') setOsVersion(this.options[this.selectedIndex].value);"> 
+                    <td> <select id="os" name="os" required="required" onchange="setOsVersion(this);"> 
                              <option value="">Please select...</option>
                             <option value="ubuntu">Ubuntu</option>
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase" maxlength="10" required="required" ></input> </td>
+                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase" maxlength="10" ></input> </td>
                 </tr>                
                 <tr>
                     <td>OS Version: </td>
-                    <td><select id="osVersion" required="required" name="osVersion" onchange="generateImageName();">
+                    <td><select id="osVersion" required="required" name="osVersion" onchange=" generateImageName();">
                              <option value="">Please select...</option>
-                             <!--
-                            <option value="14.04">14.04</option>
-                            <option value="16.04">16.04</option>
-                            <option value="17.04">17.04</option>
-                            <option value="7.3">7.3</option>
-                            <option value="7.4">7.4</option>
-                             -->
                         </select> 
                     </td>
                     <td>Registry: </td> 
@@ -95,7 +142,7 @@ function requestAction(){
                 </tr>
                 <tr>
                     <td>Talend Component :</td>
-                    <td> <select id="talendComponent" name="talendComponent" onchange="generateImageName();"> 
+                    <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
                             <option value="tac">TAC</option>
                             <option value="cmdline">CmdLine</option>
                             <option value="jobserver">Jobserver</option>
@@ -104,7 +151,8 @@ function requestAction(){
                     <td>Image Name:  </td><td><input type="text" id="imageName" name="imageName"></input> </td>
                 </tr>
                 <tr><td>Talend Version :</td>
-                    <td> <select id="componentVersion" name="componentVersion" onchange="generateImageName();"> 
+                    <td> <select id="componentVersion" name="componentVersion" onchange="checkTomcat(); checkOsVersion(); generateImageName();"> 
+                            <option value="6.0.1">6.0.1</option>
                             <option value="6.1.1">6.1.1</option>
                             <option value="6.2.1">6.2.1</option>
                             <option value="6.3.1">6.3.1</option>
@@ -115,23 +163,23 @@ function requestAction(){
                 </tr>
                 <tr><td>JDK Version : </td>
                     <td><select id="jdk" name="jdk" onchange="generateImageName();"> 
-                            <option value="7">7</option>
                             <option value="8">8</option>
                         </select> 
                     </td>
                 </tr>
                 <tr><td>JDK Update : </td>
-                    <td><select id="jdkUpdate" name="jdkUpdate" onchange="generateImageName();"> 
-                            <option value="122">122</option>
+                    <td><select id="jdkUpdate" name="jdkUpdate" onchange="generateImageName();">                            
                             <option value="144">144</option>
-                            <option value="161">161</option>                                                      
+                            <option value="152">152</option>
+                            <option value="162">162</option>
+                            <option value="163">163</option>                                                      
                         </select> 
                     </td>
                 </tr>
                 <tr><td>Tomcat Version : </td>
                     <td><select id="tomcatVersion" name="tomcatVersion"  onchange="generateImageName();"> 
-                            <option value="8.2">8.2</option>
-                            <option value="8.5">8.5</option>
+                            <option value="7.0">7.0</option>
+                            <option value="8.0">8.0</option>
                         </select> 
                     </td>
                     

@@ -5,8 +5,6 @@
  */
 package com.selfservice.controller;
 
-import com.selfservice.dboperations.SaveAsTemplate;
-import com.selfservice.model.Template;
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
 import java.io.IOException;
@@ -26,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Actions in userList.jsp
+ *
  * @author aiming
  */
 public class UserListServlet extends HttpServlet {
@@ -40,65 +39,65 @@ public class UserListServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
+            throws ServletException, IOException {
         Connection con = null;
         List<User> list = new ArrayList<>();
-        PrintWriter out=response.getWriter();
-        User user = (User) request.getSession().getAttribute("user");
+        PrintWriter out = response.getWriter();
+        User user = (User) request.getSession(false).getAttribute("user");
         try {
             con = DbConnection.getConnection();
-            //User user = (User) request.getSession().getAttribute("user");
-            //String username = user.getUsername();
             String deleteString = request.getQueryString();
-            
+
             PreparedStatement ps;
-            String sql =null;
-            int ret=0;
+            String sql = null;
+            int ret = 0;
             //delete users
-            if(deleteString !=null && deleteString.contains("delete")){
-                
-                String[] deleteNames=deleteString.replace("delete=", "").split("&");
-                sql="delete from USER where username in ";
-                String names="(";
-                for(int i=0; i<deleteNames.length; i++){
-                     String name=deleteNames[i].replace("&", "");
-                    if(i== deleteNames.length-1){
-                       
-                        names += "'"+name + "'";
-                    }else{
-                         names += "'"+ name+ "',";
+            if (deleteString != null && deleteString.contains("delete")) {
+
+                String[] deleteNames = deleteString.replace("delete=", "").split("&");
+                sql = "delete from USER where username in ";
+                String names = "(";
+                for (int i = 0; i < deleteNames.length; i++) {
+                    String name = deleteNames[i].replace("&", "");
+                    if (i == deleteNames.length - 1) {
+
+                        names += "'" + name + "'";
+                    } else {
+                        names += "'" + name + "',";
                     }
                 }
                 names += ")";
                 sql += names;
                 System.out.println("deleteUser sql-->" + sql);
                 ps = con.prepareStatement(sql);
-                ret=ps.executeUpdate();
+                ret = ps.executeUpdate();
+                ps.close();
             }
-           //save users
-            if(deleteString !=null && deleteString.contains("save")){
-               
-                String[] saveusers=deleteString.replace("save", "").split("&");
-                
-                for(String user1: saveusers){
+            //save users
+            if (deleteString != null && deleteString.contains("save")) {
+
+                String[] saveusers = deleteString.replace("save", "").split("&");
+
+                for (String user1 : saveusers) {
                     //format: username=admin
-                    if(user1.length()>0){
-                        String[] update=user1.split("=");
-                        String username=update[0];
-                        String isAdmin=update[1];
-                        sql="update USER set admin=? where username=?";
-                        ps=con.prepareStatement(sql);
-                        
-                        ps.setInt(1,isAdmin.equalsIgnoreCase("true")?1:0);
+                    if (user1.length() > 0) {
+                        String[] update = user1.split("=");
+                        String username = update[0];
+                        String isAdmin = update[1];
+                        sql = "update USER set admin=? where username=?";
+                        ps = con.prepareStatement(sql);
+
+                        ps.setInt(1, isAdmin.equalsIgnoreCase("true") ? 1 : 0);
                         ps.setString(2, username);
-                        ret=ps.executeUpdate();   
+                        ret = ps.executeUpdate();
+                        ps.close();
                         //update the session if it's the current user
-                        if(username.equalsIgnoreCase(user.getUsername())){
+                        if (username.equalsIgnoreCase(user.getUsername())) {
                             user.setAdmin(isAdmin.equalsIgnoreCase("true"));
                         }
                     }
                 }
-            }   
+            }
 
             //get user list 
             sql = "select  firstname, lastname, username, email, department, city, password, region, admin from USER";
@@ -106,13 +105,22 @@ public class UserListServlet extends HttpServlet {
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
                 sql = sql + " where  firstname like '%" + sTxt + "%' or lastname like '%" + sTxt + "%' or username like '%" + sTxt + "%' or email like '%" + sTxt + "%' or department like '%" + sTxt + "%'";
-                sql +=  " or city like '%" + sTxt + "%' or region like '%" + sTxt + "%'";
+                sql += " or city like '%" + sTxt + "%' or region like '%" + sTxt + "%'";
             }
             sql = sql + " order by firstname ASC";
+            //add paging sql
+            int page = 1; //current page;
+            int recordsPerPage = 15;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+            int beginIndex = (page - 1) * recordsPerPage;
+
+            String pageSql = "select o.* from (" + sql + ") o limit " + beginIndex + ", " + recordsPerPage;
+            ps = con.prepareStatement(pageSql);
+            ResultSet rs = ps.executeQuery();
             System.out.println("userList sql-->" + sql);
 
-            ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 User object = new User();
                 object.setFirstname(rs.getString(1));
@@ -123,46 +131,63 @@ public class UserListServlet extends HttpServlet {
                 object.setCity(rs.getString(6));
                 object.setPassword(rs.getString(7));
                 object.setRegion(rs.getString(8));
-                int  iadmin=rs.getInt(9);
-                object.setAdmin( iadmin == 1? true:false);
+                int iadmin = rs.getInt(9);
+                object.setAdmin(iadmin == 1 ? true : false);
                 list.add(object);
             }
+            rs.close();
+            ps.close();
+            //get thet total count
+            String totalSql = "select count(*) from (" + sql + ") o";
+            ps = con.prepareStatement(totalSql);
+            rs = ps.executeQuery();
+            int total = 0;
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+            //setup the paging attribute
+            int noOfPages = (int) Math.ceil(total * 1.0 / recordsPerPage);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
+
             request.setAttribute("userList", list);
             request.getRequestDispatcher("userList.jsp").include(request, response);
             //detroy the current user's session if it's deleted
-            Boolean isUserExists=false;
-            
-            for(User user1: list){
-                if(user1.getUsername().equals(user.getUsername())){
-                    isUserExists=true;
-                    break;
-                }
-            }
-            if(!isUserExists){
-                request.getSession().invalidate();
+            sql = "select * from USER where username='" + user.getUsername() + "'";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (!rs.next()) {
+                request.getSession(false).invalidate();
             }
             rs.close();
+            ps.close();
+           
         } catch (SQLException ex) {
-                if (con != null) {
-                    try {
-                        con.rollback();
-                    } catch (SQLException ex1) {
-                        Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                }
-                Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex);
-                request.getRequestDispatcher("userList.jsp").include(request, response);
-                String err = ex.getLocalizedMessage();
-                String outstr = "<h3 class='save_err'>Save Failed!  " + err + "</h3>";
-                out.print(outstr);
-        } finally {
             if (con != null) {
                 try {
-                    con.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                    con.rollback();
+                } catch (SQLException ex1) {
+                    Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex1);
                 }
             }
+            Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex);
+            request.getRequestDispatcher("userList.jsp").forward(request, response);
+            String err = ex.getLocalizedMessage();
+            String outstr = "<h3 class='save_err'>Save Failed!  " + err + "</h3>";
+            out.print(outstr);
+        } finally {
+
+            try {
+
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
         }
     }
 

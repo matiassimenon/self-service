@@ -52,7 +52,7 @@
                         </select> </td>
                 </tr>
                 <tr>
-                    <td>Username:</td><td> <input type="text" id="username" name="username" placeholder="Talend username"  maxlength="30" required="required" readonly="true" value="<%=user.getUsername()%>"></td>
+                    <td>Username:</td><td> <input type="text" id="username" name="username" placeholder="Talend username"  maxlength="30" required="required" readonly="true" style="background-color: graytext" value="<%=user.getUsername()%>"></td>
                     <td>City:</td><td> <select id="city" name="city" required="required">
                             <option value="">Please select...</option>
                             

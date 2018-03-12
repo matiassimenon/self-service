@@ -30,7 +30,7 @@ public class Logout extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.getSession().invalidate();
+        request.getSession(false).invalidate();
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 

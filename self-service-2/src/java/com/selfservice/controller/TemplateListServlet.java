@@ -81,21 +81,44 @@ public class TemplateListServlet extends HttpServlet {
                 sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' )";
             }
             sql = sql + " order by last_edit DESC";
+            //add paging sql
+            int page = 1; //current page;
+            int recordsPerPage = 20;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+            int beginIndex = (page - 1) * recordsPerPage;
+
+            String pageSql = "select o.* from (" + sql + ") o limit " + beginIndex + ", " + recordsPerPage;
+            ps = con.prepareStatement(pageSql);
+            ResultSet rs = ps.executeQuery();
             System.out.println("templateList sql-->" + sql);
 
-            ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Template object = new Template();
-                
+                Template object = new Template();              
                 object.setLast_edit(rs.getDate(1));
                 object.setTemplate_name(rs.getString(2));
                 object.setSalesforce_case(rs.getString(3));
                 object.setTemplate_uuid(rs.getString(4));
                 list.add(object);
             }
-            
-            request.getRequestDispatcher("templateList.jsp").include(request, response);
+            rs.close();
+            ps.close();
+            //get thet total count
+            String totalSql = "select count(*) from (" + sql + ") o";
+            ps = con.prepareStatement(totalSql);
+            rs = ps.executeQuery();
+            int total = 0;
+            if (rs.next()) {
+                total = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+            //setup the paging attribute
+            int noOfPages = (int) Math.ceil(total * 1.0 / recordsPerPage);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);           
+            request.getRequestDispatcher("templateList.jsp").forward(request, response);
             rs.close();
         } catch (SQLException ex) {
                 if (con != null) {
@@ -106,7 +129,7 @@ public class TemplateListServlet extends HttpServlet {
                     }
                 }
                 Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex);
-                request.getRequestDispatcher("templateList.jsp").include(request, response);
+                request.getRequestDispatcher("templateList.jsp").forward(request, response);
                 String err = ex.getLocalizedMessage();
                 String outstr = "<h3 class='save_err'>Delete Failed!  " + err + "</h3>";
                 out.print(outstr);

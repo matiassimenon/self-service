@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,49 +42,75 @@ public class HistoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection con = null;
+        PreparedStatement ps=null;
+        ResultSet rs =null;
         List<Request> list = new ArrayList<>();
         try {
             con = DbConnection.getConnection();
-            User user = (User) request.getSession().getAttribute("user");
+            User user = (User) request.getSession(false).getAttribute("user");
             String username = user.getUsername();
-            String page = request.getQueryString();
-
+            String typeString = request.getQueryString();
+            String type=request.getParameter("type");
+            
             String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
             sql = sql + " and req.username='" + username + "'";
-
-            if (page != null) {
-                //MyPrvious request
-                if (page.contains("previousRequestList")) {
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                    sql = sql + " and req.request_date < '" + df.format(new Date()) + "'";
-                }               
-            }
+      
+            //MyPrvious request
+            if ((typeString != null && typeString.contains("previousRequest")) || (type != null && type.contains("previousRequest"))) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                sql = sql + " and req.request_date < '" + df.format(new Date()) + "'";
+                type="previousRequest";
+            }else{
+                type="historyList";
+            }                           
             //Search Request
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
-
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' or request_status like '%" + sTxt + "%' )";
+                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt +  "%' or req.username like '%" + sTxt +"%' or request_status like '%" + sTxt + "%' )";
             }
             //add order
             sql = sql + " order by last_edit DESC";
+            //add paging sql
+            int page = 1; //current page;
+            int recordsPerPage = 20;
+            if(request.getParameter("page") != null)
+                page = Integer.parseInt(request.getParameter("page"));
+            int beginIndex= (page-1)*recordsPerPage;
+           
+            String pageSql = "select o.* from (" + sql + ") o limit "+ beginIndex + ", " + recordsPerPage;
+            ps=con.prepareStatement(pageSql);
+            rs=ps.executeQuery();            
             System.out.println("history sql-->" + sql);
-
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Request object = new Request();
-
                 object.setRequest_date(rs.getDate(1));
                 object.setRequest_status(rs.getString(2));
                 object.setImagename(rs.getString(3));
                 object.setSalesforce_case(rs.getString(4));
                 object.setUsername(rs.getString(5));
-
                 list.add(object);
-            }
+            }            
             request.setAttribute("historyList", list);
-            request.getRequestDispatcher(page).include(request, response);
+            
             rs.close();
+            ps.close();
+            //get thet total count
+            String totalSql="select count(*) from (" + sql +") o";
+            ps=con.prepareStatement(totalSql);
+            rs=ps.executeQuery();
+            int total=0;
+            if(rs.next()){
+                total = rs.getInt(1);
+            }
+            rs.close();
+            ps.close();
+            //setup the paging attribute
+            int noOfPages = (int) Math.ceil(total * 1.0 / recordsPerPage);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);            
+            //set back the type: historyList or previousRequestList
+            request.setAttribute("type", type);
+            request.getRequestDispatcher("historyList.jsp").forward(request, response);
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {

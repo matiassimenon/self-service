@@ -5,8 +5,10 @@
 --%>
 
 <%@page import="com.selfservice.model.User"%>
+<%@page import="com.selfservice.util.SFUtils"%>
 <%
-User user = (User)request.getSession().getAttribute("user");
+User user = (User)request.getSession(false).getAttribute("user");
+String greetString=SFUtils.getGreetingString();
 %>
 
 <table cellspacing="10" align="center" style="border:2px solid green; ">
@@ -26,6 +28,8 @@ User user = (User)request.getSession().getAttribute("user");
 <%if (user != null) {%>
 <table cellspacing="5" align="center" style="font-size: small">
     <tr>
+        <td  style="border: solid 0px #fff; color: green;">Good <%=greetString%>! <%=user.getFirstname()%></td>
+        <td class="td1" width="30px"></td>
         <%
         if (user.getAdmin()) {
         %>
@@ -35,8 +39,8 @@ User user = (User)request.getSession().getAttribute("user");
         <td class="td1"><a href="userProfile.jsp">Profile</a></td>
         <td class="td1"><a href="provisionForm.jsp">Provision Form</a></td>
         <td class="td1"><a href="TemplateListServlet">My Templates</a></td>
-        <td class="td1"><a href="HistoryServlet?previousRequestList.jsp">My Previous Requests</a></td>
-        <td class="td1"><a href="HistoryServlet?historyList.jsp">History</a></td>  
+        <td class="td1"><a href="HistoryServlet?previousRequest">My Previous Requests</a></td>
+        <td class="td1"><a href="HistoryServlet?historyList">History</a></td>  
         <td class="td1"><a href="Logout">Logout</a></td> 
     </tr>
 </table>
