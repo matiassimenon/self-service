@@ -91,6 +91,10 @@
         <servlet-name>AdminRequestServlet</servlet-name>
         <servlet-class>com.selfservice.controller.AdminRequestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <servlet-class>com.selfservice.controller.ResetPasswordServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -130,6 +134,10 @@
     <servlet-mapping>
         <servlet-name>AdminRequestServlet</servlet-name>
         <url-pattern>/AdminRequestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordServlet</servlet-name>
+        <url-pattern>/ResetPasswordServlet</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>

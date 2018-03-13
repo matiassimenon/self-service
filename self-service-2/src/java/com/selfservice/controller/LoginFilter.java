@@ -31,7 +31,7 @@ public class LoginFilter  implements Filter{
         HttpSession session = request.getSession(false);
 
         boolean loggedIn = session != null && session.getAttribute("user") != null;
-        boolean loginRequest = request.getRequestURI().contains("register.jsp")||request.getRequestURI().contains("login.jsp") ;
+        boolean loginRequest = request.getRequestURI().contains("register.jsp")||request.getRequestURI().contains("login.jsp") || request.getRequestURI().contains("resetPassword.jsp") ;
 
         if (loggedIn || loginRequest ) {
             chain.doFilter(request, response);
