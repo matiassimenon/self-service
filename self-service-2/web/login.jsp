@@ -15,7 +15,7 @@
 		<link rel="stylesheet"  type="text/css"  href="selfservice.css"/>		
 	</head>
 	<body >
-            <div  style="height: 900px">
+            <div  id="content">
                 <%@include file="navigator.jsp"%>
 		<h1>Self service Platform Login</h1>
                 <h3>Login</h3>

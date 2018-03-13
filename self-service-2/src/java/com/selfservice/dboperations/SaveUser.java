@@ -18,8 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.selfservice.model.User;
+import com.selfservice.util.SFUtils;
 /**
- * Register in register.jsp, and save action in adminProfile.jsp or reqularUserProfile.jsp
+ * Register in register.jsp, and save action in userProfile.jsp
  * @author aiming
  */
 public class SaveUser extends HttpServlet {
@@ -50,6 +51,7 @@ public class SaveUser extends HttpServlet {
         int  isAdminRequest="true".equals(admin)?1:0;
         String password1=request.getParameter("password1");
         String password2=request.getParameter("password2");
+        password1=SFUtils.getSecurePassword(password1);
         Connection con=null;
         PreparedStatement ps=null;
         User user =new User();
@@ -167,13 +169,4 @@ public class SaveUser extends HttpServlet {
     }// </editor-fold>
 
 }
-            //User user =new User();
-            //user.setFirstname(firstname);
-            //user.setLastname(lastname);
-            //user.setUsername(username);
-            //user.setDepartment(department);
-            //user.setCity(city);
-            //user.setAdmin(isAdmin==1?true:false);
-            //user.setRegion(region);
-            //user.setEmail(email);
-            //user.setPassword(password1);
+   

@@ -106,9 +106,13 @@ function checkPasswd() {
     if (pwd1 !== pwd2) {
         document.getElementById("passwdMsg").style.color="red";
         document.getElementById("passwdMsg").innerHTML = "Not Matched!";
+        document.getElementById("password1").required="required";
+        document.getElementById("password2").required="required";
         return;
     }
     document.getElementById("passwdMsg").style.color="green";
     document.getElementById("passwdMsg").innerHTML = "Matched!";
+    document.getElementById("password1").removeAttribute("required");
+    document.getElementById("password2").removeAttribute("required");
 
 }

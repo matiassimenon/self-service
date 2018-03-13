@@ -58,12 +58,12 @@ List<User> list  =(List<User>)request.getAttribute("userList");
         </script>
     </head>
     <body>
-        <div  style="height: 900px">
+        <div  id="content">
         <%@include file="navigator.jsp"%>
         <h3>Users</h3>
         <form  id="userForm" method="post" >
                 
-            <table  align="center"  style="  width: 1000px;">
+            <table  align="center"  style="  width: 1100px;">
                 <tr>
                     <td width="650px" class="td1"></td>
                     <td class="td1" align="right" >                                
@@ -72,7 +72,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
                 </tr>
             </table>                   
                          
-            <table  id ="userTable" align="center"  bordercolor="#a0c6e5" style="  width: 1000px; border-collapse: collapse;">
+            <table  id ="userTable" align="center"  bordercolor="#a0c6e5" style="  width: 1100px; border-collapse: collapse;">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</td>

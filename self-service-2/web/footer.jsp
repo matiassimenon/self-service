@@ -4,4 +4,4 @@
     Author     : aiming
 --%>
 
-<div style="width: 99%; color: green; text-align: center; position: absolute;"><small>@2018 Talend Support DevOps. All rights reserved<small></div>
+<div id="footer"><small>@2018 Talend Support DevOps. All rights reserved<small></div>

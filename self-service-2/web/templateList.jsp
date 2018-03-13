@@ -53,7 +53,7 @@
         </script>
     </head>
     <body>
-        <div  style="height: 900px">
+        <div  id="content">
         <%@include file="navigator.jsp"%>
         <h3>My Templates</h3>
         <form  id="templateForm" method="post" action="">

@@ -116,7 +116,7 @@ function requestAction(){
 </script>
     </head>
     <body>
-        <div  style="height: 900px">
+        <div  id="content">
         <%@include file="navigator.jsp"%>
         <h3>Provision Form</h3>
         <form  id="templateForm" method="post" action="">

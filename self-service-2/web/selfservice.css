@@ -33,7 +33,7 @@ font-size: 12pt;
 }
 #content {
     width: 99%;
-   min-height:  800px;
+   min-height:  900px;
 }
 
 #footer {     
@@ -41,4 +41,5 @@ font-size: 12pt;
     color: green;  
     text-align: center;  
     margin: 0;  
+    position: absolute;
 }  

@@ -5,6 +5,10 @@ they are not accessible except through controller process.
 This JSP is here to provide a redirect to the dispatcher
 servlet but should be the only JSP outside of WEB-INF.
 --%>
+<%
+    Boolean saveOK=request.getAttribute("saveOK")!=null? Boolean.valueOf(request.getAttribute("saveOK").toString()):true;
+    Object errMessage=request.getAttribute("errMessage");
+%>
 <%@page import="com.selfservice.model.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -37,7 +41,7 @@ servlet but should be the only JSP outside of WEB-INF.
                        
 	</head>
 	<body>
-	<div  style="height: 900px">
+	<div  id="content">
         <%@include file="navigator.jsp"%>
         
         <%
@@ -87,6 +91,7 @@ servlet but should be the only JSP outside of WEB-INF.
 		
                 <tr><td colspan=5 align="center"><button type="submit" >REGISTER</button></td></tr></table>
 		<p>Have an Account? <a href="login.jsp">login</a></p>
+                <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
 	</form>
         </div>                   
 </body>

@@ -22,7 +22,7 @@
                 
     </head>
     <body>
-        <div  style="height: 900px">
+        <div  id="content">
         <%@include file="navigator.jsp"%>
         <%  
         String firstname=user.getFirstname();

@@ -6,6 +6,7 @@ package com.selfservice.controller;
  * and open the template in the editor.
  */
 import com.selfservice.model.User;
+import com.selfservice.util.SFUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,7 +36,7 @@ public class Login extends HttpServlet {
 
             String username = req.getParameter("username");
             String password = req.getParameter("password");
-
+            password=SFUtils.getSecurePassword(password);
             List<User> list = new ArrayList<>(); //take a list
             list = UserLoginValidate.getUsers(username); //send the values user_name and password to vadlidate class of getUsers method and storing the resultset in list
             if (!(list.isEmpty())) {
@@ -43,6 +44,8 @@ public class Login extends HttpServlet {
                 for (User user1 : list) {
                     if (user1.getPassword().equals(password)) {
                         user = user1;
+                        user.setPassword("");
+                        break;
                     }
                 }
                 if (user == null) {//password is not correct

@@ -29,7 +29,7 @@
         </script>
     </head>
     <body>
-        <div  style="height: 900px">
+        <div  id="content">
         <%@include file="navigator.jsp"%>
         <%if("historyList".equals(type)){%>
         <h3>History</h3>
