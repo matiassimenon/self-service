@@ -5,8 +5,7 @@
  */
 package com.selfservice.servers;
 
-import java.io.IOException;
-import java.io.InputStream;
+import com.selfservice.util.FileUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,10 +24,7 @@ public class DbConnection   {
 		Connection con=null; // creating connection
 		try {
                     //get the db connection from the configuration.properties file
-                    InputStream in;
-                    in = DbConnection.class.getResourceAsStream("/configuration.properties");
-                    Properties p =new Properties();
-                    p.load(in);
+                    Properties p = FileUtil.getProperties("/configuration.properties");
                     String dburl=p.getProperty("database.url");
                     String dbdriver=p.getProperty("database.driver");
                     String dbuser=p.getProperty("database.username");
@@ -37,7 +33,7 @@ public class DbConnection   {
                     Class.forName(dbdriver);
                     con=DriverManager.getConnection(dburl,dbuser,dbpasswd);
 
-		} catch (ClassNotFoundException | SQLException | IOException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			con.close();
 			//throws an error if at all its unable to create an connection
 			System.out.println(e);

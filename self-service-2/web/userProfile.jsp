@@ -73,11 +73,11 @@
                     <%}%>
                 </tr>
                 
-                <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onblur="checkPasswd();" value="<%=user.getPassword()%>"></td>
+                <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td>
                     <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td> 
                     <td><span id="passwdMsg"></span></td></tr>
 		
-                <tr><td colspan=5 align="center"><button id="registerBtn"  type="submit" >Save</button></td></tr></table>
+                <tr><td colspan=5 align="center"><button id="submitBtn"  type="submit" >Save</button></td></tr></table>
         </form>
          <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
         </div>               

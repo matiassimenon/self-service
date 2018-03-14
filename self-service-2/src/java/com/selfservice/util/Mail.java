@@ -23,25 +23,21 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  *
- * @author Administrator
+ * @author zqin
  */
 public class Mail {
 
     
     public static void send(String toEmail,String subject, String msg) throws MessagingException {
-        String mailHost = "smtp.163.com";
-        String username = "flybird.cn@163.com";
-        String password = "jeny8282";
+       
+        Properties mailProperties = FileUtil.getProperties("/configuration.properties");
         
-        Properties mailProperties = new Properties();  
         mailProperties.put("mail.smtp.auth", "true");   
         mailProperties.put("mail.smtp.starttls.enable", "true");   
         mailProperties.put("mail.smtp.timeout", 5000);
-        mailProperties.put("mail.smtp.host",mailHost);
-        mailProperties.put("mail.smtp.user",username);
-        mailProperties.put("mail.smtp.pass",password);
         
         Session session = Session.getInstance(mailProperties, new Authenticator(){
+            @Override
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(mailProperties.getProperty("mail.smtp.user"),mailProperties.getProperty("mail.smtp.pass"));
             }
@@ -55,7 +51,7 @@ public class Mail {
         MimeMessage mimeMessage = new MimeMessage(session);
         mimeMessage.setContent(mainPart);
         mimeMessage.setSubject(subject);
-        Address from = new InternetAddress(username);
+        Address from = new InternetAddress(mailProperties.getProperty("mail.smtp.user"));
         mimeMessage.setFrom(from);
         Address to = new InternetAddress(toEmail);
         mimeMessage.setRecipient(Message.RecipientType.TO, to);

@@ -120,16 +120,23 @@ function setCity(region)
 function checkPasswd() {
     var pwd1 = document.getElementById("password1").value;
     var pwd2 = document.getElementById("password2").value;
-    var registerBtn=document.getElementById("registerBtn");
-    if (pwd1 !== pwd2) {
-        document.getElementById("passwdMsg").style.color="red";
-        document.getElementById("passwdMsg").innerHTML = "Not Matched!";
-        if(registerBtn !== null) registerBtn.disabled="disabled";
-        return;
+    var message, color, disable;
+    
+    if(pwd1.length === 0 || pwd2.length === 0) {
+        message = "Password Empty!";
+        color = "red";
+        disable = true;
+    } else if(pwd1 !== pwd2) {
+        message = "Not Matched!";
+        color = "red";
+        disable = true;
+    } else {
+        message = "Matched!";
+        color = "green";
+        disable = false;
     }
-    document.getElementById("passwdMsg").style.color="green";
-    document.getElementById("passwdMsg").innerHTML = "Matched!";
-    if(registerBtn !== null) registerBtn.removeAttribute("disabled");
 
-
+    document.getElementById("passwdMsg").style.color=color;
+    document.getElementById("passwdMsg").innerHTML = message;
+    document.getElementById("submitBtn").disabled = disable;
 }

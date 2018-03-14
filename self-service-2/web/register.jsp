@@ -85,11 +85,11 @@ servlet but should be the only JSP outside of WEB-INF.
                     <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="true"></td>
                 </tr>
                 
-                <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onblur="checkPasswd();" value="<%=user.getPassword()%>"></td>
+                <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td>
                     <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td> 
                     <td><span id="passwdMsg"></span></td></tr>
 		
-                <tr><td colspan=5 align="center"><button  id="registerBtn" type="submit" >Register</button></td></tr></table>
+                <tr><td colspan=5 align="center"><button  id="submitBtn" type="submit" >Register</button></td></tr></table>
 		<p>Have an Account? <a href="login.jsp">login</a></p>
                 <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
 	</form>
