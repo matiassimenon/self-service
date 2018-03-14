@@ -5,6 +5,7 @@
  */
 package com.selfservice.dboperations;
 
+import com.selfservice.model.Template;
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
 import com.selfservice.util.SFUtils;
@@ -53,7 +54,8 @@ public class SaveAsTemplate extends HttpServlet {
             String jdk = request.getParameter("jdk");
             String jdkUpdate = request.getParameter("jdkUpdate");
             String tomcatVersion = request.getParameter("tomcatVersion");
-            String template_uuid=SFUtils.getUUID(9);
+            String template_uuid=request.getParameter("template_uuid");
+            template_uuid = template_uuid==null? SFUtils.getUUID(9) : template_uuid;
             User user=(User)request.getSession().getAttribute("user");
             String username=user.getUsername();
             username=(username==null?"test":username);
@@ -81,6 +83,18 @@ public class SaveAsTemplate extends HttpServlet {
                         
                         //save successfully
                         if(ret >0){
+                                Template template=new Template();
+                                template.setTemplate_name(imageName);
+                                template.setTemplate_uuid(template_uuid);
+                                template.setOs_version(osVersion);
+                                template.setOs(os);
+                                template.setJdk_update(jdkUpdate);
+                                template.setJdk_version(jdk);
+                                template.setTalend_component(talendComponent);
+                                template.setTalend_version(componentVersion);
+                                template.setTomcat_version(tomcatVersion);
+                                template.setUsername(username);
+                                request.setAttribute("template", template);
                                 request.setAttribute("errMessage", "Save Successfully!!");
                                 request.setAttribute("saveOK", "true");                            
                                 request.getRequestDispatcher("provisionForm.jsp").include(request, response);

@@ -3,9 +3,14 @@
     Created on : Jan 19, 2018, 11:56:16 AM
     Author     : francisco
 --%>
+<%@page import="com.selfservice.model.Template"%>
 <%
     Boolean saveOK=request.getAttribute("saveOK")!=null? Boolean.valueOf(request.getAttribute("saveOK").toString()):true;
     Object errMessage=request.getAttribute("errMessage");
+    Template template=(Template)request.getAttribute("template");
+    if(template == null ){
+        template= new Template();
+    }
 %>
 <%@page import="com.selfservice.model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,6 +29,30 @@
         </style>
        
         <script src="selfservice.js"> </script>
+        <script>
+            window.onload=function(){
+                var os="<%=template.getOs()%>";
+                var osVersion="<%=template.getOs_version()%>";
+                var componentVersion="<%=template.getTalend_version()%>";
+                var talendComponent="<%=template.getTalend_component()%>";
+                
+                var jdk="<%=template.getJdk_version()%>";
+                var jdkUpdate="<%=template.getJdk_update()%>";
+                var tomcatVersion="<%=template.getTomcat_version()%>";
+
+                document.getElementById("imageName").value="<%=template.getTemplate_name()%>";               
+                setSelected(document.getElementById("os"), os);
+                setSelected(document.getElementById("componentVersion"), componentVersion);
+                checkOsVersion();
+                setSelected(document.getElementById("osVersion"), osVersion);
+                setSelected(document.getElementById("componentVersion"), componentVersion);
+                setSelected(document.getElementById("talendComponent"), talendComponent);
+                setSelected(document.getElementById("jdk"), jdk);
+                setSelected(document.getElementById("jdkUpdate"), jdkUpdate);
+                setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
+                checkTomcat();
+            };
+        </script>
 <script >
 
 //define the os version data array
@@ -53,10 +82,11 @@ function checkTomcat(){
     var versions=[{txt:'7.0', val: '7.0'},{txt:'8.0', val: '8.0'}];
     var ver=[{txt:'8.0', val: '8.0'}];
     var tomcatVersion=document.getElementById("tomcatVersion");
+    var componentVersion=document.getElementById("componentVersion");
     if(document.getElementById("talendComponent").value ===  "tac"){
         tomcatVersion.removeAttribute("disabled");
         tomcatVersion.style="background-color:white";
-        if(document.getElementById("componentVersion").value === "6.5.1")
+        if(componentVersion.value === "6.5.1" || componentVersion.value === '7.0.1')
             setSelectOption('tomcatVersion',ver);
         else
             setSelectOption('tomcatVersion',versions);
@@ -129,7 +159,7 @@ function requestAction(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase" maxlength="10" ></input> </td>
+                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" ></input> </td>
                 </tr>                
                 <tr>
                     <td>OS Version: </td>
@@ -195,7 +225,7 @@ function requestAction(){
                 
                 
             </table>
-            
+            <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
         </form>
         <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
         </div>

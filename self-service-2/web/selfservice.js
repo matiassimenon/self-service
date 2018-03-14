@@ -68,25 +68,42 @@ function clickRow(row) {
         row.bgColor = '#22CCCC';
         row.selected = 'true';
     }
+    //disable the Request button if multiple rows selected
+    var table=document.getElementById("templateTable");
+    var requestBtn=document.getElementById("requestBtn");
+    if(table !== null){
+        var rows=table.rows;
+        var num=0;
+        for( var i=0; i< rows.length; i++){
+            if(rows[i].selected === 'true'){
+                num++;
+            }
+        }
+        if(num >1){
+            requestBtn.disabled="disabled";
+        }else{
+            requestBtn.removeAttribute("disabled");
+        }
+    }
 }
 
 //define the city  data array
 var cityArr = [];
-cityArr['apac'] =
+cityArr['APAC'] =
         [
             {txt: 'Bangalore', val: 'Bangalore'},
             {txt: 'Beijing', val: 'Beijing'},
             {txt: 'Singapore', val: 'Singapore'},
             {txt: 'Sydney', val: 'Sydney'}
         ];
-cityArr['us'] =
+cityArr['US'] =
         [
             {txt: 'Atlanta', val: 'Atlanta'},
             {txt: 'Boston', val: 'Boston'},
             {txt: 'Irvine', val: 'Irvine'},
             {txt: 'Redwood', val: 'Redwood'}
         ];
-cityArr['emea'] =
+cityArr['EMEA'] =
         [
             {txt: 'Berkshire', val: 'Berkshire'},
             {txt: 'Barcelona', val: 'Barcelona'},
@@ -96,23 +113,23 @@ cityArr['emea'] =
             {txt: 'Suresnes', val: 'Suresnes'},
             {txt: 'Switzerland', val: 'Switzerland'}
         ];
-function setCity(city)
+function setCity(region)
 {
-    setSelectOption('city', cityArr[city], 'Please select...', '<%=cityname%>');
+    setSelectOption('city', cityArr[region], 'Please select...');
 }
 function checkPasswd() {
     var pwd1 = document.getElementById("password1").value;
     var pwd2 = document.getElementById("password2").value;
+    var registerBtn=document.getElementById("registerBtn");
     if (pwd1 !== pwd2) {
         document.getElementById("passwdMsg").style.color="red";
         document.getElementById("passwdMsg").innerHTML = "Not Matched!";
-        document.getElementById("password1").required="required";
-        document.getElementById("password2").required="required";
+        if(registerBtn !== null) registerBtn.disabled="disabled";
         return;
     }
     document.getElementById("passwdMsg").style.color="green";
     document.getElementById("passwdMsg").innerHTML = "Matched!";
-    document.getElementById("password1").removeAttribute("required");
-    document.getElementById("password2").removeAttribute("required");
+    if(registerBtn !== null) registerBtn.removeAttribute("disabled");
+
 
 }

@@ -38,7 +38,7 @@ servlet but should be the only JSP outside of WEB-INF.
 			
 		</style>
                 <script src="selfservice.js"> </script>
-                       
+                <script></script>       
 	</head>
 	<body>
 	<div  id="content">
@@ -89,7 +89,7 @@ servlet but should be the only JSP outside of WEB-INF.
                     <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td> 
                     <td><span id="passwdMsg"></span></td></tr>
 		
-                <tr><td colspan=5 align="center"><button type="submit" >Register</button></td></tr></table>
+                <tr><td colspan=5 align="center"><button  id="registerBtn" type="submit" >Register</button></td></tr></table>
 		<p>Have an Account? <a href="login.jsp">login</a></p>
                 <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
 	</form>

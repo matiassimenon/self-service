@@ -43,8 +43,9 @@
             var rows=document.getElementById("templateTable").rows;          
             var requestString="request=";
             for( var i=0; i< rows.length; i++){
-                if(rows[i].selected == 'true'){
-                    requestString += rows[i].cells[1].innerText + "&";
+                if(rows[i].selected === 'true'){
+                    requestString += rows[i].cells[2].innerText ;
+                    break;
                 }
             }
             document.getElementById("templateForm").action="UseForRequestServlet?"+requestString;
@@ -113,7 +114,7 @@
                              <button type="submit" onclick="deleteTemplate()" >Delete Template</button>
                             </td>
                             <td class="td1"  align="right">
-                                <button type="submit" >Use for Request</button>
+                                <button id="requestBtn" type="submit" onclick="useForRequst();" >Use for Request</button>
                             </td>
                             
                         </tr>

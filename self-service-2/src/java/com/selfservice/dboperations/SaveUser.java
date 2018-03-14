@@ -19,8 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.selfservice.model.User;
 import com.selfservice.util.SFUtils;
+import javax.servlet.http.HttpSession;
+
 /**
  * Register in register.jsp, and save action in userProfile.jsp
+ *
  * @author aiming
  */
 public class SaveUser extends HttpServlet {
@@ -37,92 +40,105 @@ public class SaveUser extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out=response.getWriter();
-        String jspPage=request.getQueryString();
-        
-        String firstname=request.getParameter("firstname");
-        String lastname=request.getParameter("lastname");
-        String username=request.getParameter("username");
-        String email=request.getParameter("email");
-        String department=request.getParameter("department");
-        String region=request.getParameter("region");
-        String city=request.getParameter("city");
-        String admin=request.getParameter("admin");
-        int  isAdminRequest="true".equals(admin)?1:0;
-        String password1=request.getParameter("password1");
-        String password2=request.getParameter("password2");
-        password1=SFUtils.getSecurePassword(password1);
-        Connection con=null;
-        PreparedStatement ps=null;
-        User user =new User();
+        PrintWriter out = response.getWriter();
+        String jspPage = request.getQueryString();
+
+        String firstname = request.getParameter("firstname");
+        String lastname = request.getParameter("lastname");
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String department = request.getParameter("department");
+        String region = request.getParameter("region");
+        String city = request.getParameter("city");
+        String admin = request.getParameter("admin");
+        int isAdminRequest = "true".equals(admin) ? 1 : 0;
+        String password1 = request.getParameter("password1");
+        String password2 = request.getParameter("password2");
+        password1 = SFUtils.getSecurePassword(password1);
+        Connection con = null;
+        PreparedStatement ps = null;
+        User user = (User) request.getSession(false).getAttribute("user");
+        if (user == null) {
+            user = new User();
+        }
         try {
-            con=DbConnection.getConnection();
-            
+            con = DbConnection.getConnection();
+
             //insert to User
             String sql = null;
-            
-            boolean isInsert="register.jsp".equals(jspPage);
-            if(isInsert){
-                sql="insert into USER(firstname, lastname, username, email, department, city, password, region, admin, admin_request)values(?,?,?,?,?,?,?,?,?,?)";
-                ps=con.prepareStatement(sql);
+
+            boolean isInsert = "register.jsp".equals(jspPage);
+            if (isInsert) {
+                sql = "insert into USER(firstname, lastname, username, email, department, city, password, region, admin, admin_request)values(?,?,?,?,?,?,?,?,?,?)";
+                ps = con.prepareStatement(sql);
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
                 ps.setString(3, username);
                 ps.setString(4, email);
                 ps.setString(5, department);
-                ps.setString(6, city); 
+                ps.setString(6, city);
                 ps.setString(7, password1);
                 ps.setString(8, region);
                 ps.setInt(9, 0);
                 ps.setInt(10, isAdminRequest);
             }
-            
+
             //update user           
-            if(!isInsert ){
-                sql="update USER set firstname=?, lastname=?, email=?, department=?, city=?, password=?, region=?, admin_request=? where username=?";
-                ps=con.prepareStatement(sql);
+            if (!isInsert) {
+                sql = "update USER set firstname=?, lastname=?, email=?, department=?, city=?, password=?, region=?, admin_request=? where username=?";
+                ps = con.prepareStatement(sql);
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
                 ps.setString(3, email);
                 ps.setString(4, department);
-                ps.setString(5, city); 
+                ps.setString(5, city);
                 ps.setString(6, password1);
                 ps.setString(7, region);
                 ps.setInt(8, isAdminRequest);
-                ps.setString(9, username);                
+                ps.setString(9, username);
             }
-           
-            
-            //put user to request
-            //request.setAttribute("user", user);
+
             if (sql != null) {
-                int ret=ps.executeUpdate();
-                if(ret >0){
-                 request.setAttribute("saveOK", "true");
-                 request.setAttribute("errMessage", "Save Successfully!!");
-                 request.getRequestDispatcher(jspPage).include(request, response);
-                 //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
-            }
+                int ret = ps.executeUpdate();
+                if (ret > 0) {
+                    user.setUsername(username);
+                    user.setFirstname(firstname);
+                    user.setLastname(lastname);
+                    user.setCity(city);
+                    user.setDepartment(department);
+                    user.setEmail(email);
+                    user.setRegion(region);
+                    user.setAdminRequest(isAdminRequest == 1);
+                    user.setPassword(password2);
+                    HttpSession session = request.getSession(false);
+                    if (session != null) {
+                        session.setAttribute("user", user);
+                    }
+                    request.setAttribute("user", user);
+                    request.setAttribute("saveOK", "true");
+                    request.setAttribute("errMessage", "Save Successfully!!");
+                    request.getRequestDispatcher(jspPage).include(request, response);
+                    //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
+                }
             }
 
-
-           
         } catch (SQLException ex) {
-            Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);           
-            String err=ex.getLocalizedMessage();                      
-            String outstr= "Save Failed!  "+ err;
+            Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
+            String err = ex.getLocalizedMessage();
+            String outstr = "Save Failed!  " + err;
             request.setAttribute("errMessage", outstr);
             request.setAttribute("saveOK", "true");
             request.getRequestDispatcher(jspPage).include(request, response);
             //out.print(outstr);
-            
-        }finally{
+
+        } finally {
             try {
-                if(ps!=null){
+                if (ps != null) {
                     ps.close();
                 }
-            if(con!=null) 
-                con.close();
+                if (con != null) {
+                    con.close();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -169,4 +185,3 @@ public class SaveUser extends HttpServlet {
     }// </editor-fold>
 
 }
-   

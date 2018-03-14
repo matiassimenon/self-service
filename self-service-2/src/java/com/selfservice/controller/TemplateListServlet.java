@@ -121,13 +121,7 @@ public class TemplateListServlet extends HttpServlet {
             request.getRequestDispatcher("templateList.jsp").forward(request, response);
             rs.close();
         } catch (SQLException ex) {
-                if (con != null) {
-                    try {
-                        con.rollback();
-                    } catch (SQLException ex1) {
-                        Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-                }
+
                 Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex);
                 request.getRequestDispatcher("templateList.jsp").forward(request, response);
                 String err = ex.getLocalizedMessage();
