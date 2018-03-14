@@ -12,7 +12,7 @@ import java.util.Date;
  * @author francisco
  */
 public class Template {
-    private String template_uuid, username, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version;
+    private String template_uuid="", username, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version;
     private Date last_edit, creation_date;
     private String template_name="";
     private String salesforce_case;

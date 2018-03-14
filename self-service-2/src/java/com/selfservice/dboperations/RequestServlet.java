@@ -63,6 +63,25 @@ public class RequestServlet extends HttpServlet {
             String sql;
             int ret;
             PreparedStatement ps;
+            if(template_uuid.length()==0){
+                template_uuid=SFUtils.getUUID(9);
+                System.out.print(template_uuid);
+                sql = "insert into TEMPLATE(template_uuid, template_name, username, creation_date, last_edit, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version) values(?,?,?,?,?,?,?,?,?,?,?,?) ";
+                ps = con.prepareStatement(sql);
+                ps.setString(1, template_uuid);
+                ps.setString(2, imageName);
+                ps.setString(3, username);
+                ps.setDate(4, new Date(System.currentTimeMillis()));
+                ps.setDate(5, new Date(System.currentTimeMillis()));
+                ps.setString(6, os);
+                ps.setString(7, osVersion);
+                ps.setString(8, componentVersion);
+                ps.setString(9, talendComponent);
+                ps.setString(10, jdk);
+                ps.setString(11, jdkUpdate);
+                ps.setString(12, tomcatVersion);
+                ret = ps.executeUpdate();
+            }
 
             //save to REQUEST table
             String request_uuid = SFUtils.getUUID(9);
