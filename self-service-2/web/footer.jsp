@@ -4,4 +4,4 @@
     Author     : aiming
 --%>
 
-<div id="footer"><small>@2018 Talend Support DevOps. All rights reserved<small></div>
+<div id="footer"><small>© SRE/Devops @ Talend<small></div>
