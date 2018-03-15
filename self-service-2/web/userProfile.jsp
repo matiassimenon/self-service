@@ -45,7 +45,7 @@
                         <option value="support">Support</option>   
                         <option value="escalation">Escalation</option>   
                         <option value="sales">Sales</option>
-                        <option value="rnd">RD</option>
+                        <option value="rd">RD</option>
                        
                     </select></td>
                 </tr>

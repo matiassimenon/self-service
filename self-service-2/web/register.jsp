@@ -51,16 +51,17 @@ servlet but should be the only JSP outside of WEB-INF.
             }
         %>
         <h1>Self service Platform Registration</h1>
-        <h3>Register</h3>
+        <h>Register</h3>
 	<form id="registerForm" action="SaveUser?register.jsp" method="post">
 		<table id="reg_form"  align="center" style="border:2px solid green; padding:5px 5px;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user.getFirstname()%>"></td>
                     <td>Department:</td>
                     <td><select name="department" required="required">
+                        <option value="support">Support</option>   
+                        <option value="escalation">Escalation</option>   
                         <option value="sales">Sales</option>
                         <option value="rd">RD</option>
-                        <option value="support">Support</option>
                     </select></td>
                 </tr>
 		<tr>
