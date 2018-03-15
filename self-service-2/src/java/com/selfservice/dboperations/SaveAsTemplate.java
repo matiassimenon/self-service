@@ -55,7 +55,8 @@ public class SaveAsTemplate extends HttpServlet {
             String jdkUpdate = request.getParameter("jdkUpdate");
             String tomcatVersion = request.getParameter("tomcatVersion");
             String template_uuid=request.getParameter("template_uuid");
-            template_uuid = template_uuid==null? SFUtils.getUUID(9) : template_uuid;
+            if(template_uuid.length()==0)
+                template_uuid=SFUtils.getUUID(9);
             User user=(User)request.getSession().getAttribute("user");
             String username=user.getUsername();
             username=(username==null?"test":username);
