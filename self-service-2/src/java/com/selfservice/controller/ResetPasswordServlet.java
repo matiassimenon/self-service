@@ -82,7 +82,7 @@ public class ResetPasswordServlet extends HttpServlet {
                 String message = "";
                 if(isSaved) {
                     String url = SeverletUtil.getProjectContextUrl(request) + "/login.jsp";
-                    message = "<p>  Congrats! You new password had changed successfully, please click the following link to login: </p>";
+                    message = "<p>  Congrats! Your new password had changed successfully, please click the following link to login: </p>";
                     String content = buildContent(registerUser,message,url);
                     
                     try {
