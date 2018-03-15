@@ -68,9 +68,9 @@ servlet but should be the only JSP outside of WEB-INF.
                     <td>Region:</td>
                     <td> <select id="region" name="region" required="required" onchange="if(this.value != '') setCity(this.options[this.selectedIndex].value);">
                             <option value="">Please select...</option>
-                            <option value="apac">APAC</option>
-                            <option value="emea">EMEA</option>
-                            <option value="us">US</option>
+                            <option value="APAC">APAC</option>
+                            <option value="EMEA">EMEA</option>
+                            <option value="US">US</option>
                         </select> </td>
                 </tr>
                 <tr>
