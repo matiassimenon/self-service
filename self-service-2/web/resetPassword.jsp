@@ -27,7 +27,7 @@
             <form action="ResetPasswordServlet?step=1" method = "post">
                 <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >
                     <tr><td>Talend Email:</td><td><input type="text" id="email" name="email" placeholder="Enter your Talend Email" required="required"></td></tr>
-                    <tr><td colspan=2 align="center"><button type="submit">Reset</button></td></tr>
+                    <tr><td align="center" colspan="2"><button type="submit">Reset</button> <a align="center" href="login.jsp">Login</a></td></tr>
                 </table>
             </form>
             <%
