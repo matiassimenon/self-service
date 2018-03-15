@@ -64,7 +64,7 @@ public class SaveAsTemplate extends HttpServlet {
             try {  
                  con=DbConnection.getConnection();
                  //save to TEMPLATE 
-                String sql="insert into TEMPLATE(template_uuid, template_name, username, creation_date, last_edit, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version) values(?,?,?,?,?,?,?,?,?,?,?,?) ";
+                String sql="replace into TEMPLATE(template_uuid, template_name, username, creation_date, last_edit, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version) values(?,?,?,?,?,?,?,?,?,?,?,?) ";
                 	System.out.println("saveToTemplate sql-->"+ sql);
                         PreparedStatement ps=con.prepareStatement(sql); 
                         

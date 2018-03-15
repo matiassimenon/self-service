@@ -41,11 +41,11 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
         }
         </script>
     <body>
-        <%@include file="navigator.jsp"%>
         <div  id="content">
+        <%@include file="navigator.jsp"%>        
         <h3>Admin Role Requests</h3>
         <form  id="adminReqForm" method="post" >
-                <div >
+
                     <table  align="center"  style="  width: 1000px;">
                         <tr>
                             <td width="650px" class="td1"></td>
@@ -54,7 +54,7 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                             </td>
                         </tr>
                     </table>                   
-                </div>            
+          
             <table  id ="adminReqTable" align="center"  bordercolor="#a0c6e5" style="  width: 1000px; border-collapse: collapse;">
                 <tr>
                     <th>First Name</th>
@@ -107,7 +107,7 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                     </c:if>                               
                  </tr>
              </table> 
-                <div >
+
                     <table  align="center"  style="  width: 1000px;">
                         <tr>
                             <td width="800px" class="td1"></td>
@@ -117,9 +117,9 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                             
                         </tr>
                     </table>                   
-                </div>
+           
         </form>
-        </div>
-        <%@include file="footer.jsp"%>
+        </div>        
     </body>
+    <%@include file="footer.jsp"%>
 </html>

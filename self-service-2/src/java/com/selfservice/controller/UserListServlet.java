@@ -40,6 +40,7 @@ public class UserListServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         Connection con = null;
         List<User> list = new ArrayList<>();
         PrintWriter out = response.getWriter();
