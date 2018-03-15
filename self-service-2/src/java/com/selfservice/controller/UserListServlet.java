@@ -85,11 +85,13 @@ public class UserListServlet extends HttpServlet {
                         String[] update = user1.split("=");
                         String username = update[0];
                         String isAdmin = update[1];
-                        sql = "update USER set admin=? where username=?";
+                        if(isAdmin.equalsIgnoreCase("true")){
+                            sql = "update USER set admin=1, admin_request=0 where username=?";
+                        }else{
+                            sql = "update USER set admin=0 where username=?";
+                        }
                         ps = con.prepareStatement(sql);
-
-                        ps.setInt(1, isAdmin.equalsIgnoreCase("true") ? 1 : 0);
-                        ps.setString(2, username);
+                        ps.setString(1, username);
                         ret = ps.executeUpdate();
                         ps.close();
                         //update the session if it's the current user

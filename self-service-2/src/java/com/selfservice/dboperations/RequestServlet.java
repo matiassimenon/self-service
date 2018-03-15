@@ -109,6 +109,7 @@ public class RequestServlet extends HttpServlet {
                 template.setTalend_version(componentVersion);
                 template.setTomcat_version(tomcatVersion);
                 template.setUsername(username);
+                template.setSalesforce_case(salesforceCase);
                 request.setAttribute("template", template);
                 request.setAttribute("errMessage", "Request Successfully!!");
                 request.setAttribute("saveOK", "true");

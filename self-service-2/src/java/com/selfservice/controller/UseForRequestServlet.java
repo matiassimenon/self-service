@@ -71,6 +71,7 @@ public class UseForRequestServlet extends HttpServlet {
                         template.setJdk_update(rs.getString(11));
                         template.setTomcat_version(rs.getString(12));
                         request.setAttribute("template", template);
+                        request.setAttribute("fromTemplate", "true");
                         //forward to provisionForm.jsp 
                         request.getRequestDispatcher("provisionForm.jsp").forward(request, response);
                         rs.close();
