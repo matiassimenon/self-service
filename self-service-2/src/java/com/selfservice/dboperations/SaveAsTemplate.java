@@ -108,14 +108,12 @@ public class SaveAsTemplate extends HttpServlet {
                 template.setTomcat_version(tomcatVersion);
                 template.setUsername(username);
                 request.setAttribute("template", template);
-                request.setAttribute("errMessage", "Save Successfully!!");
-                request.setAttribute("saveOK", "true");
+                request.setAttribute("errMessage", "<font color='green'>Save Successfully!!</font>");
                 request.getRequestDispatcher("provisionForm.jsp").include(request, response);
                 //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
             }
         } catch (SQLException ex) {
-            request.setAttribute("errMessage", "Save Failed!" + ex.getLocalizedMessage());
-            request.setAttribute("saveOK", "false");
+            request.setAttribute("errMessage", "<font color='red'>Save Failed!" + ex.getLocalizedMessage() + "</font>");
             Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
             request.getRequestDispatcher("provisionForm.jsp").include(request, response);
             //String err=ex.getLocalizedMessage();

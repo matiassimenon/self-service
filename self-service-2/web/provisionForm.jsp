@@ -5,7 +5,6 @@
 --%>
 <%@page import="com.selfservice.model.Template"%>
 <%
-    Boolean saveOK=request.getAttribute("saveOK")!=null? Boolean.valueOf(request.getAttribute("saveOK").toString()):true;
     Object errMessage=request.getAttribute("errMessage");
     Object fromTemplate=request.getAttribute("fromTemplate");
     Template template=(Template)request.getAttribute("template");
@@ -228,7 +227,7 @@ function requestAction(){
             </table>
             <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
         </form>
-        <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
+        <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%}%>
         </div>
     </body>
     <%@include file="footer.jsp"%>

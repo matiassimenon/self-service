@@ -111,14 +111,12 @@ public class RequestServlet extends HttpServlet {
                 template.setUsername(username);
                 template.setSalesforce_case(salesforceCase);
                 request.setAttribute("template", template);
-                request.setAttribute("errMessage", "Request Successfully!!");
-                request.setAttribute("saveOK", "true");
+                request.setAttribute("errMessage", "<font color='green'>Request Successfully!!</font>");
                 request.getRequestDispatcher("provisionForm.jsp").forward(request, response);
                 //out.print("<h3 class='save_ok'>Request Successfully!!</h3>");
             }
         } catch (SQLException ex) {
-            request.setAttribute("errMessage", "Request Failed!" + ex.getLocalizedMessage());
-            request.setAttribute("saveOK", "false");
+            request.setAttribute("errMessage", "<font color='red'>Request Failed!" + ex.getLocalizedMessage() +"</font>");
             Logger.getLogger(SaveAsTemplate.class.getName()).log(Level.SEVERE, null, ex);
             request.getRequestDispatcher("provisionForm.jsp").forward(request, response);
             //String err=ex.getLocalizedMessage();

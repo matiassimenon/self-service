@@ -92,7 +92,7 @@ servlet but should be the only JSP outside of WEB-INF.
 		
                 <tr><td colspan=5 align="center"><button  id="submitBtn" type="submit" >Register</button></td></tr></table>
 		<p>Have an Account? <a href="login.jsp">login</a></p>
-                <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
+                <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%} %>
 	</form>
         </div>                   
 </body>

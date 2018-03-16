@@ -115,8 +115,7 @@ public class SaveUser extends HttpServlet {
                         session.setAttribute("user", user);
                     }
                     request.setAttribute("user", user);
-                    request.setAttribute("saveOK", "true");
-                    request.setAttribute("errMessage", "Save Successfully!!");
+                    request.setAttribute("errMessage", "<font color='green'>Save Successfully!!</font>");
                     request.getRequestDispatcher(jspPage).include(request, response);
                     //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
                 }
@@ -125,9 +124,8 @@ public class SaveUser extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
             String err = ex.getLocalizedMessage();
-            String outstr = "Save Failed!  " + err;
+            String outstr = "<font color='red'> Save Failed!  " + err + "</font>";
             request.setAttribute("errMessage", outstr);
-            request.setAttribute("saveOK", "true");
             request.getRequestDispatcher(jspPage).include(request, response);
             //out.print(outstr);
 

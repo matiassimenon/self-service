@@ -92,7 +92,7 @@ public class ResetPasswordServlet extends HttpServlet {
                     }                    
                     
                     message = "New Password saved, page will redirect to login after 5s.";
-                    response.setHeader("Refresh","5;url=/self-service-2/login.jsp");
+                    response.setHeader("Refresh","5;url=login.jsp");
                 } else {
                     message = "<font color = red> Saved failed! Please contact the Devops Team Administrator for detail information. </font>";
                 }

@@ -47,7 +47,7 @@
             </form>            
             <%} else {
                 request.setAttribute("message", "Session is invalid or expired! Please try again. Page redirect to login in 5s.");
-                response.setHeader("Refresh","5;url=/self-service-2/login.jsp");                
+                response.setHeader("Refresh","5;url=login.jsp");                
             }}
 
              String message = (String)request.getAttribute("message");
