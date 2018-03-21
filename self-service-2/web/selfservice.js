@@ -1,3 +1,25 @@
+function isEmpty(v) {
+    switch (typeof v) {
+    case 'undefined':
+        return true;
+    case 'string':
+        if (v.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+        break;
+    case 'boolean':
+        if (!v) return true;
+        break;
+    case 'number':
+        if (0 === v || isNaN(v)) return true;
+        break;
+    case 'object':
+        if (null === v || v.length === 0) return true;
+        for (var i in v) {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
 //common functions for form 'select' options
 function removeOptions(selectObj)
 {
@@ -68,10 +90,10 @@ function clickRow(row) {
         row.bgColor = '#22CCCC';
         row.selected = 'true';
     }
-    //disable the Request button if multiple rows selected
+    //disable the Request button if multiple rows selected in templateList.jsp
     var table=document.getElementById("templateTable");
     var requestBtn=document.getElementById("requestBtn");
-    if(table !== null){
+    if(!isEmpty(table)){
         var rows=table.rows;
         var num=0;
         for( var i=0; i< rows.length; i++){
@@ -143,3 +165,4 @@ function checkPasswd() {
     document.getElementById("passwdMsg").innerHTML = message;
     document.getElementById("submitBtn").disabled = disable;
 }
+

@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%
 List<User> list  =(List<User>)request.getAttribute("userList");   
+Object errMessage=request.getAttribute("errMessage");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -135,7 +136,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
 
                 </tr>
             </table>
-                    
+             <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%} %>       
                 
         </form>
         </div>                    

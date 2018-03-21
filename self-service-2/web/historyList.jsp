@@ -9,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%
  List<Request> list  =(List<Request>)request.getAttribute("historyList");
+ String username=((User)request.getSession(false).getAttribute("user")).getUsername();
  String type=(String)request.getAttribute("type");
 %>
 
@@ -26,6 +27,45 @@
             document.getElementById("historyForm").action="HistoryServlet";
             document.getElementById("historyForm").submit();
         }
+        function selectRow(row){
+            if (row.selected === 'true') {
+                row.bgColor = 'white';
+                row.selected = 'false';
+            } else {
+                row.bgColor = '#22CCCC';
+                row.selected = 'true';
+            } 
+            //reset all the left rows
+            var table = row.offsetParent;
+            var rows=table.rows;
+            for( var i=1; i< rows.length; i++){
+                if( row != rows[i]){
+                    rows[i].bgColor = 'white';
+                    rows[i].selected = 'false';
+                    
+                }
+            }
+            //reset the 'use for request' button status
+            var status=row.cells[1].innerText;
+            var uname=row.cells[4].innerText;   
+            if("pending" === status && ( "previousRequest" === "<%=type%>" || ("historyList"=== "<%=type%>" && uname === "<%=username%>")) ){
+                document.getElementById("historyBtn").disabled=true;
+            }else{
+                document.getElementById("historyBtn").disabled=false;
+            }
+        }
+        function useForRequst1(){
+            var rows=document.getElementById("historyTable").rows;          
+            var requestString="request=";
+            for( var i=0; i< rows.length; i++){
+                if(rows[i].selected === 'true'){
+                    requestString += rows[i].cells[5].children[0].value; //template_uuid
+                    break;
+                }
+            }
+            document.getElementById("historyForm").action="UseForRequestServlet?"+requestString;
+            document.getElementById("historyForm").submit();
+        }        
         </script>
     </head>
     <body>
@@ -47,7 +87,7 @@
                 </tr>
             </table>                   
                        
-            <table  align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
+            <table  id="historyTable" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <th>Request Date</th>
                     <th>Request Status</td>
@@ -58,12 +98,13 @@
                 <%
                     for(Request his: list){
                 %>
-                <tr onclick="clickRow(this)">
+                <tr onclick="selectRow(this)">
                     <td><%=his.getRequest_date().toString()%></td>
                     <td><%=his.getRequest_status().toString()%></td>
                     <td><%=his.getImagename()%></td>
                     <td><%=his.getSalesforce_case()%></td>
                     <td><%=his.getUsername()%></td>
+                    <td><input type="hidden" value="<%=his.getTemplate_uuid()%>"/></td>
                 </tr>
                 <%}%>
             </table>
@@ -93,7 +134,7 @@
                 <tr>
                     <td width="650px" class="td1"></td>
                     <td class="td1"  align="right">
-                        <button type="submit" >Use for Request</button>
+                        <button type="button" id="historyBtn" onclick="useForRequst1();" >Use for Request</button>
                     </td>
                 </tr>
             </table>

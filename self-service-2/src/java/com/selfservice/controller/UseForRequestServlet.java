@@ -5,7 +5,6 @@
  */
 package com.selfservice.controller;
 
-import com.selfservice.dboperations.RequestServlet;
 import com.selfservice.dboperations.SaveAsTemplate;
 import com.selfservice.model.Template;
 import com.selfservice.servers.DbConnection;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * 'Use for request' from templateList.jsp
+ * 'Use for request' from templateList.jsp, history.jsp
  *
  * @author aiming
  */
@@ -74,26 +73,20 @@ public class UseForRequestServlet extends HttpServlet {
                         request.setAttribute("fromTemplate", "true");
                         //forward to provisionForm.jsp 
                         request.getRequestDispatcher("provisionForm.jsp").forward(request, response);
-                        rs.close();
-                        ps.close();
                     }
+                        rs.close();
+                        ps.close();                    
                 }
                 
             }
             
         } catch (SQLException ex) {
-            try {
-                if (con != null) {
-                    con.rollback();
-                }
+                String err = ex.getLocalizedMessage();
+                request.setAttribute("errMessage", "<font color='red'>Request Failed!  " + err + "</font>");
+   
                 Logger.getLogger(UseForRequestServlet.class.getName()).log(Level.SEVERE, null, ex);
                 request.getRequestDispatcher("templateList.jsp").forward(request, response);
-                String err = ex.getLocalizedMessage();
-                String outstr = "<h3 class='save_err'>Request Failed!  " + err + "</h3>";
-                out.print(outstr);
-            } catch (SQLException ex1) {
-                Logger.getLogger(RequestServlet.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+
         } finally {
             if (con != null) {
                 try {

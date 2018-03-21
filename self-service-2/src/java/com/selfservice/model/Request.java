@@ -16,7 +16,16 @@ public class Request {
     private Date request_date;
     private String request_status, imagename;
     private String salesforce_case, username;
+    private String template_uuid;
 
+    public String getTemplate_uuid() {
+        return template_uuid;
+    }
+
+    public void setTemplate_uuid(String template_uuid) {
+        this.template_uuid = template_uuid;
+    }
+    
     public Request() {
     }
 

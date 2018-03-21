@@ -121,12 +121,10 @@ public class TemplateListServlet extends HttpServlet {
             request.getRequestDispatcher("templateList.jsp").forward(request, response);
             rs.close();
         } catch (SQLException ex) {
-
+            String err = ex.getLocalizedMessage();
+            request.setAttribute("errMessage", "<font color='red'>Delete Failed!  " + err + "</font>");
                 Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex);
                 request.getRequestDispatcher("templateList.jsp").forward(request, response);
-                String err = ex.getLocalizedMessage();
-                String outstr = "<h3 class='save_err'>Delete Failed!  " + err + "</h3>";
-                out.print(outstr);
         } finally {
             if (con != null) {
                 try {

@@ -51,6 +51,9 @@
                 setSelected(document.getElementById("jdkUpdate"), jdkUpdate);
                 setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
                 checkTomcat();
+                if(!isEmpty(document.getElementById("imageName").value)){
+                    document.getElementById("saveTemplateBtn").disabled=true;
+                }
             };
         </script>
 <script >
@@ -220,7 +223,7 @@ function requestAction(){
                     
                 </tr>
                 <tr><td></td><td></td> <td></td>
-                    <td><button type="submit" onclick="saveAsTemplate()">Save as Template</button> 
+                    <td><button type="submit" id="saveTemplateBtn" onclick="saveAsTemplate()">Save as Template</button> 
                         <button type="submit" onclick="requestAction()">Request</button></td></tr>
                 
                 

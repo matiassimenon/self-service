@@ -63,7 +63,7 @@ public class RequestServlet extends HttpServlet {
             String sql;
             int ret;
             PreparedStatement ps;
-            if(template_uuid.length()==0){
+            if(template_uuid.length()==0){//insert one template record
                 template_uuid=SFUtils.getUUID(9);
                 System.out.print(template_uuid);
                 sql = "insert into TEMPLATE(template_uuid, template_name, username, creation_date, last_edit, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version) values(?,?,?,?,?,?,?,?,?,?,?,?) ";

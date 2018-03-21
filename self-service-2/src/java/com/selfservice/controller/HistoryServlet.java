@@ -13,10 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,13 +49,13 @@ public class HistoryServlet extends HttpServlet {
             String typeString = request.getQueryString();
             String type=request.getParameter("type");
             
-            String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
-            sql = sql + " and req.username='" + username + "'";
+            String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username, temp.template_uuid from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
+            
       
-            //MyPrvious request
-            if ((typeString != null && typeString.contains("previousRequest")) || (type != null && type.contains("previousRequest"))) {
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                sql = sql + " and req.request_date < '" + df.format(new Date()) + "'";
+            
+            if ((typeString != null && typeString.contains("previousRequest")) || (type != null && type.contains("previousRequest"))) {//MyPrvious request
+                
+               sql = sql + " and req.username='" + username + "'";
                 type="previousRequest";
             }else{
                 type="historyList";
@@ -69,7 +66,7 @@ public class HistoryServlet extends HttpServlet {
                 sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt +  "%' or req.username like '%" + sTxt +"%' or request_status like '%" + sTxt + "%' )";
             }
             //add order
-            sql = sql + " order by last_edit DESC";
+            sql = sql + " order by request_date DESC";
             //add paging sql
             int page = 1; //current page;
             int recordsPerPage = 20;
@@ -88,6 +85,7 @@ public class HistoryServlet extends HttpServlet {
                 object.setImagename(rs.getString(3));
                 object.setSalesforce_case(rs.getString(4));
                 object.setUsername(rs.getString(5));
+                object.setTemplate_uuid(rs.getString(6));
                 list.add(object);
             }            
             request.setAttribute("historyList", list);

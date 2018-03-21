@@ -9,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%
  List<Template> list  =(List<Template>)request.getAttribute("templateList");  
+Object errMessage=request.getAttribute("errMessage");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -50,7 +51,7 @@
             }
             document.getElementById("templateForm").action="UseForRequestServlet?"+requestString;
             document.getElementById("templateForm").submit();
-        }
+        }        
         </script>
     </head>
     <body>
@@ -114,12 +115,12 @@
                              <button type="submit" onclick="deleteTemplate()" >Delete Template</button>
                             </td>
                             <td class="td1"  align="right">
-                                <button id="requestBtn" type="submit" onclick="useForRequst();" >Use for Request</button>
+                                <button id="requestBtn" type="button" onclick="useForRequst();" >Use for Request</button>
                             </td>
                             
                         </tr>
                     </table>
-                    
+                <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%} %>      
         </form>
   </div>                    
     </body>
