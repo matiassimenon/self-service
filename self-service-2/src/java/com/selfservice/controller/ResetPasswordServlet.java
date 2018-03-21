@@ -49,7 +49,7 @@ public class ResetPasswordServlet extends HttpServlet {
         
         String step = request.getParameter("step");
         request.getQueryString();
-        String redirectUrl = "/login.jsp";
+        String redirectUrl = "login.jsp";
         String subject = "Self Service: Reset Password (Do Not Reply!)";
         
         if (step.equals("1")) {

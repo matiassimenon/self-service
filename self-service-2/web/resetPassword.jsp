@@ -20,7 +20,7 @@
             <%
                 String step = request.getParameter("step");
                 if (step == null) {
-                    response.sendRedirect("/login.jsp");
+                    response.sendRedirect("login.jsp");
                 } else if (step.endsWith("1")) {
             %>            
             <h3>Input Talend Email</h3>

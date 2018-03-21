@@ -127,9 +127,9 @@ function checkOsVersion(){
     }      
 }
 function generateImageName(){
-    var imagename=document.getElementById("os").value + document.getElementById("osVersion").value.toString().replace("\.","")+ "-"+            
-            document.getElementById("talendComponent").value+ document.getElementById("componentVersion").value.toString().replace("\.","").replace("\.","") + "-" +
-            "jdk" + document.getElementById("jdk").value + "u" + document.getElementById("jdkUpdate").value ;
+    var imagename=document.getElementById("talendComponent").value+ document.getElementById("componentVersion").value.toString().replace("\.","").replace("\.","") + "-"+
+            document.getElementById("os").value + document.getElementById("osVersion").value.toString().replace("\.","")+ "-"+           
+              "jdk" + document.getElementById("jdk").value + "u" + document.getElementById("jdkUpdate").value ;
     if (!document.getElementById("tomcatVersion").disabled){
             imagename += "-tomcat" + document.getElementById("tomcatVersion").value.toString().replace("\.","");
         }
