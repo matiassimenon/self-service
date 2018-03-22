@@ -87,7 +87,7 @@
                 </tr>
             </table>                   
                        
-            <table  id="historyTable" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
+            <table  id="historyTable" align="center" border="0" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <th>Request Date</th>
                     <th>Request Status</td>
@@ -104,7 +104,7 @@
                     <td><%=his.getImagename()%></td>
                     <td><%=his.getSalesforce_case()%></td>
                     <td><%=his.getUsername()%></td>
-                    <td><input type="hidden" value="<%=his.getTemplate_uuid()%>"/></td>
+                    <td class="td1"><input type="hidden" value="<%=his.getTemplate_uuid()%>"/></td>
                 </tr>
                 <%}%>
             </table>
@@ -130,7 +130,7 @@
                     </c:if>                               
                  </tr>
              </table>
-            <table  align="center"  style="  width: 800px;">
+            <table  align="center"  style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <td width="650px" class="td1"></td>
                     <td class="td1"  align="right">

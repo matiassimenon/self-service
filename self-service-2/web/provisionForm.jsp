@@ -43,14 +43,17 @@
                 document.getElementById("imageName").value="<%=template.getTemplate_name()%>";               
                 setSelected(document.getElementById("os"), os);
                 setSelected(document.getElementById("componentVersion"), componentVersion);
-                checkOsVersion();
-                setSelected(document.getElementById("osVersion"), osVersion);
+                
+                
                 setSelected(document.getElementById("componentVersion"), componentVersion);
                 setSelected(document.getElementById("talendComponent"), talendComponent);
                 setSelected(document.getElementById("jdk"), jdk);
                 setSelected(document.getElementById("jdkUpdate"), jdkUpdate);
                 setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
                 checkTomcat();
+                checkOsVersion();
+                setSelected(document.getElementById("osVersion"), osVersion);
+                
                 if(!isEmpty(document.getElementById("imageName").value)){
                     document.getElementById("saveTemplateBtn").disabled=true;
                 }
@@ -155,21 +158,29 @@ function requestAction(){
         <form  id="templateForm" method="post" action="">
             <table  align="center" style="border:2px solid green; padding:15px 15px;">
                 <tr>
-                    <td >OS:</td> 
-                    <td> <select id="os" name="os" required="required" onchange="setOsVersion(this);"> 
-                             <option value="">Please select...</option>
-                            <option value="ubuntu">Ubuntu</option>
-                            <option value="centos">CentOS</option>
+                    <td>Talend Component :</td>
+                    <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
+                            <option value="tac">TAC</option>
+                            <option value="cmdline">CmdLine</option>
+                            <option value="jobserver">Jobserver</option>
                         </select> 
-                    </td>
+                    </td>                    
                     <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
                 </tr>                
                 <tr>
-                    <td>OS Version: </td>
-                    <td><select id="osVersion" required="required" name="osVersion" onchange=" generateImageName();">
-                             <option value="">Please select...</option>
+                    <td>Talend Version :</td>
+                    <td> <select id="componentVersion" required="required" name="componentVersion" onchange="checkTomcat(); checkOsVersion(); generateImageName();"> 
+                            <option value="">Please select...</option>
+                            <option value="6.0.1">6.0.1</option>
+                            <option value="6.1.1">6.1.1</option>
+                            <option value="6.2.1">6.2.1</option>
+                            <option value="6.3.1">6.3.1</option>
+                            <option value="6.4.1">6.4.1</option>
+                            <option value="6.5.1">6.5.1</option>
+                            <option value="7.0.1">7.0.1</option>
                         </select> 
-                    </td>
+                    </td>                    
+
                     <td>Registry: </td> 
                     <td> <select id="registry" name="registry">
                             <option value="apac">APAC</option>
@@ -178,24 +189,19 @@ function requestAction(){
                         </select> </td>
                 </tr>
                 <tr>
-                    <td>Talend Component :</td>
-                    <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
-                            <option value="tac">TAC</option>
-                            <option value="cmdline">CmdLine</option>
-                            <option value="jobserver">Jobserver</option>
+                    <td >OS:</td> 
+                    <td> <select id="os" name="os" required="required" onchange="setOsVersion(this);"> 
+                             <option value="">Please select...</option>
+                            <option value="ubuntu">Ubuntu</option>
+                            <option value="centos">CentOS</option>
                         </select> 
                     </td>
                     <td>Image Name:  </td><td><input type="text" id="imageName" name="imageName"></input> </td>
                 </tr>
-                <tr><td>Talend Version :</td>
-                    <td> <select id="componentVersion" name="componentVersion" onchange="checkTomcat(); checkOsVersion(); generateImageName();"> 
-                            <option value="6.0.1">6.0.1</option>
-                            <option value="6.1.1">6.1.1</option>
-                            <option value="6.2.1">6.2.1</option>
-                            <option value="6.3.1">6.3.1</option>
-                            <option value="6.4.1">6.4.1</option>
-                            <option value="6.5.1">6.5.1</option>
-                            <option value="7.0.1">7.0.1</option>
+                <tr>
+                    <td>OS Version: </td>
+                    <td><select id="osVersion" required="required" name="osVersion" onchange=" generateImageName();">
+                             <option value="">Please select...</option>
                         </select> 
                     </td>
                 </tr>
