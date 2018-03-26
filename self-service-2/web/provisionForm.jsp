@@ -68,7 +68,7 @@ osArr['ubuntu'] =
  {txt:'12.04', val:'12.04'},
  {txt:'14.04', val:'14.04'},
  {txt:'16.04', val:'16.04'},
- {txt:'17.04', val:'17.04'}
+ {txt:'17.10', val:'17.10'}
  ];
 osArr['centos'] =
 [
@@ -109,7 +109,7 @@ function checkOsVersion(){
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
     }
     if(componentVersion.value === '6.1.1'){
-        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
     }    
     if(componentVersion.value === '6.2.1'){
@@ -121,11 +121,11 @@ function checkOsVersion(){
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }  
     if(componentVersion.value === '6.4.1'){
-        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }     
     if(componentVersion.value === '6.5.1' || componentVersion.value === '7.0.1'){
-        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.04', val:'17.04'}]);
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }      
 }
@@ -212,11 +212,12 @@ function requestAction(){
                     </td>
                 </tr>
                 <tr><td>JDK Update : </td>
-                    <td><select id="jdkUpdate" name="jdkUpdate" onchange="generateImageName();">                            
+                    <td><select id="jdkUpdate" name="jdkUpdate" onchange="generateImageName();">       
+                            <option value="144">141</option>
                             <option value="144">144</option>
-                            <option value="152">152</option>
-                            <option value="162">162</option>
-                            <option value="163">163</option>                                                      
+                            <option value="152">151</option>
+                            <option value="162">152</option>
+                            <option value="163">162</option>                                                      
                         </select> 
                     </td>
                 </tr>
