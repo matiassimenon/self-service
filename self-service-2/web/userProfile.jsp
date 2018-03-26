@@ -6,9 +6,8 @@
 <%@page import="java.util.List"%>
 <%@page import="com.selfservice.model.User"%>
 <%
-    Boolean saveOK=request.getAttribute("saveOK")!=null? Boolean.valueOf(request.getAttribute("saveOK").toString()):true;
+   
     Object errMessage=request.getAttribute("errMessage");
-    User user1=(User)request.getSession(false).getAttribute("user");
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -19,22 +18,22 @@
         <title>Self service</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <script src="selfservice.js"> </script>
+     
+    </head>
+    <body>
+        <div  id="content">
+        <%@include file="navigator.jsp"%>
         <script>
             window.onload=function(){
-                var region="<%=user1.getRegion()%>";
-                var department="<%=user1.getDepartment()%>";
-                var city="<%=user1.getCity()%>";
+                var region="<%=user.getRegion()%>";
+                var department="<%=user.getDepartment()%>";
+                var city="<%=user.getCity()%>";
                 setSelected("department", department);
                 setSelected("region", region);
                 setCity(region);
                 setSelected("city", city);               
             };
-        </script>        
-    </head>
-    <body>
-        <div  id="content">
-        <%@include file="navigator.jsp"%>
-
+        </script>   
         <h3>Profile</h3>
         <form   method="post" action="SaveUser?userProfile.jsp">
             	<table id="reg_form"  align="center" style="border:2px solid green; padding:10px 10px;" >
@@ -60,7 +59,7 @@
                         </select> </td>
                 </tr>
                 <tr>
-                    <td>Username:</td><td> <input type="text" id="username" name="username" placeholder="Talend username"  maxlength="30" required="required" readonly="true" style="background-color: graytext" value="<%=user.getUsername()%>"></td>
+                    <td>Username:</td><td> <input type="text" id="username" name="username" placeholder="Talend username"  maxlength="30" required="required" readonly="true" style="background-color: green" value="<%=user.getUsername()%>"></td>
                     <td>City:</td><td> <select id="city" name="city" required="required">
                             <option value="">Please select...</option>
                             
@@ -79,7 +78,7 @@
 		
                 <tr><td colspan=5 align="center"><button id="submitBtn"  type="submit" >Save</button></td></tr></table>
         </form>
-         <%if (saveOK && errMessage!= null ){%><h3 class="save_ok"><%=errMessage%></h3><%} else if(errMessage!=null){%> <h3 class="save_err"><%=errMessage%></h3> <%}%>
+         <% if(errMessage!=null){%> <h3 ><%=errMessage%></h3> <%}%>
         </div>               
     </body>
     <%@include file="footer.jsp"%>

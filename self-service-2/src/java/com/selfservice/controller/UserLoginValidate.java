@@ -46,8 +46,8 @@ public class UserLoginValidate {
             pObject.setRegion(rs.getString(8));
             int admin = rs.getInt(9);
             int adminRequest = rs.getInt(10);
-            pObject.setAdmin(admin == 1 ? true : false);
-            pObject.setAdminRequest(adminRequest == 1 ? true : false);
+            pObject.setAdmin(admin == 1 );
+            pObject.setAdminRequest(adminRequest == 1);
             list.add(pObject);
         }
         rs.close();
@@ -78,8 +78,8 @@ public class UserLoginValidate {
                 pObject.setRegion(rs.getString(8));
                 int admin = rs.getInt(9);
                 int adminRequest = rs.getInt(10);
-                pObject.setAdmin(admin == 1 ? true : false);
-                pObject.setAdminRequest(adminRequest == 1 ? true : false);
+                pObject.setAdmin(admin == 1 );
+                pObject.setAdminRequest(adminRequest == 1 );
                 list.add(pObject);
             }
             rs.close();

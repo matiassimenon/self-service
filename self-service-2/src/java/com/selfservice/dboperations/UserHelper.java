@@ -22,14 +22,15 @@ import java.util.logging.Logger;
  * @author Administrator
  */
 public class UserHelper {
+
     public static List<User> getUsers() {
         List<User> users = new ArrayList();
         Connection conn = null;
-        try{
+        try {
             conn = DbConnection.getConnection();
-            if(conn!=null) {
+            if (conn != null) {
                 String sql = "select * from USER";
-                Statement statement= conn.createStatement();
+                Statement statement = conn.createStatement();
                 ResultSet rs = statement.executeQuery(sql);
                 while (rs.next()) {
                     User user = new User();
@@ -49,14 +50,10 @@ public class UserHelper {
                 }
                 conn.close();
             }
-        }catch(SQLException e) {
-            if (conn!=null) {
-                try {
-                        conn.rollback();
-                    } catch (SQLException ex1) {
-                        Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, ex1);
-                    }
-            }
+        } catch (SQLException e) {
+
+            Logger.getLogger(UserListServlet.class.getName()).log(Level.SEVERE, null, e);
+
         } finally {
             if (conn != null) {
                 try {
@@ -68,5 +65,5 @@ public class UserHelper {
         }
         return users;
     }
-    
+
 }

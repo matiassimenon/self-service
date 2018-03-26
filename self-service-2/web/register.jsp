@@ -6,7 +6,7 @@ This JSP is here to provide a redirect to the dispatcher
 servlet but should be the only JSP outside of WEB-INF.
 --%>
 <%
-    Boolean saveOK=request.getAttribute("saveOK")!=null? Boolean.valueOf(request.getAttribute("saveOK").toString()):true;
+   
     Object errMessage=request.getAttribute("errMessage");
 %>
 <%@page import="com.selfservice.model.User"%>
@@ -38,18 +38,32 @@ servlet but should be the only JSP outside of WEB-INF.
 			
 		</style>
                 <script src="selfservice.js"> </script>
-                <script></script>       
+      
 	</head>
 	<body>
 	<div  id="content">
         <%@include file="navigator.jsp"%>
-        
         <%
-            user= (User)request.getAttribute("user");
-            if(user ==null){
+        user = (User) request.getAttribute("user");
+            if (user == null) {
                 user = new User();
-            }
+            }           
         %>
+      
+        <script>
+       window.onload=function(){
+           var department="<%=user.getDepartment()%>";
+           var region="<%=user.getRegion()%>";
+           var city="<%=user.getCity()%>";
+           setSelected(document.getElementById("region"), region);
+           setSelected(document.getElementById("department"), department);
+           if(!isEmpty(region)){
+                setCity(region);
+             }
+          setSelected(document.getElementById("city"), city); 
+       };
+        </script>    
+
         <h1>Self service Platform Registration</h1>
         <h3>Register</h3>
 	<form id="registerForm" action="SaveUser?register.jsp" method="post">
@@ -57,7 +71,7 @@ servlet but should be the only JSP outside of WEB-INF.
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user.getFirstname()%>"></td>
                     <td>Department:</td>
-                    <td><select name="department" required="required">
+                    <td><select name="department" id="department" required="required">
                         <option value="support">Support</option>   
                         <option value="escalation">Escalation</option>   
                         <option value="sales">Sales</option>
@@ -67,7 +81,7 @@ servlet but should be the only JSP outside of WEB-INF.
 		<tr>
                     <td>Last Name:</td><td><input type="text" name="lastname" maxlength="50" placeholder="Last name"  required="required" value="<%=user.getLastname()%>"></td>
                     <td>Region:</td>
-                    <td> <select id="region" name="region" required="required" onchange="if(this.value != '') setCity(this.options[this.selectedIndex].value);">
+                    <td> <select id="region" name="region" id="region" required="required" onchange="if(this.value != '') setCity(this.options[this.selectedIndex].value);">
                             <option value="">Please select...</option>
                             <option value="APAC">APAC</option>
                             <option value="EMEA">EMEA</option>

@@ -54,7 +54,8 @@
                 checkOsVersion();
                 setSelected(document.getElementById("osVersion"), osVersion);
                 
-                if(!isEmpty(document.getElementById("imageName").value)){
+                var fromtemplate= "<%=fromTemplate%>";
+                if(fromtemplate !== "null"){
                     document.getElementById("saveTemplateBtn").disabled=true;
                 }
             };
@@ -131,7 +132,7 @@ function checkOsVersion(){
 }
 function generateImageName(){
     var imagename=document.getElementById("talendComponent").value+ document.getElementById("componentVersion").value.toString().replace("\.","").replace("\.","") + "-"+
-            document.getElementById("os").value + document.getElementById("osVersion").value.toString().replace("\.","")+ "-"+           
+            document.getElementById("os").value + document.getElementById("osVersion").value.toString().replace("\.","").substring(0,2)+ "-"+           
               "jdk" + document.getElementById("jdk").value + "u" + document.getElementById("jdkUpdate").value ;
     if (!document.getElementById("tomcatVersion").disabled){
             imagename += "-tomcat" + document.getElementById("tomcatVersion").value.toString().replace("\.","");
