@@ -57,12 +57,12 @@ public class UserLoginValidate {
         return list;  //returns the list		
     }
 
-    public static List<User> getUsers(String username) {
+    public static List<User> getUsers(String username)throws SQLException{
         List<User> list = new ArrayList<>();
         try {
 
             //take a list to store the values which are in db
-            Connection con = DbConnection.getConnection();
+            Connection con = DbConnection.getConnection();           
             PreparedStatement ps = con.prepareStatement("select firstname, lastname, username, email, department, city, password, region, admin, admin_request from self_service_db.USER where username=?");
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
@@ -89,6 +89,7 @@ public class UserLoginValidate {
 
         } catch (SQLException ex) {
             Logger.getLogger(UserLoginValidate.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         }
         return list;  //returns the list	
     }
