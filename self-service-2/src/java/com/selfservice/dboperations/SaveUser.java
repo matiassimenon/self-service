@@ -96,6 +96,11 @@ public class SaveUser extends HttpServlet {
                 ps.setString(7, region);
                 ps.setInt(8, isAdminRequest);
                 ps.setString(9, username);
+                //update the user in the session
+                HttpSession session = request.getSession(false);
+                if (session != null) {
+                    session.setAttribute("user", user);
+                }                
             }
 
             if (sql != null) {
@@ -110,10 +115,7 @@ public class SaveUser extends HttpServlet {
                     user.setRegion(region);
                     user.setAdminRequest(isAdminRequest == 1);
                     user.setPassword(password2);
-                    HttpSession session = request.getSession(false);
-                    if (session != null) {
-                        session.setAttribute("user", user);
-                    }
+
                     request.setAttribute("user", user);
                     request.setAttribute("errMessage", "<font color='green'>Save Successfully!!</font>");
                     request.getRequestDispatcher(jspPage).include(request, response);
