@@ -4,3 +4,10 @@
 /self-service-2/nbproject/private/
 /self-service-2/dist/
 /self-service-2/build/
+/build_server/venv
+/build_server/.idea
+/build_server/authentication/credentials.py
+*__pycache__
+*.zip
+*.tar
+*.gz
