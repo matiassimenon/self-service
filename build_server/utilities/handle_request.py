@@ -4,6 +4,7 @@ import subprocess
 import mysql.connector
 from shutil import copyfile
 import authentication.credentials as credentials
+import docker
 
 repo_suffix = "repo"
 port = '443'
@@ -46,34 +47,34 @@ def handle_request(request):
 
     if is_dockerfile_present and is_repo_valid:
         replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
-        # build
         try:
-            print(f"cd {docker_build_dir}/{talend_component}; "
-                  f"docker build -f {dockerfile_name} "
-                  f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
+            client = docker.from_env()
 
-            update_request_status('processing', request_uuid)
-
-            bash_cmd(f"cd {docker_build_dir}/{talend_component}; "
-                     f"docker build -f {dockerfile_name} "
-                     f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
-            # login
-            bash_cmd(f"docker login {protocol}://{repo}-{repo_suffix}:{port} "
-                     f"-u {docker_user} -p {docker_password}")
-            # push
-            bash_cmd(f"cd {docker_build_dir}; "
-                     f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
-        except subprocess.CalledProcessError as e:
-            update_request_status('error', request_uuid)
+            # docker build
+            client.images.build(path=f'{docker_build_dir}/{talend_component}',
+                                tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+                                dockerfile=dockerfile_name)
+            # docker login
+            client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
+                         username=docker_user,
+                         password=docker_password)
+            # docker push
+            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
+        except docker.errors.APIError as e:
             print(e.output)
+            update_request_status('error', request_uuid)
+            email_dictionary = create_email_dictionary(firstname.capitalize(), user_region.lower(), template_name)
+            email_template_string = file_into_string(f'{templates_dir}/email', email_failure_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email_to_user(username, email_message)
+
+        update_request_status('processing', request_uuid)
 
     # Remove dockerfile
     bash_cmd(f"sudo rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
 
-    # Crete email dictionary
+    # Send e-mail after successful image creation and upload
     email_dictionary = create_email_dictionary(firstname.capitalize(), user_region.lower(), template_name)
-
-    # Email template
     email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
     email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
     send_email_to_user(username, email_message)
@@ -103,28 +104,25 @@ def send_email_to_user(talend_username, message):
                         f'From: {on_behalf_of}',
                         f'Subject: {subject}',
                         '', message])
-
-    # creates SMTP session in Outlook
-    s = smtplib.SMTP(smtp_server, smtp_port)
-
-    # start TLS for security
-    s.ehlo()
-    s.starttls()
-
-    # Authentication
-    s.login(sender_email, sender_password)
-
-    # Sending the email
     try:
+        # creates SMTP session in Outlook
+        s = smtplib.SMTP(smtp_server, smtp_port)
+
+        # start TLS for security
+        s.ehlo()
+        s.starttls()
+
+        # Authentication
+        s.login(sender_email, sender_password)
+
+        # Sending the email
         s.SentOnBehalfOfName = on_behalf_of
         s.sendmail(sender_email, [receiver_email], body)
-        s.close()
-        print(f'Email sent to {talend_username}')
-    except ValueError:
-        print('Error sending email')
-
-    # terminating the session
-    s.quit()
+        # terminating the session
+        s.quit()
+    except smtplib.SMTPException as e:
+        print(e)
+        s.quit()
 
 
 def create_request_dictionary(request):
@@ -181,7 +179,6 @@ def create_request_dictionary(request):
             jdk_build = 'b12'
 
     if op_sys == 'centos':
-
         if os_version == '7.4':
             os_version = os_version + '.1708'
         elif os_version == '7.3':
@@ -195,7 +192,6 @@ def create_request_dictionary(request):
 
         update_os_and_install_tools = 'yum update -y && ' \
                                       'yum install -y wget tar unzip vim'
-
         add_executables_to_path = 'alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && ' \
                                   'alternatives --set "java" "/opt/java/bin/java" && ' \
                                   'alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && ' \
@@ -204,7 +200,6 @@ def create_request_dictionary(request):
                                   'alternatives --set "keytool" "/opt/java/bin/keytool" '
         clean_cached_files = 'yum clean all'
     elif op_sys == 'ubuntu':
-
         if os_version == '14':
             os_version = '14.04'
         elif os_version == '16':
@@ -292,7 +287,7 @@ def create_request_dictionary(request):
     return template_dictionary
 
 
-# Function to check that the needed templates exist
+# Function to check that the files exist
 def is_file_present(absolute_path):
     return os.path.isfile(absolute_path)
 
@@ -300,7 +295,10 @@ def is_file_present(absolute_path):
 # Function to run bash commands
 def bash_cmd(cmd):
     # Captures output
-    result = subprocess.check_output(cmd, shell=True)
+    try:
+        result = subprocess.check_output(cmd, shell=True)
+    except subprocess.CalledProcessError as e:
+        print(e.output)
     return result.decode('utf-8')
 
 
@@ -337,9 +335,6 @@ def file_into_string(path, filename):
 
 def replace_placeholders_in_string(file_string, dictionary):
     for text_to_search, replacement_text in dictionary.items():
-        # print(f'text to search: {text_to_search}')
-        # print(f'replacement_text: {replacement_text}')
-        # print("")
 
         if replacement_text is not None:
             file_string = file_string.replace(text_to_search, replacement_text)
@@ -347,10 +342,8 @@ def replace_placeholders_in_string(file_string, dictionary):
 
 
 def update_request_status(status, request_uuid):
-    print(status, request_uuid)
-    mysql_cnx = mysql.connector.connect(**credentials.config)
-
     try:
+        mysql_cnx = mysql.connector.connect(**credentials.config)
         cursor = mysql_cnx.cursor(dictionary=True)
 
         cursor.execute('UPDATE `self_service_db`.`REQUEST` SET `request_status`= %s WHERE `request_uuid`= %s;',

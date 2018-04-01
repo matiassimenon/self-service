@@ -1,4 +1,4 @@
-FROM centos:7.4.1708
+FROM centos:7.3.1611
 # Update OS and Install Tools
 RUN yum update -y && yum install -y wget tar unzip vim
 # Set environment variables for Java version
@@ -37,26 +37,63 @@ RUN wget --no-check-certificate https://github.com/frekele/oracle-java/releases/
 # Add executables to path
 RUN alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && alternatives --set "java" "/opt/java/bin/java" && alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && alternatives --set "javac" "/opt/java/bin/javac" && alternatives --install "/usr/bin/keytool" "keytool" "/opt/java/bin/keytool" 1 && alternatives --set "keytool" "/opt/java/bin/keytool" 
 
+# Set environment variables for Tomcat version
+ENV CATALINA_HOME /opt/tomcat
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin:$CATALINA_HOME/scripts
+ENV TOMCAT_MAJOR 8
+ENV TOMCAT_VERSION 8.0.50
+
+# Install Tomcat
+RUN wget http://mirrors.koehn.com/apache/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    tar -xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    rm apache-tomcat*.tar.gz && \
+    mv apache-tomcat* ${CATALINA_HOME}
+RUN chmod +x ${CATALINA_HOME}/bin/*sh
+# Create Tomcat admin user
+ADD create_admin_user.sh $CATALINA_HOME/scripts/create_admin_user.sh
+ADD tomcat.sh $CATALINA_HOME/scripts/tomcat.sh
+RUN chmod +x $CATALINA_HOME/scripts/*.sh
+# Create tomcat user
+RUN groupadd -r tomcat && \
+    useradd -g tomcat -d ${CATALINA_HOME} -s /sbin/nologin  -c "Tomcat user" tomcat && \
+    chown -R tomcat:tomcat ${CATALINA_HOME}
+# Last step of Tomcat install comes after installing TAC
+
 # Clean all cached files
 RUN yum clean all
 
 # Expose Talend Application Ports
-EXPOSE 8002
+# Apache Tomcat port [8080]
+EXPOSE 8080
+# Apache Tomcat AJP Connector Port [8009]
+EXPOSE 8009
+# MySQL 5.7 database port [3306]
+EXPOSE 3306
+# Oracle 12c database [1521]
+EXPOSE 1521
+# MS SQL Server [1433]
+EXPOSE 1433
+# PostgreSQL 9.6 database [5432]
+EXPOSE 5432
+# Nexus port [8081]
+EXPOSE 8081
 
-# Define working directory talend
+# Define working directory
 WORKDIR /talend
 
-# Install cmdline
-ADD Talend-Studio-20170623_1246-V6.4.1.zip /talend
-ADD start_cmdline.sh /talend
-ADD stop_cmdline.sh /talend
-ADD telnet.jar /talend
+# Install TAC
+ADD Talend-AdministrationCenter-20160704_1411-V6.2.1.zip /talend
 
-RUN unzip /talend/Talend-Studio-20170623_1246-V6.4.1.zip && \
-    mv /talend/Talend-Studio-20170623_1246-V6.4.1 /talend/cmdline && \
-    rm -rf /talend/Talend-Studio-20170623_1246-V6.4.1.zip
+RUN unzip /talend/Talend-AdministrationCenter-20160704_1411-V6.2.1.zip && \
+    mv /talend/Talend-AdministrationCenter-20160704_1411-V6.2.1 /talend/tac-621 && \
+    rm -rf /talend/Talend-AdministrationCenter-20160704_1411-V6.2.1.zip && \
+    mkdir -p /Talend/CommandLine/exports /Talend/Administrator/generatedJobs /Talend/Administrator/executionLogs /Talend/Audit/reports
 
-RUN chmod +x -R /talend/*.sh
+WORKDIR /opt/tomcat
+# Finish tomcat install
+USER tomcat
+CMD ["tomcat.sh"]
 
 USER root
-ENTRYPOINT "/talend/start_cmdline.sh" && /bin/bash
+RUN mv /talend/tac-621/org.talend.administrator-6.2.1.war /opt/tomcat/webapps/tac-621.war
+ENTRYPOINT "/opt/tomcat/bin/startup.sh" && /bin/bash
