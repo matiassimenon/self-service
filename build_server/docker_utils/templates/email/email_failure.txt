@@ -1,0 +1,7 @@
+Hello <firstname_placeholder>,
+
+Something went wrong with your request, we are working to fix this issue.
+
+Best,
+
+SRE/Devops

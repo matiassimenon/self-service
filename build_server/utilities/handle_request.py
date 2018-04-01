@@ -14,7 +14,8 @@ templates_dir = f'{docker_utils_dir}/templates'
 docker_build_dir = f'{docker_utils_dir}/docker_build'
 docker_user = credentials.docker['docker_user']
 docker_password = credentials.docker['docker_password']
-email_file = 'email_template.txt'
+email_success_file = 'email_success.txt'
+email_failure_file = 'email_failure.txt'
 
 
 def handle_request(request):
@@ -48,8 +49,8 @@ def handle_request(request):
         # build
         try:
             print(f"cd {docker_build_dir}/{talend_component}; "
-                     f"docker build -f {dockerfile_name} "
-                     f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
+                  f"docker build -f {dockerfile_name} "
+                  f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
 
             update_request_status('processing', request_uuid)
 
@@ -66,7 +67,6 @@ def handle_request(request):
             update_request_status('error', request_uuid)
             print(e.output)
 
-
     # Remove dockerfile
     bash_cmd(f"sudo rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
 
@@ -74,7 +74,7 @@ def handle_request(request):
     email_dictionary = create_email_dictionary(firstname.capitalize(), user_region.lower(), template_name)
 
     # Email template
-    email_template_string = file_into_string(f'{templates_dir}/email', email_file)
+    email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
     email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
     send_email_to_user(username, email_message)
 
@@ -91,16 +91,16 @@ def create_email_dictionary(firstname, region, image_name):
 
 
 def send_email_to_user(talend_username, message):
-    sender = credentials.smtp['outlook_send_on_behalf_of']
+    on_behalf_of = credentials.smtp['outlook_send_on_behalf_of']
     sender_email = credentials.smtp['outlook_sender_email']
-    sender_email_password = credentials.smtp['outlook_sender_password']
+    sender_password = credentials.smtp['outlook_sender_password']
     receiver_email = talend_username + '@talend.com'
     subject = 'Devops Request'
     smtp_server = credentials.smtp['outlook_smtp_server']
     smtp_port = credentials.smtp['outlook_smtp_port']
 
     body = '\r\n'.join([f'To: {receiver_email}',
-                        f'From: {sender}',
+                        f'From: {on_behalf_of}',
                         f'Subject: {subject}',
                         '', message])
 
@@ -110,15 +110,15 @@ def send_email_to_user(talend_username, message):
     # start TLS for security
     s.ehlo()
     s.starttls()
-    s.ehlo()
 
     # Authentication
-    s.login(sender_email, sender_email_password)
+    s.login(sender_email, sender_password)
 
     # Sending the email
     try:
-        s.SentOnBehalfOfName = sender
+        s.SentOnBehalfOfName = on_behalf_of
         s.sendmail(sender_email, [receiver_email], body)
+        s.close()
         print(f'Email sent to {talend_username}')
     except ValueError:
         print('Error sending email')
@@ -149,7 +149,7 @@ def create_request_dictionary(request):
     _631_version = '20161216_1026-V6.3.1'
     _641_version = '20170623_1246-V6.4.1'
     _651_version = '20180116_1512-V6.5.1'
-    
+
     if tomcat_version == '7' or tomcat_version == '7.0':
         # http://mirror.reverse.net/pub/apache/tomcat/tomcat-7/v7.0.85/bin/apache-tomcat-7.0.85.tar.gz
         tomcat_major = '7'
