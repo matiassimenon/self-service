@@ -63,7 +63,8 @@ def handle_request(request):
         except docker.errors.APIError as e:
             print(e.output)
             update_request_status('error', request_uuid)
-            email_dictionary = create_email_dictionary(firstname.capitalize(), user_region.lower(), template_name)
+            email_dictionary = create_email_dictionary(username.lower(), firstname.capitalize(),
+                                                       user_region.lower(), template_name)
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email_to_user(username, email_message)
@@ -83,8 +84,9 @@ def handle_request(request):
     update_request_status('fulfilled', request_uuid)
 
 
-def create_email_dictionary(firstname, region, image_name):
+def create_email_dictionary(username, firstname, region, image_name):
     email_dictionary = {'<firstname_placeholder>': firstname,
+                        '<username_placeholder>': username,
                         '<repository_placeholder>': region,
                         '<image_name_placeholder>': image_name}
 

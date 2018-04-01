@@ -5,7 +5,7 @@ Here are the details of your request. You can pull this image from: https://<rep
 =================== DEVOPS RESPONSE ===================
 Image name: <image_name_placeholder>
 
-Pull Command: docker pull https://<repository_placeholder>-repo:443/<firstname_placeholder>/<image_name_placeholder>
+Pull Command: docker pull https://<repository_placeholder>-repo:443/<username_placeholder>/<image_name_placeholder>
 
 How to use Docker containers?
 https://wiki.talend.com/display/support/MySQL
