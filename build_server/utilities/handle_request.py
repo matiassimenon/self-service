@@ -105,23 +105,23 @@ def send_email_to_user(talend_username, message):
                         f'Subject: {subject}',
                         '', message])
     try:
-        # creates SMTP session in Outlook
+        # Open SMTP connection
         s = smtplib.SMTP(smtp_server, smtp_port)
 
-        # start TLS for security
+        # Start TLS for security
         s.ehlo()
         s.starttls()
 
         # Authentication
         s.login(sender_email, sender_password)
 
-        # Sending the email
+        # Send email
         s.SentOnBehalfOfName = on_behalf_of
         s.sendmail(sender_email, [receiver_email], body)
-        # terminating the session
-        s.quit()
     except smtplib.SMTPException as e:
         print(e)
+    finally:
+        # Terminate the session
         s.quit()
 
 
@@ -351,3 +351,5 @@ def update_request_status(status, request_uuid):
         mysql_cnx.commit()
     except mysql_cnx.Error as e:
         print(e)
+    finally:
+        mysql_cnx.close()
