@@ -60,6 +60,12 @@ def handle_request(request):
                          password=docker_password)
             # docker push
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
+        except docker.errors.BuildError as e:
+            print(e.output)
+            print(f"cd {docker_build_dir}/{talend_component}; "
+                  f"docker build -f {dockerfile_name} "
+                  f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
+            update_request_status('error', request_uuid)
         except docker.errors.APIError as e:
             print(e.output)
             update_request_status('error', request_uuid)

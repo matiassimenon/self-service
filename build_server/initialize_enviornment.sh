@@ -4,11 +4,7 @@ sudo yum -y update
 sudo yum -y install yum-utils
 sudo yum -y groupinstall development
 sudo yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-
-# Install Git and clone project
 sudo yum -y install wget vim git
-cd ~
-git clone https://github.com/franciscogd/self-service.git
 
 # Install Python 3.6 and pip
 sudo yum -y install python36u
