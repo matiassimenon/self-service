@@ -84,7 +84,8 @@ def handle_request(request):
     bash_cmd(f"sudo rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
 
     # Send e-mail after successful image creation and upload
-    email_dictionary = create_email_dictionary(firstname.capitalize(), user_region.lower(), template_name)
+    email_dictionary = create_email_dictionary(username.lower(), firstname.capitalize(),
+                                               user_region.lower(), template_name)
     email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
     email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
     send_email_to_user(username, email_message)

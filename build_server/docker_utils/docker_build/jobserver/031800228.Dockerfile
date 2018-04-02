@@ -1,6 +1,6 @@
-FROM ubuntu:14.04
+FROM centos:6.8
 # Update OS and Install Tools
-RUN apt-get update && apt-get install -y software-properties-common wget tar unzip vim
+RUN yum update -y && yum install -y wget tar unzip vim
 # Set environment variables for Java version
 ENV JDK_VERSION 8
 ENV JDK_UPDATE 144
@@ -21,7 +21,7 @@ WORKDIR /opt
 #Install Java
 RUN wget --no-check-certificate https://github.com/frekele/oracle-java/releases/download/${JDK_VERSION_UPDATE_BUILD}/jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz \
     && wget --no-check-certificate https://github.com/frekele/oracle-java/releases/download/${JDK_VERSION_UPDATE_BUILD}/jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz.md5 \
-    && echo "$(cat jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz.md5) jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz" | md5sum -c \
+    && echo "$(cat jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz.md5) *jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz" | md5sum -c \
     && tar -zvxf jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz -C /opt \
     && ln -s /opt/${JDK_FOLDER} /opt/java \
     && rm -f jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz \
@@ -35,10 +35,10 @@ RUN wget --no-check-certificate https://github.com/frekele/oracle-java/releases/
     && rm -rf ${JCE_FOLDER}
 
 # Add executables to path
-RUN update-alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && update-alternatives --set "java" "/opt/java/bin/java" && update-alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && update-alternatives --set "javac" "/opt/java/bin/javac" && update-alternatives --install "/usr/bin/keytool" "keytool" "/opt/java/bin/keytool" 1 && update-alternatives --set "keytool" "/opt/java/bin/keytool" 
+RUN alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && alternatives --set "java" "/opt/java/bin/java" && alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && alternatives --set "javac" "/opt/java/bin/javac" && alternatives --install "/usr/bin/keytool" "keytool" "/opt/java/bin/keytool" 1 && alternatives --set "keytool" "/opt/java/bin/keytool" 
 
 # Clean all cached files
-RUN apt-get clean all
+RUN yum clean all
 
 # Expose Talend Application Ports
 EXPOSE 8000
@@ -49,13 +49,13 @@ EXPOSE 8888
 WORKDIR /talend
 
 # Install JobServer
-ADD Talend-JobServer-20151214_1327-V6.1.1.zip /talend
+ADD Talend-JobServer-20161216_1026-V6.3.1.zip /talend
 
 RUN \
-  unzip /talend/Talend-JobServer-20151214_1327-V6.1.1.zip && \
-  mv /talend/Talend-JobServer-20151214_1327-V6.1.1 /talend/jobserver-611 && \
-  rm -rf /talend/Talend-JobServer-20151214_1327-V6.1.1.zip
+  unzip /talend/Talend-JobServer-20161216_1026-V6.3.1.zip && \
+  mv /talend/Talend-JobServer-20161216_1026-V6.3.1 /talend/jobserver-631 && \
+  rm -rf /talend/Talend-JobServer-20161216_1026-V6.3.1.zip
 
 USER root
 # Define Default command
-ENTRYPOINT "/talend/jobserver-611/start_rs.sh" && /bin/bash
+ENTRYPOINT "/talend/jobserver-631/start_rs.sh" && /bin/bash

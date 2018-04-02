@@ -1,11 +1,11 @@
-FROM <os_placeholder>:<os_version_placeholder>
+FROM ubuntu:16.04
 # Update OS and Install Tools
-RUN <update_os_and_install_tools_placeholder>
+RUN apt-get update && apt-get install -y software-properties-common wget tar unzip vim
 # Set environment variables for Java version
-ENV JDK_VERSION <jdk_version_placeholder>
-ENV JDK_UPDATE <jdk_update_placeholder>
-ENV JDK_BUILD <jdk_build_placeholder>
-ENV JDK_DISTRO_ARCH <jdk_distro_arch_placeholder>
+ENV JDK_VERSION 8
+ENV JDK_UPDATE 162
+ENV JDK_BUILD b12
+ENV JDK_DISTRO_ARCH linux-x64
 ENV JCE_FOLDER UnlimitedJCEPolicyJDK$JDK_VERSION
 ENV JDK_FOLDER jdk1.$JDK_VERSION.0_$JDK_UPDATE
 ENV JDK_VERSION_UPDATE $JDK_VERSION'u'$JDK_UPDATE
@@ -21,7 +21,7 @@ WORKDIR /opt
 #Install Java
 RUN wget --no-check-certificate https://github.com/frekele/oracle-java/releases/download/${JDK_VERSION_UPDATE_BUILD}/jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz \
     && wget --no-check-certificate https://github.com/frekele/oracle-java/releases/download/${JDK_VERSION_UPDATE_BUILD}/jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz.md5 \
-    && echo "$(cat jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz.md5) *jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz" | md5sum -c \
+    && echo "$(cat jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz.md5) jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz" | md5sum -c \
     && tar -zvxf jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz -C /opt \
     && ln -s /opt/${JDK_FOLDER} /opt/java \
     && rm -f jdk-${JDK_VERSION_UPDATE_DISTRO_ARCH}.tar.gz \
@@ -35,13 +35,13 @@ RUN wget --no-check-certificate https://github.com/frekele/oracle-java/releases/
     && rm -rf ${JCE_FOLDER}
 
 # Add executables to path
-RUN <add_executables_to_path_place_holder>
+RUN update-alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && update-alternatives --set "java" "/opt/java/bin/java" && update-alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && update-alternatives --set "javac" "/opt/java/bin/javac" && update-alternatives --install "/usr/bin/keytool" "keytool" "/opt/java/bin/keytool" 1 && update-alternatives --set "keytool" "/opt/java/bin/keytool" 
 
 # Set environment variables for Tomcat version
 ENV CATALINA_HOME /opt/tomcat
 ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin:$CATALINA_HOME/scripts
-ENV TOMCAT_MAJOR <tomcat_major_placeholder>
-ENV TOMCAT_VERSION <tomcat_version_placeholder>
+ENV TOMCAT_MAJOR 8
+ENV TOMCAT_VERSION 8.0.50
 
 # Install Tomcat
 RUN wget http://mirrors.koehn.com/apache/tomcat/tomcat-${TOMCAT_MAJOR}/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
@@ -60,7 +60,7 @@ RUN groupadd -r tomcat && \
 # Last step of Tomcat install comes after installing TAC
 
 # Clean all cached files
-RUN <clean_cached_files_placeholder>
+RUN apt-get clean all
 
 # Expose Talend Application Ports
 # Apache Tomcat port [8080]
@@ -82,11 +82,11 @@ EXPOSE 8081
 WORKDIR /talend
 
 # Install TAC
-ADD <talend_installer_placeholder>.zip /talend
+ADD Talend-AdministrationCenter-20150908_1633-V6.0.1.zip /talend
 
-RUN unzip /talend/<talend_installer_placeholder>.zip && \
-    mv /talend/<talend_installer_placeholder> /talend/tac-<talend_version_placeholder> && \
-    rm -rf /talend/<talend_installer_placeholder>.zip && \
+RUN unzip /talend/Talend-AdministrationCenter-20150908_1633-V6.0.1.zip && \
+    mv /talend/Talend-AdministrationCenter-20150908_1633-V6.0.1 /talend/tac-601 && \
+    rm -rf /talend/Talend-AdministrationCenter-20150908_1633-V6.0.1.zip && \
     mkdir -p /Talend/CommandLine/exports /Talend/Administrator/generatedJobs /Talend/Administrator/executionLogs /Talend/Audit/reports
 
 WORKDIR /opt/tomcat
@@ -95,5 +95,5 @@ USER tomcat
 CMD ["tomcat.sh"]
 
 USER root
-RUN mv /talend/tac-<talend_version_placeholder>/org.talend.administrator-<talend_semantic_version_placeholder>.war /opt/tomcat/webapps/tac-<talend_version_placeholder>.war
+RUN mv /talend/tac-601/org.talend.administrator-6.0.1.war /opt/tomcat/webapps/tac-601.war
 ENTRYPOINT "/opt/tomcat/bin/startup.sh" && /bin/bash

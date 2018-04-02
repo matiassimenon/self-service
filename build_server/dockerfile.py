@@ -19,6 +19,7 @@ except mysql_cnx.Error as e:
 
 cursor.execute(sql_query_get_requests)
 for request in cursor:
+    print(request)
     handle_request.handle_request(request)
 
 
