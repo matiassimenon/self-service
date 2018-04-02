@@ -33,6 +33,7 @@ sudo docker pull ubuntu:14.04
 sudo docker pull ubuntu:16.04
 sudo docker pull ubuntu:17.10
 sudo docker pull ubuntu:18.04
+sudo docker pull ubuntu:latest
 sudo docker pull centos:6.6
 sudo docker pull centos:6.7
 sudo docker pull centos:6.8
@@ -41,4 +42,5 @@ sudo docker pull centos:7.0.1406
 sudo docker pull centos:7.1.1503
 sudo docker pull centos:7.2.1511
 sudo docker pull centos:7.3.1611
-sudo docker pull centos:7.4.1708
+sudo docker pull centos:7.4.1708i
+sudo docker pull centos:latest
