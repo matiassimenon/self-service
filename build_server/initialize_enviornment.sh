@@ -42,5 +42,5 @@ sudo docker pull centos:7.0.1406
 sudo docker pull centos:7.1.1503
 sudo docker pull centos:7.2.1511
 sudo docker pull centos:7.3.1611
-sudo docker pull centos:7.4.1708i
+sudo docker pull centos:7.4.1708
 sudo docker pull centos:latest
