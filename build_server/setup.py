@@ -1,10 +1,9 @@
 from distutils.core import setup
 
-
 setup(
     name='self-service',
     version='0.1dev',
     packages=['utilities', ],
     long_description=open('README.md').read(),
-    requires=['mysql', 'docker'],
+    requires=['mysql-connector', 'docker'],
 )
