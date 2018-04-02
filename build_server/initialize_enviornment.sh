@@ -11,8 +11,8 @@ sudo yum -y install python36u
 sudo yum -y install python36u-pip
 
 # Install Python required packages
-pip3.6 install -y mysql-connector
-pip3.6 install -y docker
+pip3.6 install mysql-connector
+pip3.6 install docker
 
 # Install Docker CE
 sudo yum install -y device-mapper-persistent-data lvm2
@@ -32,12 +32,12 @@ sudo docker pull ubuntu:14.04
 sudo docker pull ubuntu:16.04
 sudo docker pull ubuntu:17.10
 sudo docker pull ubuntu:18.04
-sudo docker pull centos6.6
-sudo docker pull centos6.7
-sudo docker pull centos6.8
-sudo docker pull centos6.9
-sudo docker pull centos7.0.1406
-sudo docker pull centos7.1.1503
-sudo docker pull centos7.2.1511
-sudo docker pull centos7.3.1611
-sudo docker pull centos7.4.1708
+sudo docker pull centos:6.6
+sudo docker pull centos:6.7
+sudo docker pull centos:6.8
+sudo docker pull centos:6.9
+sudo docker pull centos:7.0.1406
+sudo docker pull centos:7.1.1503
+sudo docker pull centos:7.2.1511
+sudo docker pull centos:7.3.1611
+sudo docker pull centos:7.4.1708
