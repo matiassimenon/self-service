@@ -1,0 +1,7 @@
+Hello Admin,
+
+Something went wrong with request uuid <request_placeholder>, placed by user <username_placeholder>.
+
+Best,
+
+SRE/Devops
