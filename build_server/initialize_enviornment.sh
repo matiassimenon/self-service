@@ -11,8 +11,9 @@ sudo yum -y install python36u
 sudo yum -y install python36u-pip
 
 # Install Python required packages
-pip3.6 install mysql-connector
-pip3.6 install docker
+sudo pip3.6 install mysql-connector
+sudo pip3.6 install docker
+sudo pip3.6 install --upgrade pip
 
 # Install Docker CE
 sudo yum install -y device-mapper-persistent-data lvm2
