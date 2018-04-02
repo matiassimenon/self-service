@@ -22,6 +22,9 @@ sudo yum-config-manager \
 
 sudo yum install docker-ce -y
 
+# Start Docker
+sudo service docker start
+
 # Pull Docker base containers
 docker pull ubuntu:14.04
 docker pull ubuntu:16.04

@@ -61,7 +61,7 @@ def handle_request(request):
             # docker push
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
         except docker.errors.BuildError as e:
-            print(e.output)
+            print(e)
             print(f"cd {docker_build_dir}/{talend_component}; "
                   f"docker build -f {dockerfile_name} "
                   f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
