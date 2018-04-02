@@ -23,19 +23,21 @@ sudo yum-config-manager \
 sudo yum install docker-ce -y
 
 # Start Docker
-sudo service docker start
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $(whoami)
 
 # Pull Docker base containers
-docker pull ubuntu:14.04
-docker pull ubuntu:16.04
-docker pull ubuntu:17.10
-docker pull ubuntu:18.04
-docker pull centos6.6
-docker pull centos6.7
-docker pull centos6.8
-docker pull centos6.9
-docker pull centos7.0.1406
-docker pull centos7.1.1503
-docker pull centos7.2.1511
-docker pull centos7.3.1611
-docker pull centos7.4.1708
+sudo docker pull ubuntu:14.04
+sudo docker pull ubuntu:16.04
+sudo docker pull ubuntu:17.10
+sudo docker pull ubuntu:18.04
+sudo docker pull centos6.6
+sudo docker pull centos6.7
+sudo docker pull centos6.8
+sudo docker pull centos6.9
+sudo docker pull centos7.0.1406
+sudo docker pull centos7.1.1503
+sudo docker pull centos7.2.1511
+sudo docker pull centos7.3.1611
+sudo docker pull centos7.4.1708
