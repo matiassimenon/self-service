@@ -74,6 +74,9 @@ def handle_request(request):
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email_to_user(username, email_message)
+        except TypeError as e:
+            print(e)
+            print("Neither path nor fileobj was specified")
 
         update_request_status('processing', request_uuid)
 
@@ -305,9 +308,9 @@ def bash_cmd(cmd):
     # Captures output
     try:
         result = subprocess.check_output(cmd, shell=True)
+        return result.decode('utf-8')
     except subprocess.CalledProcessError as e:
         print(e.output)
-    return result.decode('utf-8')
 
 
 def create_dockerfile_template_copy(talend_component, dockerfile_name):
