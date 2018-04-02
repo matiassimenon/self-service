@@ -20,7 +20,12 @@ Object errMessage=request.getAttribute("errMessage");
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
         <script src="selfservice.js"></script>
-        <script>
+        
+    </head>
+    <body>
+        <div  id="content">
+        <%@include file="navigator.jsp"%>
+<script>
         function doSearch(txt){
             document.getElementById("userForm").action="UserListServlet";
             document.getElementById("userForm").submit();
@@ -31,6 +36,11 @@ Object errMessage=request.getAttribute("errMessage");
             var isSelected=false;
             for( var i=0; i< rows.length; i++){
                 if(rows[i].selected == 'true'){
+                    var uname= rows[i].cells[2].innerText;
+                    if(uname === "<%=user.getUsername()%>" ){
+                        alert("It's not allowed to delete current login user!")
+                        return;
+                    }                    
                     deleteString += rows[i].cells[2].innerText + "&";
                     isSelected=true;
                 }
@@ -56,11 +66,7 @@ Object errMessage=request.getAttribute("errMessage");
             document.getElementById("userForm").action="UserListServlet?"+saveString;
             document.getElementById("userForm").submit();
         }
-        </script>
-    </head>
-    <body>
-        <div  id="content">
-        <%@include file="navigator.jsp"%>
+        </script>        
         <h3>Users</h3>
         <form  id="userForm" method="post" >
                 
