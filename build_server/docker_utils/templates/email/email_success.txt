@@ -8,7 +8,7 @@ Image name: <image_name_placeholder>
 
 Pull Command: docker pull https://<repository_placeholder>-repo:443/<username_placeholder>/<image_name_placeholder>
 
-How to use Docker this Talend container?
+How to use this Docker image?
 https://wiki.talend.com/display/support/Talend+Images
 
 ======================================================
