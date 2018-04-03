@@ -51,7 +51,7 @@
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user.getFirstname()%>"></td>
                     <td>Department:</td>
-                    <td><select id="department" name="department" style="width:120px" required="required">
+                    <td><select id="department" name="department" required="required">
                         <option value="support">Support</option>   
                         <option value="escalation">Escalation</option>   
                         <option value="sales">Sales</option>
@@ -62,7 +62,7 @@
 		<tr>
                     <td>Last Name:</td><td><input type="text" name="lastname" maxlength="50" placeholder="Last name"  required="required" value="<%=user.getLastname()%>"></td>
                     <td>Region:</td>
-                    <td> <select id="region" name="region" required="required" style="width:120px" onchange="if(this.value != '') setCity(this.value);">
+                    <td> <select id="region" name="region" required="required"  onchange="if(this.value != '') setCity(this.value);">
                             <option value="">Please select...</option>
                             <option value="APAC">APAC</option>
                             <option value="EMEA">EMEA</option>
@@ -71,7 +71,7 @@
                 </tr>
                 <tr>
                     <td>Username:</td><td> <input type="text" id="username" name="username" placeholder="Talend username"  maxlength="30" required="required" readonly="true" style="background-color: green" value="<%=user.getUsername()%>"></td>
-                    <td>City:</td><td> <select id="city" name="city" style="width:120px" required="required">
+                    <td>City:</td><td> <select id="city" name="city"  required="required">
                             <option value="">Please select...</option>
                             
                         </select> </td>

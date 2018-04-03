@@ -1,4 +1,9 @@
-
+select{
+    width: 120px;
+}
+input{
+    width: 140px;
+}
 h1,h2,h3,h4{
 margin:25px;
 text-align:center;

@@ -19,26 +19,9 @@ servlet but should be the only JSP outside of WEB-INF.
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Support Self Service</title>
                 <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-		<style>
-			#reg_form{
-			text-align:justify;
-			padding:15px 15px;
-			background-color:#fff;
-			height:350px;
-			border-radius:15px;
-			}
-                        
-			td{
-			width:120px;
-			color:#003366;;
-			}
-                        select{
-                            width: 120px;
-                        }
-			
-		</style>
+
                 <script src="selfservice.js"> </script>
-      
+     
 	</head>
 	<body>
 	<div  id="content">
@@ -63,6 +46,7 @@ servlet but should be the only JSP outside of WEB-INF.
              }
           setSelected(document.getElementById("city"), city); 
           setSelected(document.getElementById("question"), question);
+          chooseQuestion();
        };
        function chooseQuestion(){
            var question=document.getElementById("question");
