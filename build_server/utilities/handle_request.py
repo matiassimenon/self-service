@@ -1,10 +1,11 @@
 import os
-import smtplib
 import subprocess
 import mysql.connector
 from shutil import copyfile
 import authentication.credentials as credentials
 import docker
+
+from utilities.email_operations import send_email, create_email_dictionary
 
 repo_suffix = "repo"
 port = '443'
@@ -47,14 +48,18 @@ def handle_request(request):
     else:
         is_repo_valid = False
 
-    email_dictionary = create_email_dictionary(username.lower(), firstname.capitalize(),
-                                               user_region.lower(), template_name, request_uuid)
+    email_dictionary = create_email_dictionary(username.lower(),
+                                               firstname.capitalize(),
+                                               user_region.lower(),
+                                               template_name,
+                                               request_uuid)
 
     if is_dockerfile_present and is_repo_valid:
         replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
         try:
             client = docker.from_env()
 
+            update_request_status('processing', request_uuid)
             # docker build
             client.images.build(path=f'{docker_build_dir}/{talend_component}',
                                 tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
@@ -65,8 +70,16 @@ def handle_request(request):
                          password=docker_password)
             # docker push
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
-        except docker.errors.BuildError as e:
-            print(e)
+
+            # Send e-mail after successful image creation and upload
+            email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(username, email_message)
+
+            # Update Request Status
+            update_request_status('fulfilled', request_uuid)
+
+        except docker.errors.BuildError:
             print(f"cd {docker_build_dir}/{talend_component}; "
                   f"docker build -f {dockerfile_name} "
                   f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
@@ -74,82 +87,25 @@ def handle_request(request):
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email_to_user(username, email_message)
+            send_email(username, email_message)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email_to_user(admin_email, email_message)
+            send_email(admin_email, email_message)
         except docker.errors.APIError as e:
             print(e.output)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email_to_user(username, email_message)
+            send_email(username, email_message)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email_to_user(admin_email, email_message)
-
-        except TypeError as e:
-            print(e)
-            print("Neither path nor fileobj was specified")
-
-        update_request_status('processing', request_uuid)
-
-        # Remove dockerfile
-        bash_cmd(f"sudo rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
-
-        # Send e-mail after successful image creation and upload
-        email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
-        email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-        send_email_to_user(username, email_message)
-
-        # Update Request Status
-        update_request_status('fulfilled', request_uuid)
-
-
-def create_email_dictionary(username, firstname, region, image_name, request):
-    email_dictionary = {'<firstname_placeholder>': firstname,
-                        '<username_placeholder>': username,
-                        '<repository_placeholder>': region,
-                        '<image_name_placeholder>': image_name,
-                        '<request_placeholder>': request}
-    return email_dictionary
-
-
-def send_email_to_user(talend_username, message):
-    on_behalf_of = credentials.smtp['outlook_send_on_behalf_of']
-    sender_email = credentials.smtp['outlook_sender_email']
-    sender_password = credentials.smtp['outlook_sender_password']
-    receiver_email = talend_username + '@talend.com'
-    subject = 'Devops Request'
-    smtp_server = credentials.smtp['outlook_smtp_server']
-    smtp_port = credentials.smtp['outlook_smtp_port']
-
-    body = '\r\n'.join([f'To: {receiver_email}',
-                        f'From: {on_behalf_of}',
-                        f'Subject: {subject}',
-                        '', message])
-    try:
-        # Open SMTP connection
-        s = smtplib.SMTP(smtp_server, smtp_port)
-
-        # Start TLS for security
-        s.ehlo()
-        s.starttls()
-
-        # Authentication
-        s.login(sender_email, sender_password)
-
-        # Send email
-        s.SentOnBehalfOfName = on_behalf_of
-        s.sendmail(sender_email, [receiver_email], body)
-    except smtplib.SMTPException as e:
-        print(e)
-    finally:
-        # Terminate the session
-        s.quit()
+            send_email(admin_email, email_message)
+        finally:
+            # Remove dockerfile
+            bash_cmd(f"sudo rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
 
 
 def create_request_dictionary(request):
