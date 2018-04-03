@@ -30,7 +30,7 @@ public class UserHelper {
         //take a list to store the values which are in db
 
         Connection con = DbConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("select firstname, lastname, username, email, department, city, password, region, admin, admin_request from self_service_db.USER where username=? and password=?");
+        PreparedStatement ps = con.prepareStatement("select firstname, lastname, username, email, department, city, password, region, admin, admin_request, question from self_service_db.USER where username=? and password=?");
         ps.setString(1, username);
         ps.setString(2, password);
         ResultSet rs = ps.executeQuery();
@@ -48,6 +48,7 @@ public class UserHelper {
             int adminRequest = rs.getInt(10);
             pObject.setAdmin(admin == 1);
             pObject.setAdminRequest(adminRequest == 1);
+            pObject.setQuestion(rs.getString(11));            
             list.add(pObject);
         }
         rs.close();
@@ -63,7 +64,7 @@ public class UserHelper {
 
             //take a list to store the values which are in db
             Connection con = DbConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("select firstname, lastname, username, email, department, city, password, region, admin, admin_request from self_service_db.USER where username=?");
+            PreparedStatement ps = con.prepareStatement("select firstname, lastname, username, email, department, city, password, region, admin, admin_request, question from self_service_db.USER where username=?");
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -80,6 +81,7 @@ public class UserHelper {
                 int adminRequest = rs.getInt(10);
                 pObject.setAdmin(admin == 1);
                 pObject.setAdminRequest(adminRequest == 1);
+                pObject.setQuestion(rs.getString(11));   
                 list.add(pObject);
             }
             rs.close();

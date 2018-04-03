@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.selfservice.model.User;
-import com.selfservice.util.SFUtils;
 import com.selfservice.util.SHA;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -55,12 +54,12 @@ public class SaveUser extends HttpServlet {
         String city = request.getParameter("city");
         String admin = request.getParameter("admin");
         int isAdminRequest = "true".equals(admin) ? 1 : 0;
-        String question=request.getParameter("question");
-        String answer=request.getParameter("answer");
-        
+        String question = request.getParameter("question");
+        String answer = request.getParameter("answer");
+        String encryptAnswer = "";
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
-        password1 = SFUtils.getSecurePassword(password1);
+        password1 = SHA.getSHA256(password1);
         Connection con = null;
         PreparedStatement ps = null;
         User user = (User) request.getSession(false).getAttribute("user");
@@ -79,8 +78,10 @@ public class SaveUser extends HttpServlet {
             user.setAdminRequest(isAdminRequest == 1);
             user.setPassword(password2);
             user.setQuestion(question);
-            answer=SHA.getSHA256(answer);
-            user.setAnswer(answer);
+            if (answer.length() > 0) {
+                encryptAnswer = SHA.getSHA256(answer);
+            }
+            user.setAnswer(encryptAnswer);
 
             request.setAttribute("user", user);
             //insert to User
@@ -105,12 +106,12 @@ public class SaveUser extends HttpServlet {
                 ps.setInt(9, 0);
                 ps.setInt(10, isAdminRequest);
                 ps.setString(11, question);
-                ps.setString(12, answer);
+                ps.setString(12, encryptAnswer);
             }
 
             //update user           
             if (!isInsert) {
-                sql = "update USER set firstname=?, lastname=?, email=?, department=?, city=?, password=?, region=?, admin_request=? where username=?";
+                sql = "update USER set firstname=?, lastname=?, email=?, department=?, city=?, password=?, region=?, admin_request=?,  question=?, answer=? where username=?";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
@@ -120,7 +121,12 @@ public class SaveUser extends HttpServlet {
                 ps.setString(6, password1);
                 ps.setString(7, region);
                 ps.setInt(8, isAdminRequest);
-                ps.setString(9, username);
+
+                ps.setString(9, question);
+
+                ps.setString(10, encryptAnswer);
+
+                ps.setString(11, username);
                 //update the user in the session
                 HttpSession session = request.getSession(false);
                 if (session != null) {
