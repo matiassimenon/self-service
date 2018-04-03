@@ -10,7 +10,7 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = "repo"
 port = '443'
 protocol = 'https'
-project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+project_dir = '/home/centos/self-service/build_server'
 docker_utils_dir = f'{project_dir}/docker_utils'
 templates_dir = f'{docker_utils_dir}/templates'
 docker_build_dir = f'{docker_utils_dir}/docker_build'
@@ -53,22 +53,28 @@ def handle_request(request):
                                                user_region.lower(),
                                                template_name,
                                                request_uuid)
-
+    print('before entering build section')
+    print(is_dockerfile_present)
+    print(is_repo_valid)
     if is_dockerfile_present and is_repo_valid:
         replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
         try:
+            print('docker: ')
             client = docker.from_env()
 
             update_request_status('processing', request_uuid)
             # docker build
+            print('docker build')
             client.images.build(path=f'{docker_build_dir}/{talend_component}',
                                 tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name)
             # docker login
+            print('docker login')
             client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
                          username=docker_user,
                          password=docker_password)
             # docker push
+            print('docker login')
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
 
             # Send e-mail after successful image creation and upload
