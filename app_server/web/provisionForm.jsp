@@ -178,7 +178,7 @@ function requestAction(){
                             <option value="6.3.1">6.3.1</option>
                             <option value="6.4.1">6.4.1</option>
                             <option value="6.5.1">6.5.1</option>
-                            <option value="7.0.1">7.0.1</option>
+                           
                         </select> 
                     </td>                    
 

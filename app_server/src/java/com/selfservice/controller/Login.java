@@ -16,8 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Login action in login.jsp
@@ -39,7 +37,7 @@ public class Login extends HttpServlet {
         password = SFUtils.getSecurePassword(password);
         List<User> list = new ArrayList<>(); //take a list
         try {
-            list = UserLoginValidate.getUsers(username);
+            list = UserHelper.getUsers(username);
         } catch (SQLException ex) {
             req.setAttribute("errMessage", ex.getMessage());
             req.getRequestDispatcher("login.jsp").forward(req, resp);
@@ -58,7 +56,7 @@ public class Login extends HttpServlet {
                     }
                 }
                 if (user == null) {//password is not correct
-                    req.setAttribute("errMessage", "Login failed! Password is invalid!");
+                    req.setAttribute("errMessage", "Login failed: Password is invalid!");
                     req.getRequestDispatcher("login.jsp").forward(req, resp);
                     return;
                 }
@@ -74,7 +72,7 @@ public class Login extends HttpServlet {
             }
         } catch (Exception e) {
             String err = e.getMessage();
-            String errmsg = "Login failed! " + err;
+            String errmsg =  err;
             req.setAttribute("errMessage", errmsg);
             req.getRequestDispatcher("login.jsp").forward(req, resp);
 

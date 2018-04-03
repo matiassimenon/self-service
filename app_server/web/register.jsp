@@ -19,26 +19,9 @@ servlet but should be the only JSP outside of WEB-INF.
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Support Self Service</title>
                 <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-		<style>
-			#reg_form{
-			text-align:justify;
-			padding:15px 15px;
-			background-color:#fff;
-			height:350px;
-			border-radius:15px;
-			}
-                        
-			td{
-			width:120px;
-			color:#003366;;
-			}
-                        select{
-                            width: 100px;
-                        }
-			
-		</style>
+
                 <script src="selfservice.js"> </script>
-      
+     
 	</head>
 	<body>
 	<div  id="content">
@@ -55,13 +38,24 @@ servlet but should be the only JSP outside of WEB-INF.
            var department="<%=user.getDepartment()%>";
            var region="<%=user.getRegion()%>";
            var city="<%=user.getCity()%>";
+           var question="<%=user.getQuestion()%>";
            setSelected(document.getElementById("region"), region);
            setSelected(document.getElementById("department"), department);
            if(!isEmpty(region)){
                 setCity(region);
              }
           setSelected(document.getElementById("city"), city); 
+          setSelected(document.getElementById("question"), question);
+          chooseQuestion();
        };
+       function chooseQuestion(){
+           var question=document.getElementById("question");
+           if(question.value != ""){
+               document.getElementById("answer").required=true;               
+           }else{
+               document.getElementById("answer").required=false;
+           }
+       }
         </script>    
 
         <h1>Self service Platform Registration</h1>
@@ -97,17 +91,30 @@ servlet but should be the only JSP outside of WEB-INF.
                 </tr>
                 <tr>
                     <td>Talend Email:</td><td> <input type="email" name="email" placeholder="test@talend.com" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
-                    <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="true"></td>
+                    <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="true" <%if(user.isAdminRequest()){%>checked="checked" <%}%> ></td>
                 </tr>
                 
                 <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td>
                     <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td> 
                     <td><span id="passwdMsg"></span></td></tr>
-		
+                <tr><td>Question:</td> <td colspan="3" ><select name="question" id="question" required="required" style=" width: 420px;" onchange="chooseQuestion();">
+                            <option value="">Please select one question ...</option>
+                            <option value="What is the first and last name of your first boyfriend or girlfriend?">What is the first and last name of your first boyfriend or girlfriend?</option>
+                            <option value="Which phone number do you remember most from your childhood?">Which phone number do you remember most from your childhood?</option>
+                            <option value="What was your favorite place to visit as a child?">What was your favorite place to visit as a child?</option>
+                            <option value="Who is your favorite actor, musician, or artist?">Who is your favorite actor, musician, or artist?</option>
+                            <option value="What is the name of your favorite pet?">What is the name of your favorite pet?</option>
+                            <option value="In what city were you born?">In what city were you born?</option>
+                            <option value="What is your favorite Talend product?">What is your favorite Talend product?</option>
+                            <option value="What is the name of your first school?">What is the name of your first school?</option>
+                        </select></td>
+                
+                </tr>
+                <tr><td>Answer:</td> <td><input name="answer" id="answer"  ></input></td></tr>
                 <tr><td colspan=5 align="center"><button  id="submitBtn" type="submit" >Register</button></td></tr></table>
-		<p>Have an Account? <a href="login.jsp">login</a></p>
-                <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%} %>
 	</form>
+            <p>Have an Account? <a href="login.jsp">login</a></p>
+            <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>                    
         </div>                   
 </body>
 <%@include file="footer.jsp"%>

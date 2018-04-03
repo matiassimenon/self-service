@@ -17,6 +17,8 @@ public class User {
     private String department, city, region;
     private boolean admin;
     private boolean adminRequest;
+    private String question, answer;
+    
     public User() {
         username="";
         firstname="";
@@ -26,6 +28,9 @@ public class User {
         region="";
         email="";
         password="";
+        question="";
+        answer="";
+        
     }
     
     public User(String email, String username, String department, boolean admin, String city, String firstname,String lastname,String password, String region ) {
@@ -105,6 +110,22 @@ public class User {
 
     public void setAdminRequest(boolean adminRequest) {
         this.adminRequest = adminRequest;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
     
 }
