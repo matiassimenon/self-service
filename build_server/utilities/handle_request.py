@@ -118,7 +118,6 @@ def handle_request(request):
             print(f'Error: repo {repo} is not a valid repository')
 
 
-
 def create_request_dictionary(request):
     op_sys = request['os']
     os_version = request['os_version']
