@@ -10,8 +10,8 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = "repo"
 port = '443'
 protocol = 'https'
-# project_dir = '/Users/francisco/talend-dev/self-service/build_server'
-project_dir = '/home/centos/self-service/build_server'
+project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+# project_dir = '/home/centos/self-service/build_server'
 docker_utils_dir = f'{project_dir}/docker_utils'
 templates_dir = f'{docker_utils_dir}/templates'
 docker_build_dir = f'{docker_utils_dir}/docker_build'
@@ -54,9 +54,7 @@ def handle_request(request):
                                                user_region.lower(),
                                                template_name,
                                                request_uuid)
-    print('before entering build section')
-    print(is_dockerfile_present)
-    print(is_repo_valid)
+
     if is_dockerfile_present and is_repo_valid:
         replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
         try:
@@ -65,12 +63,12 @@ def handle_request(request):
 
             update_request_status('processing', request_uuid)
             # docker build
-            print('docker build')
+            print('Docker build')
             client.images.build(path=f'{docker_build_dir}/{talend_component}',
                                 tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name)
             # docker login
-            print('docker login')
+            print('Docker login')
             client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
                          username=docker_user,
                          password=docker_password)
@@ -99,8 +97,8 @@ def handle_request(request):
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
-        except docker.errors.APIError as e:
-            print(e.output)
+        except docker.errors.APIError:
+            print('API Error')
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
@@ -112,7 +110,13 @@ def handle_request(request):
             send_email(admin_email, email_message)
         finally:
             # Remove dockerfile
-            bash_cmd(f"sudo rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+    else:
+        if not is_dockerfile_present:
+            print(f'Error: Dockerfile {dockerfile_name} was not created')
+        elif not is_repo_valid:
+            print(f'Error: repo {repo} is not a valid repository')
+
 
 
 def create_request_dictionary(request):
