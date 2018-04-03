@@ -1,4 +1,5 @@
 <%-- 
+    Not used due to mail issue: as it's not allowed to send mail in GCP instance
     Document   : resetPassword.jsp
     Created on : 2018-3-14, 4:34:35
     Author     : Zongyong Qin

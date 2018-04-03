@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Not used due to mail issue: as it's not allowed to send mail in GCP instance
  * @author zqin
  */
 @WebServlet(name = "ResetPasswordServlet", urlPatterns = {"/ResetPasswordServlet"})
