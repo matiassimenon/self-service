@@ -5,7 +5,7 @@
  */
 package com.selfservice.controller;
 
-import com.selfservice.dboperations.UserHelper;
+import com.selfservice.dboperations.UserUtil;
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
 import com.selfservice.util.Mail;
@@ -111,7 +111,7 @@ public class ResetPasswordServlet extends HttpServlet {
             if (!email.matches("^([\\w-\\.]+)@talend.com")) {
                 message = "<font color='red'>It's not a talend email, please check again</font>";
             } else {
-                List<User> users = UserHelper.getUsers();
+                List<User> users = UserUtil.getUsers();
                 for (User user: users) {
                     if (email.equalsIgnoreCase(user.getEmail())) {
                         registerUser = user;

@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author Administrator
  */
-public class UserHelper {
+public class UserUtil {
 
     public static List<User> getUsers() {
         List<User> users = new ArrayList();

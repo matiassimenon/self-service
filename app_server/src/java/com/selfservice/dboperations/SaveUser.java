@@ -5,6 +5,7 @@
  */
 package com.selfservice.dboperations;
 
+import com.selfservice.controller.UserHelper;
 import com.selfservice.servers.DbConnection;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.selfservice.model.User;
 import com.selfservice.util.SFUtils;
+import com.selfservice.util.SHA;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -52,6 +55,9 @@ public class SaveUser extends HttpServlet {
         String city = request.getParameter("city");
         String admin = request.getParameter("admin");
         int isAdminRequest = "true".equals(admin) ? 1 : 0;
+        String question=request.getParameter("question");
+        String answer=request.getParameter("answer");
+        
         String password1 = request.getParameter("password1");
         String password2 = request.getParameter("password2");
         password1 = SFUtils.getSecurePassword(password1);
@@ -63,13 +69,30 @@ public class SaveUser extends HttpServlet {
         }
         try {
             con = DbConnection.getConnection();
+            user.setUsername(username);
+            user.setFirstname(firstname);
+            user.setLastname(lastname);
+            user.setCity(city);
+            user.setDepartment(department);
+            user.setEmail(email);
+            user.setRegion(region);
+            user.setAdminRequest(isAdminRequest == 1);
+            user.setPassword(password2);
+            user.setQuestion(question);
+            answer=SHA.getSHA256(answer);
+            user.setAnswer(answer);
 
+            request.setAttribute("user", user);
             //insert to User
             String sql = null;
 
             boolean isInsert = "register.jsp".equals(jspPage);
             if (isInsert) {
-                sql = "insert into USER(firstname, lastname, username, email, department, city, password, region, admin, admin_request)values(?,?,?,?,?,?,?,?,?,?)";
+                List<User> list = UserHelper.getUsers(username);
+                if (list.size() > 0) {//user already exists
+                    throw new SQLException("The username " + username + " already in use!");
+                }
+                sql = "insert into USER(firstname, lastname, username, email, department, city, password, region, admin, admin_request, question, answer)values(?,?,?,?,?,?,?,?,?,?,?,?)";
                 ps = con.prepareStatement(sql);
                 ps.setString(1, firstname);
                 ps.setString(2, lastname);
@@ -81,6 +104,8 @@ public class SaveUser extends HttpServlet {
                 ps.setString(8, region);
                 ps.setInt(9, 0);
                 ps.setInt(10, isAdminRequest);
+                ps.setString(11, question);
+                ps.setString(12, answer);
             }
 
             //update user           
@@ -100,23 +125,12 @@ public class SaveUser extends HttpServlet {
                 HttpSession session = request.getSession(false);
                 if (session != null) {
                     session.setAttribute("user", user);
-                }                
+                }
             }
 
             if (sql != null) {
                 int ret = ps.executeUpdate();
                 if (ret > 0) {
-                    user.setUsername(username);
-                    user.setFirstname(firstname);
-                    user.setLastname(lastname);
-                    user.setCity(city);
-                    user.setDepartment(department);
-                    user.setEmail(email);
-                    user.setRegion(region);
-                    user.setAdminRequest(isAdminRequest == 1);
-                    user.setPassword(password2);
-
-                    request.setAttribute("user", user);
                     request.setAttribute("errMessage", "<font color='green'>Save Successfully!!</font>");
                     request.getRequestDispatcher(jspPage).include(request, response);
                     //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
@@ -126,7 +140,7 @@ public class SaveUser extends HttpServlet {
         } catch (SQLException ex) {
             Logger.getLogger(SaveUser.class.getName()).log(Level.SEVERE, null, ex);
             String err = ex.getLocalizedMessage();
-            String outstr = "<font color='red'> Save Failed!  " + err + "</font>";
+            String outstr = "<font color='red'> Save Failed: " + err + "</font>";
             request.setAttribute("errMessage", outstr);
             request.getRequestDispatcher(jspPage).include(request, response);
             //out.print(outstr);

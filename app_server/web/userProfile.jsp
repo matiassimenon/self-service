@@ -78,7 +78,7 @@
 		
                 <tr><td colspan=5 align="center"><button id="submitBtn"  type="submit" >Save</button></td></tr></table>
         </form>
-         <% if(errMessage!=null){%> <h3 ><%=errMessage%></h3> <%}%>
+         <% if(errMessage!=null){%> <h4><%=errMessage%></h4> <%}%>
         </div>               
     </body>
     <%@include file="footer.jsp"%>
