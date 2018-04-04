@@ -2,6 +2,7 @@ import os
 import subprocess
 import time
 import docker
+import socket
 import mysql.connector
 from shutil import copyfile
 import authentication.credentials as credentials
@@ -73,7 +74,8 @@ def handle_request(request):
                   f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
             client.images.build(path=f'{docker_build_dir}/{talend_component}',
                                 tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-                                dockerfile=dockerfile_name)
+                                dockerfile=dockerfile_name,
+                                timeout=28800)
             # Docker Login
             print(f'Docker Login to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
             client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
@@ -81,9 +83,9 @@ def handle_request(request):
                          password=docker_password)
             # Docker Push
             print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
-            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
+            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+                               timeout=28800)
 
-            # TODO: timeout (int) – Change default timeout for API calls.
             # Close all adapters and the session
             client.close()
 
@@ -112,8 +114,8 @@ def handle_request(request):
             send_email(admin_email, email_message)
             print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
                   f'has been kept to find the source of the problem.', flush=True)
-        except docker.errors.APIError:
-            print('API Error', flush=True)
+        except docker.errors.APIError or socket.timeout as e:
+            print(f'API Error or socket.timeout {e.output}', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
