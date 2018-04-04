@@ -84,7 +84,9 @@ def handle_request(request):
                          password=docker_password)
             # Docker Push
             print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
-            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
+            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+                               tag='latest',
+                               stream=True)
 
             # Close all adapters and the session
             client.close()
