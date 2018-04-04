@@ -90,6 +90,10 @@ def handle_request(request):
             # Update Request Status
             update_request_status('fulfilled', request_uuid)
 
+            # Remove dockerfile
+            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
+
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
             update_request_status('error', request_uuid)
@@ -101,6 +105,8 @@ def handle_request(request):
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
+            print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
+                  f'has been kept to find the source of the problem.', flush=True)
         except docker.errors.APIError:
             print('API Error', flush=True)
             update_request_status('error', request_uuid)
@@ -113,9 +119,6 @@ def handle_request(request):
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
         finally:
-            # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
-            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
             print(f'-----------------------------------------------------------', flush=True)
 
     else:
