@@ -83,6 +83,7 @@ def handle_request(request):
             print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
 
+            # TODO: timeout (int) – Change default timeout for API calls.
             # Close all adapters and the session
             client.close()
 
