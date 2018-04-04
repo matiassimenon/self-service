@@ -68,8 +68,8 @@ def handle_request(request):
             print(f'\n{time.strftime("%Y-%m-%d %H:%M")}', flush=True)
             print(f'-----------------------------------------------------------', flush=True)
             print(f'Request dictionary: {request}', flush=True)
-            print(f'Docker Build: ', flush=True)
-            print(f'cd {docker_build_dir}/{talend_component}; '
+            print(f'Docker Build: '
+                  f'cd {docker_build_dir}/{talend_component}; '
                   f'docker build -f {dockerfile_name} '
                   f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
             client.images.build(path=f'{docker_build_dir}/{talend_component}',
