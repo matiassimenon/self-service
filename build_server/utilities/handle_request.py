@@ -10,7 +10,7 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = "repo"
 port = '443'
 protocol = 'https'
-project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+# project_dir = '/Users/francisco/talend-dev/self-service/build_server'
 project_dir = '/home/centos/self-service/build_server'
 docker_utils_dir = f'{project_dir}/docker_utils'
 templates_dir = f'{docker_utils_dir}/templates'
@@ -63,23 +63,23 @@ def handle_request(request):
             update_request_status('processing', request_uuid)
             # Docker Build
 
-            print(f'\n{time.strftime("%Y-%m-%d %H:%M")}')
-            print(f'-----------------------------------------------------------')
-            print(f'Request dictionary: {request}')
-            print(f'Docker Build: ')
+            print(f'\n{time.strftime("%Y-%m-%d %H:%M")}', flush=True)
+            print(f'-----------------------------------------------------------', flush=True)
+            print(f'Request dictionary: {request}', flush=True)
+            print(f'Docker Build: ', flush=True)
             print(f'cd {docker_build_dir}/{talend_component}; '
                   f'docker build -f {dockerfile_name} '
-                  f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .')
+                  f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
             client.images.build(path=f'{docker_build_dir}/{talend_component}',
                                 tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name)
             # Docker Login
-            print(f'Docker Login to {protocol}://{repo}-{repo_suffix}:{port}')
+            print(f'Docker Login to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
             client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
                          username=docker_user,
                          password=docker_password)
             # Docker Push
-            print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}')
+            print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
 
             # Send e-mail after successful image creation and upload
@@ -91,7 +91,7 @@ def handle_request(request):
             update_request_status('fulfilled', request_uuid)
 
         except docker.errors.BuildError:
-            print('\nDocker BuildError\n')
+            print('\nDocker BuildError\n', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
@@ -102,7 +102,7 @@ def handle_request(request):
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
         except docker.errors.APIError:
-            print('API Error')
+            print('API Error', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
@@ -115,14 +115,14 @@ def handle_request(request):
         finally:
             # Remove dockerfile
             bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
-            print(f'Removed Dockerfile {dockerfile_name}')
-            print(f'-----------------------------------------------------------')
+            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
+            print(f'-----------------------------------------------------------', flush=True)
 
     else:
         if not is_dockerfile_present:
-            print(f'\nError: Dockerfile {dockerfile_name} was not created\n')
+            print(f'\nError: Dockerfile {dockerfile_name} was not created\n', flush=True)
         elif not is_repo_valid:
-            print(f'\nError: repo {repo} is not a valid repository\n')
+            print(f'\nError: repo {repo} is not a valid repository\n', flush=True)
 
 
 def create_request_dictionary(request):
@@ -299,7 +299,7 @@ def bash_cmd(cmd):
         result = subprocess.check_output(cmd, shell=True)
         return result.decode('utf-8')
     except subprocess.CalledProcessError as e:
-        print(e.output)
+        print(e.output, flush=True)
 
 
 def create_dockerfile_template_copy(talend_component, dockerfile_name):
@@ -350,6 +350,6 @@ def update_request_status(status, request_uuid):
                        (status, request_uuid))
         mysql_cnx.commit()
     except mysql_cnx.Error as e:
-        print(e)
+        print(e, flush=True)
     finally:
         mysql_cnx.close()

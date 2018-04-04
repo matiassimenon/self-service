@@ -31,7 +31,7 @@ def send_email(talend_username, message):
         s.SentOnBehalfOfName = on_behalf_of
         s.sendmail(sender_email, [receiver_email], body)
     except smtplib.SMTPException as e:
-        print(e)
+        print(e, flush=True)
     finally:
         # Terminate the session
         s.quit()
