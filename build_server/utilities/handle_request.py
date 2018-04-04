@@ -10,8 +10,8 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = "repo"
 port = '443'
 protocol = 'https'
-# project_dir = '/Users/francisco/talend-dev/self-service/build_server'
-project_dir = '/home/centos/self-service/build_server'
+project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+# project_dir = '/home/centos/self-service/build_server'
 docker_utils_dir = f'{project_dir}/docker_utils'
 templates_dir = f'{docker_utils_dir}/templates'
 docker_build_dir = f'{docker_utils_dir}/docker_build'
@@ -61,8 +61,8 @@ def handle_request(request):
             client = docker.from_env()
 
             update_request_status('processing', request_uuid)
-            # Docker Build
 
+            # Docker Build
             print(f'\n{time.strftime("%Y-%m-%d %H:%M")}', flush=True)
             print(f'-----------------------------------------------------------', flush=True)
             print(f'Request dictionary: {request}', flush=True)
