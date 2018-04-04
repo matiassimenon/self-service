@@ -26,7 +26,7 @@ while True:
         time.sleep(60)
 
     mysql_cnx.close()
-    time.sleep(20)
+    time.sleep(2)
 
 
 
