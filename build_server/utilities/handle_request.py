@@ -83,8 +83,7 @@ def handle_request(request):
                          password=docker_password)
             # Docker Push
             print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
-            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-                               timeout=28800)
+            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
 
             # Close all adapters and the session
             client.close()
@@ -115,7 +114,7 @@ def handle_request(request):
             print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
                   f'has been kept to find the source of the problem.', flush=True)
         except docker.errors.APIError or socket.timeout as e:
-            print(f'API Error or socket.timeout {e.output}', flush=True)
+            print(f'Push Error or socket.timeout {e.output}', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
