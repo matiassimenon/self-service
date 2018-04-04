@@ -65,7 +65,7 @@ def handle_request(request):
 
             print(f'\n{time.strftime("%Y-%m-%d %H:%M")}')
             print(f'-----------------------------------------------------------')
-            print(request)
+            print(f'Request dictionary: {request}')
             print(f'Docker Build: ')
             print(f'cd {docker_build_dir}/{talend_component}; '
                   f'docker build -f {dockerfile_name} '
