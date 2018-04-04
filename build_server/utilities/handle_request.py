@@ -58,6 +58,7 @@ def handle_request(request):
     if is_dockerfile_present and is_repo_valid:
         replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
         try:
+            # Open a client session with the Docker daemon
             client = docker.from_env()
 
             update_request_status('processing', request_uuid)
@@ -81,6 +82,9 @@ def handle_request(request):
             # Docker Push
             print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
+
+            # Close all adapters and the session
+            client.close()
 
             # Send e-mail after successful image creation and upload
             email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
