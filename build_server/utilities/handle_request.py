@@ -10,7 +10,7 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = "repo"
 port = '443'
 protocol = 'https'
-# project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+project_dir = '/Users/francisco/talend-dev/self-service/build_server'
 project_dir = '/home/centos/self-service/build_server'
 docker_utils_dir = f'{project_dir}/docker_utils'
 templates_dir = f'{docker_utils_dir}/templates'
@@ -65,6 +65,7 @@ def handle_request(request):
 
             print(f'\n{time.strftime("%Y-%m-%d %H:%M")}')
             print(f'-----------------------------------------------------------')
+            print(request)
             print(f'Docker Build: ')
             print(f'cd {docker_build_dir}/{talend_component}; '
                   f'docker build -f {dockerfile_name} '
@@ -113,9 +114,10 @@ def handle_request(request):
             send_email(admin_email, email_message)
         finally:
             # Remove dockerfile
-            print(f'-----------------------------------------------------------')
-            print(f'Removed Dockerfile {dockerfile_name}')
             bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            print(f'Removed Dockerfile {dockerfile_name}')
+            print(f'-----------------------------------------------------------')
+
     else:
         if not is_dockerfile_present:
             print(f'\nError: Dockerfile {dockerfile_name} was not created\n')

@@ -21,7 +21,6 @@ while True:
 
     cursor.execute(sql_query_get_requests)
     for request in cursor:
-        print(request)
         handle_request.handle_request(request)
 
     mysql_cnx.close()
