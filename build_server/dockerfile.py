@@ -23,7 +23,7 @@ while True:
 
     for request in cursor:
         handle_request.handle_request(request)
-        time.sleep(60)
+        # time.sleep(60)
 
     mysql_cnx.close()
     time.sleep(2)
