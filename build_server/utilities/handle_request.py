@@ -1,17 +1,17 @@
 import os
 import subprocess
+import time
+import docker
 import mysql.connector
 from shutil import copyfile
 import authentication.credentials as credentials
-import docker
-
 from utilities.email_operations import send_email, create_email_dictionary
 
 repo_suffix = "repo"
 port = '443'
 protocol = 'https'
-project_dir = '/Users/francisco/talend-dev/self-service/build_server'
-# project_dir = '/home/centos/self-service/build_server'
+# project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+project_dir = '/home/centos/self-service/build_server'
 docker_utils_dir = f'{project_dir}/docker_utils'
 templates_dir = f'{docker_utils_dir}/templates'
 docker_build_dir = f'{docker_utils_dir}/docker_build'
@@ -58,22 +58,27 @@ def handle_request(request):
     if is_dockerfile_present and is_repo_valid:
         replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
         try:
-            print('docker: ')
             client = docker.from_env()
 
             update_request_status('processing', request_uuid)
-            # docker build
-            print('Docker build')
+            # Docker Build
+
+            print(f'\n{time.strftime("%Y-%m-%d %H:%M")}')
+            print(f'-----------------------------------------------------------')
+            print(f'Docker Build: ')
+            print(f'cd {docker_build_dir}/{talend_component}; '
+                  f'docker build -f {dockerfile_name} '
+                  f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .')
             client.images.build(path=f'{docker_build_dir}/{talend_component}',
                                 tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name)
-            # docker login
-            print('Docker login')
+            # Docker Login
+            print(f'Docker Login to {protocol}://{repo}-{repo_suffix}:{port}')
             client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
                          username=docker_user,
                          password=docker_password)
-            # docker push
-            print('docker login')
+            # Docker Push
+            print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}')
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}')
 
             # Send e-mail after successful image creation and upload
@@ -85,9 +90,7 @@ def handle_request(request):
             update_request_status('fulfilled', request_uuid)
 
         except docker.errors.BuildError:
-            print(f"cd {docker_build_dir}/{talend_component}; "
-                  f"docker build -f {dockerfile_name} "
-                  f"-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .")
+            print('\nDocker BuildError\n')
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
@@ -110,12 +113,14 @@ def handle_request(request):
             send_email(admin_email, email_message)
         finally:
             # Remove dockerfile
+            print(f'-----------------------------------------------------------')
+            print(f'Removed Dockerfile {dockerfile_name}')
             bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
     else:
         if not is_dockerfile_present:
-            print(f'Error: Dockerfile {dockerfile_name} was not created')
+            print(f'\nError: Dockerfile {dockerfile_name} was not created\n')
         elif not is_repo_valid:
-            print(f'Error: repo {repo} is not a valid repository')
+            print(f'\nError: repo {repo} is not a valid repository\n')
 
 
 def create_request_dictionary(request):
