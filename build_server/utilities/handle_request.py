@@ -129,7 +129,7 @@ def handle_request(request):
             # Remove dockerfile
             bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
-        except ConnectionError or urllib3.exceptions.ReadTimeoutError as e:
+        except OSError as e:
             print(f'Connection Error {e.output}', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
