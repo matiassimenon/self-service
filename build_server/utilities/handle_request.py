@@ -130,7 +130,7 @@ def handle_request(request):
             bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         except OSError as e:
-            print(f'Connection Error {e.output}', flush=True)
+            print(f'OSError {e.output}', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
