@@ -16,22 +16,17 @@ while True:
                                  "INNER JOIN self_service_db.REQUEST R ON R.template_uuid = T.template_uuid " \
                                  "INNER JOIN self_service_db.USER U ON R.username = U.username " \
                                  "WHERE R.request_status='pending' "
+        cursor.execute(sql_query_get_requests)
+
     except mysql_cnx.Error as e:
         print(e)
 
-    cursor.execute(sql_query_get_requests)
     for request in cursor:
-        print(request)
         handle_request.handle_request(request)
+        # time.sleep(60)
 
     mysql_cnx.close()
     time.sleep(2)
-
-
-
-
-
-
 
 
 

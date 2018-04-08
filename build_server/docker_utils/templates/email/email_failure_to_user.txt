@@ -1,6 +1,7 @@
 Hello <firstname_placeholder>,
 
-Something went wrong with your request, we are working to fix this issue.
+Something went wrong during the build of your instance <image_name_placeholder>.
+We have been informed and are currently working to fix this issue.
 
 Best,
 
