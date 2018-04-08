@@ -204,14 +204,8 @@ function requestAction(){
                             <option value="6.5.1">6.5.1</option>
                            
                         </select> 
-                    </td>                    
-
-                    <td>Registry: </td> 
-                    <td> <select id="registry" name="registry">
-                            <option value="apac">APAC</option>
-                            <option value="emea">EMEA</option>
-                            <option value="us">US</option>
-                        </select> </td>
+                    </td>      
+                    <td>Image Name:  </td><td><input type="text" id="imageName" name="imageName"></input> </td>
                 </tr>
                 <tr>
                     <td >OS:</td> 
@@ -221,7 +215,7 @@ function requestAction(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td>Image Name:  </td><td><input type="text" id="imageName" name="imageName"></input> </td>
+                    
                 </tr>
                 <tr>
                     <td>OS Version: </td>
