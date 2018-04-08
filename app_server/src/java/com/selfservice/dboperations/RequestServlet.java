@@ -100,7 +100,8 @@ public class RequestServlet extends HttpServlet {
             if (ret > 0) {
                 Template template = new Template();
                 template.setTemplate_name(imageName);
-                template.setTemplate_uuid(template_uuid);
+                //clear template_uuid;
+                template.setTemplate_uuid("");
                 template.setOs_version(osVersion);
                 template.setOs(os);
                 template.setJdk_update(jdkUpdate);

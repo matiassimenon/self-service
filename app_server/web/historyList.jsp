@@ -112,7 +112,7 @@
              <table align="center">
                  <tr>
                     <c:if test="${currentPage != 1}">
-                        <td class="td1"><a href="HistoryServlet?page=${currentPage - 1}">Previous</a></td>
+                        <td class="td1"><a href="HistoryServlet?page=${currentPage - 1}&type=${type}">Previous</a></td>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
@@ -120,13 +120,13 @@
                                <td class="td1">${i}</td>
                            </c:when>
                            <c:otherwise>
-                               <td class="td1"><a href="HistoryServlet?page=${i}">${i}</a></td>
+                               <td class="td1"><a href="HistoryServlet?page=${i}&type=${type}">${i}</a></td>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                        <td class="td1"><a href="HistoryServlet?page=${currentPage + 1}">Next</a></td>
+                        <td class="td1"><a href="HistoryServlet?page=${currentPage + 1}&type=${type}" >Next</a></td>
                     </c:if>                               
                  </tr>
              </table>

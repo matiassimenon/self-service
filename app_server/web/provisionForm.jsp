@@ -45,20 +45,41 @@
                 setSelected(document.getElementById("componentVersion"), componentVersion);
                 
                 
-                setSelected(document.getElementById("componentVersion"), componentVersion);
                 setSelected(document.getElementById("talendComponent"), talendComponent);
                 setSelected(document.getElementById("jdk"), jdk);
                 setSelected(document.getElementById("jdkUpdate"), jdkUpdate);
-                setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
+                
                 checkTomcat();
                 checkOsVersion();
                 setSelected(document.getElementById("osVersion"), osVersion);
-                
+                setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
                 var fromtemplate= "<%=fromTemplate%>";
-                if(fromtemplate !== "null"){
-                    document.getElementById("saveTemplateBtn").disabled=true;
+                var disable = (fromtemplate === "true");
+                if(disable){
+                    document.getElementById("os").disabled=true;
+                    document.getElementById("componentVersion").disabled=true;
+                    document.getElementById("talendComponent").disabled=true;
+                    document.getElementById("jdk").disabled=true;
+                    document.getElementById("jdkUpdate").disabled=true;
+                    document.getElementById("osVersion").disabled=true;
+                    document.getElementById("tomcatVersion").disabled=true;                                
+                    document.getElementById("imageName").disabled=true;                                
+                    document.getElementById("saveTemplateBtn").disabled=true;  
                 }
+                
             };
+         function enableInput(){
+                    
+                    document.getElementById("os").disabled=false;
+                    document.getElementById("componentVersion").disabled=false;
+                    document.getElementById("talendComponent").disabled=false;
+                    document.getElementById("jdk").disabled=false;
+                    document.getElementById("jdkUpdate").disabled=false;
+                    document.getElementById("osVersion").disabled=false;
+                    document.getElementById("tomcatVersion").disabled=false;                                
+                    document.getElementById("imageName").disabled=false;                                
+                    //document.getElementById("saveTemplateBtn").disabled=false;                         
+         }
         </script>
 <script >
 
@@ -99,7 +120,6 @@ function checkTomcat(){
             setSelectOption('tomcatVersion',versions);
     }else{
         tomcatVersion.disabled="disabled";
-        tomcatVersion.style="background-color:graytext";
     }
 }
 function checkOsVersion(){
@@ -142,12 +162,16 @@ function generateImageName(){
 }
 function saveAsTemplate(){
     document.getElementById("salesforceCase").removeAttribute("required");
-    document.getElementById("templateForm").action="SaveAsTemplate?"+"<%=fromTemplate%>";
+    document.getElementById("templateForm").action="SaveAsTemplate?fromTemplate="+"<%=fromTemplate%>";
     //document.getElementById("templateForm").submit();
 }
 function requestAction(){
+
     document.getElementById("salesforceCase").required="required";
     document.getElementById("templateForm").action="RequestServlet";    
+    if(document.getElementById("salesforceCase") !== ""){
+        enableInput();
+    }
     //document.getElementById("templateForm").submit();
 }
 </script>
@@ -214,11 +238,11 @@ function requestAction(){
                 </tr>
                 <tr><td>JDK Update : </td>
                     <td><select id="jdkUpdate" name="jdkUpdate" onchange="generateImageName();">       
-                            <option value="144">141</option>
+                            <option value="141">141</option>
                             <option value="144">144</option>
-                            <option value="152">151</option>
-                            <option value="162">152</option>
-                            <option value="163">162</option>                                                      
+                            <option value="151">151</option>
+                            <option value="152">152</option>
+                            <option value="162">162</option>                                                      
                         </select> 
                     </td>
                 </tr>
