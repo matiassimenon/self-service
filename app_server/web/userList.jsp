@@ -130,9 +130,9 @@ Object errMessage=request.getAttribute("errMessage");
                     </c:if>                               
                  </tr>
              </table>                
-            <table  align="center"  style="  width: 1000px;">
+            <table  align="center"  style="  width: 1200px;">
                 <tr>
-                    <td width="800px" class="td1"></td>
+                    <td width="1000px" class="td1"></td>
                      <td class="td1"  align="right">
                      <button type="submit" onclick="deleteUsers();" >Delete User</button>
                     </td>
