@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
                 }
                 req.getSession(false).setAttribute("user", user);
                 //setup session timeout, never timeout
-                req.getSession(false).setMaxInactiveInterval(-1);
+                //req.getSession(false).setMaxInactiveInterval(-1);
                 req.getRequestDispatcher("userProfile.jsp").forward(req, resp);
 
             } else {
