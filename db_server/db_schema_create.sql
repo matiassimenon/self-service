@@ -26,6 +26,8 @@ CREATE TABLE `USER` (
   `region` CHAR(4) NOT NULL,
   `admin` TINYINT(1) NOT NULL,
   `admin_request` TINYINT(1) NOT NULL,
+  `question` VARCHAR(100) DEFAULT "",
+  `answer` VARCHAR(32) DEFAULT "",
   UNIQUE (email),
   PRIMARY KEY (`username`)
 );
