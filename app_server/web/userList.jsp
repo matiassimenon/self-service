@@ -70,7 +70,7 @@ Object errMessage=request.getAttribute("errMessage");
         <h3>Users</h3>
         <form  id="userForm" method="post" >
                 
-            <table  align="center"  style="  width: 1100px;">
+            <table  align="center"  style="  width: 1200px;">
                 <tr>
                     <td width="650px" class="td1"></td>
                     <td class="td1" align="right" >                                
@@ -79,7 +79,7 @@ Object errMessage=request.getAttribute("errMessage");
                 </tr>
             </table>                   
                          
-            <table  id ="userTable" align="center"  bordercolor="#a0c6e5" style="  width: 1100px; border-collapse: collapse;">
+            <table  id ="userTable" align="center"  bordercolor="#a0c6e5" style="  width: 1200px; border-collapse: collapse;">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</td>
