@@ -54,8 +54,7 @@ public class UseForRequestServlet extends HttpServlet {
                     String sql="select template_uuid, template_name, username, creation_date, last_edit, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version from TEMPLATE where template_uuid=? ";
                     ps = con.prepareStatement(sql);
                     ps.setString(1, template_uuid);
-                    ResultSet rs=ps.executeQuery();
-                    if(rs.next()){
+                    ResultSet rs=ps.executeQuery();                    if(rs.next()){
                         Template template=new Template();
                         template.setTemplate_uuid(rs.getString(1));
                         template.setTemplate_name(rs.getString(2));

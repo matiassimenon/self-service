@@ -1,8 +1,8 @@
 -- TEST DATA
 
 -- INSERT INTO USER (ADMIN_USER and REGULAR will be updated too)
-INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Francisco', 'Duran', 'fgalindo', 'fgalindo@talend.com', 'devops', 'atl', '', 'APAC', '0', '0', '', '');
-INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Abdoul Karim', 'Diallo', 'fgalindo', 'adiallo@talend.com', 'escalation', 'atl', '', 'APAC', '0', '0', '', '');
+INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Francisco', 'Duran', 'fgalindo', 'fgalindo@talend.com', 'devops', 'atl', '5e884898da28047151d0e56f8dc62927', 'APAC', '0', '0', '', '');
+INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Abdoul Karim', 'Diallo', 'fgalindo', 'adiallo@talend.com', 'escalation', 'atl', '5e884898da28047151d0e56f8dc62927', 'APAC', '0', '0', '', '');
 
 -- UPDATE USER SET to admin
 UPDATE `self_service_db`.`USER` SET `admin`=1 WHERE `username`='fgalindo';
