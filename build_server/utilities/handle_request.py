@@ -87,9 +87,6 @@ def handle_request(request):
             client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
                                tag='latest')
 
-            # Close all adapters and the session
-            client.close()
-
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
             update_request_status('error', request_uuid)
@@ -141,6 +138,8 @@ def handle_request(request):
             bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         finally:
+            # Close all adapters and the session
+            client.close()
             print(f'-----------------------------------------------------------', flush=True)
 
     else:
