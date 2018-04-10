@@ -90,18 +90,6 @@ def handle_request(request):
             # Close all adapters and the session
             client.close()
 
-            # Send e-mail after successful image creation and upload
-            email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
-            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
-
-            # Update Request Status
-            update_request_status('fulfilled', request_uuid)
-
-            # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
-            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
-
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
             update_request_status('error', request_uuid)
@@ -141,7 +129,17 @@ def handle_request(request):
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
         else:
-            print(f'Unclassified Error', flush=True)
+            # Send e-mail after successful image creation and upload
+            email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(username, email_message)
+
+            # Update Request Status
+            update_request_status('fulfilled', request_uuid)
+
+            # Remove dockerfile
+            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         finally:
             print(f'-----------------------------------------------------------', flush=True)
 
