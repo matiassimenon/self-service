@@ -115,7 +115,7 @@ def handle_request(request):
             send_email(admin_email, email_message)
             print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
                   f'has been kept to find the source of the problem.', flush=True)
-        except docker.errors.APIError or socket.timeout as e:
+        except (docker.errors.APIError, socket.timeout) as e:
             print(f'Push Error {e.output}', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
