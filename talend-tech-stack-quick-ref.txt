@@ -1,0 +1,81 @@
+# Rules for Docker Templates
+
+## Operating Systems
+osystems=[ubuntu  centos]
+os_versions=[12.04, 14.04, 16.04, 17.10, 6.6, 6.7, 6.8, 6.9, 7.1, 7.2, 7.3]
+
+## Talend Components and Versions
+talend_components=[cmdline, tac, jobserver]
+talend_versions=[6.0.1, 6.1.1, 6.2.1, 6.3.1, 6.4.1, 6.5.1]
+
+## Tomcat Versions
+tomcat_versions=[7.0 8.0]
+
+## Java Versions and Updates
+java_versions=[8]
+java_updates=[144, 152, 162, 163]
+*All java updates and version available for all Docker permutations*
+
+
+## Tomcat for Talend Components and Versions
+if talend_component == tac
+      tomcat == true
+      if talend_version == 6.0.1
+            tomcat_versions=[7.0 8.0]
+      elif talend_version == 6.1.1
+            tomcat_versions=[7.0 8.0]
+      elif talend_version == 6.2.1
+            tomcat_versions=[7.0 8.0]
+      elif talend_version == 6.3.1
+            tomcat_versions=[7.0 8.0]
+      elif talend_version == 6.4.1
+            tomcat_versions=[7.0 8.0]
+      elif talend_version ==6.5.1
+            tomcat_versions=[8.0]
+      fi
+elif talend_component == cmdline
+      tomcat == false
+elif talend_component == jobserver
+      tomcat == false
+fi
+
+
+
+## OS Versions for Talend Versions:
+if talend_version == 6.0.1
+          if os == ubuntu
+                      os_versions == [12.04 14.04]
+          elif os == centos
+                      os_versions == [6.6, 7.1]
+          fi
+    elif talend_version == 6.1.1
+          if os == ubuntu
+                      os_versions == [12.04 16.04 17.04]
+          elif os == centos
+                      os_versions == [6.6, 7.1]
+          fi
+    elif talend_version == 6.2.1
+          if os == ubuntu
+                      os_versions == [12.04 14.04 16.04]
+          elif os == centos
+                      os_versions == [6.7, 6.8, 7.2, 7.3]
+          fi
+    elif talend_version == 6.3.1
+          if os == ubuntu
+                      os_versions == [12.04 14.04 16.04]
+          elif os == centos
+                      os_versions == [6.7 6.8 7.1 7.2 7.3]
+          fi
+    elif talend_version == 6.4.1
+          if os == ubuntu
+                      os_versions == [14.04 16.04 17.04]
+          elif os == centos
+                      os_versions == [6.8, 6.9, 7.1, 7.2, 7.3]
+          fi
+    elif talend_version == 6.5.1
+          if os == ubuntu
+                      os_versions == [12.04, 14.04, 16.04, 17.04]
+          elif os == centos
+                      os_versions == [6.7, 6.8, 6.9, 7.1, 7.2, 7.3]
+          fi
+fi

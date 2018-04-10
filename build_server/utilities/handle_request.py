@@ -212,11 +212,16 @@ def create_request_dictionary(request):
             os_version = os_version + '.1511'
         elif os_version == '7.1':
             os_version = os_version + '.1503'
+            update_os_and_install_tools = 'yum swap fakesystemd systemd -y && ' \
+                                          'yum update -y && ' \
+                                          'yum install -y wget tar unzip vim'
         elif os_version == '7.0':
             os_version = os_version + '.1406'
 
-        update_os_and_install_tools = 'yum update -y && ' \
-                                      'yum install -y wget tar unzip vim'
+        else:
+            update_os_and_install_tools = 'yum update -y && ' \
+                                          'yum install -y wget tar unzip vim'
+
         add_executables_to_path = 'alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && ' \
                                   'alternatives --set "java" "/opt/java/bin/java" && ' \
                                   'alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && ' \
