@@ -140,6 +140,8 @@ def handle_request(request):
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
+        else:
+            print(f'Unclassified Error', flush=True)
         finally:
             print(f'-----------------------------------------------------------', flush=True)
 
