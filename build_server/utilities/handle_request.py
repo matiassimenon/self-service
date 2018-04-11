@@ -80,7 +80,7 @@ def handle_request(request):
                                 dockerfile=dockerfile_name,
                                 timeout=28800)
             # Docker Login
-            print(f'Docker Login to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
+            print(f'Docker Login: docker login {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
             client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
                          username=docker_user,
                          password=docker_password)
@@ -89,7 +89,7 @@ def handle_request(request):
             # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
             #                                tag='latest'):
             #     print(line, flush=True)
-            print(f'Docker Push: cd {docker_build_dir}; '
+            print(f'Docker Push: '
                   f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}', flush=True)
             bash_cmd(f"cd {docker_build_dir}; "
                      f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
