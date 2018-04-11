@@ -5,5 +5,5 @@ setup(
     version='0.1dev',
     packages=['utilities', ],
     long_description=open('README.md').read(),
-    requires=['mysql-connector', 'docker', 'urllib3'],
+    requires=['mysql-connector', 'docker', 'urllib3', 'requests'],
 )

@@ -3,6 +3,8 @@ import subprocess
 import time
 import docker
 import socket
+
+import requests
 import urllib3
 import mysql.connector
 from shutil import copyfile
@@ -100,8 +102,10 @@ def handle_request(request):
             send_email(admin_email, email_message)
             print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
                   f'has been kept to find the source of the problem.', flush=True)
-        except (docker.errors.APIError, socket.timeout) as e:
-            print(f'Push Error {e.output}', flush=True)
+        except (docker.errors.APIError, socket.timeout,
+                urllib3.exceptions.ReadTimeoutError,
+                requests.exceptions.ConnectionError) as e:
+            print(f'Push Error {e}', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
