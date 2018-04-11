@@ -104,8 +104,8 @@ def handle_request(request):
                   f'has been kept to find the source of the problem.', flush=True)
         except (docker.errors.APIError, socket.timeout,
                 urllib3.exceptions.ReadTimeoutError,
-                requests.exceptions.ConnectionError) as e:
-            print(f'Push Error {e}', flush=True)
+                requests.exceptions.ConnectionError):
+            print(f'Push Error', flush=True)
             update_request_status('error', request_uuid)
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
