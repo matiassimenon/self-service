@@ -86,8 +86,9 @@ def handle_request(request):
                          password=docker_password)
             # Docker Push
             print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
-            client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-                               tag='latest')
+            for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+                                           tag='latest'):
+                print(line, flush=True)
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
