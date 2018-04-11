@@ -89,7 +89,7 @@ def handle_request(request):
             # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
             #                                tag='latest'):
             #     print(line, flush=True)
-            print(f'Docker push: cd {docker_build_dir}; '
+            print(f'Docker Push: cd {docker_build_dir}; '
                   f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name} : ')
             bash_cmd(f"cd {docker_build_dir}; "
                      f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
