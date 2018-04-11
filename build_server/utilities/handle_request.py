@@ -85,10 +85,14 @@ def handle_request(request):
                          username=docker_user,
                          password=docker_password)
             # Docker Push
-            print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
-            for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-                                           tag='latest'):
-                print(line, flush=True)
+            # print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
+            # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+            #                                tag='latest'):
+            #     print(line, flush=True)
+            print(f'Docker push: cd {docker_build_dir}; '
+                  f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name} : ')
+            bash_cmd(f"cd {docker_build_dir}; "
+                     f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
