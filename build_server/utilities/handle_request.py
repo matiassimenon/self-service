@@ -90,7 +90,7 @@ def handle_request(request):
             #                                tag='latest'):
             #     print(line, flush=True)
             print(f'Docker Push: cd {docker_build_dir}; '
-                  f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name} : ')
+                  f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}', flush=True)
             bash_cmd(f"cd {docker_build_dir}; "
                      f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
 
