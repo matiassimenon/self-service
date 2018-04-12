@@ -214,10 +214,16 @@ def create_request_dictionary(request):
     if op_sys == 'centos':
         if os_version == '7.4':
             os_version = os_version + '.1708'
+            update_os_and_install_tools = 'yum update -y && ' \
+                                          'yum install -y wget tar unzip vim'
         elif os_version == '7.3':
             os_version = os_version + '.1611'
+            update_os_and_install_tools = 'yum update -y && ' \
+                                          'yum install -y wget tar unzip vim'
         elif os_version == '7.2':
             os_version = os_version + '.1511'
+            update_os_and_install_tools = 'yum update -y && ' \
+                                          'yum install -y wget tar unzip vim'
         elif os_version == '7.1':
             os_version = os_version + '.1503'
             update_os_and_install_tools = 'yum swap fakesystemd systemd -y && ' \
@@ -225,8 +231,6 @@ def create_request_dictionary(request):
                                           'yum install -y wget tar unzip vim'
         elif os_version == '7.0':
             os_version = os_version + '.1406'
-
-        else:
             update_os_and_install_tools = 'yum update -y && ' \
                                           'yum install -y wget tar unzip vim'
 
