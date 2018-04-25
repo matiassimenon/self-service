@@ -38,6 +38,12 @@ CREATE TABLE `TEMPLATE` (
   `username` VARCHAR(30) NOT NULL,
   `creation_date` DATE NOT NULL,
   `last_edit` DATE NOT NULL,
+  PRIMARY KEY (`template_uuid`,`username`)
+  -- FOREIGN KEY (`username`) REFERENCES `USER` (`username`)
+);
+
+CREATE TABLE `TALEND_TEMPLATE` (
+  `template_uuid` VARCHAR(30) NOT NULL,
   `os` VARCHAR(12) NOT NULL,
   `os_version` CHAR(5) NOT NULL,
   `talend_version` CHAR(5) NULL,
@@ -45,8 +51,20 @@ CREATE TABLE `TEMPLATE` (
   `jdk_version` CHAR(2) NULL,
   `jdk_update` CHAR(3) NULL,
   `tomcat_version` CHAR(4) NULL,
+  `database_version` CHAR(5) NULL,
+  `database` VARCHAR(12) NULL,
   PRIMARY KEY (`template_uuid`,`username`)
-  -- FOREIGN KEY (`username`) REFERENCES `USER` (`username`)
+  -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
+);
+
+CREATE TABLE `DB_TEMPLATE` (
+  `template_uuid` VARCHAR(30) NOT NULL,
+  `os` VARCHAR(12) NOT NULL,
+  `os_version` CHAR(5) NOT NULL,
+  `database_version` CHAR(5) NULL,
+  `database` VARCHAR(12) NULL,
+  PRIMARY KEY (`template_uuid`,`username`)
+  -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
 
 CREATE TABLE `REQUEST` (
@@ -95,13 +113,18 @@ END ||
 delimiter ;
 
 
-
 -- Constraints: Foreign Keys: FK_CHILD_TABLE_child_Column_PATENT_TABLE_parent_Column
 ALTER TABLE `TEMPLATE`
   ADD CONSTRAINT FK_TEMPLATE_username_USER_username FOREIGN KEY (`username`) REFERENCES `USER`(`username`) ON DELETE CASCADE;
 
+ALTER TABLE `TALEND_TEMPLATE`
+  ADD CONSTRAINT FK_TALEND_TEMPLATE_template_uuid_TEMPLATE_template_uuid FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE`(`template_uuid`) ON DELETE CASCADE;
+
+ALTER TABLE `DB_TEMPLATE`
+  ADD CONSTRAINT FK_DB_TEMPLATE_template_uuid_TEMPLATE_template_uuid FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE`(`template_uuid`) ON DELETE CASCADE;
+
 ALTER TABLE `IMAGE`
-  ADD CONSTRAINT FK_IMAGE_username_TEMPLATE_UUID_template FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE`(`template_uuid`) ON DELETE CASCADE;
+  ADD CONSTRAINT FK_IMAGE_template_uuid_TEMPLATE_UUID_template FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE`(`template_uuid`) ON DELETE CASCADE;
 
 ALTER TABLE `REQUEST`
   ADD CONSTRAINT FK_REQUEST_username_USER_username FOREIGN KEY (`username`) REFERENCES `USER`(`username`) ON DELETE CASCADE,
