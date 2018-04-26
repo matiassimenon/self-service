@@ -53,7 +53,7 @@ CREATE TABLE `TALEND_TEMPLATE` (
   `tomcat_version` CHAR(4) NULL,
   `database_version` CHAR(5) NULL,
   `database` VARCHAR(12) NULL,
-  PRIMARY KEY (`template_uuid`,`username`)
+  PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
 
@@ -63,7 +63,7 @@ CREATE TABLE `DB_TEMPLATE` (
   `os_version` CHAR(5) NOT NULL,
   `database_version` CHAR(5) NULL,
   `database` VARCHAR(12) NULL,
-  PRIMARY KEY (`template_uuid`,`username`)
+  PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
 
