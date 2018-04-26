@@ -51,8 +51,8 @@ CREATE TABLE `TALEND_TEMPLATE` (
   `jdk_version` CHAR(2) NULL,
   `jdk_update` CHAR(3) NULL,
   `tomcat_version` CHAR(4) NULL,
-  `database_version` CHAR(5) NULL,
-  `database` VARCHAR(12) NULL,
+  `db_version` CHAR(20) NULL,
+  `db` VARCHAR(20) NULL,
   PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
@@ -61,8 +61,8 @@ CREATE TABLE `DB_TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
   `os` VARCHAR(12) NOT NULL,
   `os_version` CHAR(5) NOT NULL,
-  `database_version` CHAR(5) NULL,
-  `database` VARCHAR(12) NULL,
+  `db_version` CHAR(20) NULL,
+  `db` VARCHAR(20) NULL,
   PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
