@@ -1,4 +1,7 @@
-a{text-decoration:none;}
+a{
+    text-decoration:none;
+    
+}
 a:hover, a:focus, button:hover {
     color: #fff;
     display: inline-block;
@@ -6,7 +9,8 @@ a:hover, a:focus, button:hover {
     text-decoration:none;
 }
 .li_menu{
-    width: 125px;
+    width: 128px;
+    padding: 5px;
 }
 li
 {

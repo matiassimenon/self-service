@@ -26,7 +26,7 @@ String greetString=SFUtils.getGreetingString();
 </table>
 
 <%if (user != null) {%>
-<table cellspacing="5" align="center" style="font-size: small">
+<table cellspacing="10" align="center" style="font-size: small">
     <tr>
         <td  style="border: solid 0px #fff; color: green;">Good <%=greetString%>! <%=user.getFirstname()%></td>
         <td class="td1" width="30px"></td>
