@@ -168,3 +168,19 @@ function checkPasswd() {
     document.getElementById("submitBtn").disabled = disable;
 }
 
+ function  disableForm(disabled){
+    var sels=document.getElementsByTagName("SELECT");
+    var inputs=document.getElementsByTagName("INPUT");
+    var a_elements=document.getElementsByClassName("li_menu");
+
+    for(var i=0; i<sels.length; i++){
+        sels[i].disabled=disabled;
+    }
+    for(var i=0; i<inputs.length; i++){
+        inputs[i].disabled=disabled;
+    }
+    for(var i=0; i<a_elements.length; i++){
+        a_elements[i].style.display="none";
+    }
+    document.getElementById("saveTemplateBtn").disabled=disabled;      
+}

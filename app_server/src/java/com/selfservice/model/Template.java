@@ -9,14 +9,32 @@ import java.util.Date;
 
 /**
  *
- * @author francisco
+ * @author aiming
  */
 public class Template {
     private String template_uuid="", username, os, os_version, talend_version, talend_component, jdk_version, jdk_update, tomcat_version;
     private Date last_edit, creation_date;
     private String template_name="";
     private String salesforce_case="";
+    private String database, database_version;
 
+    public String getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(String database) {
+        this.database = database;
+    }
+
+    public String getDatabase_version() {
+        return database_version;
+    }
+
+    public void setDatabase_version(String database_version) {
+        this.database_version = database_version;
+    }
+    
+    
     public String getUsername() {
         return username;
     }

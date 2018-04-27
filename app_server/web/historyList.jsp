@@ -78,7 +78,7 @@
         <%}%>
         <form  id="historyForm" method="post" action="">
             <input type="hidden" name="type" value="<%=type%>" />     
-            <table  align="center"  style="  width: 800px; border-collapse: collapse;">
+            <table  align="center"  class="tableClass">
                 <tr>
                     <td width="650px" class="td1"></td>
                     <td class="td1" align="right" >                                
@@ -87,7 +87,7 @@
                 </tr>
             </table>                   
                        
-            <table  id="historyTable" align="center" border="0" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
+            <table  id="historyTable" align="center" border="0" bordercolor="#a0c6e5" class="tableClass">
                 <tr>
                     <th>Request Date</th>
                     <th>Request Status</td>
@@ -130,9 +130,9 @@
                     </c:if>                               
                  </tr>
              </table>
-            <table  align="center"  style="  width: 800px; border-collapse: collapse;">
+            <table  align="center"  class="tableClass">
                 <tr>
-                    <td width="650px" class="td1"></td>
+                    <td width="685px" class="td1"></td>
                     <td class="td1"  align="right">
                         <button type="button" id="historyBtn" onclick="useForRequst1();" >Use for Request</button>
                     </td>

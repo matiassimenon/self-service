@@ -1,7 +1,7 @@
 <%-- 
     Document   : provisionForm
     Created on : Jan 19, 2018, 11:56:16 AM
-    Author     : francisco
+    Author     : aiming
 --%>
 <%@page import="com.selfservice.model.Template"%>
 <%
@@ -10,6 +10,7 @@
     Template template=(Template)request.getAttribute("template");
     if(template == null ){
         template= new Template();
+        template.setTalend_component("");
     }
 %>
 <%@page import="com.selfservice.model.User"%>
@@ -22,10 +23,10 @@
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <style>             
             input,select{
-                width: 255px;
+                width: 240px;
                 color:#003366;
 		background-color:#fff;
-            }
+            }           
         </style>
        
         <script src="selfservice.js"> </script>
@@ -39,46 +40,53 @@
                 var jdk="<%=template.getJdk_version()%>";
                 var jdkUpdate="<%=template.getJdk_update()%>";
                 var tomcatVersion="<%=template.getTomcat_version()%>";
+                var db ="<%=template.getDatabase()%>";
+                var db_version="<%=template.getDatabase_version()%>";
+                if(talendComponent === "null")
+                {// database tab
+                    document.getElementById("imageName_db").value="<%=template.getTemplate_name()%>";  
+                    setSelected(document.getElementById("os_db"), os);
+                    setSelectOption('osVersion_db', osArr[os], 'Please select...');
+                    setSelected(document.getElementById("osVersion_db"), osVersion);
+                    setSelected(document.getElementById("database_db"), db);
+                    setSelectOption('database_version_db', dbArr[db], 'Please select...');
+                    setSelected(document.getElementById("database_version_db"), db_version);
+                    displayDatabase();
+                }else{//talend tab               
+                    //document.getElementById("talend_a").focus();
+                    if(talendComponent != ""){
+                        document.getElementById("imageName").value="<%=template.getTemplate_name()%>";               
+                        setSelected(document.getElementById("os"), os);
+                        setSelected(document.getElementById("componentVersion"), componentVersion);
 
-                document.getElementById("imageName").value="<%=template.getTemplate_name()%>";               
-                setSelected(document.getElementById("os"), os);
-                setSelected(document.getElementById("componentVersion"), componentVersion);
-                
-                
-                setSelected(document.getElementById("talendComponent"), talendComponent);
-                setSelected(document.getElementById("jdk"), jdk);
-                setSelected(document.getElementById("jdkUpdate"), jdkUpdate);
-                
-                checkTomcat();
-                checkOsVersion();
-                setSelected(document.getElementById("osVersion"), osVersion);
-                setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
+                        setSelected(document.getElementById("talendComponent"), talendComponent);
+                        setSelected(document.getElementById("jdk"), jdk);
+                        setSelected(document.getElementById("jdkUpdate"), jdkUpdate);
+                        checkTomcat();
+                        checkOsVersion();
+                        setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
+                        setSelected(document.getElementById("osVersion"), osVersion);
+
+                        setSelected(document.getElementById("database"), db);
+                        setSelectOption('database_version', dbArr[db], 'Please select...');
+                        setSelected(document.getElementById("database_version"), db_version);
+                    }
+                    displayTalend();
+                }
+             
                 var fromtemplate= "<%=fromTemplate%>";
                 var disable = (fromtemplate === "true");
                 if(disable){
-                    document.getElementById("os").disabled=true;
-                    document.getElementById("componentVersion").disabled=true;
-                    document.getElementById("talendComponent").disabled=true;
-                    document.getElementById("jdk").disabled=true;
-                    document.getElementById("jdkUpdate").disabled=true;
-                    document.getElementById("osVersion").disabled=true;
-                    document.getElementById("tomcatVersion").disabled=true;                                
-                    document.getElementById("imageName").disabled=true;                                
-                    document.getElementById("saveTemplateBtn").disabled=true;  
-                }
-                
+                   disableForm(true);   
+                   //enable sales_force 
+                   var salesforces=document.getElementsByName("salesforceCase");
+                   for(var i=0; i<salesforces.length; i++){
+                       salesforces[i].disabled=false;
+                   }
+                }               
             };
          function enableInput(){
-                    
-                    document.getElementById("os").disabled=false;
-                    document.getElementById("componentVersion").disabled=false;
-                    document.getElementById("talendComponent").disabled=false;
-                    document.getElementById("jdk").disabled=false;
-                    document.getElementById("jdkUpdate").disabled=false;
-                    document.getElementById("osVersion").disabled=false;
-                    document.getElementById("tomcatVersion").disabled=false;                                
-                    document.getElementById("imageName").disabled=false;                                
-                    //document.getElementById("saveTemplateBtn").disabled=false;                         
+             disableForm(false);
          }
         </script>
 <script >
@@ -101,10 +109,60 @@ osArr['centos'] =
  {txt:'7.2', val:'7.2'},
  {txt:'7.3', val:'7.3'}
  ];
+ //define the database version data array
+var dbArr=[];
+dbArr['mysql'] =
+[
+ {txt:'5.5', val:'5.5'},
+ {txt:'5.6', val:'5.6'},
+ {txt:'5.7', val:'5.7'},
+ {txt:'8.0', val:'8.0'}
+ ];
+ dbArr['postgresql'] =
+[
+ {txt:'9.3', val:'9.3'},
+ {txt:'9.4', val:'9.4'},
+ {txt:'9.5', val:'9.5'},
+ {txt:'9.6', val:'9.6'},
+ {txt:'10.0', val:'10.0'}
+ ];
+
+  dbArr['mariadb'] =
+[
+ {txt:'5.5', val:'5.5'},
+ {txt:'10.0', val:'10.0'},
+ {txt:'10.1', val:'10.1'},
+ {txt:'10.2', val:'10.2'},
+ {txt:'10.3', val:'10.3'}
+ ];
+   dbArr['mssql'] =
+[
+ {txt:'MSSQL for Linux', val:'2017'}
+ ];
+
+   dbArr['oracle'] =
+[
+ {txt:'11gr2', val:'11gr2'},
+ {txt:'12cr1', val:'12cr1'}
+ ];
+  dbArr['db2'] =
+[
+ {txt:'db2express-c', val:'db2express-c'}
+ ];
+ 
 function setOsVersion(osVersion)
 {
-    if(this.value !== '') 
         setSelectOption('osVersion', osArr[osVersion.options[osVersion.selectedIndex].value], 'Please select...');
+}
+function setOsVersion_db(osVersion) //in database table
+{    
+        setSelectOption('osVersion_db', osArr[osVersion.options[osVersion.selectedIndex].value], 'Please select...');
+}
+function setDbVersion(db){
+        setSelectOption('database_version', dbArr[db.options[db.selectedIndex].value], 'Please select...');
+}
+function setDbVersion_db(db){
+        setSelectOption('database_version_db', dbArr[db.options[db.selectedIndex].value], 'Please select...');
 }
 function checkTomcat(){
     var versions=[{txt:'7.0', val: '7.0'},{txt:'8.0', val: '8.0'}];
@@ -157,22 +215,58 @@ function generateImageName(){
     if (!document.getElementById("tomcatVersion").disabled){
             imagename += "-tomcat" + document.getElementById("tomcatVersion").value.toString().replace("\.","");
         }
+        imagename += "-" +document.getElementById("database").value+ document.getElementById("database_version").value.toString().replace("\.","").replace("\.","")
+        
     //window.alert(imagename);
     document.getElementById("imageName").value=imagename;
 }
+function generateImageName_db(){
+    var imagename=
+            document.getElementById("os_db").value + document.getElementById("osVersion_db").value.toString().replace("\.","").substring(0,2)+ "-"+  
+            document.getElementById("database_db").value + document.getElementById("database_version_db").value.toString().replace("\.","").substring(0,2);
+    document.getElementById("imageName_db").value=imagename;
+}
+
 function saveAsTemplate(){
     document.getElementById("salesforceCase").removeAttribute("required");
     document.getElementById("templateForm").action="SaveAsTemplate?fromTemplate="+"<%=fromTemplate%>";
     //document.getElementById("templateForm").submit();
 }
+function saveAsTemplate_db(){
+    document.getElementById("salesforceCase_db").removeAttribute("required");
+    document.getElementById("templateForm_db").action="SaveAsTemplate?fromTemplate="+"<%=fromTemplate%>";
+    //document.getElementById("templateForm").submit();
+}
 function requestAction(){
-
     document.getElementById("salesforceCase").required="required";
     document.getElementById("templateForm").action="RequestServlet";    
     if(document.getElementById("salesforceCase") !== ""){
         enableInput();
     }
-    //document.getElementById("templateForm").submit();
+}
+function requestAction_db(){
+    document.getElementById("salesforceCase_db").required="required";
+    document.getElementById("templateForm_db").action="RequestServlet";    
+    if(document.getElementById("salesforceCase_db") !== ""){
+        enableInput();
+    }
+}
+function displayDatabase(){
+    document.getElementById('database_a').focus();
+    document.getElementById('templateForm_db').style.display='block';
+    document.getElementById('templateForm_db').style.backgroundColor='#47a3da';
+    document.getElementById('templateForm_db').style.color='#fff';
+    document.getElementById('templateForm').style.display='none'; //hide talend
+}
+function displayTalend(){
+    document.getElementById('talend_a').focus();
+    document.getElementById('templateForm').style.display='block';
+    document.getElementById('templateForm').style.backgroundColor='#47a3da';
+    document.getElementById('templateForm').style.color='#fff';
+    document.getElementById('templateForm_db').style.display='none'; //hide talend
+}
+function displayHadoop(){
+    alert("TODO: Please waiting ....");
 }
 </script>
     </head>
@@ -180,8 +274,15 @@ function requestAction(){
         <div  id="content">
         <%@include file="navigator.jsp"%>
         <h3>Provision Form</h3>
-        <form  id="templateForm" method="post" action="">
-            <table  align="center" style="border:2px solid green; padding:15px 15px;">
+
+        <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
+         <ul>
+            <li><a class="li_menu" id="talend_a" href="#" onclick="displayTalend(); ">Talend component</a></li>
+            <li><a  class="li_menu" id ="database_a" href="#" onclick="displayDatabase(); ">Databases</a></li>
+            <li><a  class="li_menu" id ="hadoop_a" href="#" onclick="displayHadoop(); ">Hadoop Cluster</a></li>
+        </ul>
+        <form  id="templateForm"  style="display: none;" method="post" action="">
+            <table  id="talend_table" align="center" style="border:1px solid green; padding:0px 0px;">
                 <tr>
                     <td>Talend Component :</td>
                     <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
@@ -189,8 +290,19 @@ function requestAction(){
                             <option value="cmdline">CmdLine</option>
                             <option value="jobserver">Jobserver</option>
                         </select> 
+                    </td>    
+                    <td >Database:</td>                    
+                    <td> <select id="database" name="database" required="required" onchange="setDbVersion(this); generateImageName();"> 
+                             <option value="">Please select...</option>
+                            <option value="mysql">MySQL</option>
+                            <option value="postgresql">PostgreSQL</option>
+                            <option value="mariadb">MariaDB</option>
+                            <option value="mssql">MSSQL for Linux</option>
+                            <option value="oracle">Oracle</option>
+                            <option value="db2">IBM db2</option>
+                        </select> 
                     </td>                    
-                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
+                    
                 </tr>                
                 <tr>
                     <td>Talend Version :</td>
@@ -205,7 +317,11 @@ function requestAction(){
                            
                         </select> 
                     </td>      
-                    <td>Image Name:  </td><td><input type="text" id="imageName" name="imageName"></input> </td>
+                     <td>Database Version: </td>
+                    <td><select id="database_version" required="required" name="database_version" onchange=" generateImageName();">
+                             <option value="">Please select...</option>
+                        </select> 
+                    </td>                   
                 </tr>
                 <tr>
                     <td >OS:</td> 
@@ -215,7 +331,7 @@ function requestAction(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    
+                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
                 </tr>
                 <tr>
                     <td>OS Version: </td>
@@ -223,6 +339,7 @@ function requestAction(){
                              <option value="">Please select...</option>
                         </select> 
                     </td>
+                    <td>Image Name:  </td><td><input type="text" id="imageName" readonly="true" name="imageName"></input> </td>
                 </tr>
                 <tr><td>JDK Version : </td>
                     <td><select id="jdk" name="jdk" onchange="generateImageName();"> 
@@ -245,17 +362,65 @@ function requestAction(){
                             <option value="7.0">7.0</option>
                             <option value="8.0">8.0</option>
                         </select> 
-                    </td>
-                    
+                    </td>                    
                 </tr>
                 <tr><td></td><td></td> <td></td>
                     <td><button type="submit" id="saveTemplateBtn" onclick="saveAsTemplate()">Save as Template</button> 
                         <button type="submit" onclick="requestAction()">Request</button></td></tr>
-                
-                
-            </table>
+            </table>                
             <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
         </form>
+
+        
+        <form  id="templateForm_db"  style="display: none;" method="post" action="">
+            <table id="database_table" align="center" style="border:1px solid green; padding:0px 0px;">
+                <tr>
+                    <td >OS:</td> 
+                    <td> <select id="os_db" name="os" required="required" onchange="setOsVersion_db(this);"> 
+                            <option value="">Please select...</option>
+                            <option value="ubuntu">Ubuntu</option>
+                            <option value="centos">CentOS</option>
+                        </select> 
+                    </td>                    
+                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
+                </tr>                
+                <tr>
+                    <td>OS Version: </td>
+                    <td><select id="osVersion_db" required="required" name="osVersion" onchange="generateImageName_db();">
+                             <option value="">Please select...</option>
+                        </select> 
+                    </td>    
+                    <td>Image Name:  </td><td><input type="text" id="imageName_db" readonly="true" name="imageName"></input> </td>
+                </tr>
+                <tr> 
+                    <td >Database:</td>                    
+                    <td> <select id="database_db" name="database" required="required" onchange="setDbVersion_db(this);"> 
+                             <option value="">Please select...</option>
+                            <option value="mysql">MySQL</option>
+                            <option value="postgresql">PostgreSQL</option>
+                            <option value="mariadb">MariaDB</option>
+                            <option value="mssql">MSSQL for Linux</option>
+                            <option value="oracle">Oracle</option>
+                            <option value="db2">IBM db2</option>
+                        </select> 
+                    </td>
+                </tr>
+                <tr>
+                    <td>Database Version: </td>
+                    <td><select id="database_version_db" required="required" name="database_version" onchange=" generateImageName_db();">
+                             <option value="">Please select...</option>
+                        </select> 
+                    </td>
+                </tr>
+                
+                <tr><td></td><td></td> <td></td>
+                    <td><button type="submit" id="saveTemplateBtn" onclick="saveAsTemplate_db()">Save as Template</button> 
+                        <button type="submit" onclick="requestAction_db()">Request</button></td></tr>
+
+            </table>                
+            <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
+        </form>    
+        </div>
         <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%}%>
         </div>
     </body>

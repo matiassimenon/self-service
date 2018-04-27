@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Login action in login.jsp
  *
- * @author francisco
+ * @author aiming
  */
 public class Login extends HttpServlet {
 
@@ -31,6 +31,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
         String username = req.getParameter("username");
         String password = req.getParameter("password");

@@ -3,6 +3,7 @@
     Created on : 2018-4-3, 12:54:26
     Author     : aiming
 --%>
+<%@page import="com.selfservice.model.User"%>
 <%
     Object errMessage=request.getAttribute("errMessage");
 %>
@@ -18,7 +19,7 @@
 
     <body>
         <div  id="content">
-            <%@include file="navigator.jsp"%>
+
             <% 
                 User user1 = (User)request.getSession(false).getAttribute("resetUser");
             %>            

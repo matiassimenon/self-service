@@ -18,7 +18,7 @@
 
     <body>
         <div  id="content">
-            <%@include file="navigator.jsp"%>
+            
             <h3>Reset Password Step 1</h3>
             <form action="ForgotPasswdServlet?step=1" method = "post">
                 <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >

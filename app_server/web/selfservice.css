@@ -1,3 +1,17 @@
+a{text-decoration:none;}
+a:hover, a:focus, button:hover {
+    color: #fff;
+    display: inline-block;
+    background: #47a3da;
+    text-decoration:none;
+}
+.li_menu{
+    width: 125px;
+}
+li
+{
+    list-style-type:none;    
+} 
 select{
     width: 120px;
 }

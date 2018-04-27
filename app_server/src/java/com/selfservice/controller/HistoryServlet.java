@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Actions in history.jsp
+ *
  * @author aiming
  */
 public class HistoryServlet extends HttpServlet {
@@ -39,44 +40,43 @@ public class HistoryServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         Connection con = null;
-        PreparedStatement ps=null;
-        ResultSet rs =null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         List<Request> list = new ArrayList<>();
         try {
             con = DbConnection.getConnection();
             User user = (User) request.getSession(false).getAttribute("user");
             String username = user.getUsername();
             String typeString = request.getQueryString();
-            String type=request.getParameter("type");
-            
-            String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username, temp.template_uuid from REQUEST req, TEMPLATE temp where req.template_uuid= temp.template_uuid";
-            
-      
-            
+            String type = request.getParameter("type");
+
+            String sql = "select req.request_date, req.request_status, temp.template_name, req.salesforce_case, req.username, temp.template_uuid from REQUEST req INNER JOIN TEMPLATE temp on req.template_uuid= temp.template_uuid and req.username = temp.username ";
+
             if ((typeString != null && typeString.contains("previousRequest")) || (type != null && type.contains("previousRequest"))) {//MyPrvious request
-                
-               sql = sql + " and req.username='" + username + "'";
-                type="previousRequest";
-            }else{
-                type="historyList";
-            }                           
+
+                sql = sql + " and req.username='" + username + "'";
+                type = "previousRequest";
+            } else {
+                type = "historyList";
+            }
             //Search Request
             String sTxt = request.getParameter("search");
             if (sTxt != null && sTxt.length() > 0) {
-                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt +  "%' or req.username like '%" + sTxt +"%' or request_status like '%" + sTxt + "%' )";
+                sql = sql + " and ( template_name like '%" + sTxt + "%' or req.salesforce_case like '%" + sTxt + "%' or req.username like '%" + sTxt + "%' or request_status like '%" + sTxt + "%' )";
             }
             //add order
             sql = sql + " order by request_date DESC";
             //add paging sql
             int page = 1; //current page;
             int recordsPerPage = 20;
-            if(request.getParameter("page") != null)
+            if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
-            int beginIndex= (page-1)*recordsPerPage;
-           
-            String pageSql = "select o.* from (" + sql + ") o limit "+ beginIndex + ", " + recordsPerPage;
-            ps=con.prepareStatement(pageSql);
-            rs=ps.executeQuery();            
+            }
+            int beginIndex = (page - 1) * recordsPerPage;
+
+            String pageSql = "select o.* from (" + sql + ") o limit " + beginIndex + ", " + recordsPerPage;
+            ps = con.prepareStatement(pageSql);
+            rs = ps.executeQuery();
             System.out.println("history sql-->" + sql);
             while (rs.next()) {
                 Request object = new Request();
@@ -87,17 +87,17 @@ public class HistoryServlet extends HttpServlet {
                 object.setUsername(rs.getString(5));
                 object.setTemplate_uuid(rs.getString(6));
                 list.add(object);
-            }            
+            }
             request.setAttribute("historyList", list);
-            
+
             rs.close();
             ps.close();
             //get thet total count
-            String totalSql="select count(*) from (" + sql +") o";
-            ps=con.prepareStatement(totalSql);
-            rs=ps.executeQuery();
-            int total=0;
-            if(rs.next()){
+            String totalSql = "select count(*) from (" + sql + ") o";
+            ps = con.prepareStatement(totalSql);
+            rs = ps.executeQuery();
+            int total = 0;
+            if (rs.next()) {
                 total = rs.getInt(1);
             }
             rs.close();
@@ -105,7 +105,7 @@ public class HistoryServlet extends HttpServlet {
             //setup the paging attribute
             int noOfPages = (int) Math.ceil(total * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
-            request.setAttribute("currentPage", page);            
+            request.setAttribute("currentPage", page);
             //set back the type: historyList or previousRequestList
             request.setAttribute("type", type);
             request.getRequestDispatcher("historyList.jsp").forward(request, response);

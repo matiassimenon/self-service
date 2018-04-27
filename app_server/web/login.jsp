@@ -16,8 +16,8 @@
 	</head>
 	<body >
             <div  id="content">
-                <%@include file="navigator.jsp"%>
-		<h1>Self service Platform Login</h1>
+                
+		<h1>Self service Platform</h1>
                 <h3>Login</h3>
 		<form action="LoginServlet" method="post">
                     <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >
