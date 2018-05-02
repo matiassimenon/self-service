@@ -7,7 +7,6 @@ package com.selfservice.dboperations;
 
 import com.selfservice.model.Template;
 import com.selfservice.model.User;
-import com.selfservice.servers.DbConnection;
 import com.selfservice.util.SFUtils;
 import java.sql.Connection;
 import java.sql.Date;
@@ -45,7 +44,7 @@ public class DbHelper {
         String fromTemplate = request.getParameter("fromTemplate");
         String salesforce_case= request.getParameter("salesforce_case");
         int ret = 0;
-        if (template_uuid.length() == 0) {
+        if (template_uuid==null || template_uuid.length() == 0) {
             template_uuid = SFUtils.getUUID(9);
         }
         User user = (User) request.getSession().getAttribute("user");

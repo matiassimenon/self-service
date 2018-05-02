@@ -79,10 +79,10 @@
                 if(disable){
                    disableForm(true);   
                    //enable sales_force 
-                   var salesforces=document.getElementsByName("salesforceCase");
-                   for(var i=0; i<salesforces.length; i++){
-                       salesforces[i].disabled=false;
-                   }
+//                   var salesforces=document.getElementsByName("salesforceCase");
+//                   for(var i=0; i<salesforces.length; i++){
+//                       salesforces[i].readonly=false;
+//                   }
                 }               
             };
          function enableInput(){
@@ -177,7 +177,7 @@ function checkTomcat(){
         else
             setSelectOption('tomcatVersion',versions);
     }else{
-        tomcatVersion.disabled="disabled";
+        tomcatVersion.readonly=true;
     }
 }
 function checkOsVersion(){
@@ -240,16 +240,16 @@ function saveAsTemplate_db(){
 function requestAction(){
     document.getElementById("salesforceCase").required="required";
     document.getElementById("templateForm").action="RequestServlet";    
-    if(document.getElementById("salesforceCase") !== ""){
-        enableInput();
-    }
+    //if(document.getElementById("salesforceCase").value !== ""){
+    //    enableInput();
+    //}
 }
 function requestAction_db(){
     document.getElementById("salesforceCase_db").required="required";
     document.getElementById("templateForm_db").action="RequestServlet";    
-    if(document.getElementById("salesforceCase_db") !== ""){
-        enableInput();
-    }
+    //if(document.getElementById("salesforceCase_db").value !== ""){
+    //    enableInput();
+    //}
 }
 function displayDatabase(){
     document.getElementById('database_a').focus();
@@ -279,7 +279,7 @@ function displayHadoop(){
          <ul>
             <li><a class="li_menu" id="talend_a" href="#" onclick="displayTalend(); ">Talend component</a></li>
             <li><a  class="li_menu" id ="database_a" href="#" onclick="displayDatabase(); ">Databases</a></li>
-            <li><a  class="li_menu" id ="hadoop_a" href="#" onclick="displayHadoop(); ">Hadoop Cluster</a></li>
+            
         </ul>
         <form  id="templateForm"  style="display: none;" method="post" action="">
             <table  id="talend_table" align="center" style="border:1px solid green; padding:0px 0px;">
