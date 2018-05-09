@@ -17,9 +17,9 @@ String greetString=SFUtils.getGreetingString();
         <td class="td1"><a href="https://wiki.talend.com/display/support/" target="_blank">Support wiki</a></td>
         <td class="td1"><a href="https://cloud.google.com/">Google Cloud</a></td>
         <td class="td1"><a href="https://aws.amazon.com/">AWS</a></td>
-        <td class="td1"><a href="https://apac-support-docker-registry/v2/_catalog">APAC repository</a></td>
-        <td class="td1"><a href="https://emea-support-docker-registry/v2/_catalog">EMEA repository</a></td>
-        <td class="td1"><a href="https://us-support-docker-registry/v2/_catalog">US repository</a></td>
+        <td class="td1"><a href="https://apac.self-service.talend.com/v2/_catalog">APAC repository</a></td>
+        <td class="td1"><a href="https://emea.self-service.talend.com/v2/_catalog">EMEA repository</a></td>
+        <td class="td1"><a href="https://us.self-service.talend.com/v2/_catalog">US repository</a></td>
         <td class="td1"><a href="https://help.talend.com/">Help Talend</a></td>
         
     </tr>

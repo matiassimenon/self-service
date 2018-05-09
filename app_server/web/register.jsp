@@ -90,7 +90,7 @@ servlet but should be the only JSP outside of WEB-INF.
                         </select> </td>
                 </tr>
                 <tr>
-                    <td>Talend Email:</td><td> <input type="email" name="email" placeholder="test@talend.com" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
+                    <td>Talend Email:</td><td> <input type="email" name="email" placeholder="test@talend.com" pattern="[a-z0-9._%+-]+@talend.com$" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
                     <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="true" <%if(user.isAdminRequest()){%>checked="checked" <%}%> ></td>
                 </tr>
                 
