@@ -16,16 +16,15 @@ Object errMessage=request.getAttribute("errMessage");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Self service</title>
+        <title>Provisioning platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
-        <script src="selfservice.js"></script>
-        
+        <script src="selfservice.js"></script>       
     </head>
     <body>
-        <div  id="content">
+        <div  id="content" align="center">
         <%@include file="navigator.jsp"%>
-<script>
+     <script>
         function doSearch(txt){
             document.getElementById("userForm").action="UserListServlet";
             document.getElementById("userForm").submit();
@@ -66,8 +65,10 @@ Object errMessage=request.getAttribute("errMessage");
             document.getElementById("userForm").action="UserListServlet?"+saveString;
             document.getElementById("userForm").submit();
         }
-        </script>        
-        <h3>Users</h3>
+        </script>   
+        <br>
+        <div class="tablecontent">
+        <div class="view">Users</div>
         <form  id="userForm" method="post" >
                 
             <table  align="center"  style="  width: 1200px;">
@@ -143,9 +144,10 @@ Object errMessage=request.getAttribute("errMessage");
                 </tr>
             </table>
              <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>       
-                
         </form>
-        </div>                    
+        </div>
+        </div> 
+    <%@include file="footer.jsp"%>         
     </body>
-    <%@include file="footer.jsp"%>
+    
 </html>

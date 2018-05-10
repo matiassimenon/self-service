@@ -18,7 +18,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Self service</title>
+        <title>Provisioning platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
         <script src="selfservice.js"></script>
@@ -69,12 +69,14 @@
         </script>
     </head>
     <body>
-        <div  id="content">
+        <div  id="content" align="center">
         <%@include file="navigator.jsp"%>
+        <br>
+        <div class="tablecontent">        
         <%if("historyList".equals(type)){%>
-        <h3>History</h3>
+        <div class="view">History</div>
         <%} else{ %>
-        <h3>My Previous Requests</h3>
+        <div class="view">My Previous Requests</div>
         <%}%>
         <form  id="historyForm" method="post" action="">
             <input type="hidden" name="type" value="<%=type%>" />     
@@ -141,7 +143,7 @@
 
         </form>
         </div>
-    </body>
-
-    <%@include file="footer.jsp"%>
+        </div>
+        <%@include file="footer.jsp"%>
+    </body>    
 </html>

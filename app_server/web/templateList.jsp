@@ -1,7 +1,7 @@
 <%-- 
     Document   : templateList.jsp
     Created on : Jan 19, 2018, 11:54:19 AM
-    Author     : francisco
+    Author     : Aiming
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.selfservice.model.User"%>
@@ -17,7 +17,7 @@ Object errMessage=request.getAttribute("errMessage");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Self service</title>
+        <title>Provisioning platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
         <script src="selfservice.js"></script>
@@ -55,9 +55,11 @@ Object errMessage=request.getAttribute("errMessage");
         </script>
     </head>
     <body>
-        <div  id="content">
+        <div  id="content" align="center">
         <%@include file="navigator.jsp"%>
-        <h3>My Templates</h3>
+        <br>
+        <div class="tablecontent">
+        <div class="view">My templates</div>
         <form  id="templateForm" method="post" action="">
 
                     <table  align="center"  style="  width: 800px;">
@@ -122,7 +124,9 @@ Object errMessage=request.getAttribute("errMessage");
                     </table>
                 <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>      
         </form>
-  </div>                    
+    </div>         
+        </div>
+        <%@include file="footer.jsp"%>
     </body>
-    <%@include file="footer.jsp"%>
+    
 </html>

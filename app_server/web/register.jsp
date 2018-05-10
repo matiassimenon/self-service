@@ -17,14 +17,14 @@ servlet but should be the only JSP outside of WEB-INF.
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Support Self Service</title>
+		<title>Provisioning Platform</title>
                 <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
 
                 <script src="selfservice.js"> </script>
      
 	</head>
 	<body>
-	<div  id="content">
+	<div  id="content" align="center">
         <%@include file="navigator.jsp"%>
         <%
         user = (User) request.getAttribute("user");
@@ -57,8 +57,9 @@ servlet but should be the only JSP outside of WEB-INF.
            }
        }
         </script>    
-
-        <h1>Self service Platform Registration</h1>
+        <br><br>
+        <div >
+        <h1>Provisioning Platform</h1>
         <h3>Register</h3>
 	<form id="registerForm" action="SaveUser?register.jsp" method="post">
 		<table id="reg_form"  align="center" style="border:2px solid green; padding:5px 5px;" >
@@ -115,7 +116,9 @@ servlet but should be the only JSP outside of WEB-INF.
 	</form>
             <p>Have an Account? <a href="login.jsp">login</a></p>
             <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>                    
-        </div>                   
+        </div>
+        </div>
+        <%@include file="footer.jsp"%>
 </body>
-<%@include file="footer.jsp"%>
+
 </html>

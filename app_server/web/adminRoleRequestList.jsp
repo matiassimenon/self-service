@@ -14,7 +14,7 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Self service</title>
+        <title>Provisioning platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
     </head>
@@ -41,9 +41,12 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
         }
         </script>
     <body>
-        <div  id="content">
+        <div  id="content" align="center">
         <%@include file="navigator.jsp"%>        
-        <h3>Admin Role Requests</h3>
+        <br>
+        <div class="tablecontent">
+        <div class="view">Admin Role Requests</div>
+        
         <form  id="adminReqForm" method="post" >
 
                     <table  align="center"  style="  width: 1000px;">
@@ -119,7 +122,9 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                     </table>                   
            
         </form>
-        </div>        
+        </div> 
+        </div>
+         <%@include file="footer.jsp"%>
     </body>
-    <%@include file="footer.jsp"%>
+    
 </html>

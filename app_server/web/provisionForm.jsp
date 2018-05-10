@@ -19,7 +19,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Self service</title>
+        <title>Provisioning Platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <style>             
             input,select{
@@ -271,10 +271,11 @@ function displayHadoop(){
 </script>
     </head>
     <body>
-        <div  id="content">
+        <div  id="content" align="center">
         <%@include file="navigator.jsp"%>
-        <h3>Provision Form</h3>
-
+        <br>
+        <div class="tablecontent">
+        <div class="view">Instances</div>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
          <ul>
             <li><a class="li_menu" id="talend_a" href="#" onclick="displayTalend(); ">Talend component</a></li>
@@ -423,6 +424,8 @@ function displayHadoop(){
         </div>
         <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%}%>
         </div>
+        </div>
+        <%@include file="footer.jsp"%>
     </body>
-    <%@include file="footer.jsp"%>
+    
 </html>

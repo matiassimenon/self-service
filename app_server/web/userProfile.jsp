@@ -15,13 +15,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Self service</title>
+        <title>Provisioning platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <script src="selfservice.js"> </script>
      
     </head>
     <body>
-        <div  id="content">
+        <div  id="content" align="center">
         <%@include file="navigator.jsp"%>
         <script>
             window.onload=function(){
@@ -45,9 +45,11 @@
            }
        }            
         </script>   
-        <h3>Profile</h3>
+        <br>
+        <div class="tablecontent">
+        <div class="view">Profile</div>
         <form   method="post" action="SaveUser?userProfile.jsp">
-            	<table id="reg_form"  align="center" style="border:2px solid green; padding:10px 10px;" >
+            	<table id="reg_form"  align="center" style="border:1px solid green; padding:10px 10px;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user.getFirstname()%>"></td>
                     <td>Department:</td>
@@ -103,8 +105,10 @@
                 <tr><td colspan=5 align="center"><button id="submitBtn"  type="submit" >Save</button></td></tr></table>
         </form>
          <% if(errMessage!=null){%> <h4><%=errMessage%></h4> <%}%>
-        </div>               
+        </div>
+        </div>
+        <%@include file="footer.jsp"%>
     </body>
-    <%@include file="footer.jsp"%>
+    
     
 </html>
