@@ -42,7 +42,7 @@ public class DbHelper {
         String database = request.getParameter("database");
         String database_version = request.getParameter("database_version");
         String fromTemplate = request.getParameter("fromTemplate");
-        String salesforce_case= request.getParameter("salesforce_case");
+        String salesforce_case= request.getParameter("salesforceCase");
         int ret = 0;
         if (template_uuid==null || template_uuid.length() == 0) {
             template_uuid = SFUtils.getUUID(9);
