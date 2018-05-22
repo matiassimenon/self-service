@@ -134,7 +134,7 @@ cityArr['EMEA'] =
             {txt: 'Bonn', val: 'cgn'},
             {txt: 'Feldkirchen', val: 'grz'},
             {txt: 'Nantes ', val: 'nte'},
-            {txt: 'Nürnberg', val: 'nue'},
+            {txt: 'Nurnberg', val: 'nue'},
             {txt: 'Suresnes', val: 'sur'},
             {txt: 'Alpnach', val: 'zrh'}
         ];

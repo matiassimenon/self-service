@@ -25,9 +25,9 @@ String greetString=SFUtils.getGreetingString();
     <tr>        
         <!--<td colspan="3" class="td1"><div> <a href="https://www.talend.com/" target="_blank"><img src="talend.png" ></img></a></div>-->
         <td class="td1"><a href="https://wiki.talend.com/display/support/Support+devops/" target="_blank">Devops Wiki</a></td>
-        <td class="td1"><a href="https://apac.self-service.talend.com/v2/_catalog">APAC</a></td>
-        <td class="td1"><a href="https://emea.self-service.talend.com/v2/_catalog">EMEA</a></td>
-        <td class="td1"><a href="https://us.self-service.talend.com/v2/_catalog">US</a></td>
+        <td class="td1"><a href="https://apac.self-service.talend.com/v2/_catalog" target="_blank">APAC</a></td>
+        <td class="td1"><a href="https://emea.self-service.talend.com/v2/_catalog" target="_blank">EMEA</a></td>
+        <td class="td1"><a href="https://us.self-service.talend.com/v2/_catalog" target="_blank">US</a></td>
         <td class="td1"><a href="mailto:support.devops@talend.com">Contact</a></td>
         
     </tr>

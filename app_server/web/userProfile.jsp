@@ -79,7 +79,7 @@
                         </select> </td>
                 </tr>
                 <tr>
-                    <td>Talend Email:</td><td> <input type="email" name="email" placeholder="test@talend.com" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
+                    <td>Talend Email:</td><td> <input type="email" name="email" pattern="[a-z0-9._%+-]+@talend.com" placeholder="test@talend.com" maxlength="50" required="required" value="<%=user.getEmail()%>"></td>
                     <%if (!user.getAdmin()) {%>
                     <td>Admin Request:</td><td><input type="checkbox" id="admin" name="admin"  value="true" <%if(user.isAdminRequest()){%>checked="checked" <%}%>></td>
                     <%}%>
@@ -101,7 +101,7 @@
                         </select></td>
                 
                 </tr>
-                <tr><td>Answer:</td> <td><input name="answer" id="answer"  ></input></td></tr>		
+                <tr><td>Answer:</td> <td><input name="answer" type="password" id="answer"  ></input></td></tr>		
                 <tr><td colspan=5 align="center"><button id="submitBtn"  type="submit" >Save</button></td></tr></table>
         </form>
          <% if(errMessage!=null){%> <h4><%=errMessage%></h4> <%}%>

@@ -2,15 +2,15 @@
 body{
     margin: 20px;
 }
-a:hover, a:focus, button:hover {
+a:hover, a:focus, a:active, a:after, button:hover {
     color: #fff;
     display: inline-block;
     background: #47a3da;
-    text-decoration:none;
 }
+
 .li_menu{
-    width: 128px;
-    padding: 5px;
+    width: 135px;
+     margin: 5px;
 }
 li
 {
