@@ -111,7 +111,7 @@ servlet but should be the only JSP outside of WEB-INF.
                         </select></td>
                 
                 </tr>
-                <tr><td>Answer:</td> <td><input name="answer" id="answer"  ></input></td></tr>
+                <tr><td>Answer:</td> <td><input name="answer" type="password" id="answer"  ></input></td></tr>
                 <tr><td colspan=5 align="center"><button  id="submitBtn" type="submit" >Register</button></td></tr></table>
 	</form>
             <p>Have an Account? <a href="login.jsp">login</a></p>
