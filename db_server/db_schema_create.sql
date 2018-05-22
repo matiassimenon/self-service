@@ -46,13 +46,11 @@ CREATE TABLE `TALEND_TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
   `os` VARCHAR(12) NOT NULL,
   `os_version` CHAR(5) NOT NULL,
-  `talend_version` CHAR(5) NULL,
+  `talend_version` CHAR(5) NOT NULL,
   `talend_component` VARCHAR(12) NULL,
-  `jdk_version` CHAR(2) NULL,
-  `jdk_update` CHAR(3) NULL,
-  `tomcat_version` CHAR(4) NULL,
-  `db_version` CHAR(20) NULL,
-  `db` VARCHAR(20) NULL,
+  `jdk_version` CHAR(2) NOT NULL,
+  `jdk_update` CHAR(3) NOT NULL,
+  `tomcat_version` CHAR(4) NOT NULL,
   PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
@@ -61,8 +59,8 @@ CREATE TABLE `DB_TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
   `os` VARCHAR(12) NOT NULL,
   `os_version` CHAR(5) NOT NULL,
-  `db_version` CHAR(20) NULL,
-  `db` VARCHAR(20) NULL,
+  `db_version` CHAR(20) NOT NULL,
+  `db` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
