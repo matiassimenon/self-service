@@ -254,15 +254,15 @@ function requestAction_db(){
 function displayDatabase(){
     document.getElementById('database_a').focus();
     document.getElementById('templateForm_db').style.display='block';
-    document.getElementById('templateForm_db').style.backgroundColor='#47a3da';
-    document.getElementById('templateForm_db').style.color='#fff';
+    //document.getElementById('templateForm_db').style.backgroundColor='#47a3da';
+    //document.getElementById('templateForm_db').style.color='#fff';
     document.getElementById('templateForm').style.display='none'; //hide talend
 }
 function displayTalend(){
     document.getElementById('talend_a').focus();
     document.getElementById('templateForm').style.display='block';
-    document.getElementById('templateForm').style.backgroundColor='#47a3da';
-    document.getElementById('templateForm').style.color='#fff';
+    //document.getElementById('templateForm').style.backgroundColor='#47a3da';
+    //document.getElementById('templateForm').style.color='#fff';
     document.getElementById('templateForm_db').style.display='none'; //hide talend
 }
 function displayHadoop(){
