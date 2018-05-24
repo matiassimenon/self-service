@@ -99,9 +99,9 @@ webxml="${webRoot.dir}/WEB-INF/web.xml">
   
 
 <target name="deploy" depends="war" description="deploy war">  
-<echo message="begin deploy war to the 3 cluster nodes..." />  
+<echo message="begin deploy war to the us-app-server-test vm..." />  
 <scp file="${dist.dir}/${webapp.name}.war"
-     todir="talend@us-app-server:/opt/tomcat/webapps"
+     todir="talend@35.202.130.54:/opt/tomcat/webapps"
      password="talend" 
      trust="true"
      />
