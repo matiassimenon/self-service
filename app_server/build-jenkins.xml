@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>  
 <project name="self-service" default="deploy" basedir=".">  
 <property environment="env" />  
+
+<property name="user.home" value="/home/talend" /> 
+
 <property name="webapp.name" value="self-service" />  
 <property name="catalina.home" value="/home/talend/tomcat" />  
 <property name="dist.dir" value="${basedir}/dist" />  
@@ -44,8 +47,6 @@
 <target name="clear" description="clear old files">  
 <delete dir="${build.dir}" />  
 <delete dir="${dist.dir}" />  
-<delete file="${catalina.home}/webapps/${webapp.name}.war" />  
-<delete dir="${catalina.home}/webapps/${webapp.name}" />  
 </target>  
   
 <!-- create folder structure -->  
@@ -85,7 +86,7 @@ encoding="UTF-8" classpathref="project.classpath"
 </target>   
 -->  
   
-<!-- 打成war包, 名称默认为 项目名 -->  
+ 
 <target name="war" depends="compile" description="build the project to a war">  
 <echo message="begin war..." />  
 <war destfile="${dist.dir}/${webapp.name}.war" basedir="${webRoot.dir}"   
@@ -98,10 +99,13 @@ webxml="${webRoot.dir}/WEB-INF/web.xml">
 <echo message="end war..." />  
 </target>  
   
-<!-- copy war包 tomcat的deploy目录 -->  
+
 <target name="deploy" depends="war" description="deploy war">  
-<echo message="begin deploy..." />  
-<copy file="${dist.dir}/${webapp.name}.war" todir="${catalina.home}/webapps" />  
+<echo message="begin deploy war to the 3 cluster nodes..." />  
+<scp file="${dist.dir}/${webapp.name}.war"
+     todir="talend@us-app-server:/opt/tomcat/webapps"
+     keyfile="${user.home}/.ssh/gcp-support-self-service.ppk"
+     />
 <echo message="end deploy..." />  
 </target>  
   
