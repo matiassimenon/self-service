@@ -2,12 +2,10 @@
 <project name="self-service" default="deploy" basedir=".">  
 <property environment="env" />  
 
-<property name="user.home" value="/home/talend" /> 
-
 <property name="webapp.name" value="self-service" />  
-<property name="catalina.home" value="/home/talend/tomcat" />  
+<property name="catalina.home" value="/opt/tomcat" />  
 <property name="dist.dir" value="${basedir}/dist" />  
-<property name="ant.dir" value="/home/talend/apache-ant-1.10.3" />  
+<property name="ant.dir" value="/opt/apache-ant" />  
 <property name="webRoot.dir" value="${basedir}/web" />  
 <property name="src.dir" value="${basedir}/src/java" />  
 <property name="lib.dir" value="${webRoot.dir}/WEB-INF/lib" />  
@@ -104,7 +102,8 @@ webxml="${webRoot.dir}/WEB-INF/web.xml">
 <echo message="begin deploy war to the 3 cluster nodes..." />  
 <scp file="${dist.dir}/${webapp.name}.war"
      todir="talend@us-app-server:/opt/tomcat/webapps"
-     keyfile="${user.home}/.ssh/gcp-support-self-service.ppk"
+     password="talend" 
+     trust="true"
      />
 <echo message="end deploy..." />  
 </target>  
