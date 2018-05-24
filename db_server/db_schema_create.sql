@@ -45,8 +45,8 @@ CREATE TABLE `TEMPLATE` (
 CREATE TABLE `TALEND_TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
   `os` VARCHAR(12) NOT NULL,
-  `os_version` CHAR(5) NOT NULL,
-  `talend_version` CHAR(5) NOT NULL,
+  `os_version` CHAR(10) NOT NULL,
+  `talend_version` CHAR(10) NOT NULL,
   `talend_component` VARCHAR(12) NULL,
   `jdk_version` CHAR(2) NOT NULL,
   `jdk_update` CHAR(3) NOT NULL,
@@ -57,8 +57,8 @@ CREATE TABLE `TALEND_TEMPLATE` (
 
 CREATE TABLE `DB_TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
-  `os` VARCHAR(12) NOT NULL,
-  `os_version` CHAR(5) NOT NULL,
+  `os` VARCHAR(10) NOT NULL,
+  `os_version` CHAR(10) NOT NULL,
   `db_version` CHAR(20) NOT NULL,
   `db` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`template_uuid`)
