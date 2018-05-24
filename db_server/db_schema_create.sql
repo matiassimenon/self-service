@@ -34,7 +34,7 @@ CREATE TABLE `USER` (
 
 CREATE TABLE `TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
-  `template_name` VARCHAR(50) NOT NULL,
+  `template_name` VARCHAR(63) NOT NULL,
   `username` VARCHAR(30) NOT NULL,
   `creation_date` DATE NOT NULL,
   `last_edit` DATE NOT NULL,
@@ -44,9 +44,9 @@ CREATE TABLE `TEMPLATE` (
 
 CREATE TABLE `TALEND_TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
-  `os` VARCHAR(12) NOT NULL,
-  `os_version` CHAR(5) NOT NULL,
-  `talend_version` CHAR(5) NOT NULL,
+  `os` VARCHAR(20) NOT NULL,
+  `os_version` CHAR(10) NOT NULL,
+  `talend_version` CHAR(10) NOT NULL,
   `talend_component` VARCHAR(12) NULL,
   `jdk_version` CHAR(2) NOT NULL,
   `jdk_update` CHAR(3) NOT NULL,
@@ -57,9 +57,9 @@ CREATE TABLE `TALEND_TEMPLATE` (
 
 CREATE TABLE `DB_TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
-  `os` VARCHAR(12) NOT NULL,
-  `os_version` CHAR(5) NOT NULL,
-  `db_version` CHAR(20) NOT NULL,
+  `os` VARCHAR(20) NOT NULL,
+  `os_version` CHAR(10) NOT NULL,
+  `db_version` CHAR(10) NOT NULL,
   `db` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
