@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<project name="self-service" default="deploy" basedir=".">  
+<property environment="env" />  
+<property name="webapp.name" value="self-service" />  
+<property name="catalina.home" value="/home/talend/tomcat" />  
+<property name="dist.dir" value="${basedir}/dist" />  
+<property name="ant.dir" value="/home/talend/apache-ant-1.10.3" />  
+<property name="webRoot.dir" value="${basedir}/web" />  
+<property name="src.dir" value="${basedir}/src/java" />  
+<property name="lib.dir" value="${webRoot.dir}/WEB-INF/lib" />  
+<property name="build.dir" value="${basedir}/build" />  
+ 
+  
+<!-- init classpath -->  
+<path id="project.classpath">  
+<fileset dir="${lib.dir}">  
+<include name="**/*.jar" />  
+</fileset>  
+<!-- add tomcat libs -->  
+<fileset dir="${catalina.home}/lib">  
+<include name="*.jar" />  
+</fileset>  
+<!-- ant lib  -->  
+<fileset dir="${ant.dir}">  
+<include name="**/*.jar" />  
+</fileset>  
+</path>  
+  
+<!-- get the source compile classpath in a printable form -->  
+<pathconvert pathsep="${line.separator}|   |-- "  
+ property="echo.path.compile"  
+ refid="project.classpath">  
+</pathconvert>  
+  
+<!-- show classpath jars -->  
+<target name="print_classpath">  
+<echo message="|-- compile classpath"/>  
+<echo message="|   |"/>  
+<echo message="|   |-- ${echo.path.compile}"/>  
+</target>  
+  
+  
+<!-- clear old files -->  
+<target name="clear" description="clear old files">  
+<delete dir="${build.dir}" />  
+<delete dir="${dist.dir}" />  
+<delete file="${catalina.home}/webapps/${webapp.name}.war" />  
+<delete dir="${catalina.home}/webapps/${webapp.name}" />  
+</target>  
+  
+<!-- create folder structure -->  
+<target name="init" depends="clear" description="init project folder structure">  
+<mkdir dir="${build.dir}/classes" />  
+<mkdir dir="${dist.dir}" />  
+</target>  
+  
+<!-- compile java -->  
+<target name="compile" depends="init" description="compile java files">  
+<echo message="begin compile..." />  
+<javac srcdir="${src.dir}" destdir="${build.dir}/classes"   
+includeantruntime="false" nowarn="on"   fork="yes"
+source="1.8" target="1.8" deprecation="true" debug="true"   
+encoding="UTF-8" classpathref="project.classpath"   
+>  
+<compilerarg line="-Xlint:unchecked" />  
+<!-- <classpath refid="project.classpath" /> -->  
+</javac>  
+<copy todir="${build.dir}/classes">  
+<fileset dir="${src.dir}">   
+<include name="**/*.properties" />  
+</fileset>  
+
+</copy>  
+<echo message="end compile..." />  
+</target>  
+  
+<!-- build class as jar -->  
+<!--
+<target name="pack" depends="compile">   
+<jar jarfile="${build.dir}/${webapp.name}.jar">   
+<fileset dir="${build.dir}/classes">   
+<include name="**/*.class"/>   
+</fileset>   
+</jar>   
+</target>   
+-->  
+  
+<!-- 打成war包, 名称默认为 项目名 -->  
+<target name="war" depends="compile" description="build the project to a war">  
+<echo message="begin war..." />  
+<war destfile="${dist.dir}/${webapp.name}.war" basedir="${webRoot.dir}"   
+webxml="${webRoot.dir}/WEB-INF/web.xml">    
+<classes dir="${build.dir}/classes" />  
+<fileset dir="${webRoot.dir}">  
+<include name="***.*" />  
+</fileset>  
+</war>  
+<echo message="end war..." />  
+</target>  
+  
+<!-- copy war包 tomcat的deploy目录 -->  
+<target name="deploy" depends="war" description="deploy war">  
+<echo message="begin deploy..." />  
+<copy file="${dist.dir}/${webapp.name}.war" todir="${catalina.home}/webapps" />  
+<echo message="end deploy..." />  
+</target>  
+  
+</project>  
