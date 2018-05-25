@@ -89,14 +89,15 @@
                 </tr>
             </table>                   
                        
-            <table  id="historyTable" align="center" border="0" bordercolor="#a0c6e5" class="tableClass">
-                <tr>
+            <table  id="historyTable"   class="table table-hover table-condensed" align="center" style="  width: 870px;">
+                <thead>
                     <th>Request Date</th>
                     <th>Request Status</td>
                     <th>Image Name</th>
                     <th>Salesforce Case</th>
                     <th>Username</th>
-                </tr>
+                </thead>
+                <tbody>
                 <%
                     for(Request his: list){
                 %>
@@ -109,34 +110,34 @@
                     <td class="td1"><input type="hidden" value="<%=his.getTemplate_uuid()%>"/></td>
                 </tr>
                 <%}%>
+                </tbody>
             </table>
              <!-- pageing table-->
-             <table align="center">
-                 <tr>
+            <ul class="pagination">
+                 
                     <c:if test="${currentPage != 1}">
-                        <td class="td1"><a href="HistoryServlet?page=${currentPage - 1}&type=${type}">Previous</a></td>
+                        <li><a href="HistoryServlet?page=${currentPage - 1}">&laquo;</a></li>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
                            <c:when test="${currentPage eq i}">
-                               <td class="td1">${i}</td>
+                           <li><a>${i}</a></li>
                            </c:when>
                            <c:otherwise>
-                               <td class="td1"><a href="HistoryServlet?page=${i}&type=${type}">${i}</a></td>
+                           <li><a href="HistoryServlet?page=${i}">${i}</a></li>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                        <td class="td1"><a href="HistoryServlet?page=${currentPage + 1}&type=${type}" >Next</a></td>
+                    <li><a href="HistoryServlet?page=${currentPage + 1}">&raquo;</a></li>
                     </c:if>                               
-                 </tr>
-             </table>
+                 </ul>
             <table  align="center"  class="tableClass">
                 <tr>
                     <td width="685px" class="td1"></td>
                     <td class="td1"  align="right">
-                        <button type="button" id="historyBtn" onclick="useForRequst1();" >Use for Request</button>
+                        <button type="button" id="historyBtn" class="btn btn-success" onclick="useForRequst1();" >Use for Request</button>
                     </td>
                 </tr>
             </table>

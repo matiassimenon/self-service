@@ -19,7 +19,6 @@ servlet but should be the only JSP outside of WEB-INF.
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Provisioning Platform</title>
                 <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-
                 <script src="selfservice.js"> </script>
      
 	</head>
@@ -59,10 +58,10 @@ servlet but should be the only JSP outside of WEB-INF.
         </script>    
         <br><br>
         <div >
-        <h1>Provisioning Platform</h1>
-        <h3>Register</h3>
-	<form id="registerForm" action="SaveUser?register.jsp" method="post">
-		<table id="reg_form"  align="center" style="border:2px solid green; padding:5px 5px;" >
+    <h2 class="text-primary">Provisioning platform</h2>
+    <h3 class="text-primary">Register</h3>
+	<form id="registerForm" class="form-horizontal" action="SaveUser?register.jsp" method="post">
+		<table id="reg_form"  align="center" style="border:1px solid green; padding:5px 5px;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user.getFirstname()%>"></td>
                     <td>Department:</td>
@@ -112,7 +111,7 @@ servlet but should be the only JSP outside of WEB-INF.
                 
                 </tr>
                 <tr><td>Answer:</td> <td><input name="answer" type="password" id="answer"  ></input></td></tr>
-                <tr><td colspan=5 align="center"><button  id="submitBtn" type="submit" >Register</button></td></tr></table>
+                <tr><td colspan=5 align="center"><button  id="submitBtn" class="btn btn-success" type="submit" >Register</button></td></tr></table>
 	</form>
             <p>Have an Account? <a href="login.jsp">login</a></p>
             <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>                    

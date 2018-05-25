@@ -20,6 +20,7 @@ Object errMessage=request.getAttribute("errMessage");
         <title>Provisioning platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
+        
         <script src="selfservice.js"></script>
         <script>
         function doSearch(txt){
@@ -71,7 +72,7 @@ Object errMessage=request.getAttribute("errMessage");
                         </tr>
                     </table>                   
             
-            <table  id ="templateTable" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
+            <table  id ="templateTable" class="table table-hover table-condensed" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
                 <tr>
                     <th>Last Edit</th>
                     <th>Template Name</td>
@@ -89,35 +90,35 @@ Object errMessage=request.getAttribute("errMessage");
                 <%}%>
             </table>
             <!-- pageing table-->
-             <table align="center">
-                 <tr>
+             <ul class="pagination">
+                 
                     <c:if test="${currentPage != 1}">
-                        <td class="td1"><a href="TemplateListServlet?page=${currentPage - 1}">Previous</a></td>
+                        <li><a href="TemplateListServlet?page=${currentPage - 1}">&laquo;</a></li>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
                            <c:when test="${currentPage eq i}">
-                               <td class="td1">${i}</td>
+                           <li><a>${i}</a></li>
                            </c:when>
                            <c:otherwise>
-                               <td class="td1"><a href="TemplateListServlet?page=${i}">${i}</a></td>
+                           <li><a href="TemplateListServlet?page=${i}">${i}</a></li>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                        <td class="td1"><a href="TemplateListServlet?page=${currentPage + 1}">Next</a></td>
+                    <li><a href="TemplateListServlet?page=${currentPage + 1}">&raquo;</a></li>
                     </c:if>                               
-                 </tr>
+                 </ul>
              </table>
                     <table  align="center"  style="  width: 800px;">
                         <tr>
                             <td width="500px" class="td1"></td>
                              <td class="td1"  align="right">
-                             <button type="submit" onclick="deleteTemplate()" >Delete Template</button>
+                             <button type="submit" class="btn btn-success" onclick="deleteTemplate()" >Delete Template</button>
                             </td>
                             <td class="td1"  align="right">
-                                <button id="requestBtn" type="button" onclick="useForRequst();" >Use for Request</button>
+                                <button id="requestBtn" type="button" class="btn btn-success" onclick="useForRequst();" >Use for Request</button>
                             </td>
                             
                         </tr>

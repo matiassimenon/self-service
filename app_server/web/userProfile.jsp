@@ -49,7 +49,7 @@
         <div class="tablecontent">
         <div class="view">Profile</div>
         <form   method="post" action="SaveUser?userProfile.jsp">
-            	<table id="reg_form"  align="center" style="border:1px solid green; padding:10px 10px;" >
+            	<table id="reg_form"  align="center" cellspacing="5" style="border:1px solid green; " >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user.getFirstname()%>"></td>
                     <td>Department:</td>
@@ -88,7 +88,7 @@
                 <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td>
                     <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td> 
                     <td><span id="passwdMsg"></span></td></tr>
-                <tr><td>Question:</td> <td colspan="3" ><select name="question" id="question"  style=" width: 420px;" required="required" onchange="chooseQuestion();">
+                <tr><td>Question:</td> <td colspan="3" ><select name="question" id="question"  style=" width: 430px;" required="required" onchange="chooseQuestion();">
                             <option value="">Please select one question ...</option>
                             <option value="What is the first and last name of your first boyfriend or girlfriend?">What is the first and last name of your first boyfriend or girlfriend?</option>
                             <option value="Which phone number do you remember most from your childhood?">Which phone number do you remember most from your childhood?</option>
@@ -102,7 +102,7 @@
                 
                 </tr>
                 <tr><td>Answer:</td> <td><input name="answer" type="password" id="answer"  ></input></td></tr>		
-                <tr><td colspan=5 align="center"><button id="submitBtn"  type="submit" >Save</button></td></tr></table>
+                <tr><td colspan=5 align="center"><button id="submitBtn" class="btn btn-success" type="submit" >Save</button></td></tr></table>
         </form>
          <% if(errMessage!=null){%> <h4><%=errMessage%></h4> <%}%>
         </div>

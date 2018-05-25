@@ -2,10 +2,10 @@
 body{
     margin: 20px;
 }
-a:hover, a:focus, a:active, a:after, button:hover {
-    color: #fff;
+a:hover, a:focus, button:hover {
+    color: white;
     display: inline-block;
-    background: green;
+    background: graytext;   
 }
 
 .li_menu{
@@ -60,46 +60,26 @@ font-size: 12pt;
     margin: 0;  
     position: absolute;
 }  
-img
-{
-	position:absolute;
-	top:40px;
-	left:100px;
-}
+
 .img_login{
     	position:absolute;
 	top:40px;
 	left:400px;
 }
 
-.label{
-    	position:absolute;
-	top:90px;
-	left:180px;
-}
-.label_login{
-     position:absolute;
-     top:90px;
-     left:480px;
-}
 #content {
    width: 99%;
    min-height:  880px;
    border : 0px solid green;
 }
 .tablecontent{
-    width: 70%;
+    width: 99%;
     border : 0px solid green;
     margin: 5px;
     padding: 5px;
 }
-.rightalign{
-    width: 70%;
-}
-.rightalign_login{
-    width: 40%;
-}
+
 .view{
-    font:italic bold 15px arial,sans-serif;
+    font:italic bold 13px arial,sans-serif;
     color: green;
 }

@@ -366,8 +366,8 @@ function displayHadoop(){
                     </td>                    
                 </tr>
                 <tr><td></td><td></td> <td></td>
-                    <td><button type="submit" id="saveTemplateBtn" onclick="saveAsTemplate()">Save as Template</button> 
-                        <button type="submit" onclick="requestAction()">Request</button></td></tr>
+                    <td><button type="submit" id="saveTemplateBtn" class="btn btn-success" onclick="saveAsTemplate()">Save as Template</button> 
+                        <button type="submit" class="btn btn-success" onclick="requestAction()">Request</button></td></tr>
             </table>                
             <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
         </form>
@@ -415,8 +415,8 @@ function displayHadoop(){
                 </tr>
                 
                 <tr><td></td><td></td> <td></td>
-                    <td><button type="submit" id="saveTemplateBtn" onclick="saveAsTemplate_db()">Save as Template</button> 
-                        <button type="submit" onclick="requestAction_db()">Request</button></td></tr>
+                    <td><button type="submit" id="saveTemplateBtn" class="btn btn-success" onclick="saveAsTemplate_db()">Save as Template</button> 
+                        <button type="submit" class="btn btn-success" onclick="requestAction_db()">Request</button></td></tr>
 
             </table>                
             <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>

@@ -19,6 +19,7 @@ Object errMessage=request.getAttribute("errMessage");
         <title>Provisioning platform</title>
         <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
         <link rel="stylesheet"  type="text/css"  href="table.css"/>
+       
         <script src="selfservice.js"></script>       
     </head>
     <body>
@@ -80,8 +81,8 @@ Object errMessage=request.getAttribute("errMessage");
                 </tr>
             </table>                   
                          
-            <table  id ="userTable" align="center"  bordercolor="#a0c6e5" style="  width: 1200px; border-collapse: collapse;">
-                <tr>
+            <table  id ="userTable" align="center" class="table table-hover table-condensed"  bordercolor="#a0c6e5" style="  width: 1200px; border-collapse: collapse;">
+                <thead>
                     <th>First Name</th>
                     <th>Last Name</td>
                     <th>User Name</th>
@@ -91,7 +92,8 @@ Object errMessage=request.getAttribute("errMessage");
                     <th>Passowrd</th>
                     <th>Region</th>
                     <th>Admin</th>
-                </tr>
+                </thead>
+                <tbody>
                 <%
                     for(User user1: list)   {         
                 %>
@@ -108,37 +110,37 @@ Object errMessage=request.getAttribute("errMessage");
                     
                 </tr>
                 <%}%>
+                </tbody>
             </table>
             <!-- pageing table-->
-             <table align="center">
-                 <tr>
+               <ul class="pagination">
+                 
                     <c:if test="${currentPage != 1}">
-                        <td class="td1"><a href="UserListServlet?page=${currentPage - 1}">Previous</a></td>
+                        <li><a href="UserListServlet?page=${currentPage - 1}">&laquo;</a></li>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
                            <c:when test="${currentPage eq i}">
-                               <td class="td1">${i}</td>
+                           <li><a>${i}</a></li>
                            </c:when>
                            <c:otherwise>
-                               <td class="td1"><a href="UserListServlet?page=${i}">${i}</a></td>
+                           <li><a href="UserListServlet?page=${i}">${i}</a></li>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                        <td class="td1"><a href="UserListServlet?page=${currentPage + 1}">Next</a></td>
+                    <li><a href="UserListServlet?page=${currentPage + 1}">&raquo;</a></li>
                     </c:if>                               
-                 </tr>
-             </table>                
+                 </ul>               
             <table  align="center"  style="  width: 1200px;">
                 <tr>
                     <td width="1000px" class="td1"></td>
                      <td class="td1"  align="right">
-                     <button type="submit" onclick="deleteUsers();" >Delete User</button>
+                     <button type="submit" class="btn btn-success" onclick="deleteUsers();" >Delete User</button>
                     </td>
                     <td class="td1"  align="right">
-                        <button type="submit"  onclick="saveUsers();">Save</button>
+                        <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
                     </td>
 
                 </tr>
