@@ -2,11 +2,7 @@
 body{
     margin: 20px;
 }
-a:hover, a:focus, button:hover {
-    color: green;
-    display: inline-block;
-    background-color:green;
-}
+
 
 li
 {
