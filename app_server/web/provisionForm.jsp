@@ -278,8 +278,8 @@ function displayHadoop(){
         <div class="view">Instances</div>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
          <ul>
-            <li><a class="li_menu" id="talend_a" href="#" onclick="displayTalend(); ">Talend component</a></li>
-            <li><a  class="li_menu" id ="database_a" href="#" onclick="displayDatabase(); ">Databases</a></li>
+            <li><button  class="btn btn-link" id="talend_a"  onclick="displayTalend(); ">Talend component</button></li>
+            <li><button  class="btn btn-link" id ="database_a"  onclick="displayDatabase(); ">Databases</button></li>
             
         </ul>
         <form  id="templateForm"  style="display: none;" method="post" action="">

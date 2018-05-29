@@ -14,7 +14,7 @@ String greetString=SFUtils.getGreetingString();
 <div class="container">
     <div class="row">
    <%if (user != null) {%>       
-   <div class="col-md-5" style="margin: 20px;" ><font color="green"><small>Good <%=greetString%>! <%=user.getFirstname()%></small></font></div>
+   <div class="col-md-6" style="margin: 5px;" ><font color="green"><small>Good <%=greetString%>! <%=user.getFirstname()%></small></font></div>
    <div class="col-md-2"></div>
     <%}else{%>
         <div class="col-md-7"></div>

@@ -3,15 +3,11 @@ body{
     margin: 20px;
 }
 a:hover, a:focus, button:hover {
-    color: white;
+    color: green;
     display: inline-block;
-    background: graytext;   
+    background-color:green;
 }
 
-.li_menu{
-    width: 135px;
-     margin: 5px;
-}
 li
 {
     list-style-type:none;    
