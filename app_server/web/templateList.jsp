@@ -73,11 +73,12 @@ Object errMessage=request.getAttribute("errMessage");
                     </table>                   
             
             <table  id ="templateTable" class="table table-hover table-condensed" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
-                <tr>
+                <thead>
                     <th>Last Edit</th>
                     <th>Template Name</td>
                     
-                </tr>
+                </thead>
+                <tbody>
                 <%
                     for(Template his: list){
                 %>
@@ -88,6 +89,7 @@ Object errMessage=request.getAttribute("errMessage");
                     <td hidden="hidden"><%=his.getTemplate_uuid()%></td>
                 </tr>
                 <%}%>
+                </tbody>
             </table>
             <!-- pageing table-->
              <ul class="pagination">

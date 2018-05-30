@@ -89,7 +89,6 @@ Object errMessage=request.getAttribute("errMessage");
                     <th>E-mail</th>
                     <th>Department</th>
                     <th>City</th>
-                    <th>Passowrd</th>
                     <th>Region</th>
                     <th>Admin</th>
                 </thead>
@@ -104,7 +103,6 @@ Object errMessage=request.getAttribute("errMessage");
                     <td><%=user1.getEmail()%></td>
                     <td><%=user1.getDepartment()%></td>
                     <td><%=user1.getCity()%></td>
-                    <td><%=user1.getPassword()%></td>
                     <td><%=user1.getRegion()%></td> 
                     <td><input type="checkbox" onclick="this.value='1'" <%if(user1.getAdmin()){%>checked="checked"<%}%> /></td>
                     

@@ -20,7 +20,7 @@ String greetString=SFUtils.getGreetingString();
         <div class="col-md-7"></div>
         <%}%>
         <div class="col-md-5">    
-           <ul class="nav nav-pills" style="font:italic bold 9px arial,sans-serif;">
+           <ul class="nav nav-pills" style="font: italic bold 8px arial,sans-serif;">
             <li><a href="https://wiki.talend.com/display/support/Support+devops/" target="_blank">Devops Wiki</a></td>
             <li><a href="https://apac.self-service.talend.com/v2/_catalog" target="_blank">APAC</a></td>
             <li><a href="https://emea.self-service.talend.com/v2/_catalog" target="_blank">EMEA</a></td>
@@ -32,7 +32,7 @@ String greetString=SFUtils.getGreetingString();
     
     <div class="row" >
         <div  class="col-md-2">           
-            <image src="talend_provisioning.jpg"> </image> 
+            <a href="login_blank.jsp" ><image src="talend_provisioning.jpg"> </a></image> 
         </div>
 
 

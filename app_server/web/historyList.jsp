@@ -89,7 +89,7 @@
                 </tr>
             </table>                   
                        
-            <table  id="historyTable"   class="table table-hover table-condensed" align="center" style="  width: 870px;">
+            <table  id="historyTable"   class="table table-hover table-condensed " align="center" style="  width: 870px;">
                 <thead>
                     <th>Request Date</th>
                     <th>Request Status</td>

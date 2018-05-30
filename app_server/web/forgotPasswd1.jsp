@@ -19,7 +19,7 @@
     <body>
         <div  id="content">
              <%@include file="navigator.jsp"%>
-            <h3 class="text-primary">Reset Password Step1</h3>
+            <h3 class="text-primary">Reset Password </h3>
             <form action="ForgotPasswdServlet?step=1" method = "post">
                 <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >
                     <tr><td>Username or Talend Email:</td><td><input type="text" id="username_email" name="username_email"  required="required"></td></tr>

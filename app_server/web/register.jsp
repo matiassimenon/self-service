@@ -58,7 +58,6 @@ servlet but should be the only JSP outside of WEB-INF.
         </script>    
         <br><br>
         <div >
-    <h2 class="text-primary">Provisioning platform</h2>
     <h3 class="text-primary">Register</h3>
 	<form id="registerForm" class="form-horizontal" action="SaveUser?register.jsp" method="post">
 		<table id="reg_form"  align="center" style="border:1px solid green; padding:5px 5px;" >
@@ -70,6 +69,9 @@ servlet but should be the only JSP outside of WEB-INF.
                         <option value="escalation">Escalation</option>   
                         <option value="sales">Sales</option>
                         <option value="rd">RD</option>
+                        <option value="csa">CSA</option>
+                        <option value="pm">PM</option>
+                        <option value="ps">PS</option>
                     </select></td>
                 </tr>
 		<tr>

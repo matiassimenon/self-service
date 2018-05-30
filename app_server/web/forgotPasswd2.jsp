@@ -23,7 +23,7 @@
             <% 
                 User user1 = (User)request.getSession(false).getAttribute("resetUser");
             %>
-            <h3 class="text-primary">Reset Password Step2</h3>
+            <h3 class="text-primary">Reset Password</h3>
             <form action="ForgotPasswdServlet?step=2" method = "post">
                 <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >
                     <tr><td>Question:</td><td><input style="width: 500px"type="text" id="question" readonly name="question"  required="required" value="<%=user1.getQuestion()%>"></td></tr>
