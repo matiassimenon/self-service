@@ -13,22 +13,17 @@
         template.setTalend_component("");
     }
 %>
-<%@page import="com.selfservice.model.User"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Provisioning Platform</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-        <style>             
+<%@include file="logined_left.jsp"%>
+<style>             
             input,select{
-                width: 240px;
+                width: 270px;
                 color:#003366;
 		background-color:#fff;
-            }           
-        </style>
-       
+            }
+            td{
+                border: solid 0px #a0c6e5; height: 20px;               
+            }            
+ </style>       
         <script src="selfservice.js"> </script>
         <script>
             window.onload=function(){
@@ -269,13 +264,15 @@ function displayHadoop(){
     alert("TODO: Please waiting ....");
 }
 </script>
-    </head>
-    <body>
-        <div  id="content" align="center">
-        <%@include file="navigator.jsp"%>
-        <br>
-        <div class="tablecontent">
-        <div class="view">Instances</div>
+   
+<div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
+     <%@include file="navigator.jsp"%>
+     
+    
+
+        <div class="tablecontent" style=" min-height:  800px;" >
+        <div class="text-lg-center color-3">Instances</div>
+        
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
          <ul>
             <li><button  class="btn btn-link" id="talend_a"  onclick="displayTalend(); ">Talend component</button></li>
@@ -420,12 +417,16 @@ function displayHadoop(){
 
             </table>                
             <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
+            <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%}%>
         </form>    
         </div>
-        <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%}%>
         </div>
-        </div>
-        <%@include file="footer.jsp"%>
+        <%@include file="footer.jsp" %>
+</div>
+        </div></div>        
+        </main>
+
+        
     </body>
-    
+
 </html>

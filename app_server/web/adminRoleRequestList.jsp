@@ -10,14 +10,7 @@
 <%
 List<User> list  =(List<User>)request.getAttribute("adminReqList");   
 %>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Provisioning platform</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-        <link rel="stylesheet"  type="text/css"  href="table.css"/>
-    </head>
+<%@include file="logined_left.jsp"%>
        <script>
         function doSearch(txt){
             document.getElementById("adminReqForm").action="AdminRequestServlet";
@@ -40,12 +33,12 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
             document.getElementById("adminReqForm").submit();
         }
         </script>
-    <body>
-        <div  id="content" align="center">
-        <%@include file="navigator.jsp"%>        
-        <br>
-        <div class="tablecontent">
-        <div class="view">Admin Role Requests</div>
+     <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
+     <%@include file="navigator.jsp"%>
+     
+     <div class="tablecontent" style=" min-height:  800px;">
+
+        <div class="text-lg-center color-3">Admin Role Requests</div>
         
         <form  id="adminReqForm" method="post" >
 
@@ -58,7 +51,7 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                         </tr>
                     </table>                   
           
-            <table  id ="adminReqTable" align="center"  bordercolor="#a0c6e5" style="  width: 1000px; border-collapse: collapse;">
+            <table  id ="adminReqTable" align="center"class="table table-hover table-condensed"   bordercolor="#a0c6e5" style="  width: 1000px; border-collapse: collapse;">
                 <tr>
                     <th>First Name</th>
                     <th>Last Name</td>
@@ -89,42 +82,49 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                 <%}%>
             </table>
             <!-- pageing table-->
-             <table align="center">
-                 <tr>
+             <table  align="center">
+                <tr><td class="td1">
+               <ul  class="pagination">
+                 
                     <c:if test="${currentPage != 1}">
-                        <td class="td1"><a href="AdminRequestServlet?page=${currentPage - 1}">Previous</a></td>
+                        <li class="page-item"><a class="page-link" href="AdminRequestServlet?page=${currentPage - 1}">&laquo;</a></li>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
                            <c:when test="${currentPage eq i}">
-                               <td class="td1">${i}</td>
+                           <li class="page-item"><a class="page-link">${i}</a></li>
                            </c:when>
                            <c:otherwise>
-                               <td class="td1"><a href="AdminRequestServlet?page=${i}">${i}</a></td>
+                           <li class="page-item"><a class="page-link" href="AdminRequestServlet?page=${i}">${i}</a></li>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                        <td class="td1"><a href="AdminRequestServlet?page=${currentPage + 1}">Next</a></td>
+                    <li class="page-item"><a class="page-link" href="AdminRequestServlet?page=${currentPage + 1}">&raquo;</a></li>
                     </c:if>                               
-                 </tr>
-             </table> 
+                 </ul> 
+                    </td></tr>
+            </table>
 
                     <table  align="center"  style="  width: 1000px;">
                         <tr>
                             <td width="800px" class="td1"></td>
                             <td class="td1"  align="right">
-                                <button type="submit"  onclick="saveUsers();">Save</button>
+                                <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
                             </td>
                             
                         </tr>
                     </table>                   
            
         </form>
-        </div> 
-        </div>
-         <%@include file="footer.jsp"%>
+         </div>
+        <%@include file="footer.jsp" %>
+</div>
+        </div></div>        
+        </main>
+
+        
     </body>
-    
+
 </html>

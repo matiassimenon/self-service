@@ -3,31 +3,33 @@
     Created on : 2018-4-3, 12:54:26
     Author     : aiming
 --%>
-<%
-    Object errMessage=request.getAttribute("errMessage");
-%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Reset Password</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
+ <%@include file="left.jsp"%>
+    
+ 
+ <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-center align-content-center">
+                        <div class="login-form w-lg-50">
+                            
+                            <h1 class="display-4 accent mb-5"><font color="green">Reset Password </font></h1>
+                            <form  action="ForgotPasswdServlet?step=1" method = "post" class="cozy" >
+                                <div class="form-group control">
+                                    <label class="col-mb-5 control-label">Username or Talend Email</label><input type="text" id="username_email" name="username_email"  required="required" class="form-control">
+                                </div>
+                                
+                                <div class="d-flex align-content-left justify-content-left">
+                                    <button type="submit" class="btn-lg btn-success">Next</button>
+                                    <p><a href="login.jsp">  Login</a> </p> 
+                                    
+                                </div>
+                                <div class="d-flex align-content-left justify-content-left">
+                                    <%if (errMessage != null) {%><h4 style="color: red"><%=errMessage%></h4><%}%>
+                                </div>
+                            </form> 
+                        </div></div>
+                   </div></div>        
+        </main>
 
-    </head>
-
-    <body>
-        <div  id="content">
-             <%@include file="navigator.jsp"%>
-            <h3 class="text-primary">Reset Password </h3>
-            <form action="ForgotPasswdServlet?step=1" method = "post">
-                <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >
-                    <tr><td>Username or Talend Email:</td><td><input type="text" id="username_email" name="username_email"  required="required"></td></tr>
-                    <tr><td align="center" colspan="2"><button class="btn btn-success" type="submit">Next</button> <a align="center" href="login.jsp">Login</a></td></tr>
-                   
-                </table>
-            </form>         
-            <%if (errMessage != null){%><h4><%=errMessage%></h4><%}%>
-        </div>
+        
     </body>
+
 </html>
+            

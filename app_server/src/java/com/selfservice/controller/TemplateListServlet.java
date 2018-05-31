@@ -83,7 +83,7 @@ public class TemplateListServlet extends HttpServlet {
             sql = sql + " order by last_edit DESC";
             //add paging sql
             int page = 1; //current page;
-            int recordsPerPage = 20;
+            int recordsPerPage = 12;
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }

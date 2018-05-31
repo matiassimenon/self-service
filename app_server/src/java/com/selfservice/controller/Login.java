@@ -72,7 +72,7 @@ public class Login extends HttpServlet {
                 req.getSession(false).setAttribute("user", user);
                 //setup session timeout, never timeout
                 //req.getSession(false).setMaxInactiveInterval(-1);
-                resp.sendRedirect(req.getContextPath()+"/login_blank.jsp");    
+                resp.sendRedirect(req.getContextPath()+"/authenticated.jsp");    
                 
             } else {
                 req.setAttribute("errMessage", "<User Does Not Exist! <a href='register.jsp'>Register Here</a>");

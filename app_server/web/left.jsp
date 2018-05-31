@@ -1,8 +1,9 @@
 <%-- 
-    Document   : loginForm
-    Created on : Jan 19, 2018, 11:53:44 AM
-    Author     : francisco
+    Document   : left.jsp
+    Created on : 2018-5-31, 9:54:06
+    Author     : aiming
 --%>
+
 <%
     Object errMessage = request.getAttribute("errMessage");
 %>
@@ -25,7 +26,7 @@
 
                             <figure class="lgo mb-5"><a href="http://www.talend.com" target="_blank"><img src="talend.png" class="imgresponsive" alt="Talend website"></a></figure>
                             <h2 class="bold color-1 mb-4"><span class="font-lg">Welcome</span> <span class="d-block">to Provisioning platform</span></h2>
-                            <p class="lead color-1 alpha-6">Please fill your credentials to get started</p>
+                            
                         </div>
 
                         <div class="feature-footer"><hr class="b-4 d-flex mx-auto">
@@ -34,33 +35,6 @@
                                 <a class="nav-link" href="https://apac.self-service.talend.com/v2/_catalog" target="_blank">APAC</a> 
                                 <a class="nav-link" href="https://emea.self-service.talend.com/v2/_catalog" target="_blank">EMEA</a>
                                 <a class="nav-link" href="https://us.self-service.talend.com/v2/_catalog" target="_blank">US</a>
+                                <a class="nav-link" href="mailto:support.devops@talend.com">Contact</a>
                             </nav>
                         </div></div>
-                    <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-center align-content-center">
-                        <div class="login-form w-lg-50">
-                            <div class="blog-post-nav mb-3">
-                                <a href="register.jsp">     <img src="add_account.png"></img> Signup for a free account</a></div>
-                            <hr class="mb-5"><h1 class="display-4 accent mb-5"><font color="green">Login </font></h1>
-                            <form action="LoginServlet" method="post"  class="cozy" novalidate="">
-                                <div class="form-group control">
-                                    <label class="col-mb-5 control-label">Username</label><input type="text" id="login_username"  name= "username" class="form-control">
-                                </div>
-                                <div class="form-group control">
-                                    <label class="col-mb-5 control-label">Password</label><input type="password" name="password" id="login_password" class="form-control" ></div>
-                                <div class="d-flex align-content-left justify-content-left">
-                                    <button type="submit" class="btn-lg btn-success">Login</button>
-                                    <p><a href="forgotPasswd1.jsp">  Forgot Password?</a> </p> 
-                                    
-                                </div>
-                                <div class="d-flex align-content-left justify-content-left">
-                                    <%if (errMessage != null) {%><h4 style="color: red"><%=errMessage%></h4><%}%>
-                                </div>
-                            </form> 
-                        </div></div>
-                   </div></div>        
-        </main>
-
-        
-    </body>
-
-</html>

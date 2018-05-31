@@ -12,16 +12,7 @@
 Object errMessage=request.getAttribute("errMessage");
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Provisioning platform</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-        <link rel="stylesheet"  type="text/css"  href="table.css"/>
-        
-        <script src="selfservice.js"></script>
+<%@include file="logined_left.jsp"%>
         <script>
         function doSearch(txt){
             document.getElementById("templateForm").action="TemplateListServlet";
@@ -54,13 +45,13 @@ Object errMessage=request.getAttribute("errMessage");
             document.getElementById("templateForm").submit();
         }        
         </script>
-    </head>
-    <body>
-        <div  id="content" align="center">
-        <%@include file="navigator.jsp"%>
-        <br>
-        <div class="tablecontent">
-        <div class="view">My templates</div>
+   <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
+     <%@include file="navigator.jsp"%>
+     
+    
+
+        <div class="tablecontent" style=" min-height:  800px;" >
+        <div class="text-lg-center color-3">My Templates</div>
         <form  id="templateForm" method="post" action="">
 
                     <table  align="center"  style="  width: 800px;">
@@ -92,27 +83,30 @@ Object errMessage=request.getAttribute("errMessage");
                 </tbody>
             </table>
             <!-- pageing table-->
-             <ul class="pagination">
+             <table  align="center">
+                <tr><td class="td1">
+               <ul  class="pagination">
                  
                     <c:if test="${currentPage != 1}">
-                        <li><a href="TemplateListServlet?page=${currentPage - 1}">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="TemplateListServlet?page=${currentPage - 1}">&laquo;</a></li>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
                            <c:when test="${currentPage eq i}">
-                           <li><a>${i}</a></li>
+                           <li class="page-item"><a class="page-link">${i}</a></li>
                            </c:when>
                            <c:otherwise>
-                           <li><a href="TemplateListServlet?page=${i}">${i}</a></li>
+                           <li class="page-item"><a class="page-link" href="TemplateListServlet?page=${i}">${i}</a></li>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                    <li><a href="TemplateListServlet?page=${currentPage + 1}">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="TemplateListServlet?page=${currentPage + 1}">&raquo;</a></li>
                     </c:if>                               
-                 </ul>
-             </table>
+                 </ul> 
+                    </td></tr>
+            </table>
                     <table  align="center"  style="  width: 800px;">
                         <tr>
                             <td width="500px" class="td1"></td>
@@ -127,9 +121,11 @@ Object errMessage=request.getAttribute("errMessage");
                     </table>
                 <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>      
         </form>
-    </div>         
-        </div>
-        <%@include file="footer.jsp"%>
+         </div>
+        <%@include file="footer.jsp" %>
+</div>
+        </div></div>        
+        </main>
+
+        
     </body>
-    
-</html>

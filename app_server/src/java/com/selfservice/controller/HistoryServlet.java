@@ -68,7 +68,7 @@ public class HistoryServlet extends HttpServlet {
             sql = sql + " order by request_date DESC";
             //add paging sql
             int page = 1; //current page;
-            int recordsPerPage = 20;
+            int recordsPerPage = 12;
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }

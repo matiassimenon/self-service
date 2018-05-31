@@ -5,28 +5,11 @@ they are not accessible except through controller process.
 This JSP is here to provide a redirect to the dispatcher
 servlet but should be the only JSP outside of WEB-INF.
 --%>
-<%
-   
-    Object errMessage=request.getAttribute("errMessage");
-%>
-<%@page import="com.selfservice.model.User"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<!DOCTYPE html>
 
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>Provisioning Platform</title>
-                <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-                <script src="selfservice.js"> </script>
-     
-	</head>
-	<body>
-	<div  id="content" align="center">
-        <%@include file="navigator.jsp"%>
+<%@page import="com.selfservice.model.User"%>
+<%@include  file="left.jsp" %>
         <%
-        user = (User) request.getAttribute("user");
+        User user = (User) request.getAttribute("user");
             if (user == null) {
                 user = new User();
             }           
@@ -56,10 +39,12 @@ servlet but should be the only JSP outside of WEB-INF.
            }
        }
         </script>    
-        <br><br>
-        <div >
-    <h3 class="text-primary">Register</h3>
-	<form id="registerForm" class="form-horizontal" action="SaveUser?register.jsp" method="post">
+ <script src="selfservice.js"> </script>
+ <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-center align-content-center">
+                        <div class="login-form w-lg-50">
+                            
+                            <h1 class="display-4 accent mb-5"><font color="green">Register </font></h1>
+	<form id="registerForm" action="SaveUser?register.jsp" method="post" class="cozy" >
 		<table id="reg_form"  align="center" style="border:1px solid green; padding:5px 5px;" >
 		<tr>
                     <td>First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user.getFirstname()%>"></td>
@@ -116,10 +101,13 @@ servlet but should be the only JSP outside of WEB-INF.
                 <tr><td colspan=5 align="center"><button  id="submitBtn" class="btn btn-success" type="submit" >Register</button></td></tr></table>
 	</form>
             <p>Have an Account? <a href="login.jsp">login</a></p>
-            <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>                    
-        </div>
-        </div>
-        <%@include file="footer.jsp"%>
-</body>
+            <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>       
+            
+  </div></div>
+                   </div></div>        
+        </main>
+
+        
+    </body>
 
 </html>

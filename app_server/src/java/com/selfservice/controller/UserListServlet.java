@@ -113,7 +113,7 @@ public class UserListServlet extends HttpServlet {
             sql = sql + " order by firstname ASC";
             //add paging sql
             int page = 1; //current page;
-            int recordsPerPage = 15;
+            int recordsPerPage = 12;
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }

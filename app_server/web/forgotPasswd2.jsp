@@ -4,34 +4,37 @@
     Author     : aiming
 --%>
 <%@page import="com.selfservice.model.User"%>
-<%
-    Object errMessage=request.getAttribute("errMessage");
-%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Reset Password</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-        
-    </head>
-
-    <body>
-        <div  id="content">
-            <%@include file="navigator.jsp"%>
-            <% 
+ <%@include file="left.jsp"%>
+             <% 
                 User user1 = (User)request.getSession(false).getAttribute("resetUser");
-            %>
-            <h3 class="text-primary">Reset Password</h3>
-            <form action="ForgotPasswdServlet?step=2" method = "post">
-                <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >
-                    <tr><td>Question:</td><td><input style="width: 500px"type="text" id="question" readonly name="question"  required="required" value="<%=user1.getQuestion()%>"></td></tr>
-                    <tr><td>Answer</td><td><input type="text" style="width: 500px" id="answer" name="answer"  required="required"></td></tr>
-                    <tr><td align="center" colspan="2"><button class="btn btn-success" type="submit">Next</button> <a align="center" href="login.jsp">Login</a></td></tr>
-                </table>
-            </form>      
-            <%if (errMessage != null){%><h4><%=errMessage%></h4><%}%>        
-        </div>
+            %>   
+ 
+ <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-center align-content-center">
+                        <div class="login-form w-lg-50">
+                            
+                            <h1 class="display-4 accent mb-5"><font color="green">Reset Password </font></h1>
+                            <form  action="ForgotPasswdServlet?step=2" method = "post" class="cozy" >
+                                <div class="form-group control">
+                                    <label class="col-mb-6 control-label">Question</label><input type="text"  id="question" readonly name="question"  required="required" value="<%=user1.getQuestion()%>" class="form-control">
+                                </div>
+                                <div class="form-group control">
+                                    <label class="col-mb-6 control-label">Answer</label><input type="text"  id="answer" name="answer"  required="required" class="form-control">
+                                </div>
+                                <div class="d-flex align-content-left justify-content-left">
+                                    <button type="submit" class="btn-lg btn-success">Next</button>
+                                    <p><a href="login.jsp">  Login</a> </p> 
+                                    
+                                </div>
+                                <div class="d-flex align-content-left justify-content-left">
+                                    <%if (errMessage != null) {%><h4 style="color: red"><%=errMessage%></h4><%}%>
+                                </div>
+                            </form> 
+                        </div></div>
+                   </div></div>        
+        </main>
+
+        
     </body>
+
 </html>
+            

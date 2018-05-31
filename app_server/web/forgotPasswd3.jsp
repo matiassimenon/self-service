@@ -4,34 +4,42 @@
     Author     : aiming
 --%>
 <%@page import="com.selfservice.model.User"%>
-<%
-    Object errMessage=request.getAttribute("errMessage");
-%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Reset Password</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-    </head>
-
-    <body>
-        <div  id="content">
-            <%@include file="navigator.jsp"%>
-            <% 
+ <%@include file="left.jsp"%>
+             <% 
                 User user1 = (User)request.getSession(false).getAttribute("resetUser");
-            %>            
-            <h3 class="text-primary">Reset Password</h3>
-            <form action="ForgotPasswdServlet?step=3" method = "post">
-                <table id="login_form" cellspacing="20" align="center" style="border:2px solid green;" >
-                    <tr><td>Username:</td><td><input type="text" id="username" name="username"  readonly value="<%=user1.getUsername()%>"></td></tr>
-                    <tr><td>New Password:</td><td><input type="password" id="password1" name="password1" required="required" onkeyup="checkPasswd();"></td></tr>
-                    <tr><td>Retry Password:</td><td><input type="password" id="password2" name="password2" required="required" onkeyup="checkPasswd();"></td></tr>
-                    <tr><td align="center"><button type="submit" class="btn btn-success" id="submitBtn">Reset</button></td><td><a align="center" href="login.jsp">Cancel</a></td></tr>
-                </table>
-            </form>         
-            <%if (errMessage != null){%><h4><%=errMessage%></h4><%}%>   
-        </div>
+            %>   
+ <script src="selfservice.js"> </script>
+ <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-center align-content-center">
+                        <div class="login-form w-lg-50">
+                            
+                            <h1 class="display-4 accent mb-5"><font color="green">Reset Password </font></h1>
+                            <form  action="ForgotPasswdServlet?step=3" method = "post" class="cozy" >
+                                <div class="form-group control">
+                                    <label class="col-mb-6 control-label">Username</label><input type="text"  id="username" name="username"  readonly value="<%=user1.getUsername()%>" class="form-control">
+                                </div>
+                                <div class="form-group control">
+                                    <label class="col-mb-6 control-label">New password</label><input type="password" id="password1" name="password1" required="required" onkeyup="checkPasswd();" class="form-control">
+                                </div>
+                                <div class="form-group control">
+                                    <label class="col-mb-6 control-label">Retry password</label><input type="password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" class="form-control">
+                                </div>
+                                <div class="d-flex align-content-left justify-content-left">
+                                    <button type="submit" id="submitBtn" class="btn-lg btn-success">Reset</button>
+                                    <p><a href="login.jsp">Cancel</a> </p>
+                                    
+                                    <p id="passwdMsg"></p>
+                                    
+                                </div>
+                                <div class="d-flex align-content-left justify-content-left">
+                                    <%if (errMessage != null) {%><h4 style="color: red"><%=errMessage%></h4><%}%>
+                                </div>
+                            </form> 
+                        </div></div>
+                   </div></div>        
+        </main>
+
+        
     </body>
+
 </html>
+            

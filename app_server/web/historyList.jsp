@@ -13,15 +13,7 @@
  String type=(String)request.getAttribute("type");
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Provisioning platform</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-        <link rel="stylesheet"  type="text/css"  href="table.css"/>
-        <script src="selfservice.js"></script>
+<%@include file="logined_left.jsp"%>
         <script>
         function doSearch(txt){
             document.getElementById("historyForm").action="HistoryServlet";
@@ -67,29 +59,32 @@
             document.getElementById("historyForm").submit();
         }        
         </script>
-    </head>
-    <body>
-        <div  id="content" align="center">
-        <%@include file="navigator.jsp"%>
-        <br>
-        <div class="tablecontent">        
+ <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
+     <%@include file="navigator.jsp"%>
+     
+    
+
+        <div class="tablecontent" style=" min-height:  800px;" >
+        
+        
         <%if("historyList".equals(type)){%>
-        <div class="view">History</div>
+        <div class="text-lg-center color-3">History</div>
         <%} else{ %>
-        <div class="view">My Previous Requests</div>
+        <div class="text-lg-center color-3">My Previous Requests</div>
         <%}%>
-        <form  id="historyForm" method="post" action="">
+        
+        <form  id="historyForm"  method="post" action="" >
             <input type="hidden" name="type" value="<%=type%>" />     
             <table  align="center"  class="tableClass">
                 <tr>
-                    <td width="650px" class="td1"></td>
+                    <td width="800px" class="td1"></td>
                     <td class="td1" align="right" >                                
                         <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
                     </td>
                 </tr>
             </table>                   
                        
-            <table  id="historyTable"   class="table table-hover table-condensed " align="center" style="  width: 870px;">
+            <table  id="historyTable"   class="table table-hover table-condensed " align="center" style="  width: 1000px; border-collapse: collapse;">
                 <thead>
                     <th>Request Date</th>
                     <th>Request Status</td>
@@ -113,29 +108,33 @@
                 </tbody>
             </table>
              <!-- pageing table-->
-            <ul class="pagination">
+             <table  align="center">
+                <tr><td class="td1">
+               <ul  class="pagination">
                  
                     <c:if test="${currentPage != 1}">
-                        <li><a href="HistoryServlet?page=${currentPage - 1}">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="HistoryServlet?page=${currentPage - 1}">&laquo;</a></li>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
                            <c:when test="${currentPage eq i}">
-                           <li><a>${i}</a></li>
+                           <li class="page-item"><a class="page-link">${i}</a></li>
                            </c:when>
                            <c:otherwise>
-                           <li><a href="HistoryServlet?page=${i}">${i}</a></li>
+                           <li class="page-item"><a class="page-link" href="HistoryServlet?page=${i}">${i}</a></li>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                    <li><a href="HistoryServlet?page=${currentPage + 1}">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="HistoryServlet?page=${currentPage + 1}">&raquo;</a></li>
                     </c:if>                               
-                 </ul>
+                 </ul> 
+                    </td></tr>
+            </table>
             <table  align="center"  class="tableClass">
                 <tr>
-                    <td width="685px" class="td1"></td>
+                    <td width="800px" class="td1"></td>
                     <td class="td1"  align="right">
                         <button type="button" id="historyBtn" class="btn btn-success" onclick="useForRequst1();" >Use for Request</button>
                     </td>
@@ -143,8 +142,11 @@
             </table>
 
         </form>
-        </div>
-        </div>
-        <%@include file="footer.jsp"%>
-    </body>    
-</html>
+         </div>
+        <%@include file="footer.jsp" %>
+</div>
+        </div></div>        
+        </main>
+
+        
+    </body>

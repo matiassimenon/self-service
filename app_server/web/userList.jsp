@@ -11,21 +11,9 @@ List<User> list  =(List<User>)request.getAttribute("userList");
 Object errMessage=request.getAttribute("errMessage");
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Provisioning platform</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-        <link rel="stylesheet"  type="text/css"  href="table.css"/>
-       
-        <script src="selfservice.js"></script>       
-    </head>
-    <body>
-        <div  id="content" align="center">
-        <%@include file="navigator.jsp"%>
-     <script>
+<%@include file="logined_left.jsp"%>
+
+    <script>
         function doSearch(txt){
             document.getElementById("userForm").action="UserListServlet";
             document.getElementById("userForm").submit();
@@ -66,10 +54,14 @@ Object errMessage=request.getAttribute("errMessage");
             document.getElementById("userForm").action="UserListServlet?"+saveString;
             document.getElementById("userForm").submit();
         }
-        </script>   
-        <br>
-        <div class="tablecontent">
-        <div class="view">Users</div>
+        </script>
+        
+ <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
+     <%@include file="navigator.jsp"%>
+     
+     <div class="tablecontent" style=" min-height:  800px;">
+
+        <div class="text-lg-center color-3">Users</div>
         <form  id="userForm" method="post" >
                 
             <table  align="center"  style="  width: 1200px;">
@@ -111,26 +103,32 @@ Object errMessage=request.getAttribute("errMessage");
                 </tbody>
             </table>
             <!-- pageing table-->
-               <ul class="pagination">
+
+            <table  align="center">
+                <tr><td class="td1">
+               <ul  class="pagination">
                  
                     <c:if test="${currentPage != 1}">
-                        <li><a href="UserListServlet?page=${currentPage - 1}">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="UserListServlet?page=${currentPage - 1}">&laquo;</a></li>
                     </c:if>
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                        <c:choose>
                            <c:when test="${currentPage eq i}">
-                           <li><a>${i}</a></li>
+                           <li class="page-item"><a class="page-link">${i}</a></li>
                            </c:when>
                            <c:otherwise>
-                           <li><a href="UserListServlet?page=${i}">${i}</a></li>
+                           <li class="page-item"><a class="page-link" href="UserListServlet?page=${i}">${i}</a></li>
                            </c:otherwise>
                        </c:choose>
                    </c:forEach>    
                     <%--For displaying Next link --%>
                     <c:if test="${currentPage lt noOfPages}">
-                    <li><a href="UserListServlet?page=${currentPage + 1}">&raquo;</a></li>
+                    <li class="page-item"><a class="page-link" href="UserListServlet?page=${currentPage + 1}">&raquo;</a></li>
                     </c:if>                               
-                 </ul>               
+                 </ul> 
+                    </td></tr>
+            </table>
+          
             <table  align="center"  style="  width: 1200px;">
                 <tr>
                     <td width="1000px" class="td1"></td>
@@ -145,9 +143,14 @@ Object errMessage=request.getAttribute("errMessage");
             </table>
              <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>       
         </form>
+             
         </div>
-        </div> 
-    <%@include file="footer.jsp"%>         
+        <%@include file="footer.jsp" %>
+</div>
+        </div></div>        
+        </main>
+
+        
     </body>
-    
+
 </html>

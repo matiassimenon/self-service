@@ -10,19 +10,12 @@
     Object errMessage=request.getAttribute("errMessage");
 %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Provisioning platform</title>
-        <link rel="stylesheet"  type="text/css"  href="selfservice.css"/>
-        <script src="selfservice.js"> </script>
-     
-    </head>
-    <body>
-        <div  id="content" align="center">
-        <%@include file="navigator.jsp"%>
+<%@include file="logined_left.jsp"%>
+<style>             
+            td{
+                border: solid 0px #a0c6e5; height: 20px;               
+            }            
+ </style> 
         <script>
             window.onload=function(){
                 var region="<%=user.getRegion()%>";
@@ -45,9 +38,13 @@
            }
        }            
         </script>   
-        <br>
-        <div class="tablecontent">
-        <div class="view">Profile</div>
+       <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
+     <%@include file="navigator.jsp"%>
+     
+    
+
+        <div class="tablecontent" style=" min-height:  800px;" >
+        <div class="text-lg-center color-3">Profile</div>
         <form   method="post" action="SaveUser?userProfile.jsp">
             	<table id="reg_form"  align="center" cellspacing="5" style="border:1px solid green; " >
 		<tr>
@@ -90,7 +87,7 @@
                 <tr><td>Password:</td><td> <input type="password" id="password1" placeholder="password" name="password1" maxlength="20"  required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td>
                     <td> <input type="password" maxlength="20" placeholder="Re-try password" id="password2" name="password2" required="required" onkeyup="checkPasswd();" value="<%=user.getPassword()%>"></td> 
                     <td><span id="passwdMsg"></span></td></tr>
-                <tr><td>Question:</td> <td colspan="3" ><select name="question" id="question"  style=" width: 430px;" required="required" onchange="chooseQuestion();">
+                <tr><td>Question:</td> <td colspan="3" ><select name="question" id="question"  style=" width: 460px;" required="required" onchange="chooseQuestion();">
                             <option value="">Please select one question ...</option>
                             <option value="What is the first and last name of your first boyfriend or girlfriend?">What is the first and last name of your first boyfriend or girlfriend?</option>
                             <option value="Which phone number do you remember most from your childhood?">Which phone number do you remember most from your childhood?</option>
@@ -105,12 +102,16 @@
                 </tr>
                 <tr><td>Answer:</td> <td><input name="answer" type="password" id="answer"  ></input></td></tr>		
                 <tr><td colspan=5 align="center"><button id="submitBtn" class="btn btn-success" type="submit" >Save</button></td></tr></table>
+                <% if(errMessage!=null){%> <h4><%=errMessage%></h4> <%}%>
         </form>
-         <% if(errMessage!=null){%> <h4><%=errMessage%></h4> <%}%>
+         
         </div>
-        </div>
-        <%@include file="footer.jsp"%>
+        <%@include file="footer.jsp" %>
+</div>
+        </div></div>        
+        </main>
+
+        
     </body>
-    
-    
+
 </html>

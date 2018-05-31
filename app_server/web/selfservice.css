@@ -3,7 +3,6 @@ body{
     margin: 20px;
 }
 
-
 li
 {
     list-style-type:none;    
@@ -14,35 +13,23 @@ select{
 input{
     width: 140px;
 }
-h1,h2,h3,h4{
-margin:25px;
-text-align:center;
-background-color:#fff; 
-color:#003366;
-}
+
 .save_err{
     margin:25px;
     text-align:center;
-    background-color:#fff;
     color:red;
 }
 .save_ok{
     margin:25px;
     text-align:center;
-    background-color:#fff;
     color:green;
 }
 
 .form{
     padding:5px 5px;
-    background-color:#fff;    
     border-radius:5px;
     border:2px solid green;
     margin: 2em;
-}
-p{
-text-align:center;
-font-size: 12pt;
 }
 
 #footer {     
@@ -53,25 +40,17 @@ font-size: 12pt;
     position: absolute;
 }  
 
-.img_login{
-    	position:absolute;
-	top:40px;
-	left:400px;
+h4{
+margin:25px;
+text-align:center;
+color:#003366;
 }
 
-#content {
-   width: 99%;
-   min-height:  880px;
-   border : 0px solid green;
-}
 .tablecontent{
     width: 99%;
+    min-height:  800px;
     border : 0px solid green;
     margin: 5px;
     padding: 5px;
 }
 
-.view{
-    font:italic bold 13px arial,sans-serif;
-    color: green;
-}
