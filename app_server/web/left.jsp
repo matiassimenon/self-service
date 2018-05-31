@@ -3,9 +3,13 @@
     Created on : 2018-5-31, 9:54:06
     Author     : aiming
 --%>
-
+<%@page import="com.selfservice.model.User"%>
+<%@page import="com.selfservice.util.SFUtils"%>
 <%
-    Object errMessage = request.getAttribute("errMessage");
+User user = (User)request.getSession(false).getAttribute("user");
+String greetString=SFUtils.getGreetingString();
+
+ Object errMessage = request.getAttribute("errMessage");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,6 +18,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="description" content=""><meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Provisioning Platform</title>
+        <link rel="stylesheet"  type="text/css"  href="table.css"/>
+        <script src="selfservice.js"></script>         
         <link rel="stylesheet" href="cronos.css">        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     </head>
@@ -25,6 +31,7 @@
                             <p class=" mb-5"></p>
 
                             <figure class="lgo mb-5"><a href="http://www.talend.com" target="_blank"><img src="talend.png" class="imgresponsive" alt="Talend website"></a></figure>
+                            <%if (user != null){%><h2 class="bold color-1 mb-4"><span class="font-regular">Good <%=greetString%>! <%=user.getFirstname()%></span> </h2><%}%>
                             <h2 class="bold color-1 mb-4"><span class="font-lg">Welcome</span> <span class="d-block">to Provisioning platform</span></h2>
                             
                         </div>

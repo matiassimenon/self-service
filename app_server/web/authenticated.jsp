@@ -4,7 +4,7 @@
     Author     : aiming
 --%>
 
- <%@include file="logined_left.jsp"%>
+ <%@include file="left.jsp"%>
  <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
      <%@include file="navigator.jsp"%>
      <p class=" mb-5"></p>

@@ -13,7 +13,7 @@
  String type=(String)request.getAttribute("type");
 %>
 
-<%@include file="logined_left.jsp"%>
+<%@include file="left.jsp"%>
         <script>
         function doSearch(txt){
             document.getElementById("historyForm").action="HistoryServlet";
@@ -75,9 +75,9 @@
         
         <form  id="historyForm"  method="post" action="" >
             <input type="hidden" name="type" value="<%=type%>" />     
-            <table  align="center"  class="tableClass">
+            <table  align="center"  >
                 <tr>
-                    <td width="800px" class="td1"></td>
+                    <td width="830px" class="td1"></td>
                     <td class="td1" align="right" >                                
                         <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
                     </td>
@@ -102,7 +102,7 @@
                     <td><%=his.getImagename()%></td>
                     <td><%=his.getSalesforce_case()%></td>
                     <td><%=his.getUsername()%></td>
-                    <td class="td1"><input type="hidden" value="<%=his.getTemplate_uuid()%>"/></td>
+                    <td class="td1" style="display:none;"><input type="hidden" value="<%=his.getTemplate_uuid()%>"/></td>
                 </tr>
                 <%}%>
                 </tbody>
@@ -132,9 +132,9 @@
                  </ul> 
                     </td></tr>
             </table>
-            <table  align="center"  class="tableClass">
+            <table  align="center"  >
                 <tr>
-                    <td width="800px" class="td1"></td>
+                    <td width="850px" class="td1"></td>
                     <td class="td1"  align="right">
                         <button type="button" id="historyBtn" class="btn btn-success" onclick="useForRequst1();" >Use for Request</button>
                     </td>

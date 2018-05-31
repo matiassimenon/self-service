@@ -9,10 +9,9 @@
 <%@page import="java.util.List"%>
 <%
  List<Template> list  =(List<Template>)request.getAttribute("templateList");  
-Object errMessage=request.getAttribute("errMessage");
 %>
 
-<%@include file="logined_left.jsp"%>
+<%@include file="left.jsp"%>
         <script>
         function doSearch(txt){
             document.getElementById("templateForm").action="TemplateListServlet";

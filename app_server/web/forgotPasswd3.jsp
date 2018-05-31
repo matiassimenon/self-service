@@ -9,9 +9,9 @@
                 User user1 = (User)request.getSession(false).getAttribute("resetUser");
             %>   
  <script src="selfservice.js"> </script>
- <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-center align-content-center">
+ <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-top align-content-center">
                         <div class="login-form w-lg-50">
-                            
+                            <p class="display-4 accent mb-5">
                             <h1 class="display-4 accent mb-5"><font color="green">Reset Password </font></h1>
                             <form  action="ForgotPasswdServlet?step=3" method = "post" class="cozy" >
                                 <div class="form-group control">

@@ -8,11 +8,11 @@
 <%@page import="java.util.List"%>
 <%
 List<User> list  =(List<User>)request.getAttribute("userList");   
-Object errMessage=request.getAttribute("errMessage");
 %>
 
-<%@include file="logined_left.jsp"%>
-
+<%@include file="left.jsp"%>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function doSearch(txt){
             document.getElementById("userForm").action="UserListServlet";
@@ -26,7 +26,8 @@ Object errMessage=request.getAttribute("errMessage");
                 if(rows[i].selected == 'true'){
                     var uname= rows[i].cells[2].innerText;
                     if(uname === "<%=user.getUsername()%>" ){
-                        alert("It's not allowed to delete current login user!")
+                        //alert("It's not allowed to delete current login user!")
+                        $('#myAlert').show();
                         return;
                     }                    
                     deleteString += rows[i].cells[2].innerText + "&";
@@ -138,8 +139,13 @@ Object errMessage=request.getAttribute("errMessage");
                     <td class="td1"  align="right">
                         <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
                     </td>
-
                 </tr>
+                <tr><td class="td1">
+                    <div  id="myAlert" class="alert alert-warning collapse">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                        <strong>Error </strong>It's not allowed to delete current login user!
+                    </div>
+                    </td></tr>
             </table>
              <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>       
         </form>
@@ -150,7 +156,7 @@ Object errMessage=request.getAttribute("errMessage");
         </div></div>        
         </main>
 
-        
+      
     </body>
 
 </html>

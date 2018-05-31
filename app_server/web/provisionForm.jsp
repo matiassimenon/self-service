@@ -5,7 +5,6 @@
 --%>
 <%@page import="com.selfservice.model.Template"%>
 <%
-    Object errMessage=request.getAttribute("errMessage");
     Object fromTemplate=request.getAttribute("fromTemplate");
     Template template=(Template)request.getAttribute("template");
     if(template == null ){
@@ -13,7 +12,7 @@
         template.setTalend_component("");
     }
 %>
-<%@include file="logined_left.jsp"%>
+<%@include file="left.jsp"%>
 <style>             
             input,select{
                 width: 270px;

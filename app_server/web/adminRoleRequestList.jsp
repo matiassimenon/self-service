@@ -10,7 +10,7 @@
 <%
 List<User> list  =(List<User>)request.getAttribute("adminReqList");   
 %>
-<%@include file="logined_left.jsp"%>
+<%@include file="left.jsp"%>
        <script>
         function doSearch(txt){
             document.getElementById("adminReqForm").action="AdminRequestServlet";

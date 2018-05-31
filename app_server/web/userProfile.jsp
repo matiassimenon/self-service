@@ -5,12 +5,8 @@
 --%>
 <%@page import="java.util.List"%>
 <%@page import="com.selfservice.model.User"%>
-<%
-   
-    Object errMessage=request.getAttribute("errMessage");
-%>
 
-<%@include file="logined_left.jsp"%>
+<%@include file="left.jsp"%>
 <style>             
             td{
                 border: solid 0px #a0c6e5; height: 20px;               
