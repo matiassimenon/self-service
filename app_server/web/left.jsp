@@ -18,12 +18,20 @@ String greetString=SFUtils.getGreetingString();
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="description" content=""><meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Provisioning Platform</title>
-        <link rel="stylesheet"  type="text/css"  href="table.css"/>
+        <SCRIPT type="text/javascript">
+	window.history.forward();
+	function noBack() { window.history.forward(); }
+        </SCRIPT>
         <script src="selfservice.js"></script>         
-        <link rel="stylesheet" href="cronos.css">        
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <link rel="stylesheet" href="cronos.css">       
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>        
+               
+        <link rel="stylesheet"  type="text/css"  href="table.css"/>
     </head>
-    <body >
+    <body onload="noBack();" 	onpageshow="if (event.persisted) noBack();" onunload="">
         <div class="nav-overlay bg-5 alpha-8 gradient"></div><main>
             <div class="container-fluid"><div class="fullscreen row">
                     <div class="col-lg-4 bg-5-gradient py-4 d-flex flex-column align-items-center justify-content-center justify-content-lg-between">

@@ -11,8 +11,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
 %>
 
 <%@include file="left.jsp"%>
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <script>
         function doSearch(txt){
             document.getElementById("userForm").action="UserListServlet";
@@ -65,13 +64,13 @@ List<User> list  =(List<User>)request.getAttribute("userList");
         <div class="text-lg-center color-3">Users</div>
         <form  id="userForm" method="post" >
                 
-            <table  align="center"  style="  width: 1200px;">
+            <table  class="table" align="center"  style="  width: 1200px;">
                 <tr>
-                    <td width="650px" class="td1"></td>
+                  
                     <td class="td1" align="right" >                                
                         <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
                     </td>
-                </tr>
+                </tr>                
             </table>                   
                          
             <table  id ="userTable" align="center" class="table table-hover table-condensed"  bordercolor="#a0c6e5" style="  width: 1200px; border-collapse: collapse;">
@@ -130,24 +129,22 @@ List<User> list  =(List<User>)request.getAttribute("userList");
                     </td></tr>
             </table>
           
-            <table  align="center"  style="  width: 1200px;">
-                <tr>
-                    <td width="1000px" class="td1"></td>
-                     <td class="td1"  align="right">
-                     <button type="submit" class="btn btn-success" onclick="deleteUsers();" >Delete User</button>
-                    </td>
-                    <td class="td1"  align="right">
-                        <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
-                    </td>
-                </tr>
-                <tr><td class="td1">
+            <table  align="center"  class="table" style="  width: 1200px;">
+                <tr>                   
+                    <td class="td1"  style="text-align: left">
                     <div  id="myAlert" class="alert alert-warning collapse">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
                         <strong>Error </strong>It's not allowed to delete current login user!
-                    </div>
-                    </td></tr>
+                    </div>  
+                    </td>
+                    <td class="td1"  align="right">
+                     <button type="submit" class="btn btn-success" onclick="deleteUsers();" >Delete User</button>
+                        <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
+                    </td>
+                </tr>
+
             </table>
-             <%if (errMessage!= null ){%><h4><%=errMessage%></h4><%} %>       
+                 
         </form>
              
         </div>

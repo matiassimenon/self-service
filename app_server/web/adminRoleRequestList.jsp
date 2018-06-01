@@ -38,13 +38,13 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
      
      <div class="tablecontent" style=" min-height:  800px;">
 
-        <div class="text-lg-center color-3">Admin Role Requests</div>
+        <div class="text-lg-center color-3">Role Management</div>
         
         <form  id="adminReqForm" method="post" >
 
-                    <table  align="center"  style="  width: 1000px;">
+                    <table  class="table" align="center"  style="  width: 1000px;">
                         <tr>
-                            <td width="650px" class="td1"></td>
+                            
                             <td class="td1" align="right" >                                
                                 <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
                             </td>
@@ -107,9 +107,8 @@ List<User> list  =(List<User>)request.getAttribute("adminReqList");
                     </td></tr>
             </table>
 
-                    <table  align="center"  style="  width: 1000px;">
+                    <table  class="table" align="center"  style="  width: 1000px;">
                         <tr>
-                            <td width="800px" class="td1"></td>
                             <td class="td1"  align="right">
                                 <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
                             </td>

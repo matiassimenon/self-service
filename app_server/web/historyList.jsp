@@ -75,9 +75,8 @@
         
         <form  id="historyForm"  method="post" action="" >
             <input type="hidden" name="type" value="<%=type%>" />     
-            <table  align="center"  >
+            <table class="table" align="center" style="  width: 1000px; border-collapse: collapse;"  >
                 <tr>
-                    <td width="830px" class="td1"></td>
                     <td class="td1" align="right" >                                
                         <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
                     </td>
@@ -132,9 +131,8 @@
                  </ul> 
                     </td></tr>
             </table>
-            <table  align="center"  >
+            <table class="table" align="center"  style="  width: 1000px; border-collapse: collapse;">
                 <tr>
-                    <td width="850px" class="td1"></td>
                     <td class="td1"  align="right">
                         <button type="button" id="historyBtn" class="btn btn-success" onclick="useForRequst1();" >Use for Request</button>
                     </td>

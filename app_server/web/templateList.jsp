@@ -53,9 +53,8 @@
         <div class="text-lg-center color-3">My Templates</div>
         <form  id="templateForm" method="post" action="">
 
-                    <table  align="center"  style="  width: 800px;">
+                    <table  class="table" align="center" border="0" style="  width: 800px; border-collapse: collapse;">
                         <tr>
-                            <td width="650px" class="td1"></td>
                             <td class="td1" align="right" >                                
                                 <input placeholder="Search..." type="search" id="search" name="search"  onkeypress="if(event.keyCode === 13){  doSearch(this.value);}" />
                             </td>
@@ -63,6 +62,7 @@
                     </table>                   
             
             <table  id ="templateTable" class="table table-hover table-condensed" align="center" border="1" bordercolor="#a0c6e5" style="  width: 800px; border-collapse: collapse;">
+                
                 <thead>
                     <th>Last Edit</th>
                     <th>Template Name</td>
@@ -106,14 +106,13 @@
                  </ul> 
                     </td></tr>
             </table>
-                    <table  align="center"  style="  width: 800px;">
+                    <table class="table" align="center"  style="  width: 800px;">
                         <tr>
-                            <td width="500px" class="td1"></td>
+                            
                              <td class="td1"  align="right">
                              <button type="submit" class="btn btn-success" onclick="deleteTemplate()" >Delete Template</button>
-                            </td>
-                            <td class="td1"  align="right">
-                                <button id="requestBtn" type="button" class="btn btn-success" onclick="useForRequst();" >Use for Request</button>
+                            
+                            <button id="requestBtn" type="button" class="btn btn-success" onclick="useForRequst();" >Use for Request</button>
                             </td>
                             
                         </tr>

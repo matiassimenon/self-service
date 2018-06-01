@@ -21,8 +21,12 @@
             }
             td{
                 border: solid 0px #a0c6e5; height: 20px;               
-            }            
- </style>       
+            } 
+ .td1{
+            border: solid 0px #fff; text-align: right;
+        }            
+ </style>  
+
         <script src="selfservice.js"> </script>
         <script>
             window.onload=function(){
@@ -270,25 +274,24 @@ function displayHadoop(){
     
 
         <div class="tablecontent" style=" min-height:  800px;" >
-        <div class="text-lg-center color-3">Instances</div>
-        
+        <div class="text-lg-center color-3">Request a container</div>
+        <p>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
-         <ul>
+         <ol >
             <li><button  class="btn btn-link" id="talend_a"  onclick="displayTalend(); ">Talend component</button></li>
             <li><button  class="btn btn-link" id ="database_a"  onclick="displayDatabase(); ">Databases</button></li>
-            
-        </ul>
+        </ol>
         <form  id="templateForm"  style="display: none;" method="post" action="">
-            <table  id="talend_table" align="center" style="border:1px solid green; padding:0px 0px;">
+            <table  id="talend_table"  cellpadding="5px" align="center" style="border:1px solid green;">
                 <tr>
-                    <td>Talend Component :</td>
+                    <td class="td1">Talend Component :</td>
                     <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
                             <option value="tac">TAC</option>
                             <option value="cmdline">CmdLine</option>
                             <option value="jobserver">Jobserver</option>
                         </select> 
                     </td>    
-                    <td >Database:</td>                    
+                    <td class="td1">Database:</td>                    
                     <td> <select id="database" name="database" required="required" onchange="setDbVersion(this); generateImageName();"> 
                              <option value="">Please select...</option>
                             <option value="mysql">MySQL</option>
@@ -302,7 +305,7 @@ function displayHadoop(){
                     
                 </tr>                
                 <tr>
-                    <td>Talend Version :</td>
+                    <td class="td1">Talend Version :</td>
                     <td> <select id="componentVersion" required="required" name="componentVersion" onchange="checkTomcat(); checkOsVersion(); generateImageName();"> 
                             <option value="">Please select...</option>
                             <option value="6.0.1">6.0.1</option>
@@ -314,37 +317,37 @@ function displayHadoop(){
                            
                         </select> 
                     </td>      
-                     <td>Database Version: </td>
+                     <td class="td1">Database Version: </td>
                     <td><select id="database_version" required="required" name="database_version" onchange=" generateImageName();">
                              <option value="">Please select...</option>
                         </select> 
                     </td>                   
                 </tr>
                 <tr>
-                    <td >OS:</td> 
+                    <td class="td1" >OS:</td> 
                     <td> <select id="os" name="os" required="required" onchange="setOsVersion(this);"> 
                              <option value="">Please select...</option>
                             <option value="ubuntu">Ubuntu</option>
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
+                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
                 </tr>
                 <tr>
-                    <td>OS Version: </td>
+                    <td class="td1">OS Version: </td>
                     <td><select id="osVersion" required="required" name="osVersion" onchange=" generateImageName();">
                              <option value="">Please select...</option>
                         </select> 
                     </td>
-                    <td>Image Name:  </td><td><input type="text" id="imageName" readonly="true" name="imageName"></input> </td>
+                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName" readonly="true" name="imageName"></input> </td>
                 </tr>
-                <tr><td>JDK Version : </td>
+                <tr><td class="td1">JDK Version : </td>
                     <td><select id="jdk" name="jdk" onchange="generateImageName();"> 
                             <option value="8">8</option>
                         </select> 
                     </td>
                 </tr>
-                <tr><td>JDK Update : </td>
+                <tr><td class="td1">JDK Update : </td>
                     <td><select id="jdkUpdate" name="jdkUpdate" onchange="generateImageName();">       
                             <option value="141">141</option>
                             <option value="144">144</option>
@@ -354,7 +357,7 @@ function displayHadoop(){
                         </select> 
                     </td>
                 </tr>
-                <tr><td>Tomcat Version : </td>
+                <tr><td class="td1">Tomcat Version : </td>
                     <td><select id="tomcatVersion" name="tomcatVersion"  onchange="generateImageName();"> 
                             <option value="7.0">7.0</option>
                             <option value="8.0">8.0</option>
@@ -366,31 +369,32 @@ function displayHadoop(){
                         <button type="submit" class="btn btn-success" onclick="requestAction()">Request</button></td></tr>
             </table>                
             <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
+            <%if (errMessage!= null ){%><div><%=errMessage%></div><%}%>
         </form>
 
         
         <form  id="templateForm_db"  style="display: none;" method="post" action="">
-            <table id="database_table" align="center" style="border:1px solid green; padding:0px 0px;">
+            <table id="database_table" cellpadding="5px" align="center" style="border:1px solid green; padding:0px 0px;">
                 <tr>
-                    <td >OS:</td> 
+                    <td class="td1">OS:</td> 
                     <td> <select id="os_db" name="os" required="required" onchange="setOsVersion_db(this);"> 
                             <option value="">Please select...</option>
                             <option value="ubuntu">Ubuntu</option>
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>                    
-                    <td>Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
+                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
                 </tr>                
                 <tr>
-                    <td>OS Version: </td>
+                    <td class="td1">OS Version: </td>
                     <td><select id="osVersion_db" required="required" name="osVersion" onchange="generateImageName_db();">
                              <option value="">Please select...</option>
                         </select> 
                     </td>    
-                    <td>Image Name:  </td><td><input type="text" id="imageName_db" readonly="true" name="imageName"></input> </td>
+                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName_db" readonly="true" name="imageName"></input> </td>
                 </tr>
                 <tr> 
-                    <td >Database:</td>                    
+                    <td class="td1">Database:</td>                    
                     <td> <select id="database_db" name="database" required="required" onchange="setDbVersion_db(this);"> 
                              <option value="">Please select...</option>
                             <option value="mysql">MySQL</option>
@@ -403,7 +407,7 @@ function displayHadoop(){
                     </td>
                 </tr>
                 <tr>
-                    <td>Database Version: </td>
+                    <td class="td1">Database Version: </td>
                     <td><select id="database_version_db" required="required" name="database_version" onchange=" generateImageName_db();">
                              <option value="">Please select...</option>
                         </select> 
@@ -413,12 +417,13 @@ function displayHadoop(){
                 <tr><td></td><td></td> <td></td>
                     <td><button type="submit" id="saveTemplateBtn" class="btn btn-success" onclick="saveAsTemplate_db()">Save as Template</button> 
                         <button type="submit" class="btn btn-success" onclick="requestAction_db()">Request</button></td></tr>
-
+                
             </table>                
             <input type="hidden" name="template_uuid" value="<%=template.getTemplate_uuid()%>"/>
-            <%if (errMessage!= null ){%><h3><%=errMessage%></h3><%}%>
-        </form>    
+            <%if (errMessage!= null ){%><div><%=errMessage%></div><%}%>
+        </form>               
         </div>
+            
         </div>
         <%@include file="footer.jsp" %>
 </div>

@@ -138,8 +138,7 @@ cityArr['EMEA'] =
             {txt: 'Suresnes', val: 'sur'},
             {txt: 'Alpnach', val: 'zrh'}
         ];
-        
-        
+             
 function setCity(region)
 {
     setSelectOption('city', cityArr[region], 'Please select...');

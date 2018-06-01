@@ -7,6 +7,7 @@ package com.selfservice.controller;
 
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
+import com.selfservice.util.CityUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -131,7 +132,7 @@ public class UserListServlet extends HttpServlet {
                 object.setUsername(rs.getString(3));
                 object.setEmail(rs.getString(4));
                 object.setDepartment(rs.getString(5));
-                object.setCity(rs.getString(6));
+                object.setCity(CityUtil.cityMap.get(rs.getString(6)));
                 object.setPassword(rs.getString(7));
                 object.setRegion(rs.getString(8));
                 int iadmin = rs.getInt(9);
