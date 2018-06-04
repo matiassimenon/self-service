@@ -139,7 +139,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
                         <strong>Error </strong>It's not allowed to delete current login user!
                     </div>  
                     </td>
-                    <td class="td1"  >
+                    <td class="td1" align="right" >
                      <button type="submit" class="btn btn-success" onclick="deleteUsers();" >Delete User</button>
                         <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
                     </td>
