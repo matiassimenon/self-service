@@ -46,7 +46,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
             for( var i=0; i< rows.length; i++){
                 if(rows[i].selected == 'true'){
                     //save format: username;admin, e.g: test=true
-                    var childNode=rows[i].cells[8].children[0];
+                    var childNode=rows[i].cells[7].children[0];
                     saveString += "&"+rows[i].cells[2].innerText + "=" + childNode.checked + "&";
                     isSelected=true;
                 }

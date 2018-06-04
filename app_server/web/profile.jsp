@@ -6,8 +6,16 @@
 <%@page import="com.selfservice.model.User"%>
 <%
     User user1 = (User)request.getSession(false).getAttribute("user");
+    if(user1 == null){
+        user1= new User();
+    }
 %>
-
+<style>
+     td{
+                border: solid 0px #a0c6e5; height: 20px;               
+      }  
+    
+</style>
 <table id="reg_form"  align="center" cellpadding="5px;" style="border:1px solid green;" >
 		<tr>
                     <td class="td1">First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user1.getFirstname()%>"></td>

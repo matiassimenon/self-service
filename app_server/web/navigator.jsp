@@ -5,6 +5,9 @@
 --%>
 
 <%@page import="com.selfservice.model.User"%>
+<%
+    User user2 = (User)request.getSession(false).getAttribute("user");
+%>
 <style>
     .menuClass{
         background: white; color: green;
@@ -25,10 +28,10 @@
             </button>
 
             <div class="dropdown-menu dropdown-menu-right ">
-                
+              <% if (user2.getAdmin()) {%>  
               <a class="dropdown-item menuClass" href="UserListServlet">List of user</a>
               <a class="dropdown-item menuClass" href="AdminRequestServlet">Role Management</a>
-              
+              <%}%>
               <a class="dropdown-item menuClass" href="userProfile.jsp">Update Profile</a>
             </div>
             </div>
