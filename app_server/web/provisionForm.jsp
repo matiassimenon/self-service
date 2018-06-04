@@ -22,9 +22,7 @@
             td{
                 border: solid 0px #a0c6e5; height: 20px;               
             } 
- .td1{
-            border: solid 0px #fff; text-align: right;
-        }            
+          
  </style>  
 
         <script src="selfservice.js"> </script>
@@ -250,14 +248,18 @@ function requestAction_db(){
     //}
 }
 function displayDatabase(){
-    document.getElementById('database_a').focus();
+    
+    $('#database_a').toggleClass('active');
+    $('#talend_a').removeClass('active');
     document.getElementById('templateForm_db').style.display='block';
     //document.getElementById('templateForm_db').style.backgroundColor='#47a3da';
     //document.getElementById('templateForm_db').style.color='#fff';
     document.getElementById('templateForm').style.display='none'; //hide talend
 }
 function displayTalend(){
-    document.getElementById('talend_a').focus();
+    
+   $('#talend_a').toggleClass('active');
+   $('#database_a').removeClass('active');
     document.getElementById('templateForm').style.display='block';
     //document.getElementById('templateForm').style.backgroundColor='#47a3da';
     //document.getElementById('templateForm').style.color='#fff';
@@ -277,10 +279,12 @@ function displayHadoop(){
         <div class="text-lg-center color-3">Request a container</div>
         <p>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
-         <ol >
-            <li><button  class="btn btn-link" id="talend_a"  onclick="displayTalend(); ">Talend component</button></li>
-            <li><button  class="btn btn-link" id ="database_a"  onclick="displayDatabase(); ">Databases</button></li>
-        </ol>
+<div class="list-group" id="myList" role="tablist">
+  <a class="list-group-item list-group-item-action" id="talend_a"  onclick="displayTalend(); " data-toggle="list" href="#" role="tab">Talend component</a>
+  <a class="list-group-item list-group-item-action" id ="database_a"  onclick="displayDatabase(); " data-toggle="list" href="#" role="tab">Databases</a>
+
+</div>
+            
         <form  id="templateForm"  style="display: none;" method="post" action="">
             <table  id="talend_table"  cellpadding="5px" align="center" style="border:1px solid green;">
                 <tr>

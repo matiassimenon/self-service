@@ -12,6 +12,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
 
 <%@include file="left.jsp"%>
 
+
     <script>
         function doSearch(txt){
             document.getElementById("userForm").action="UserListServlet";
@@ -55,6 +56,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
             document.getElementById("userForm").submit();
         }
         </script>
+
         
  <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
      <%@include file="navigator.jsp"%>
@@ -137,7 +139,7 @@ List<User> list  =(List<User>)request.getAttribute("userList");
                         <strong>Error </strong>It's not allowed to delete current login user!
                     </div>  
                     </td>
-                    <td class="td1"  align="right">
+                    <td class="td1"  >
                      <button type="submit" class="btn btn-success" onclick="deleteUsers();" >Delete User</button>
                         <button type="submit" class="btn btn-success" onclick="saveUsers();">Save</button>
                     </td>

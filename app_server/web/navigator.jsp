@@ -5,43 +5,52 @@
 --%>
 
 <%@page import="com.selfservice.model.User"%>
+<style>
+    .menuClass{
+        background: white; color: green;
+    }
 
-    
+.table>tbody>tr>td,
+.table>tbody>tr>th {
+  border-top: none;
+}          
+</style>
+        
         <nav class="nav justify-content-center nav-tabs">
   
            
-        <div class="btn-group dropdown">
-            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+        <div class=" btn-group dropdown">
+            <button type="button" class="btn nav-item  dropdown-toggle menuClass" data-toggle="dropdown" >
               User Management
             </button>
 
-            <div class="dropdown-menu dropdown-menu-right">
+            <div class="dropdown-menu dropdown-menu-right ">
                 
-              <a class="dropdown-item" href="UserListServlet">List of user</a>
-              <a class="dropdown-item" href="AdminRequestServlet">Role Management</a>
+              <a class="dropdown-item menuClass" href="UserListServlet">List of user</a>
+              <a class="dropdown-item menuClass" href="AdminRequestServlet">Role Management</a>
               
-              <a class="dropdown-item" href="userProfile.jsp">Update Profile</a>
+              <a class="dropdown-item menuClass" href="userProfile.jsp">Update Profile</a>
             </div>
             </div>
             
             <div class="btn-group dropdown">
-            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+            <button type="button" class="btn  dropdown-toggle menuClass" data-toggle="dropdown"  >
               Instance Management
             </button>
 
             <div class="dropdown-menu dropdown-menu-right">
                 
-              <a class="dropdown-item" href="provisionForm.jsp">Request a container</a>
-              <a class="dropdown-item" href="TemplateListServlet">My Templates</a>
+              <a class="dropdown-item menuClass" href="provisionForm.jsp">Request a container</a>
+              <a class="dropdown-item menuClass" href="TemplateListServlet">My Templates</a>
               
-              <a class="dropdown-item" href="HistoryServlet?previousRequest">My Previous Requests</a>
-              <a class="dropdown-item" href="HistoryServlet?historyList">History</a>
+              <a class="dropdown-item menuClass" href="HistoryServlet?previousRequest">My Previous Requests</a>
+              <a class="dropdown-item menuClass" href="HistoryServlet?historyList">History</a>
             </div>
             </div>
-            <a class="nav-link" href="Logout">Logout</a>
+            <a class="nav-link menuClass" href="Logout" >Logout</a>
         </nav>
         
-        <p>
+<p>
 
 
 

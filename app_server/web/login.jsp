@@ -12,19 +12,19 @@
                                 
                                 <a href="register.jsp">     <img src="add_account.png"></img> Signup for a free account</a></div>
                             <hr class="mb-5"><h1 class="display-4 accent mb-5"><font color="green">Login: </font></h1>
-                            <form action="LoginServlet" method="post"  class="cozy" novalidate="">
+                            <form action="LoginServlet" method="post"  class="cozy" >
                                 <div class="form-group control">
-                                    <label class="col-mb-5 control-label">Username</label><input type="text" id="login_username"  name= "username" class="form-control">
+                                    <label class="col-mb-5 control-label">Username</label><input type="text" id="login_username"  name= "username" class="form-control" required="required">
                                 </div>
                                 <div class="form-group control">
-                                    <label class="col-mb-5 control-label">Password</label><input type="password" name="password" id="login_password" class="form-control" ></div>
+                                    <label class="col-mb-5 control-label">Password</label><input type="password" name="password" id="login_password" class="form-control" required="required" ></div>
                                     <div class="d-flex align-content-left justify-content-left" >
                                     <button type="submit" class="btn-lg btn-success">Login</button>
                                     <p><a href="forgotPasswd1.jsp">&nbsp; Forgot Password?</a> </p> 
                                     
                                 </div>
                                 <div class="d-flex align-content-left justify-content-left">
-                                    <%if (errMessage != null) {%><h4 style="color: red"><%=errMessage%></h4><%}%>
+                                    <%if (errMessage != null) {%><div style="color: red"><%=errMessage%></div><%}%>
                                 </div>
                             </form> 
                         </div></div>

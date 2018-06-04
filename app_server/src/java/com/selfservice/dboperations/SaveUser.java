@@ -136,11 +136,11 @@ public class SaveUser extends HttpServlet {
 
             if (sql != null) {
                 int ret = ps.executeUpdate();
-                if (ret > 0) {
-                    request.setAttribute("errMessage", "<font color='green'>Save Successfully!!</font>");
-                    request.getRequestDispatcher(jspPage).include(request, response);
-                    //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
-                }
+                
+                request.setAttribute("errMessage", "<font color='green'>Save Successfully!!</font>");
+                request.getRequestDispatcher(jspPage).include(request, response);
+                //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
+                
             }
 
         } catch (SQLException ex) {

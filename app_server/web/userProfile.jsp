@@ -7,7 +7,10 @@
 <%@page import="com.selfservice.model.User"%>
 
 <%@include file="left.jsp"%>
-<style>             
+<style>      
+        select{
+            width: 200px;
+        }
             td{
                 border: solid 0px #a0c6e5; height: 20px;               
             }            
@@ -45,7 +48,7 @@
         <div class="d-flex flex-column align-items-center">
         <form  method="post" action="SaveUser?userProfile.jsp">
             	<%@include file="profile.jsp" %>		
-                <tr><td align="right"><button id="submitBtn" class="btn btn-success" type="submit" >Save</button></td></tr></table>
+                <tr><td  class="td1"><button id="submitBtn" class="btn btn-success" type="submit" >Save</button></td></tr></table>
                 <% if(errMessage!=null){%> <div><%=errMessage%></div> <%}%>
         </form>
         </div>
