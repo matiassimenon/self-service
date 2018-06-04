@@ -7,14 +7,7 @@
 <%@page import="com.selfservice.model.User"%>
 
 <%@include file="left.jsp"%>
-<style>      
-        select{
-            width: 200px;
-        }
-            td{
-                border: solid 0px #a0c6e5; height: 20px;               
-            }            
- </style> 
+
         <script>
             window.onload=function(){
                 var region="<%=user.getRegion()%>";

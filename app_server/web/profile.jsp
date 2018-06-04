@@ -11,6 +11,9 @@
     }
 %>
 <style>
+        select{
+            width: 200px;
+        }    
      td{
                 border: solid 0px #a0c6e5; height: 20px;               
       }  
