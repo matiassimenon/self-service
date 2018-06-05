@@ -63,9 +63,7 @@
                         setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
                         setSelected(document.getElementById("osVersion"), osVersion);
 
-                        setSelected(document.getElementById("database"), db);
-                        setSelectOption('database_version', dbArr[db], 'Please select...');
-                        setSelected(document.getElementById("database_version"), db_version);
+
                     }
                     displayTalend();
                 }
@@ -143,7 +141,7 @@ dbArr['mysql'] =
  ];
   dbArr['db2'] =
 [
- {txt:'db2express-c', val:'db2express-c'}
+ {txt:'db2express-c', val:'express-c'}
  ];
  
 function setOsVersion(osVersion)
@@ -154,9 +152,7 @@ function setOsVersion_db(osVersion) //in database table
 {    
         setSelectOption('osVersion_db', osArr[osVersion.options[osVersion.selectedIndex].value], 'Please select...');
 }
-function setDbVersion(db){
-        setSelectOption('database_version', dbArr[db.options[db.selectedIndex].value], 'Please select...');
-}
+
 function setDbVersion_db(db){
         setSelectOption('database_version_db', dbArr[db.options[db.selectedIndex].value], 'Please select...');
 }
@@ -205,21 +201,22 @@ function checkOsVersion(){
     }      
 }
 function generateImageName(){
-    var imagename=document.getElementById("talendComponent").value+ document.getElementById("componentVersion").value.toString().replace("\.","").replace("\.","") + "-"+
-            document.getElementById("os").value + document.getElementById("osVersion").value.toString().replace("\.","").substring(0,2)+ "-"+           
+    var imagename=document.getElementById("talendComponent").value+ document.getElementById("componentVersion").value.toString() + "-"+
+            document.getElementById("os").value + document.getElementById("osVersion").value.toString()+ "-"+           
               "jdk" + document.getElementById("jdk").value + "u" + document.getElementById("jdkUpdate").value ;
     if (!document.getElementById("tomcatVersion").disabled){
-            imagename += "-tomcat" + document.getElementById("tomcatVersion").value.toString().replace("\.","");
+            imagename += "-tomcat" + document.getElementById("tomcatVersion").value.toString();
         }
-        imagename += "-" +document.getElementById("database").value+ document.getElementById("database_version").value.toString().replace("\.","").replace("\.","")
+    if(document.getElementById("salesforceCase").value.length>0) imagename += "-"+ document.getElementById("salesforceCase").value;   
         
     //window.alert(imagename);
     document.getElementById("imageName").value=imagename;
 }
 function generateImageName_db(){
     var imagename=
-            document.getElementById("os_db").value + document.getElementById("osVersion_db").value.toString().replace("\.","").substring(0,2)+ "-"+  
-            document.getElementById("database_db").value + document.getElementById("database_version_db").value.toString().replace("\.","").substring(0,2);
+            document.getElementById("os_db").value + document.getElementById("osVersion_db").value.toString()+ "-"+  
+            document.getElementById("database_db").value + "-"+document.getElementById("database_version_db").value.toString();
+    if(document.getElementById("salesforceCase_db").value.length>0) imagename += "-"+ document.getElementById("salesforceCase_db").value;   
     document.getElementById("imageName_db").value=imagename;
 }
 
@@ -295,20 +292,6 @@ function displayHadoop(){
                             <option value="jobserver">Jobserver</option>
                         </select> 
                     </td>    
-                    <td class="td1">Database:</td>                    
-                    <td> <select id="database" name="database" required="required" onchange="setDbVersion(this); generateImageName();"> 
-                             <option value="">Please select...</option>
-                            <option value="mysql">MySQL</option>
-                            <option value="postgresql">PostgreSQL</option>
-                            <option value="mariadb">MariaDB</option>
-                            <option value="mssql">MSSQL for Linux</option>
-                            <option value="oracle">Oracle</option>
-                            <option value="db2">IBM db2</option>
-                        </select> 
-                    </td>                    
-                    
-                </tr>                
-                <tr>
                     <td class="td1">Talend Version :</td>
                     <td> <select id="componentVersion" required="required" name="componentVersion" onchange="checkTomcat(); checkOsVersion(); generateImageName();"> 
                             <option value="">Please select...</option>
@@ -320,13 +303,10 @@ function displayHadoop(){
                             <option value="6.5.1">6.5.1</option>
                            
                         </select> 
-                    </td>      
-                     <td class="td1">Database Version: </td>
-                    <td><select id="database_version" required="required" name="database_version" onchange=" generateImageName();">
-                             <option value="">Please select...</option>
-                        </select> 
-                    </td>                   
-                </tr>
+                    </td>  
+                    
+                </tr>                
+
                 <tr>
                     <td class="td1" >OS:</td> 
                     <td> <select id="os" name="os" required="required" onchange="setOsVersion(this);"> 
@@ -335,7 +315,7 @@ function displayHadoop(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
+                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange=" generateImageName();" ></input> </td>
                 </tr>
                 <tr>
                     <td class="td1">OS Version: </td>
@@ -343,7 +323,7 @@ function displayHadoop(){
                              <option value="">Please select...</option>
                         </select> 
                     </td>
-                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName" readonly="true" name="imageName"></input> </td>
+                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName"  name="imageName" ></input> </td>
                 </tr>
                 <tr><td class="td1">JDK Version : </td>
                     <td><select id="jdk" name="jdk" onchange="generateImageName();"> 
@@ -387,7 +367,7 @@ function displayHadoop(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>                    
-                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" ></input> </td>
+                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange="generateImageName_db();" ></input> </td>
                 </tr>                
                 <tr>
                     <td class="td1">OS Version: </td>
@@ -395,7 +375,7 @@ function displayHadoop(){
                              <option value="">Please select...</option>
                         </select> 
                     </td>    
-                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName_db" readonly="true" name="imageName"></input> </td>
+                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName_db"  name="imageName"></input> </td>
                 </tr>
                 <tr> 
                     <td class="td1">Database:</td>                    

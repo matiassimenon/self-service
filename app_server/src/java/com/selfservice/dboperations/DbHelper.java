@@ -76,7 +76,7 @@ public class DbHelper {
         ps.setDate(5, new Date(System.currentTimeMillis()));
         ret = ps.executeUpdate();
         if (talendComponent != null) {// from Talend product tab
-            sql = operation + " into TALEND_TEMPLATE(template_uuid, os, os_version, talend_version, talend_component,  jdk_version, jdk_update, tomcat_version, db_version, db) values(?,?,?,?,?,?,?,?,?,?) ";
+            sql = operation + " into TALEND_TEMPLATE(template_uuid, os, os_version, talend_version, talend_component,  jdk_version, jdk_update, tomcat_version) values(?,?,?,?,?,?,?,?) ";
             ps2 = con.prepareStatement(sql);
             ps2.setString(1, template_uuid);
             ps2.setString(2, os);
@@ -87,8 +87,6 @@ public class DbHelper {
             ps2.setString(6, jdk);
             ps2.setString(7, jdkUpdate);
             ps2.setString(8, tomcatVersion);
-            ps2.setString(9, database_version);
-            ps2.setString(10, database);
 
             ret = ps2.executeUpdate();
         } else { // from Database tab
