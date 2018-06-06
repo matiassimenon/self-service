@@ -7,6 +7,7 @@ package com.selfservice.controller;
 
 import com.selfservice.model.User;
 import com.selfservice.servers.DbConnection;
+import com.selfservice.util.CityUtil;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -100,7 +101,7 @@ public class AdminRequestServlet extends HttpServlet {
                 user.setUsername(rs.getString(3));
                 user.setEmail(rs.getString(4));
                 user.setDepartment(rs.getString(5));
-                user.setCity(rs.getString(6));
+                user.setCity(CityUtil.cityMap.get(rs.getString(6)));
                 user.setRegion(rs.getString(7));
                 list.add(user);
             }           
