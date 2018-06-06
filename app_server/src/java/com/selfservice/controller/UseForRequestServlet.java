@@ -70,7 +70,7 @@ public class UseForRequestServlet extends HttpServlet {
                         template.setDatabase_version(rs.getString(6));                       
                     }
                     sql="select TEMPLATE.template_uuid, TEMPLATE.template_name, talend.os, talend.os_version, talend.talend_version, talend.talend_component, "
-                            + " talend.jdk_version, talend.jdk_update, talend.tomcat_version, talend.db, talend.db_version  from TEMPLATE  INNER JOIN TALEND_TEMPLATE talend on TEMPLATE.template_uuid = talend.template_uuid where TEMPLATE.template_uuid=?";
+                            + " talend.jdk_version, talend.jdk_update, talend.tomcat_version  from TEMPLATE  INNER JOIN TALEND_TEMPLATE talend on TEMPLATE.template_uuid = talend.template_uuid where TEMPLATE.template_uuid=?";
                     ps = con.prepareStatement(sql);
                     ps.setString(1, template_uuid);
                     rs = ps.executeQuery();
@@ -87,8 +87,8 @@ public class UseForRequestServlet extends HttpServlet {
                         template.setJdk_version(rs.getString(7));
                         template.setJdk_update(rs.getString(8));
                         template.setTomcat_version(rs.getString(9));
-                        template.setDatabase(rs.getString(10));
-                        template.setDatabase_version(rs.getString(11));
+                        //template.setDatabase(rs.getString(10));
+                        //template.setDatabase_version(rs.getString(11));
                     }
                     //check talend_template
                     request.setAttribute("template", template);
