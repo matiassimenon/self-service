@@ -12,3 +12,6 @@
 *.tar
 *.gz
 *.Dockerfile
+/app_server/nbproject/private/
+/app_server/build/
+/app_server/dist/
