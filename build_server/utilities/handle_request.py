@@ -27,7 +27,7 @@ email_failure_to_admin_file = 'email_failure_to_admin.txt'
 admin_email = 'support.devops@talend.com'
 
 
-def handle_request(request):
+def handle_tal_request(request):
     username = request['username']
     firstname = request['firstname']
     user_region = request['region']
@@ -157,6 +157,136 @@ def handle_request(request):
         elif not is_repo_valid:
             print(f'\nError: repo {repo} is not a valid repository\n', flush=True)
 
+
+def handle_db_request(request):
+    username = request['username']
+    firstname = request['firstname']
+    user_region = request['region']
+    template_dictionary = create_request_dictionary(request)
+    template_name = request['template_name']
+    request_uuid = request['request_uuid']
+    talend_component = request['talend_component']
+
+    dockerfile_name = request_uuid + '.Dockerfile'
+
+    is_dockerfile_present = create_dockerfile_template_copy(talend_component, dockerfile_name)
+
+    # Re-routing push depending on users's Region.
+    if user_region == 'apac' or user_region == 'APAC':
+        repo = 'apac'
+        is_repo_valid = True
+    elif user_region == 'emea' or user_region == 'EMEA':
+        repo = 'emea'
+        is_repo_valid = True
+    elif user_region == 'us' or user_region == 'US':
+        repo = 'us'
+        is_repo_valid = True
+    else:
+        is_repo_valid = False
+
+    email_dictionary = create_email_dictionary(username.lower(),
+                                               firstname.capitalize(),
+                                               user_region.lower(),
+                                               template_name,
+                                               request_uuid)
+
+    if is_dockerfile_present and is_repo_valid:
+        replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
+        try:
+            # Open a client session with the Docker daemon
+            client = docker.from_env()
+
+            update_request_status('processing', request_uuid)
+
+            # Docker Build
+            print(f'\n{time.strftime("%Y-%m-%d %H:%M")}', flush=True)
+            print(f'-----------------------------------------------------------', flush=True)
+            print(f'Request dictionary: {request}', flush=True)
+            print(f'Docker Build: '
+                  f'cd {docker_build_dir}/{talend_component}; '
+                  f'docker build -f {dockerfile_name} '
+                  f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
+            client.images.build(path=f'{docker_build_dir}/{talend_component}',
+                                tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+                                dockerfile=dockerfile_name,
+                                timeout=28800)
+            # Docker Login
+            print(f'Docker Login: docker login {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
+            client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
+                         username=docker_user,
+                         password=docker_password)
+            # Docker Push
+            # print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
+            # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+            #                                tag='latest'):
+            #     print(line, flush=True)
+            print(f'Docker Push: '
+                  f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}', flush=True)
+            bash_cmd(f"cd {docker_build_dir}; "
+                     f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
+
+        except docker.errors.BuildError:
+            print('\nDocker BuildError\n', flush=True)
+            update_request_status('error', request_uuid)
+            # Send email to user
+            email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(username, email_message)
+            # Send email to admin
+            email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(admin_email, email_message)
+            print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
+                  f'has been kept to find the source of the problem.', flush=True)
+        except (docker.errors.APIError, socket.timeout,
+                urllib3.exceptions.ReadTimeoutError,
+                requests.exceptions.ConnectionError):
+            print(f'Push Error', flush=True)
+            update_request_status('error', request_uuid)
+            # Send email to user
+            email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(username, email_message)
+            # Send email to admin
+            email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(admin_email, email_message)
+            # Remove dockerfile
+            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
+        except OSError as e:
+            print(f'OSError {e.output}', flush=True)
+            update_request_status('error', request_uuid)
+            # Send email to user
+            email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(username, email_message)
+            # Send email to admin
+            email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(admin_email, email_message)
+        else:
+            # Send e-mail after successful image creation and upload
+            email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
+            email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
+            send_email(username, email_message)
+
+            # Update Request Status
+            update_request_status('fulfilled', request_uuid)
+
+            # Remove dockerfile
+            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
+        finally:
+            # Close all adapters and the session
+            client.close()
+            print(f'-----------------------------------------------------------', flush=True)
+
+    else:
+        if not is_dockerfile_present:
+            print(f'\nError: Dockerfile {dockerfile_name} was not created\n', flush=True)
+        elif not is_repo_valid:
+            print(f'\nError: repo {repo} is not a valid repository\n', flush=True)
 
 def create_request_dictionary(request):
     op_sys = request['os']
