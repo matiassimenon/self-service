@@ -31,7 +31,7 @@ CREATE TABLE `USER` (
   UNIQUE (email),
   PRIMARY KEY (`username`)
 );
-
+REQUEST
 CREATE TABLE `TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
   `template_name` VARCHAR(63) NOT NULL,
