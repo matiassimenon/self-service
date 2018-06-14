@@ -11,20 +11,20 @@ from shutil import copyfile
 import authentication.credentials as credentials
 from utilities.email_operations import send_email, create_email_dictionary
 
-repo_suffix = "repo"
+repo_suffix = 'self-service.talend.com'
 port = '443'
 protocol = 'https'
-# project_dir = '/Users/francisco/talend-dev/self-service/build_server'
-project_dir = '/home/centos/self-service/build_server'
-docker_utils_dir = f'{project_dir}/docker_utils'
-templates_dir = f'{docker_utils_dir}/templates'
-docker_build_dir = f'{docker_utils_dir}/docker_build'
+project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+#project_dir = '/home/centos/self-service/build_server'
+templates_dir = f'{project_dir}/templates'
+docker_build_dir = f'{project_dir}/docker_build'
 docker_user = credentials.docker['docker_user']
 docker_password = credentials.docker['docker_password']
 email_success_file = 'email_success.txt'
 email_failure_to_user_file = 'email_failure_to_user.txt'
 email_failure_to_admin_file = 'email_failure_to_admin.txt'
 admin_email = 'support.devops@talend.com'
+talend_components = ['cmdline', 'tac', 'jobserver', 'cibuilder']
 
 
 def handle_tal_request(request):
@@ -56,11 +56,11 @@ def handle_tal_request(request):
     email_dictionary = create_email_dictionary(username.lower(),
                                                firstname.capitalize(),
                                                user_region.lower(),
-                                               template_name,
+                                               template_name.lower(),
                                                request_uuid)
 
     if is_dockerfile_present and is_repo_valid:
-        replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
+        replace_placeholders_in_file(f'{docker_build_dir}/talend/{talend_component}', dockerfile_name, template_dictionary)
         try:
             # Open a client session with the Docker daemon
             client = docker.from_env()
@@ -72,27 +72,26 @@ def handle_tal_request(request):
             print(f'-----------------------------------------------------------', flush=True)
             print(f'Request dictionary: {request}', flush=True)
             print(f'Docker Build: '
-                  f'cd {docker_build_dir}/{talend_component}; '
+                  f'cd {docker_build_dir}/talend/{talend_component}; '
                   f'docker build -f {dockerfile_name} '
-                  f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
-            client.images.build(path=f'{docker_build_dir}/{talend_component}',
-                                tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+                  f'-t {repo}.{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
+            client.images.build(path=f'{docker_build_dir}/talend/{talend_component}',
+                                tag=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name,
                                 timeout=28800)
             # Docker Login
-            print(f'Docker Login: docker login {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
-            client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
+            print(f'Docker Login: docker login {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
+            client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
                          username=docker_user,
                          password=docker_password)
             # Docker Push
-            # print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
+            # print(f'Docker Push to {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
             # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
             #                                tag='latest'):
             #     print(line, flush=True)
             print(f'Docker Push: '
-                  f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}', flush=True)
-            bash_cmd(f"cd {docker_build_dir}; "
-                     f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
+                  f'docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}', flush=True)
+            bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
@@ -105,7 +104,9 @@ def handle_tal_request(request):
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
-            print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
+
+            print(f'Dockerfile {docker_build_dir}/talend/{talend_component}/{dockerfile_name} '
+
                   f'has been kept to find the source of the problem.', flush=True)
         except (docker.errors.APIError, socket.timeout,
                 urllib3.exceptions.ReadTimeoutError,
@@ -121,7 +122,7 @@ def handle_tal_request(request):
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
             # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         except OSError as e:
             print(f'OSError {e.output}', flush=True)
@@ -144,7 +145,7 @@ def handle_tal_request(request):
             update_request_status('fulfilled', request_uuid)
 
             # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         finally:
             # Close all adapters and the session
@@ -187,11 +188,12 @@ def handle_db_request(request):
     email_dictionary = create_email_dictionary(username.lower(),
                                                firstname.capitalize(),
                                                user_region.lower(),
-                                               template_name,
+                                               template_name.lower(),
                                                request_uuid)
 
     if is_dockerfile_present and is_repo_valid:
-        replace_placeholders_in_file(f'{docker_build_dir}/{talend_component}', dockerfile_name, template_dictionary)
+        replace_placeholders_in_file(f'{docker_build_dir}/talend/{talend_component}', dockerfile_name,
+                                     template_dictionary)
         try:
             # Open a client session with the Docker daemon
             client = docker.from_env()
@@ -203,27 +205,26 @@ def handle_db_request(request):
             print(f'-----------------------------------------------------------', flush=True)
             print(f'Request dictionary: {request}', flush=True)
             print(f'Docker Build: '
-                  f'cd {docker_build_dir}/{talend_component}; '
+                  f'cd {docker_build_dir}/talend/{talend_component}; '
                   f'docker build -f {dockerfile_name} '
-                  f'-t {repo}-{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
-            client.images.build(path=f'{docker_build_dir}/{talend_component}',
-                                tag=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
+                  f'-t {repo}.{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
+            client.images.build(path=f'{docker_build_dir}/talend/{talend_component}',
+                                tag=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name,
                                 timeout=28800)
             # Docker Login
-            print(f'Docker Login: docker login {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
-            client.login(registry=f'{protocol}://{repo}-{repo_suffix}:{port}',
+            print(f'Docker Login: docker login {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
+            client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
                          username=docker_user,
                          password=docker_password)
             # Docker Push
-            # print(f'Docker Push to {protocol}://{repo}-{repo_suffix}:{port}', flush=True)
+            # print(f'Docker Push to {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
             # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
             #                                tag='latest'):
             #     print(line, flush=True)
             print(f'Docker Push: '
-                  f'docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}', flush=True)
-            bash_cmd(f"cd {docker_build_dir}; "
-                     f"docker push {repo}-{repo_suffix}:{port}/{username}/{template_name}")
+                  f'docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}', flush=True)
+            bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
@@ -236,7 +237,9 @@ def handle_db_request(request):
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
-            print(f'Dockerfile {docker_build_dir}/{talend_component}/{dockerfile_name} '
+
+            print(f'Dockerfile {docker_build_dir}/talend/{talend_component}/{dockerfile_name} '
+
                   f'has been kept to find the source of the problem.', flush=True)
         except (docker.errors.APIError, socket.timeout,
                 urllib3.exceptions.ReadTimeoutError,
@@ -252,7 +255,7 @@ def handle_db_request(request):
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
             # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         except OSError as e:
             print(f'OSError {e.output}', flush=True)
@@ -275,7 +278,7 @@ def handle_db_request(request):
             update_request_status('fulfilled', request_uuid)
 
             # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/{talend_component}/{dockerfile_name}")
+            bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         finally:
             # Close all adapters and the session
@@ -287,6 +290,7 @@ def handle_db_request(request):
             print(f'\nError: Dockerfile {dockerfile_name} was not created\n', flush=True)
         elif not is_repo_valid:
             print(f'\nError: repo {repo} is not a valid repository\n', flush=True)
+
 
 def create_request_dictionary(request):
     op_sys = request['os']
@@ -475,10 +479,10 @@ def bash_cmd(cmd):
 
 
 def create_dockerfile_template_copy(talend_component, dockerfile_name):
-    if talend_component == 'tac' or talend_component == 'cmdline' or talend_component == 'jobserver':
-        if is_file_present(f'{templates_dir}/{talend_component}/template.Dockerfile'):
-            copyfile(f'{templates_dir}/{talend_component}/template.Dockerfile',
-                     f'{docker_build_dir}/{talend_component}/{dockerfile_name}')
+    if talend_component in talend_components:
+        if is_file_present(f'{templates_dir}/talend/{talend_component}/template.Dockerfile'):
+            copyfile(f'{templates_dir}/talend/{talend_component}/template.Dockerfile',
+                     f'{docker_build_dir}/talend/{talend_component}/{dockerfile_name}')
             return True
         else:
             return False
