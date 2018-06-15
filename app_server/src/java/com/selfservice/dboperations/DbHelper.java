@@ -33,7 +33,7 @@ public class DbHelper {
         String os = request.getParameter("os");
         String osVersion = request.getParameter("osVersion");
         String talendComponent = request.getParameter("talendComponent");
-        String imageName = request.getParameter("imageName");
+        String imageName = request.getParameter("imageName").toLowerCase();
         String componentVersion = request.getParameter("componentVersion");
         String jdk = request.getParameter("jdk");
         String jdkUpdate = request.getParameter("jdkUpdate");
