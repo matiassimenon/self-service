@@ -31,7 +31,7 @@ def handle_tal_request(request):
     username = request['username']
     firstname = request['firstname']
     user_region = request['region']
-    template_dictionary = create_request_dictionary(request)
+    template_dictionary = create_tal_request_dictionary(request)
     template_name = request['template_name']
     request_uuid = request['request_uuid']
     talend_component = request['talend_component']
@@ -163,14 +163,16 @@ def handle_db_request(request):
     username = request['username']
     firstname = request['firstname']
     user_region = request['region']
-    template_dictionary = create_request_dictionary(request)
+    os = request['os']
+    os_version = request['os_version']
+    db = request['db']
+    db_version = request['db_version']
     template_name = request['template_name']
     request_uuid = request['request_uuid']
-    talend_component = request['talend_component']
 
     dockerfile_name = request_uuid + '.Dockerfile'
 
-    is_dockerfile_present = create_dockerfile_template_copy(talend_component, dockerfile_name)
+    is_dockerfile_present = create_dockerfile_template_copy(db, dockerfile_name)
 
     # Re-routing push depending on users's Region.
     if user_region == 'apac' or user_region == 'APAC':
@@ -292,7 +294,7 @@ def handle_db_request(request):
             print(f'\nError: repo {repo} is not a valid repository\n', flush=True)
 
 
-def create_request_dictionary(request):
+def create_tal_request_dictionary(request):
     op_sys = request['os']
     os_version = request['os_version']
     talend_component = request['talend_component']
@@ -316,21 +318,21 @@ def create_request_dictionary(request):
     _651_version = '20180116_1512-V6.5.1'
 
     if tomcat_version == '7' or tomcat_version == '7.0':
-        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-7/v7.0.85/bin/apache-tomcat-7.0.85.tar.gz
+        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-7/v7.0.85/bin/apache-tomcat-7.0.88.tar.gz
         tomcat_major = '7'
-        tomcat_version = '7.0.85'
+        tomcat_version = '7.0.88'
     elif tomcat_version == '8' or tomcat_version == '8.0':
-        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.50.tar.gz
+        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.52.tar.gz
         tomcat_major = '8'
-        tomcat_version = '8.0.50'
+        tomcat_version = '8.0.52'
     elif tomcat_version == '8.5':
-        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.5.29/bin/apache-tomcat-8.5.29.tar.gz
+        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.5.29/bin/apache-tomcat-8.5.31.tar.gz
         tomcat_major = '8'
-        tomcat_version = '8.5.29'
+        tomcat_version = '8.5.31'
     elif tomcat_version == '9' or tomcat_version == '9.0':
-        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-9/v9.0.6/bin/apache-tomcat-9.0.6.tar.gz
+        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-9/v9.0.8/bin/apache-tomcat-9.0.8.tar.gz
         tomcat_major = '9'
-        tomcat_version = '9.0.6'
+        tomcat_version = '9.0.8'
     else:
         tomcat_major = None
         tomcat_version = None
