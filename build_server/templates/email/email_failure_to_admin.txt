@@ -5,3 +5,4 @@ Something went wrong with request uuid <request_placeholder>, placed by user <us
 Best,
 
 SRE/Devops
+support.devops@talend.com

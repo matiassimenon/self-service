@@ -3,12 +3,12 @@ import smtplib
 from authentication import credentials as credentials
 
 
-def send_email(talend_username, message):
+def send_email(talend_username, message, template_name):
     on_behalf_of = credentials.smtp['outlook_send_on_behalf_of']
     sender_email = credentials.smtp['outlook_sender_email']
     sender_password = credentials.smtp['outlook_sender_password']
     receiver_email = talend_username + '@talend.com'
-    subject = 'Devops Request'
+    subject = f'Devops Request - {template_name}'
     smtp_server = credentials.smtp['outlook_smtp_server']
     smtp_port = credentials.smtp['outlook_smtp_port']
 

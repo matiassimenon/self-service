@@ -6,3 +6,4 @@ We have been informed and are currently working to fix this issue.
 Best,
 
 SRE/Devops
+support.devops@talend.com

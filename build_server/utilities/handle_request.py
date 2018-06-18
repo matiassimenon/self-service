@@ -100,7 +100,7 @@ def handle_tal_request(request):
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
@@ -117,7 +117,7 @@ def handle_tal_request(request):
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
@@ -131,7 +131,7 @@ def handle_tal_request(request):
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
@@ -140,7 +140,7 @@ def handle_tal_request(request):
             # Send e-mail after successful image creation and upload
             email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
 
             # Update Request Status
             update_request_status('fulfilled', request_uuid)
@@ -235,7 +235,7 @@ def handle_db_request(request):
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
@@ -251,7 +251,7 @@ def handle_db_request(request):
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
@@ -263,7 +263,7 @@ def handle_db_request(request):
             # Send email to user
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_user_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
@@ -272,7 +272,7 @@ def handle_db_request(request):
             # Send e-mail after successful image creation and upload
             email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(username, email_message)
+            send_email(username, email_message, template_name)
 
             # Update Request Status
             update_request_status('fulfilled', request_uuid)

@@ -1,15 +1,16 @@
 Hello <firstname_placeholder>,
 
-Here are the details of your request. You can pull this image from: https://<repository_placeholder>-repo/v2/_catalog
+Here are the details of your request. You can pull this image from: <protocol_placeholder>://<repository_placeholder>.<registry_placeholder>/v2/_catalog
 
 =================== DEVOPS RESPONSE ===================
 
 Image name: <image_name_placeholder>
 
-Pull Command: docker pull https://<repository_placeholder>-repo:443/<username_placeholder>/<image_name_placeholder>
+Login Command: docker login <protocol_placeholder>://<repository_placeholder>.<registry_placeholder>:<port_placeholder>
+Pull Command:  docker pull <repository_placeholder>.<registry_placeholder>:<port_placeholder>/<username_placeholder>/<image_name_placeholder>
 
 How to use this Docker image?
-https://wiki.talend.com/display/support/Talend+Images
+https://wiki.talend.com/display/support/Talend
 
 ======================================================
 
@@ -21,3 +22,4 @@ Please let us know if you need anything else.
 Best,
 
 SRE/Devops
+support.devops@talend.com
