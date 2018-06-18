@@ -37,10 +37,13 @@ def send_email(talend_username, message, template_name):
         s.quit()
 
 
-def create_email_dictionary(username, firstname, region, image_name, request):
+def create_email_dictionary(username, firstname, region, repo_suffix, protocol, port, template_name, request):
     email_dictionary = {'<firstname_placeholder>': firstname,
                         '<username_placeholder>': username,
                         '<repository_placeholder>': region,
-                        '<image_name_placeholder>': image_name,
+                        '<registry_placeholder>': repo_suffix,
+                        '<protocol_placeholder>': protocol,
+                        '<port_placeholder>': port,
+                        '<template_name_placeholder>': template_name,
                         '<request_placeholder>': request}
     return email_dictionary

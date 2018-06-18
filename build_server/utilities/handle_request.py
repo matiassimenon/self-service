@@ -57,8 +57,13 @@ def handle_tal_request(request):
     email_dictionary = create_email_dictionary(username.lower(),
                                                firstname.capitalize(),
                                                user_region.lower(),
-                                               template_name.lower(),
+                                               repo_suffix,
+                                               protocol,
+                                               port,
+                                               template_name,
                                                request_uuid)
+
+    image_name = f'{repo}.{repo_suffix}:{port}/{username}/{template_name}'
 
     if is_dockerfile_present and is_repo_valid:
         replace_placeholders_in_file(f'{docker_build_dir}/talend/{talend_component}', dockerfile_name, template_dictionary)
@@ -146,7 +151,7 @@ def handle_tal_request(request):
             update_request_status('fulfilled', request_uuid)
 
             # Insert Image Input
-            insert_image(template_uuid, template_name)
+            insert_image(template_uuid, image_name)
 
             # Remove dockerfile
             bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
@@ -193,8 +198,13 @@ def handle_db_request(request):
     email_dictionary = create_email_dictionary(username.lower(),
                                                firstname.capitalize(),
                                                user_region.lower(),
-                                               template_name.lower(),
+                                               repo_suffix,
+                                               protocol,
+                                               port,
+                                               template_name,
                                                request_uuid)
+
+    image_name = f'{repo}.{repo_suffix}:{port}/{username}/{template_name}'
 
     if is_file_present(f'{work_dir}/{dockerfile_name}') and is_repo_valid:
         try:
@@ -278,7 +288,7 @@ def handle_db_request(request):
             update_request_status('fulfilled', request_uuid)
 
             # Insert Image Input
-            insert_image(template_uuid, template_name)
+            insert_image(template_uuid, image_name)
         finally:
             # Close all adapters and the session
             client.close()
