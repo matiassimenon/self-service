@@ -31,7 +31,7 @@ CREATE TABLE `USER` (
   UNIQUE (email),
   PRIMARY KEY (`username`)
 );
-REQUEST
+
 CREATE TABLE `TEMPLATE` (
   `template_uuid` VARCHAR(30) NOT NULL,
   `template_name` VARCHAR(63) NOT NULL,
@@ -80,7 +80,6 @@ CREATE TABLE `REQUEST` (
 CREATE TABLE `IMAGE` (
   `template_uuid` VARCHAR(30) NOT NULL,
   `image_name` VARCHAR(100) NOT NULL,
-  `dockerfile_name` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (template_uuid) REFERENCES `TEMPLATE` (template_uuid)
 );
