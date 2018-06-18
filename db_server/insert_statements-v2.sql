@@ -54,7 +54,7 @@ INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_vers
 -- INSERT INTO TEMPLATE and DB_TEMPLATE
 -- MySQL
 -- 8.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000013', 'mysql8.0-debian9.slim-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000013', 'mysql8.0-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000013', 'debian', '9-slim', '8.0', 'mysql');
 -- 5.7
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000014', 'mysql5.7-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
