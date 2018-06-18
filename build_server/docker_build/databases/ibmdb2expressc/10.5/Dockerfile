@@ -1,0 +1,1 @@
+FROM us.self-service.talend.com:443/devops/ibm/db2express-c:latest

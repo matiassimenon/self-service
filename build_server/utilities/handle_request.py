@@ -33,6 +33,7 @@ def handle_tal_request(request):
     user_region = request['region']
     template_dictionary = create_tal_request_dictionary(request)
     template_name = request['template_name']
+    template_uuid = request['template_uuid']
     request_uuid = request['request_uuid']
     talend_component = request['talend_component']
 
@@ -144,6 +145,9 @@ def handle_tal_request(request):
             # Update Request Status
             update_request_status('fulfilled', request_uuid)
 
+            # Insert Image Input
+            insert_image(template_uuid, template_name)
+
             # Remove dockerfile
             bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
@@ -168,11 +172,10 @@ def handle_db_request(request):
     db = request['db']
     db_version = request['db_version']
     template_name = request['template_name']
+    template_uuid = request['template_uuid']
     request_uuid = request['request_uuid']
-
-    dockerfile_name = request_uuid + '.Dockerfile'
-
-    is_dockerfile_present = create_dockerfile_template_copy(db, dockerfile_name)
+    work_dir = f"{docker_build_dir}/databases/{db}/{db_version}"
+    dockerfile_name = 'Dockerfile'
 
     # Re-routing push depending on users's Region.
     if user_region == 'apac' or user_region == 'APAC':
@@ -193,9 +196,7 @@ def handle_db_request(request):
                                                template_name.lower(),
                                                request_uuid)
 
-    if is_dockerfile_present and is_repo_valid:
-        replace_placeholders_in_file(f'{docker_build_dir}/talend/{talend_component}', dockerfile_name,
-                                     template_dictionary)
+    if is_file_present(f'{work_dir}/{dockerfile_name}') and is_repo_valid:
         try:
             # Open a client session with the Docker daemon
             client = docker.from_env()
@@ -207,10 +208,10 @@ def handle_db_request(request):
             print(f'-----------------------------------------------------------', flush=True)
             print(f'Request dictionary: {request}', flush=True)
             print(f'Docker Build: '
-                  f'cd {docker_build_dir}/talend/{talend_component}; '
+                  f'cd {docker_build_dir}/databases/{db}/{db_version}; '
                   f'docker build -f {dockerfile_name} '
                   f'-t {repo}.{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
-            client.images.build(path=f'{docker_build_dir}/talend/{talend_component}',
+            client.images.build(path=f'{docker_build_dir}/databases/{db}/{db_version}',
                                 tag=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name,
                                 timeout=28800)
@@ -240,8 +241,7 @@ def handle_db_request(request):
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
 
-            print(f'Dockerfile {docker_build_dir}/talend/{talend_component}/{dockerfile_name} '
-
+            print(f'Dockerfile {docker_build_dir}/databases/{db}/{db_version} '
                   f'has been kept to find the source of the problem.', flush=True)
         except (docker.errors.APIError, socket.timeout,
                 urllib3.exceptions.ReadTimeoutError,
@@ -256,8 +256,6 @@ def handle_db_request(request):
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
             send_email(admin_email, email_message)
-            # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         except OSError as e:
             print(f'OSError {e.output}', flush=True)
@@ -279,17 +277,16 @@ def handle_db_request(request):
             # Update Request Status
             update_request_status('fulfilled', request_uuid)
 
-            # Remove dockerfile
-            bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
-            print(f'Removed Dockerfile {dockerfile_name}', flush=True)
+            # Insert Image Input
+            insert_image(template_uuid, template_name)
         finally:
             # Close all adapters and the session
             client.close()
             print(f'-----------------------------------------------------------', flush=True)
 
     else:
-        if not is_dockerfile_present:
-            print(f'\nError: Dockerfile {dockerfile_name} was not created\n', flush=True)
+        if not is_file_present(work_dir):
+            print(f'\nError: {dockerfile_name} was not found\n', flush=True)
         elif not is_repo_valid:
             print(f'\nError: repo {repo} is not a valid repository\n', flush=True)
 
@@ -318,15 +315,15 @@ def create_tal_request_dictionary(request):
     _651_version = '20180116_1512-V6.5.1'
 
     if tomcat_version == '7' or tomcat_version == '7.0':
-        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-7/v7.0.85/bin/apache-tomcat-7.0.88.tar.gz
+        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-7/v7.0.88/bin/apache-tomcat-7.0.88.tar.gz
         tomcat_major = '7'
         tomcat_version = '7.0.88'
     elif tomcat_version == '8' or tomcat_version == '8.0':
-        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.0.50/bin/apache-tomcat-8.0.52.tar.gz
+        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.0.52/bin/apache-tomcat-8.0.52.tar.gz
         tomcat_major = '8'
         tomcat_version = '8.0.52'
     elif tomcat_version == '8.5':
-        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.5.29/bin/apache-tomcat-8.5.31.tar.gz
+        # http://mirror.reverse.net/pub/apache/tomcat/tomcat-8/v8.5.31/bin/apache-tomcat-8.5.31.tar.gz
         tomcat_major = '8'
         tomcat_version = '8.5.31'
     elif tomcat_version == '9' or tomcat_version == '9.0':
@@ -526,6 +523,20 @@ def update_request_status(status, request_uuid):
 
         cursor.execute('UPDATE `self_service_db`.`REQUEST` SET `request_status`= %s WHERE `request_uuid`= %s;',
                        (status, request_uuid))
+        mysql_cnx.commit()
+    except mysql_cnx.Error as e:
+        print(e, flush=True)
+    finally:
+        mysql_cnx.close()
+
+
+def insert_image(template_uuid, image_name):
+    try:
+        mysql_cnx = mysql.connector.connect(**credentials.config)
+        cursor = mysql_cnx.cursor(dictionary=True)
+
+        cursor.execute('INSERT INTO `self_service_db`.`IMAGE` (`template_uuid`, `image_name`) VALUES (%s, %s)',
+                       (template_uuid, image_name))
         mysql_cnx.commit()
     except mysql_cnx.Error as e:
         print(e, flush=True)

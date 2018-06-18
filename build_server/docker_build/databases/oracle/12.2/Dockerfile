@@ -1,0 +1,1 @@
+FROM us.self-service.talend.com:443/devops/oracle/12.2.0.1/oracle12.2.0.1
