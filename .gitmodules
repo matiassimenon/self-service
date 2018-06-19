@@ -1,0 +1,15 @@
+[submodule "build_server/docker_build/databases/mysql"]
+	path = build_server/docker_build/databases/mysql
+	url = https://github.com/docker-library/mysql
+[submodule "build_server/docker_build/databases/postgres"]
+	path = build_server/docker_build/databases/postgres
+	url = https://github.com/docker-library/postgres
+[submodule "build_server/docker_build/databases/mongo"]
+	path = build_server/docker_build/databases/mongo
+	url = https://github.com/docker-library/mongo
+[submodule "build_server/docker_build/databases/cassandra"]
+	path = build_server/docker_build/databases/cassandra
+	url = https://github.com/docker-library/cassandra
+[submodule "build_server/docker_build/databases/mariadb"]
+	path = build_server/docker_build/databases/mariadb
+	url = https://github.com/docker-library/mariadb
