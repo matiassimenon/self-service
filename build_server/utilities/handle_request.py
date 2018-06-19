@@ -375,13 +375,13 @@ def create_tal_request_dictionary(request):
                                           'yum update -y && ' \
                                           'yum install -y wget tar unzip vim'
         else:
-            update_os_and_install_tools = 'yum update -y && \ ' \
+            update_os_and_install_tools = 'yum update -y && ' \
                                           'yum install -y wget tar unzip vim'
 
         add_executables_to_path = 'alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && ' \
                                   'alternatives --set "java" "/opt/java/bin/java" && ' \
                                   'alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && ' \
-                                  'alternatives --set "javac" "/opt/java/bin/javac" && \ ' \
+                                  'alternatives --set "javac" "/opt/java/bin/javac" && ' \
                                   'alternatives --install "/usr/bin/keytool" "keytool" "/opt/java/bin/keytool" 1 && ' \
                                   'alternatives --set "keytool" "/opt/java/bin/keytool" '
         clean_cached_files = 'yum clean all'
@@ -399,7 +399,7 @@ def create_tal_request_dictionary(request):
         update_os_and_install_tools = 'apt-get update && ' \
                                       'apt-get install -y software-properties-common wget tar unzip vim'
         add_executables_to_path = 'update-alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && ' \
-                                  'update-alternatives --set "java" "/opt/java/bin/java" && \ ' \
+                                  'update-alternatives --set "java" "/opt/java/bin/java" && ' \
                                   'update-alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && ' \
                                   'update-alternatives --set "javac" "/opt/java/bin/javac" && ' \
                                   'update-alternatives --install "/usr/bin/keytool" ' \
