@@ -1,7 +1,7 @@
 Hello <firstname_placeholder>,
 
-Something went wrong during the build of your instance <template_name_placeholder>.
-We have been informed and are currently working to fix this issue.
+Well this is embarrassing; something went wrong during the build of your instance <template_name_placeholder>.
+We have been informed and are currently working to fix this issue. We will let you know once your instance is ready.
 
 Best,
 
