@@ -11,7 +11,7 @@
                             <div class="blog-post-nav mb-3">
                                 
                                 <a href="register.jsp">     <img src="add_account.png"></img> Signup for a free account</a></div>
-                            <hr class="mb-5"><h1 class="display-4 accent mb-5"><font color="green">Login: </font></h1>
+                            <hr class="mb-5"><h1 class="display-4 accent mb-5"><font color="green">Login </font></h1>
                             <form action="LoginServlet" method="post"  class="cozy" >
                                 <div class="form-group control">
                                     <label class="col-mb-5 control-label">Username</label><input type="text" id="login_username"  name= "username" class="form-control" required="required">
