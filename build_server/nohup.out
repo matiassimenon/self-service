@@ -130,3 +130,163 @@ Request dictionary: {'template_name': 'mariadb10.1-debian8', 'template_uuid': '0
 Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.1; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.1-debian8 .
 Docker Login: docker login https://us.self-service.talend.com:443
 Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.1-debian8
+
+2018-06-19 13:37
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'ibmdb2expressc10.5-centos7', 'template_uuid': '00000020', 'os': 'centos', 'os_version': '7.1', 'db': 'ibmdb2expressc', 'db_version': '10.5', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000020'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/ibmdb2expressc/10.5; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/ibmdb2expressc10.5-centos7 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/ibmdb2expressc10.5-centos7
+-----------------------------------------------------------
+
+2018-06-19 13:37
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.3-debian9.slim', 'template_uuid': '00000021', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.3', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000021'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.3; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.3-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.3-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 13:37
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.4-debian9.slim', 'template_uuid': '00000022', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.4', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000022'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.4; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.4-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.4-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 13:37
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.5-debian9.slim', 'template_uuid': '00000023', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.5', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000023'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.5; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.5-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.5-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 13:37
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.6-debian9.slim', 'template_uuid': '00000024', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.6', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000024'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.6; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.6-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.6-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 13:38
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres10-debian9.slim', 'template_uuid': '00000025', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '10', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000025'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/10; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres10-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres10-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 13:38
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres11-debian9.slim', 'template_uuid': '00000026', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '11', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000026'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/11; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres11-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres11-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 13:38
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb10.3-debian8', 'template_uuid': '00000027', 'os': 'debian', 'os_version': '8', 'db': 'mariadb', 'db_version': '10.3', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000027'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.3; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.3-debian8 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.3-debian8
+-----------------------------------------------------------
+
+2018-06-19 13:38
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb10.2-debian8', 'template_uuid': '00000028', 'os': 'debian', 'os_version': '8', 'db': 'mariadb', 'db_version': '10.2', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000028'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.2; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.2-debian8 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.2-debian8
+-----------------------------------------------------------
+
+2018-06-19 13:38
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb10.1-debian8', 'template_uuid': '00000029', 'os': 'debian', 'os_version': '8', 'db': 'mariadb', 'db_version': '10.1', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000029'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.1; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.1-debian8 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.1-debian8
+-----------------------------------------------------------
+
+2018-06-19 13:40
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb10.0-debian8', 'template_uuid': '00000030', 'os': 'debian', 'os_version': '8', 'db': 'mariadb', 'db_version': '10.0', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000030'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.0; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.0-debian8 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.0-debian8
+-----------------------------------------------------------
+
+2018-06-19 13:42
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb5.5-debian7', 'template_uuid': '00000031', 'os': 'debian', 'os_version': '7', 'db': 'mariadb', 'db_version': '5.5', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000031'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/5.5; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb5.5-debian7 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb5.5-debian7
+-----------------------------------------------------------
+
+2018-06-19 13:46
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'cassandra2.1-debian8.slim', 'template_uuid': '00000032', 'os': 'debian', 'os_version': '8-slim', 'db': 'cassandra', 'db_version': '2.1', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000032'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/cassandra/2.1; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/cassandra2.1-debian8.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/cassandra2.1-debian8.slim
+-----------------------------------------------------------
+
+2018-06-19 13:51
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'cassandra2.2-debian8.slim', 'template_uuid': '00000033', 'os': 'debian', 'os_version': '8-slim', 'db': 'cassandra', 'db_version': '2.2', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000033'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/cassandra/2.2; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/cassandra2.2-debian8.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/cassandra2.2-debian8.slim
+-----------------------------------------------------------
+
+2018-06-19 13:54
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'cassandra3.0-debian9.slim', 'template_uuid': '00000034', 'os': 'debian', 'os_version': '9-slim', 'db': 'cassandra', 'db_version': '3.0', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000034'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/cassandra/3.0; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/cassandra3.0-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/cassandra3.0-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 13:58
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'cassandra3.11-debian9.slim', 'template_uuid': '00000035', 'os': 'debian', 'os_version': '9-slim', 'db': 'cassandra', 'db_version': '3.11', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000035'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/cassandra/3.11; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/cassandra3.11-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/cassandra3.11-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 14:01
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mongo3.2-debian9.slim', 'template_uuid': '00000036', 'os': 'debian', 'os_version': '7', 'db': 'mongo', 'db_version': '3.2', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000036'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mongo/3.2; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mongo3.2-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mongo3.2-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 14:04
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mongo3.4-debian9.slim', 'template_uuid': '00000037', 'os': 'debian', 'os_version': '7', 'db': 'mongo', 'db_version': '3.4', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000037'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mongo/3.4; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mongo3.4-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mongo3.4-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 14:06
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mongo3.6-debian9.slim', 'template_uuid': '00000038', 'os': 'debian', 'os_version': '7', 'db': 'mongo', 'db_version': '3.6', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000038'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mongo/3.6; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mongo3.6-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mongo3.6-debian9.slim
+-----------------------------------------------------------
+
+2018-06-19 14:10
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mongo3.7-debian9.slim', 'template_uuid': '00000039', 'os': 'debian', 'os_version': '7', 'db': 'mongo', 'db_version': '3.7', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000039'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mongo/3.7; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mongo3.7-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mongo3.7-debian9.slim
+-----------------------------------------------------------
