@@ -39,8 +39,8 @@ String greetString=SFUtils.getGreetingString();
                             <p class=" mb-5"></p>
 
                             <figure class="lgo mb-5"><a href="http://www.talend.com" target="_blank"><img src="talend.png" class="imgresponsive" alt="Talend website"></a></figure>
-                            <%if (user != null){%><h2 class="bold color-1 mb-4"><span class="font-regular">Good <%=greetString%>! <%=user.getFirstname()%></span> </h2><%}%>
-                            <h2 class="bold color-1 mb-4"><span class="font-lg">Welcome</span> <span class="d-block">to Provisioning platform</span></h2>
+                            <%if (user != null){%><h2 class="bold color-1 mb-4"><span class="font-regular">Good <%=greetString%>, <%=user.getFirstname()%></span> </h2><%}%>
+                            <h2 class="bold color-1 mb-4"><span class="font-lg">Welcome</span> <span class="d-block">Provisioning Platform</span></h2>
                             
                         </div>
 
