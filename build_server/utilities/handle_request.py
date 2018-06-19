@@ -109,7 +109,7 @@ def handle_tal_request(request):
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(admin_email, email_message)
+            send_email(username, email_message, template_name)
 
             print(f'Dockerfile {docker_build_dir}/talend/{talend_component}/{dockerfile_name} '
 
@@ -126,7 +126,7 @@ def handle_tal_request(request):
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(admin_email, email_message)
+            send_email(username, email_message, template_name)
             # Remove dockerfile
             bash_cmd(f"rm -rf {docker_build_dir}/talend/{talend_component}/{dockerfile_name}")
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
@@ -140,7 +140,7 @@ def handle_tal_request(request):
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(admin_email, email_message)
+            send_email(username, email_message, template_name)
         else:
             # Send e-mail after successful image creation and upload
             email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)
@@ -249,7 +249,7 @@ def handle_db_request(request):
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(admin_email, email_message)
+            send_email(username, email_message, template_name)
 
             print(f'Dockerfile {docker_build_dir}/databases/{db}/{db_version} '
                   f'has been kept to find the source of the problem.', flush=True)
@@ -265,7 +265,7 @@ def handle_db_request(request):
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(admin_email, email_message)
+            send_email(username, email_message, template_name)
             print(f'Removed Dockerfile {dockerfile_name}', flush=True)
         except OSError as e:
             print(f'OSError {e.output}', flush=True)
@@ -277,7 +277,7 @@ def handle_db_request(request):
             # Send email to admin
             email_template_string = file_into_string(f'{templates_dir}/email', email_failure_to_admin_file)
             email_message = replace_placeholders_in_string(email_template_string, email_dictionary)
-            send_email(admin_email, email_message)
+            send_email(username, email_message, template_name)
         else:
             # Send e-mail after successful image creation and upload
             email_template_string = file_into_string(f'{templates_dir}/email', email_success_file)

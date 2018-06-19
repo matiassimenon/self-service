@@ -79,73 +79,76 @@ INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`
 
 -- IBM DB2 Express-C
 -- 5.5
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000020', 'ibmdb2express.c.10.5-centos7', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000020', 'ibmdb2expressc10.5-centos7', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000020', 'centos', '7.1', '10.5', 'ibmdb2expressc');
 
 -- PostgreSQL
--- 10.4
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000021', 'postgres10.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000021', 'debian', '9-slim', '8.0', 'postgres');
--- 9.6
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000022', 'postgres9.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000022', 'debian', '9-slim', '5.7', 'postgres');
+-- 9.3
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000021', 'postgres9.3-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000021', 'debian', '9-slim', '9.3', 'postgres');
+-- 9.4
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000022', 'postgres9.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000022', 'debian', '9-slim', '9.4', 'postgres');
 -- 9.5
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000023', 'postgres9.5-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000023', 'debian', '9-slim', '5.6', 'postgres');
--- 9.4
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000024', 'postgres9.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000024', 'debian', '9-slim', '5.5', 'postgres');
--- 9.3
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000025', 'postgres9.3-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000025', 'debian', '9-slim', '5.5', 'postgres');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000023', 'debian', '9-slim', '9.5', 'postgres');
+-- 9.6
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000024', 'postgres9.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000024', 'debian', '9-slim', '9.6', 'postgres');
+-- 10
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000025', 'postgres10-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000025', 'debian', '9-slim', '10', 'postgres');
+-- 11
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000026', 'postgres11-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000026', 'debian', '9-slim', '11', 'postgres');
 
 -- MariaDB
 -- 10.3
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000026', 'mariadb10.3-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000026', 'debian', '8', '10.3', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000027', 'mariadb10.3-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000027', 'debian', '8', '10.3', 'mariadb');
 -- 10.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000027', 'mariadb10.2-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000027', 'debian', '8', '10.2', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000028', 'mariadb10.2-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000028', 'debian', '8', '10.2', 'mariadb');
 -- 10.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000028', 'mariadb10.1-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000028', 'debian', '8', '10.1', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000029', 'mariadb10.1-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000029', 'debian', '8', '10.1', 'mariadb');
 -- 10.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000029', 'mariadb10.0-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000029', 'debian', '8', '10.0', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000030', 'mariadb10.0-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000030', 'debian', '8', '10.0', 'mariadb');
 -- 5.5
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000030', 'mariadb5.5-debian7', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000030', 'debian', '7', '5.5', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000031', 'mariadb5.5-debian7', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000031', 'debian', '7', '5.5', 'mariadb');
 
 -- Apache Cassandra
 -- 2.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000031', 'cassandra2.1-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000031', 'debian', '8-slim', '2.1', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000032', 'cassandra2.1-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000032', 'debian', '8-slim', '2.1', 'cassandra');
 -- 2.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000032', 'cassandra2.2-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000032', 'debian', '8-slim', '2.2', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000033', 'cassandra2.2-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000033', 'debian', '8-slim', '2.2', 'cassandra');
 -- 3.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000033', 'cassandra3.0-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000033', 'debian', '9-slim', '3.0', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000034', 'cassandra3.0-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000034', 'debian', '9-slim', '3.0', 'cassandra');
 -- 3.11
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000034', 'cassandra3.11-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000034', 'debian', '9-slim', '3.11', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000035', 'cassandra3.11-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000035', 'debian', '9-slim', '3.11', 'cassandra');
 
 -- MongoDB
 -- 3.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000035', 'mongo3.2-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000035', 'debian', '7', '3.2', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000036', 'mongo3.2-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000036', 'debian', '7', '3.2', 'mongo');
 -- 3.4
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000036', 'mongo3.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000036', 'debian', '7', '3.4', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000037', 'mongo3.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000037', 'debian', '7', '3.4', 'mongo');
 -- 3.6
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000037', 'mongo3.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000037', 'debian', '7', '3.6', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000038', 'mongo3.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000038', 'debian', '7', '3.6', 'mongo');
 -- 3.7
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000038', 'mongo3.7-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000038', 'debian', '7', '3.7', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000039', 'mongo3.7-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000039', 'debian', '7', '3.7', 'mongo');
 -- 4.0.rc
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000039', 'mongo4.0.rc-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000039', 'debian', '7', '4.0-rc', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000040', 'mongo4.0.rc-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000040', 'debian', '7', '4.0-rc', 'mongo');
 
 
 -- INSERT REQUESTS

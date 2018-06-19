@@ -1,1 +1,1 @@
-FROM us.self-service.talend.com:443/devops/ibm/db2express-c:latest
+FROM us.self-service.talend.com:443/devops/ibmdb2/ibmdb2expressc10.5:latest

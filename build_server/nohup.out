@@ -1,0 +1,132 @@
+
+2018-06-18 20:18
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'ibmdb2expressc10.5-centos7', 'template_uuid': '00000020', 'os': 'centos', 'os_version': '7.1', 'db': 'ibmdb2expressc', 'db_version': '10.5', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000020'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/ibmdb2expressc/10.5; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/ibmdb2expressc10.5-centos7 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/ibmdb2expressc10.5-centos7
+-----------------------------------------------------------
+
+2018-06-18 20:18
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.3-debian9.slim', 'template_uuid': '00000021', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.3', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000021'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.3; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.3-debian9.slim .
+
+Docker BuildError
+
+-----------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/francisco/talend-dev/self-service/build_server/utilities/handle_request.py", line 227, in handle_db_request
+    timeout=28800)
+  File "/Users/francisco/talend-dev/self-service/build_server/venv/lib/python3.6/site-packages/docker/models/images.py", line 266, in build
+    raise BuildError(chunk['error'], result_stream)
+docker.errors.BuildError: The command '/bin/sh -c set -ex; 	key='B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8'; 	export GNUPGHOME="$(mktemp -d)"; 	gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; 	gpg --export "$key" > /etc/apt/trusted.gpg.d/postgres.gpg; 	rm -rf "$GNUPGHOME"; 	apt-key list' returned a non-zero code: 2
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "dockerfile.py", line 34, in <module>
+    handle_request.handle_db_request(request)
+  File "/Users/francisco/talend-dev/self-service/build_server/utilities/handle_request.py", line 252, in handle_db_request
+    send_email(admin_email, email_message)
+TypeError: send_email() missing 1 required positional argument: 'template_name'
+
+2018-06-18 20:22
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.3-debian9.slim', 'template_uuid': '00000021', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.3', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000021'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.3; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.3-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.3-debian9.slim
+-----------------------------------------------------------
+
+2018-06-18 20:23
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.4-debian9.slim', 'template_uuid': '00000022', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.4', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000022'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.4; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.4-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.4-debian9.slim
+-----------------------------------------------------------
+
+2018-06-18 20:24
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.5-debian9.slim', 'template_uuid': '00000023', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.5', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000023'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.5; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.5-debian9.slim .
+
+2018-06-18 20:24
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.6-debian9.slim', 'template_uuid': '00000024', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.6', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000024'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.6; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.6-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.5-debian9.slim
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.6-debian9.slim
+-----------------------------------------------------------
+
+2018-06-18 20:25
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres9.6-debian9.slim', 'template_uuid': '00000024', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '9.6', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000024'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/9.6; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres9.6-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres9.6-debian9.slim
+-----------------------------------------------------------
+
+2018-06-18 20:25
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres10-debian9.slim', 'template_uuid': '00000025', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '10', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000025'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/10; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres10-debian9.slim .
+-----------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/francisco/talend-dev/self-service/build_server/utilities/handle_request.py", line 549, in insert_image
+    (template_uuid, image_name))
+  File "/Users/francisco/talend-dev/self-service/build_server/venv/lib/python3.6/site-packages/mysql/connector/cursor.py", line 566, in execute
+    self._handle_result(self._connection.cmd_query(stmt))
+  File "/Users/francisco/talend-dev/self-service/build_server/venv/lib/python3.6/site-packages/mysql/connector/connection.py", line 530, in cmd_query
+    result = self._handle_result(self._send_cmd(ServerCmd.QUERY, query))
+  File "/Users/francisco/talend-dev/self-service/build_server/venv/lib/python3.6/site-packages/mysql/connector/connection.py", line 432, in _handle_result
+    raise errors.get_exception(packet)
+mysql.connector.errors.IntegrityError: 1062 (23000): Duplicate entry '00000024' for key 'PRIMARY'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "dockerfile.py", line 34, in <module>
+    handle_request.handle_db_request(request)
+  File "/Users/francisco/talend-dev/self-service/build_server/utilities/handle_request.py", line 291, in handle_db_request
+    insert_image(template_uuid, image_name)
+  File "/Users/francisco/talend-dev/self-service/build_server/utilities/handle_request.py", line 551, in insert_image
+    except mysql_cnx.Error as e:
+AttributeError: 'MySQLConnection' object has no attribute 'Error'
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres10-debian9.slim
+-----------------------------------------------------------
+
+2018-06-18 20:26
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'postgres11-debian9.slim', 'template_uuid': '00000026', 'os': 'debian', 'os_version': '9-slim', 'db': 'postgres', 'db_version': '11', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000026'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/postgres/11; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/postgres11-debian9.slim .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/postgres11-debian9.slim
+-----------------------------------------------------------
+
+2018-06-18 20:27
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb10.3-debian8', 'template_uuid': '00000027', 'os': 'debian', 'os_version': '8', 'db': 'mariadb', 'db_version': '10.3', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000027'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.3; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.3-debian8 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.3-debian8
+-----------------------------------------------------------
+
+2018-06-18 20:28
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb10.2-debian8', 'template_uuid': '00000028', 'os': 'debian', 'os_version': '8', 'db': 'mariadb', 'db_version': '10.2', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000028'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.2; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.2-debian8 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.2-debian8
+-----------------------------------------------------------
+
+2018-06-18 20:29
+-----------------------------------------------------------
+Request dictionary: {'template_name': 'mariadb10.1-debian8', 'template_uuid': '00000029', 'os': 'debian', 'os_version': '8', 'db': 'mariadb', 'db_version': '10.1', 'region': 'US', 'firstname': 'Francisco', 'username': 'fgalindo', 'request_uuid': '00000029'}
+Docker Build: cd /Users/francisco/talend-dev/self-service/build_server/docker_build/databases/mariadb/10.1; docker build -f Dockerfile -t us.self-service.talend.com:443/fgalindo/mariadb10.1-debian8 .
+Docker Login: docker login https://us.self-service.talend.com:443
+Docker Push: docker push us.self-service.talend.com:443/fgalindo/mariadb10.1-debian8
