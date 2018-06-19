@@ -357,33 +357,35 @@ def create_tal_request_dictionary(request):
     if op_sys == 'centos':
         if os_version == '7.4':
             os_version = os_version + '.1708'
-            update_os_and_install_tools = 'yum update -y && ' \
-                                          'yum install -y wget tar unzip vim'
+
         elif os_version == '7.3':
             os_version = os_version + '.1611'
-            update_os_and_install_tools = 'yum update -y && ' \
-                                          'yum install -y wget tar unzip vim'
+
         elif os_version == '7.2':
             os_version = os_version + '.1511'
-            update_os_and_install_tools = 'yum update -y && ' \
-                                          'yum install -y wget tar unzip vim'
+
         elif os_version == '7.1':
             os_version = os_version + '.1503'
+
+        elif os_version == '7.0':
+            os_version = os_version + '.1406'
+
+        if os_version == '7.1.1503':
             update_os_and_install_tools = 'yum swap fakesystemd systemd -y && ' \
                                           'yum update -y && ' \
                                           'yum install -y wget tar unzip vim'
-        elif os_version == '7.0':
-            os_version = os_version + '.1406'
-            update_os_and_install_tools = 'yum update -y && ' \
+        else:
+            update_os_and_install_tools = 'yum update -y && \ ' \
                                           'yum install -y wget tar unzip vim'
 
         add_executables_to_path = 'alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && ' \
                                   'alternatives --set "java" "/opt/java/bin/java" && ' \
                                   'alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && ' \
-                                  'alternatives --set "javac" "/opt/java/bin/javac" && ' \
+                                  'alternatives --set "javac" "/opt/java/bin/javac" && \ ' \
                                   'alternatives --install "/usr/bin/keytool" "keytool" "/opt/java/bin/keytool" 1 && ' \
                                   'alternatives --set "keytool" "/opt/java/bin/keytool" '
         clean_cached_files = 'yum clean all'
+
     elif op_sys == 'ubuntu':
         if os_version == '14':
             os_version = '14.04'
@@ -397,7 +399,7 @@ def create_tal_request_dictionary(request):
         update_os_and_install_tools = 'apt-get update && ' \
                                       'apt-get install -y software-properties-common wget tar unzip vim'
         add_executables_to_path = 'update-alternatives --install "/usr/bin/java" "java" "/opt/java/bin/java" 1 && ' \
-                                  'update-alternatives --set "java" "/opt/java/bin/java" && ' \
+                                  'update-alternatives --set "java" "/opt/java/bin/java" && \ ' \
                                   'update-alternatives --install "/usr/bin/javac" "javac" "/opt/java/bin/javac" 1 && ' \
                                   'update-alternatives --set "javac" "/opt/java/bin/javac" && ' \
                                   'update-alternatives --install "/usr/bin/keytool" ' \
