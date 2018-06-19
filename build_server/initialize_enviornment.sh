@@ -44,3 +44,13 @@ sudo docker pull centos:7.2.1511
 sudo docker pull centos:7.3.1611
 sudo docker pull centos:7.4.1708
 sudo docker pull centos:latest
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:5.2.1
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:5.3.3
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:5.5.3
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:5.6.10
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:6.0.1
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:6.1.4
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:6.2.4
+sudo docker pull docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+
+
