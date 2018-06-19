@@ -14,8 +14,8 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = 'self-service.talend.com'
 port = '443'
 protocol = 'https'
-project_dir = '/Users/francisco/talend-dev/self-service/build_server'
-#project_dir = '/home/centos/self-service/build_server'
+#project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+project_dir = '/home/centos/self-service/build_server'
 templates_dir = f'{project_dir}/templates'
 docker_build_dir = f'{project_dir}/docker_build'
 docker_user = credentials.docker['docker_user']
