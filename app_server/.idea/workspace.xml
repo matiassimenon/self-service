@@ -80,8 +80,8 @@
       <file leaf-file-name="left.jsp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/left.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="615">
-              <caret line="41" column="172" lean-forward="true" selection-start-line="41" selection-start-column="172" selection-end-line="41" selection-end-column="172" />
+            <state relative-caret-position="750">
+              <caret line="50" column="99" lean-forward="true" selection-start-line="50" selection-start-column="99" selection-end-line="50" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -126,8 +126,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>welcome</find>
-      <find>Welcome</find>
       <find>Good</find>
+      <find>Welcome</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -305,12 +305,12 @@
       <option name="presentableId" value="Default" />
       <updated>1527263118663</updated>
       <workItem from="1527263120455" duration="2234000" />
-      <workItem from="1529417743694" duration="1233000" />
+      <workItem from="1529417743694" duration="1334000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3467000" />
+    <option name="totallyTimeSpent" value="3568000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -561,8 +561,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/left.jsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="172" lean-forward="true" selection-start-line="41" selection-start-column="172" selection-end-line="41" selection-end-column="172" />
+        <state relative-caret-position="750">
+          <caret line="50" column="99" lean-forward="true" selection-start-line="50" selection-start-column="99" selection-end-line="50" selection-end-column="99" />
           <folding />
         </state>
       </provider>
