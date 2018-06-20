@@ -220,10 +220,10 @@ def handle_db_request(request):
             print(f'-----------------------------------------------------------', flush=True)
             print(f'Request dictionary: {request}', flush=True)
             print(f'Docker Build: '
-                  f'cd {docker_build_dir}/databases/{db}/{db_version}; '
+                  f'cd {docker_build_dir}/talend/{talend_component}; '
                   f'docker build -f {dockerfile_name} '
                   f'-t {repo}.{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
-            client.images.build(path=f'{docker_build_dir}/databases/{db}/{db_version}',
+            client.images.build(path=f'{docker_build_dir}/talend/{talend_component}',
                                 tag=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name,
                                 timeout=28800)
@@ -233,13 +233,15 @@ def handle_db_request(request):
                          username=docker_user,
                          password=docker_password)
             # Docker Push
-            # print(f'Docker Push to {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
             # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
             #                                tag='latest'):
             #     print(line, flush=True)
             print(f'Docker Push: '
                   f'docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}', flush=True)
-            bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
+            # bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
+            for line in client.images.push(repository=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
+                                           tag='latest'):
+                print(line, flush=True)
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
