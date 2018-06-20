@@ -378,8 +378,8 @@ function displayHadoop(){
                     <td class="td1">Talend Component :</td>
                     <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
                             <option value="tac">TAC</option>
-                            <option value="cmdline">CmdLine</option>
-                            <option value="jobserver">Jobserver</option>
+                            <option value="cmdline">CommandLine</option>
+                            <option value="jobserver">JobServer</option>
                         </select> 
                     </td>    
                     <td class="td1">Talend Version :</td>
