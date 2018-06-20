@@ -367,7 +367,7 @@ function displayHadoop(){
         <p>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
 <div class="list-group" id="myList" role="tablist">
-  <a class="list-group-item list-group-item-action" id="talend_a"  onclick="displayTalend(); " data-toggle="list" href="#" role="tab">Talend Component</a>
+  <a class="list-group-item list-group-item-action" id="talend_a"  onclick="displayTalend(); " data-toggle="list" href="#" role="tab">Talend Components</a>
   <a class="list-group-item list-group-item-action" id ="database_a"  onclick="displayDatabase(); " data-toggle="list" href="#" role="tab">Databases</a>
 
 </div>
@@ -375,7 +375,7 @@ function displayHadoop(){
         <form  id="templateForm"  style="display: none;" method="post" action="">
             <table  id="talend_table"  cellpadding="5px" align="center" style="border:1px solid green;">
                 <tr>
-                    <td class="td1">Talend Component :</td>
+                    <td class="td1">Talend Components :</td>
                     <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
                             <option value="tac">TAC</option>
                             <option value="cmdline">CommandLine</option>
