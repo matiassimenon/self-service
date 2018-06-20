@@ -87,19 +87,18 @@ def handle_tal_request(request):
                                 timeout=28800)
             # Docker Login
             print(f'Docker Login: docker login {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
-            client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
-                         username=docker_user,
-                         password=docker_password)
+            bash_cmd(f"docker login -u {docker_user} -p {docker_password} {protocol}://{repo}.{repo_suffix}:{port}")
+            # client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
+            #              username=docker_user,
+            #              password=docker_password)
+
             # Docker Push
-            # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-            #                                tag='latest'):
-            #     print(line, flush=True)
             print(f'Docker Push: '
                   f'docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}', flush=True)
-            # bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
-            for line in client.images.push(repository=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
-                                           tag='latest'):
-                print(line, flush=True)
+            bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
+            # for line in client.images.push(repository=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
+            #                                tag='latest'):
+            #     print(line, flush=True)
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
@@ -220,28 +219,27 @@ def handle_db_request(request):
             print(f'-----------------------------------------------------------', flush=True)
             print(f'Request dictionary: {request}', flush=True)
             print(f'Docker Build: '
-                  f'cd {docker_build_dir}/talend/{talend_component}; '
+                  f'cd {docker_build_dir}/databases/{db}/{db_version}; '
                   f'docker build -f {dockerfile_name} '
                   f'-t {repo}.{repo_suffix}:{port}/{username}/{template_name} .', flush=True)
-            client.images.build(path=f'{docker_build_dir}/talend/{talend_component}',
+            client.images.build(path=f'{docker_build_dir}/databases/{db}/{db_version}',
                                 tag=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
                                 dockerfile=dockerfile_name,
                                 timeout=28800)
             # Docker Login
             print(f'Docker Login: docker login {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
-            client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
-                         username=docker_user,
-                         password=docker_password)
+            bash_cmd(f"docker login -u {docker_user} -p {docker_password} {protocol}://{repo}.{repo_suffix}:{port}")
+            # client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
+            #              username=docker_user,
+            #              password=docker_password)
+
             # Docker Push
-            # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-            #                                tag='latest'):
-            #     print(line, flush=True)
             print(f'Docker Push: '
                   f'docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}', flush=True)
-            # bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
-            for line in client.images.push(repository=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
-                                           tag='latest'):
-                print(line, flush=True)
+            bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
+            # for line in client.images.push(repository=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
+            #                                tag='latest'):
+            #     print(line, flush=True)
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
