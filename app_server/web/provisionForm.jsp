@@ -62,8 +62,6 @@
                         checkOsVersion();
                         setSelected(document.getElementById("tomcatVersion"), tomcatVersion);
                         setSelected(document.getElementById("osVersion"), osVersion);
-
-
                     }
                     displayTalend();
                 }
@@ -72,11 +70,6 @@
                 var disable = (fromtemplate === "true");
                 if(disable){
                    disableForm(true);   
-                   //enable sales_force 
-//                   var salesforces=document.getElementsByName("salesforceCase");
-//                   for(var i=0; i<salesforces.length; i++){
-//                       salesforces[i].readonly=false;
-//                   }
                 }               
             };
          function enableInput(){
@@ -103,6 +96,13 @@ osArr['centos'] =
  {txt:'7.2', val:'7.2'},
  {txt:'7.3', val:'7.3'}
  ];
+ osArr['debian'] =
+[
+ {txt:'8-slim', val:'8-slim'},
+ {txt:'9-slim', val:'9-slim'}
+ ];
+ osArr['oraclelinux'] =[{txt:'7-slim', val:'7-slim'}];
+ 
  //define the database version data array
 var dbArr=[];
 dbArr['mysql'] =
@@ -112,13 +112,14 @@ dbArr['mysql'] =
  {txt:'5.7', val:'5.7'},
  {txt:'8.0', val:'8.0'}
  ];
- dbArr['postgresql'] =
+ dbArr['postgres'] =
 [
  {txt:'9.3', val:'9.3'},
  {txt:'9.4', val:'9.4'},
  {txt:'9.5', val:'9.5'},
  {txt:'9.6', val:'9.6'},
- {txt:'10.0', val:'10.0'}
+ {txt:'10', val:'10'},
+ {txt:'11', val:'11'}
  ];
 
   dbArr['mariadb'] =
@@ -133,17 +134,32 @@ dbArr['mysql'] =
 [
  {txt:'MSSQL for Linux', val:'2017'}
  ];
-
    dbArr['oracle'] =
 [
- {txt:'11gr2', val:'11gr2'},
- {txt:'12cr1', val:'12cr1'}
+ {txt:'11.2', val:'11.2'},
+ {txt:'12.1', val:'12.1'},
+ {txt:'12.2', val:'12.2'}
  ];
-  dbArr['db2'] =
+  dbArr['ibmdb2expressc'] =
 [
- {txt:'db2express-c', val:'express-c'}
+ {txt:'10.5', val:'10.5'}
  ];
- 
+ dbArr['cassandra'] =
+[
+ {txt:'2.1', val:'2.1'},
+ {txt:'2.2', val:'2.2'},
+ {txt:'3.0', val:'3.0'},
+ {txt:'3.11', val:'3.11'}
+ ];
+ dbArr['elasticsearch'] =
+ [
+     {txt:'5.2', val:'5.2'}, {txt:'5.3', val:'5.3'}, {txt:'5.4', val:'5.4'},{txt:'5.5', val:'5.5'},{txt:'5.6', val:'5.6'},
+     {txt:'6.0', val:'6.0'},{txt:'6.1', val:'6.1'},{txt:'6.2', val:'6.2'},{txt:'6.3', val:'6.3'}
+ ];
+ dbArr['mongo'] =
+ [
+     {txt:'3.2', val:'3.2'},{txt:'3.4', val:'3.4'},{txt:'3.6', val:'3.6'},{txt:'3.7', val:'3.7'},{txt:'4.0-rc', val:'4.0-rc'}
+ ];
 function setOsVersion(osVersion)
 {
         setSelectOption('osVersion', osArr[osVersion.options[osVersion.selectedIndex].value], 'Please select...');
@@ -200,6 +216,89 @@ function checkOsVersion(){
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }      
 }
+function checkDBVersion(){
+    var db=document.getElementById("database_db");
+    var db_version=document.getElementById("database_version_db");
+    var osVersion_db=document.getElementById("osVersion_db");
+    if(db.value === 'cassandra'){
+        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('osVersion_db',[{txt:'8-slim', val:'8-slim'}, {txt:'9-slim', val:'9-slim'}]);       
+    }
+    if(db.value === 'elasticsearch'){
+        setSelectOption('os_db',[{txt:'centos', val:'centos'}]);
+        setSelectOption('osVersion_db',[{txt:'7', val:'7'}]);     
+        setSelectOption('database_version_db',[{txt:'5.2', val:'5.2'},{txt:'5.3', val:'5.3'},{txt:'5.4', val:'5.4'},{txt:'5.5', val:'5.5'},{txt:'5.6', val:'5.6'},{txt:'6.0', val:'6.0'},{txt:'6.1', val:'6.1'},{txt:'6.2', val:'6.2'},{txt:'6.3', val:'6.3'}]);
+    }
+    if(db.value === 'ibmdb2expressc'){
+        setSelectOption('os_db',[{txt:'centos', val:'centos'}]);
+        setSelectOption('osVersion_db',[{txt:'7', val:'7'}]);    
+        setSelectOption('database_version_db',[{txt:'10.5', val:'10.5'}]);
+    }
+    if(db.value === 'mariadb'){
+        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('osVersion_db',[{txt:'7', val:'7'},{txt:'8', val:'8'}]);    
+    }
+    if(db.value === 'mongo'){
+        setSelectOption('os_db',[{txt:'debian', val:'debian'},{txt:'ubuntu', val:'ubuntu'}]);
+    }
+    if(db.value === 'mssql'){
+        setSelectOption('os_db',[{txt:'centos', val:'centos'}]);
+        setSelectOption('osVersion_db',[{txt:'7', val:'7'}]);    
+        setSelectOption('database_version_db',[{txt:'2017', val:'2017'}]);
+    }
+    if(db.value === 'mysql'){
+        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('osVersion_db',[{txt:'9-slim', val:'9-slim'}]);    
+        setSelectOption('database_version_db',[{txt:'5.5', val:'5.5'},{txt:'5.6', val:'5.6'},{txt:'5.7', val:'5.7'},{txt:'8.0', val:'8.0'}]);
+    }
+    if(db.value === 'oracle'){
+        setSelectOption('os_db',[{txt:'oraclelinux', val:'oraclelinux'}]);
+        setSelectOption('osVersion_db',[{txt:'7-slim', val:'7-slim'}]);    
+        setSelectOption('database_version_db',[{txt:'11.2', val:'11.2'},{txt:'12.1', val:'12.1'},{txt:'12.2', val:'12.2'}]);
+    }
+    if(db.value === 'postgres'){
+        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('osVersion_db',[{txt:'9-slim', val:'9-slim'}]);    
+        setSelectOption('database_version_db',[{txt:'9.3', val:'9.3'},{txt:'9.4', val:'9.4'},{txt:'9.5', val:'9.5'},{txt:'9.6', val:'9.6'},{txt:'10', val:'10'},{txt:'11', val:'11'}]);
+    }
+}
+function resetOSVersion_db(){
+    var db=document.getElementById("database_db");
+    var os_db=document.getElementById("os_db");
+    if(db.value === 'mongo'){
+        if(os_db.value === 'debian')setSelectOption('osVersion_db',[{txt:'9-slim', val:'9-slim'}], 'Please select...');   
+        if(os_db.value === 'ubuntu')setSelectOption('osVersion_db',[{txt:'16', val:'16'}], 'Please select ...'); 
+    }
+}
+function resetDBVersion(){
+    var db=document.getElementById("database_db");
+    var osVersion_db=document.getElementById("osVersion_db");
+    if(db.value === 'cassandra'){      
+        if(osVersion_db.value === '8-slim'){
+            setSelectOption('database_version_db',[{txt:'2.1', val:'2.1'},{txt:'2.2', val:'2.2'}],'Please select..');
+        }
+        if(osVersion_db.value === '9-slim'){
+            setSelectOption('database_version_db',[{txt:'3.0', val:'3.0'},{txt:'3.11', val:'3.11'}],'Please select..');
+        }
+    }
+    if(db.value === 'mariadb'){
+        if(osVersion_db.value === '7'){
+            setSelectOption('database_version_db',[{txt:'5.5', val:'5.5'}]);
+        }
+        if(osVersion_db.value === '8'){
+            setSelectOption('database_version_db',[{txt:'10.0', val:'10.0'},{txt:'10.1', val:'10.1'},{txt:'10.2', val:'10.2'},{txt:'10.3', val:'10.3'}],'Please select..');
+        }        
+    }
+    if(db.value === 'mongo'){
+        if(osVersion_db.value === '9-slim'){
+            setSelectOption('database_version_db',[{txt:'3.2', val:'3.2'},{txt:'3.4', val:'3.4'},{txt:'3.6', val:'3.6'}], 'Please select ...');
+        }
+        if(osVersion_db.value === '16'){
+            setSelectOption('database_version_db',[{txt:'3.7', val:'3.7'},{txt:'4.0-rc', val:'4.0-rc'}], 'Please select ...');
+        }
+    }
+    
+}
 function generateImageName(){
     var imagename=document.getElementById("talendComponent").value+ document.getElementById("componentVersion").value.toString() + "-"+
             document.getElementById("os").value + document.getElementById("osVersion").value.toString()+ "-"+           
@@ -214,8 +313,8 @@ function generateImageName(){
 }
 function generateImageName_db(){
     var imagename=
-            document.getElementById("os_db").value + document.getElementById("osVersion_db").value.toString()+ "-"+  
-            document.getElementById("database_db").value + "-"+document.getElementById("database_version_db").value.toString();
+            document.getElementById("os_db").value + document.getElementById("osVersion_db").value.toString().replace('-','.')+ "-"+  
+            document.getElementById("database_db").value +document.getElementById("database_version_db").value.toString().replace('-','.');
     if(document.getElementById("salesforceCase_db").value.length>0) imagename += "-"+ document.getElementById("salesforceCase_db").value;   
     document.getElementById("imageName_db").value=imagename;
 }
@@ -233,24 +332,17 @@ function saveAsTemplate_db(){
 function requestAction(){
     document.getElementById("salesforceCase").required="required";
     document.getElementById("templateForm").action="RequestServlet";    
-    //if(document.getElementById("salesforceCase").value !== ""){
-    //    enableInput();
-    //}
 }
 function requestAction_db(){
     document.getElementById("salesforceCase_db").required="required";
     document.getElementById("templateForm_db").action="RequestServlet";    
-    //if(document.getElementById("salesforceCase_db").value !== ""){
-    //    enableInput();
-    //}
+
 }
 function displayDatabase(){
     
     $('#database_a').toggleClass('active');
     $('#talend_a').removeClass('active');
     document.getElementById('templateForm_db').style.display='block';
-    //document.getElementById('templateForm_db').style.backgroundColor='#47a3da';
-    //document.getElementById('templateForm_db').style.color='#fff';
     document.getElementById('templateForm').style.display='none'; //hide talend
 }
 function displayTalend(){
@@ -258,8 +350,6 @@ function displayTalend(){
    $('#talend_a').toggleClass('active');
    $('#database_a').removeClass('active');
     document.getElementById('templateForm').style.display='block';
-    //document.getElementById('templateForm').style.backgroundColor='#47a3da';
-    //document.getElementById('templateForm').style.color='#fff';
     document.getElementById('templateForm_db').style.display='none'; //hide talend
 }
 function displayHadoop(){
@@ -269,8 +359,6 @@ function displayHadoop(){
    
 <div class="col-lg-8 py-4 d-flex flex-column align-items-left justify-content-top align-content-center">
      <%@include file="navigator.jsp"%>
-     
-    
 
         <div class="tablecontent" style=" min-height:  800px;" >
         <div class="text-lg-center color-3">Request a container</div>
@@ -301,15 +389,12 @@ function displayHadoop(){
                             <option value="6.3.1">6.3.1</option>
                             <option value="6.4.1">6.4.1</option>
                             <option value="6.5.1">6.5.1</option>
-                           
                         </select> 
                     </td>  
-                    
                 </tr>                
-
                 <tr>
                     <td class="td1" >OS:</td> 
-                    <td> <select id="os" name="os" required="required" onchange="setOsVersion(this);"> 
+                    <td> <select id="os" name="os" required="required" onchange="setOsVersion(this); generateImageName();"> 
                              <option value="">Please select...</option>
                             <option value="ubuntu">Ubuntu</option>
                             <option value="centos">CentOS</option>
@@ -360,39 +445,44 @@ function displayHadoop(){
         <form  id="templateForm_db"  style="display: none;" method="post" action="">
             <table id="database_table" cellpadding="5px" align="center" style="border:1px solid green; padding:0px 0px;">
                 <tr>
-                    <td class="td1">OS:</td> 
-                    <td> <select id="os_db" name="os" required="required" onchange="setOsVersion_db(this);"> 
-                            <option value="">Please select...</option>
-                            <option value="ubuntu">Ubuntu</option>
-                            <option value="centos">CentOS</option>
-                        </select> 
-                    </td>                    
-                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange="generateImageName_db();" ></input> </td>
-                </tr>                
-                <tr>
-                    <td class="td1">OS Version: </td>
-                    <td><select id="osVersion_db" required="required" name="osVersion" onchange="generateImageName_db();">
-                             <option value="">Please select...</option>
-                        </select> 
-                    </td>    
-                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName_db"  name="imageName"></input> </td>
-                </tr>
-                <tr> 
                     <td class="td1">Database:</td>                    
-                    <td> <select id="database_db" name="database" required="required" onchange="setDbVersion_db(this);"> 
+                    <td> <select id="database_db" name="database" required="required" onchange="setDbVersion_db(this); checkDBVersion();generateImageName_db();"> 
                              <option value="">Please select...</option>
                             <option value="mysql">MySQL</option>
-                            <option value="postgresql">PostgreSQL</option>
+                            <option value="postgres">PostgreSQL</option>
                             <option value="mariadb">MariaDB</option>
                             <option value="mssql">MSSQL for Linux</option>
                             <option value="oracle">Oracle</option>
-                            <option value="db2">IBM db2</option>
+                            <option value="ibmdb2expressc">DB2 Express-C</option>
+                            <option value="cassandra">Apache Cassandra</option>
+                            <option value="elasticsearch">Elasticsearch</option>
+                            <option value="mongo">MongoDB</option>
                         </select> 
-                    </td>
+                    </td>                                                       
+                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange="generateImageName_db();" ></input> </td>
+                </tr>                
+                <tr>
+                     <td class="td1">Database Version: </td>
+                    <td><select id="database_version_db" required="required" name="database_version" onchange=" generateImageName_db();">
+                             <option value="">Please select...</option>
+                        </select> 
+                    </td>                        
+                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName_db"  name="imageName"></input> </td>
+                </tr>
+                <tr> 
+                    <td class="td1">OS:</td> 
+                    <td> <select id="os_db" name="os" required="required" onchange="setOsVersion_db(this); resetOSVersion_db();generateImageName_db();"> 
+                            <option value="">Please select...</option>
+                            <option value="ubuntu">Ubuntu</option>
+                            <option value="centos">CentOS</option>
+                            <option value="debian">Debian</option>
+                            <option value="oraclelinux">Oracle Linux</option>
+                        </select> 
+                    </td>     
                 </tr>
                 <tr>
-                    <td class="td1">Database Version: </td>
-                    <td><select id="database_version_db" required="required" name="database_version" onchange=" generateImageName_db();">
+                   <td class="td1">OS Version: </td>
+                    <td><select id="osVersion_db" required="required" name="osVersion" onchange=" resetDBVersion();generateImageName_db();">
                              <option value="">Please select...</option>
                         </select> 
                     </td>
