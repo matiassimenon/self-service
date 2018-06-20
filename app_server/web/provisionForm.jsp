@@ -367,7 +367,7 @@ function displayHadoop(){
         <p>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
 <div class="list-group" id="myList" role="tablist">
-  <a class="list-group-item list-group-item-action" id="talend_a"  onclick="displayTalend(); " data-toggle="list" href="#" role="tab">Talend component</a>
+  <a class="list-group-item list-group-item-action" id="talend_a"  onclick="displayTalend(); " data-toggle="list" href="#" role="tab">Talend Component</a>
   <a class="list-group-item list-group-item-action" id ="database_a"  onclick="displayDatabase(); " data-toggle="list" href="#" role="tab">Databases</a>
 
 </div>
