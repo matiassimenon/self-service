@@ -363,7 +363,7 @@ function displayHadoop(){
      <%@include file="navigator.jsp"%>
 
         <div class="tablecontent" style=" min-height:  800px;" >
-        <div class="text-lg-center color-3">Request a container</div>
+        <div class="text-lg-center color-3">Request a Container</div>
         <p>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
 <div class="list-group" id="myList" role="tablist">
