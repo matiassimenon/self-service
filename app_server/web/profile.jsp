@@ -26,7 +26,7 @@
                     <td><select name="department" id="department" required="required" >
                         <option value="csa">CSA</option>
                         <option value="devops">Devops</option>
-                        <option value="escalation">Escalation</option>
+                        <option value="escalations">Escalations</option>
                         <option value="pm">PM</option>
                         <option value="ps">PS</option>
                         <option value="rd">R&D</option>
@@ -39,9 +39,9 @@
                     <td class="td1">Region:</td>
                     <td> <select id="region" name="region" id="region" required="required" onchange="if(this.value != '') setCity(this.options[this.selectedIndex].value);">
                             <option value="">Please select...</option>
-                            <option value="APAC">APAC</option>
-                            <option value="EMEA">EMEA</option>
-                            <option value="US">US</option>
+                            <option value="apac">APAC</option>
+                            <option value="emea">EMEA</option>
+                            <option value="us">US</option>
                         </select> </td>
                 </tr>
                 <tr>

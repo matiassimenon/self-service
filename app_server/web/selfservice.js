@@ -111,7 +111,7 @@ function clickRow(row) {
 
 //define the city  data array
 var cityArr = [];
-cityArr['APAC'] =
+cityArr['apac'] =
         [
             {txt: 'Bangalore', val: 'blr'},
             {txt: 'Beijing', val: 'bjs'},
@@ -119,7 +119,7 @@ cityArr['APAC'] =
             {txt: 'Sydney', val: 'swz'},
             {txt: 'Tokyo', val: 'tyo'}
         ];
-cityArr['US'] =
+cityArr['us'] =
         [
             {txt: 'Atlanta', val: 'atl'},
             {txt: 'Boston', val: 'bos'},
@@ -127,7 +127,7 @@ cityArr['US'] =
             {txt: 'Redwood City', val: 'rwc'},
             {txt: 'Montreal', val: 'yul'}
         ];
-cityArr['EMEA'] =
+cityArr['emea'] =
         [
             {txt: 'Maidenhead', val: 'lhr'},
             {txt: 'Barcelona', val: 'bcn'},
