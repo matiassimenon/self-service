@@ -29,7 +29,7 @@
 
             <div class="dropdown-menu dropdown-menu-right ">
               <% if (user2.getAdmin()) {%>  
-              <a class="dropdown-item menuClass" href="UserListServlet">List of user</a>
+              <a class="dropdown-item menuClass" href="UserListServlet">List of Users</a>
               <a class="dropdown-item menuClass" href="AdminRequestServlet">Role Management</a>
               <%}%>
               <a class="dropdown-item menuClass" href="userProfile.jsp">Update Profile</a>
@@ -43,7 +43,7 @@
 
             <div class="dropdown-menu dropdown-menu-right">
                 
-              <a class="dropdown-item menuClass" href="provisionForm.jsp">Request a container</a>
+              <a class="dropdown-item menuClass" href="provisionForm.jsp">Request a Container</a>
               <a class="dropdown-item menuClass" href="TemplateListServlet">My Templates</a>
               
               <a class="dropdown-item menuClass" href="HistoryServlet?previousRequest">My Previous Requests</a>
