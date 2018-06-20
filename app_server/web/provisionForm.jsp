@@ -85,6 +85,7 @@ osArr['ubuntu'] =
  {txt:'12.04', val:'12.04'},
  {txt:'14.04', val:'14.04'},
  {txt:'16.04', val:'16.04'},
+ {txt:'16', val:'16'},
  {txt:'17.10', val:'17.10'}
  ];
 osArr['centos'] =
@@ -92,6 +93,7 @@ osArr['centos'] =
 {txt:'6.7', val:'6.7'},
 {txt:'6.8', val:'6.8'},
 {txt:'6.9', val:'6.9'},
+{txt:'7', val:'7'},
 {txt:'7.1', val:'7.1'},
  {txt:'7.2', val:'7.2'},
  {txt:'7.3', val:'7.3'}
@@ -132,7 +134,7 @@ dbArr['mysql'] =
  ];
    dbArr['mssql'] =
 [
- {txt:'MSSQL for Linux', val:'2017'}
+ {txt:'2017', val:'2017'}
  ];
    dbArr['oracle'] =
 [
@@ -221,43 +223,43 @@ function checkDBVersion(){
     var db_version=document.getElementById("database_version_db");
     var osVersion_db=document.getElementById("osVersion_db");
     if(db.value === 'cassandra'){
-        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('os_db',[{txt:'Debian', val:'debian'}]);
         setSelectOption('osVersion_db',[{txt:'8-slim', val:'8-slim'}, {txt:'9-slim', val:'9-slim'}]);       
     }
     if(db.value === 'elasticsearch'){
-        setSelectOption('os_db',[{txt:'centos', val:'centos'}]);
+        setSelectOption('os_db',[{txt:'Centos', val:'centos'}]);
         setSelectOption('osVersion_db',[{txt:'7', val:'7'}]);     
         setSelectOption('database_version_db',[{txt:'5.2', val:'5.2'},{txt:'5.3', val:'5.3'},{txt:'5.4', val:'5.4'},{txt:'5.5', val:'5.5'},{txt:'5.6', val:'5.6'},{txt:'6.0', val:'6.0'},{txt:'6.1', val:'6.1'},{txt:'6.2', val:'6.2'},{txt:'6.3', val:'6.3'}]);
     }
     if(db.value === 'ibmdb2expressc'){
-        setSelectOption('os_db',[{txt:'centos', val:'centos'}]);
+        setSelectOption('os_db',[{txt:'Centos', val:'centos'}]);
         setSelectOption('osVersion_db',[{txt:'7', val:'7'}]);    
         setSelectOption('database_version_db',[{txt:'10.5', val:'10.5'}]);
     }
     if(db.value === 'mariadb'){
-        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('os_db',[{txt:'Debian', val:'debian'}]);
         setSelectOption('osVersion_db',[{txt:'7', val:'7'},{txt:'8', val:'8'}]);    
     }
     if(db.value === 'mongo'){
-        setSelectOption('os_db',[{txt:'debian', val:'debian'},{txt:'ubuntu', val:'ubuntu'}]);
+        setSelectOption('os_db',[{txt:'Debian', val:'debian'},{txt:'Ubuntu', val:'ubuntu'}]);
     }
     if(db.value === 'mssql'){
-        setSelectOption('os_db',[{txt:'centos', val:'centos'}]);
+        setSelectOption('os_db',[{txt:'Centos', val:'centos'}]);
         setSelectOption('osVersion_db',[{txt:'7', val:'7'}]);    
         setSelectOption('database_version_db',[{txt:'2017', val:'2017'}]);
     }
     if(db.value === 'mysql'){
-        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('os_db',[{txt:'Debian', val:'debian'}]);
         setSelectOption('osVersion_db',[{txt:'9-slim', val:'9-slim'}]);    
         setSelectOption('database_version_db',[{txt:'5.5', val:'5.5'},{txt:'5.6', val:'5.6'},{txt:'5.7', val:'5.7'},{txt:'8.0', val:'8.0'}]);
     }
     if(db.value === 'oracle'){
-        setSelectOption('os_db',[{txt:'oraclelinux', val:'oraclelinux'}]);
+        setSelectOption('os_db',[{txt:'Oracle linux', val:'oraclelinux'}]);
         setSelectOption('osVersion_db',[{txt:'7-slim', val:'7-slim'}]);    
         setSelectOption('database_version_db',[{txt:'11.2', val:'11.2'},{txt:'12.1', val:'12.1'},{txt:'12.2', val:'12.2'}]);
     }
     if(db.value === 'postgres'){
-        setSelectOption('os_db',[{txt:'debian', val:'debian'}]);
+        setSelectOption('os_db',[{txt:'Debian', val:'Debian'}]);
         setSelectOption('osVersion_db',[{txt:'9-slim', val:'9-slim'}]);    
         setSelectOption('database_version_db',[{txt:'9.3', val:'9.3'},{txt:'9.4', val:'9.4'},{txt:'9.5', val:'9.5'},{txt:'9.6', val:'9.6'},{txt:'10', val:'10'},{txt:'11', val:'11'}]);
     }
