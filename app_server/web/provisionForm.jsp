@@ -363,7 +363,7 @@ function displayHadoop(){
      <%@include file="navigator.jsp"%>
 
         <div class="tablecontent" style=" min-height:  800px;" >
-        <div class="text-lg-center color-3">Request a Container</div>
+        <div class="text-lg-center color-3">Request Container</div>
         <p>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
 <div class="list-group" id="myList" role="tablist">
@@ -375,14 +375,14 @@ function displayHadoop(){
         <form  id="templateForm"  style="display: none;" method="post" action="">
             <table  id="talend_table"  cellpadding="5px" align="center" style="border:1px solid green;">
                 <tr>
-                    <td class="td1">Talend Components :</td>
+                    <td class="td1">Talend Components:</td>
                     <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
                             <option value="tac">TAC</option>
                             <option value="cmdline">CommandLine</option>
                             <option value="jobserver">JobServer</option>
                         </select> 
                     </td>    
-                    <td class="td1">Talend Version :</td>
+                    <td class="td1">Talend Version:</td>
                     <td> <select id="componentVersion" required="required" name="componentVersion" onchange="checkTomcat(); checkOsVersion(); generateImageName();"> 
                             <option value="">Please select...</option>
                             <option value="6.0.1">6.0.1</option>

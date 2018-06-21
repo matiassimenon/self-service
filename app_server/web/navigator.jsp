@@ -43,7 +43,7 @@
 
             <div class="dropdown-menu dropdown-menu-right">
                 
-              <a class="dropdown-item menuClass" href="provisionForm.jsp">Request a Container</a>
+              <a class="dropdown-item menuClass" href="provisionForm.jsp">Request Container</a>
               <a class="dropdown-item menuClass" href="TemplateListServlet">My Templates</a>
               
               <a class="dropdown-item menuClass" href="HistoryServlet?previousRequest">My Previous Requests</a>
