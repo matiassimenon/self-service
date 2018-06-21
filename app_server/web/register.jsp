@@ -43,7 +43,7 @@ servlet but should be the only JSP outside of WEB-INF.
  <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-top align-content-center">
                         <div class="login-form w-lg-50">
                             <p>
-                            <h1 class="display-4 accent mb-5"><font color="green">Register: </font></h1>
+                            <h1 class="display-4 accent mb-5"><font color="green">Register:</font></h1>
 	<form id="registerForm" action="SaveUser?register.jsp" method="post" class="cozy" >
             <%@include file="profile.jsp" %>
                 <tr><td  class="td1"><button  id="submitBtn" class="btn btn-success" type="submit" >Register</button></td> <td>Have an Account? <a href="login.jsp">login</a></td></tr></table>

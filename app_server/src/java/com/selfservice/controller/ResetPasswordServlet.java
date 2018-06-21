@@ -82,7 +82,7 @@ public class ResetPasswordServlet extends HttpServlet {
                 String message = "";
                 if(isSaved) {
                     String url = SeverletUtil.getProjectContextUrl(request) + "/login.jsp";
-                    message = "<p>  Congrats! Your new password had changed successfully, please click the following link to login: </p>";
+                    message = "<p>  Your new password has been changed successfully, please click the following link to login:</p>";
                     String content = buildContent(registerUser,message,url);
                     
                     try {
@@ -91,10 +91,10 @@ public class ResetPasswordServlet extends HttpServlet {
                         Logger.getLogger(ResetPasswordServlet.class.getName()).log(Level.SEVERE, null, ex);
                     }                    
                     
-                    message = "New Password saved, page will redirect to login after 5s.";
+                    message = "New password saved. The page will redirect you to login after 5s.";
                     response.setHeader("Refresh","5;url=login.jsp");
                 } else {
-                    message = "<font color = red> Saved failed! Please contact the Devops Team Administrator for detail information. </font>";
+                    message = "<font color = red> Saved failed! Please contact the Devops Team Administrator for detailed information. </font>";
                 }
                 
                 request.setAttribute("message", message);
@@ -109,7 +109,7 @@ public class ResetPasswordServlet extends HttpServlet {
         
         if (email!=null) {
             if (!email.matches("^([\\w-\\.]+)@talend.com")) {
-                message = "<font color='red'>It's not a talend email, please check again</font>";
+                message = "<font color='red'>It's not a Talend email, please try again using your Talend email.</font>";
             } else {
                 List<User> users = UserUtil.getUsers();
                 for (User user: users) {
