@@ -375,7 +375,7 @@ function displayHadoop(){
         <form  id="templateForm"  style="display: none;" method="post" action="">
             <table  id="talend_table"  cellpadding="5px" align="center" style="border:1px solid green;">
                 <tr>
-                    <td class="td1">Talend Components:</td>
+                    <td class="td1">Talend Component:</td>
                     <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
                             <option value="tac">TAC</option>
                             <option value="cmdline">CommandLine</option>
