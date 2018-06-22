@@ -10,7 +10,7 @@
                             <p class="display-4 accent mb-5">
                             <div class="blog-post-nav mb-3">
                                 
-                                <a href="register.jsp">     <img src="add_account.png"></img> Signup for a free account</a></div>
+                                <a href="register.jsp">     <img src="add_account.png"></img> Sign Up with your Talend Email</a></div>
                             <hr class="mb-5"><h1 class="display-4 accent mb-5"><font color="green">Login </font></h1>
                             <form action="LoginServlet" method="post"  class="cozy" >
                                 <div class="form-group control">

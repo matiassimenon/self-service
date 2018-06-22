@@ -12,7 +12,7 @@
  <div class="col-lg-8 py-4 d-flex flex-column align-items-center justify-content-top align-content-center">
                         <div class="login-form w-lg-50">
                             <p class="display-4 accent mb-5">
-                            <h1 class="display-4 accent mb-5"><font color="green">Reset Password: </font></h1>
+                            <h1 class="display-4 accent mb-5"><font color="green">Reset Password:</font></h1>
                             <form  action="ForgotPasswdServlet?step=2" method = "post" class="cozy" >
                                 <div class="form-group control">
                                     <label class="col-mb-6 control-label">Question</label><input type="text"  id="question" readonly name="question"  required="required" value="<%=user1.getQuestion()%>" class="form-control">

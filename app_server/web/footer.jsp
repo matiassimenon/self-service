@@ -4,4 +4,4 @@
     Author     : aiming
 --%>
 
-<div class="text-lg-center color-3 "><small>© SRE/Devops @ Talend<small></div>
+<div class="text-lg-center color-3 "><small>SRE/Devops @ Talend<small></div>

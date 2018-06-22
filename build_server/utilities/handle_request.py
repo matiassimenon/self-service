@@ -87,17 +87,18 @@ def handle_tal_request(request):
                                 timeout=28800)
             # Docker Login
             print(f'Docker Login: docker login {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
-            client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
-                         username=docker_user,
-                         password=docker_password)
+            bash_cmd(f"docker login -u {docker_user} -p {docker_password} {protocol}://{repo}.{repo_suffix}:{port}")
+            # client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
+            #              username=docker_user,
+            #              password=docker_password)
+
             # Docker Push
-            # print(f'Docker Push to {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
-            # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-            #                                tag='latest'):
-            #     print(line, flush=True)
             print(f'Docker Push: '
                   f'docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}', flush=True)
             bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
+            # for line in client.images.push(repository=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
+            #                                tag='latest'):
+            #     print(line, flush=True)
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)
@@ -227,17 +228,18 @@ def handle_db_request(request):
                                 timeout=28800)
             # Docker Login
             print(f'Docker Login: docker login {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
-            client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
-                         username=docker_user,
-                         password=docker_password)
+            bash_cmd(f"docker login -u {docker_user} -p {docker_password} {protocol}://{repo}.{repo_suffix}:{port}")
+            # client.login(registry=f'{protocol}://{repo}.{repo_suffix}:{port}',
+            #              username=docker_user,
+            #              password=docker_password)
+
             # Docker Push
-            # print(f'Docker Push to {protocol}://{repo}.{repo_suffix}:{port}', flush=True)
-            # for line in client.images.push(repository=f'{repo}-{repo_suffix}:{port}/{username}/{template_name}',
-            #                                tag='latest'):
-            #     print(line, flush=True)
             print(f'Docker Push: '
                   f'docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}', flush=True)
             bash_cmd(f"docker push {repo}.{repo_suffix}:{port}/{username}/{template_name}")
+            # for line in client.images.push(repository=f'{repo}.{repo_suffix}:{port}/{username}/{template_name}',
+            #                                tag='latest'):
+            #     print(line, flush=True)
 
         except docker.errors.BuildError:
             print('\nDocker BuildError\n', flush=True)

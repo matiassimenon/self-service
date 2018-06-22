@@ -395,11 +395,11 @@ function displayHadoop(){
      <%@include file="navigator.jsp"%>
 
         <div class="tablecontent" style=" min-height:  800px;" >
-        <div class="text-lg-center color-3">Request a container</div>
+        <div class="text-lg-center color-3">Request Container</div>
         <p>
         <div id="formBody" style="display: flex; flex-direction: row; align-items: flex-start;  justify-content: center;">
 <div class="list-group" id="myList" role="tablist">
-  <a class="list-group-item list-group-item-action" id="talend_a"  onclick="displayTalend(); " data-toggle="list" href="#" role="tab">Talend component</a>
+  <a class="list-group-item list-group-item-action" id="talend_a"  onclick="displayTalend(); " data-toggle="list" href="#" role="tab">Talend Components</a>
   <a class="list-group-item list-group-item-action" id ="database_a"  onclick="displayDatabase(); " data-toggle="list" href="#" role="tab">Databases</a>
 
 </div>
@@ -418,7 +418,7 @@ function displayHadoop(){
                             <option value="remoteengine">Remote Engine</option>
                         </select> 
                     </td>    
-                    <td class="td1">Talend Version :</td>
+                    <td class="td1">Talend Version:</td>
                     <td> <select id="componentVersion" required="required" name="componentVersion" onchange="checkTomcat(); checkOsVersion(); generateImageName();"> 
                             <option value="">Please select...</option>
                             <option value="6.0.1">6.0.1</option>
@@ -439,23 +439,23 @@ function displayHadoop(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange=" generateImageName();" ></input> </td>
+                    <td class="td1">Salesforce Case:</td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange=" generateImageName();" ></input> </td>
                 </tr>
                 <tr>
-                    <td class="td1">OS Version: </td>
+                    <td class="td1">OS Version:</td>
                     <td><select id="osVersion" required="required" name="osVersion" onchange=" generateImageName();">
                              <option value="">Please select...</option>
                         </select> 
                     </td>
-                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName"  name="imageName" ></input> </td>
+                    <td class="td1">Image Name:</td><td><input type="text" id="imageName"  name="imageName" ></input> </td>
                 </tr>
-                <tr><td class="td1">JDK Version : </td>
+                <tr><td class="td1">JDK Version:</td>
                     <td><select id="jdk" name="jdk" onchange="generateImageName();"> 
                             <option value="8">8</option>
                         </select> 
                     </td>
                 </tr>
-                <tr><td class="td1">JDK Update : </td>
+                <tr><td class="td1">JDK Update:</td>
                     <td><select id="jdkUpdate" name="jdkUpdate" onchange="generateImageName();">       
                             <option value="141">141</option>
                             <option value="144">144</option>
@@ -465,7 +465,7 @@ function displayHadoop(){
                         </select> 
                     </td>
                 </tr>
-                <tr><td class="td1">Tomcat Version : </td>
+                <tr><td class="td1">Tomcat Version:</td>
                     <td><select id="tomcatVersion" name="tomcatVersion"  onchange="generateImageName();"> 
                             <option value="7.0">7.0</option>
                             <option value="8.0">8.0</option>
@@ -498,15 +498,15 @@ function displayHadoop(){
                             <option value="mongo">MongoDB</option>
                         </select> 
                     </td>                                                       
-                    <td class="td1">Salesforce case: </td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange="generateImageName_db();" ></input> </td>
+                    <td class="td1">Salesforce Case:</td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange="generateImageName_db();" ></input> </td>
                 </tr>                
                 <tr>
-                     <td class="td1">Database Version: </td>
+                     <td class="td1">Database Version:</td>
                     <td><select id="database_version_db" required="required" name="database_version" onchange=" generateImageName_db();">
                              <option value="">Please select...</option>
                         </select> 
                     </td>                        
-                    <td class="td1">Image Name:  </td><td><input type="text" id="imageName_db"  name="imageName"></input> </td>
+                    <td class="td1">Image Name:</td><td><input type="text" id="imageName_db"  name="imageName"></input> </td>
                 </tr>
                 <tr> 
                     <td class="td1">OS:</td> 
@@ -520,7 +520,7 @@ function displayHadoop(){
                     </td>     
                 </tr>
                 <tr>
-                   <td class="td1">OS Version: </td>
+                   <td class="td1">OS Version:</td>
                     <td><select id="osVersion_db" required="required" name="osVersion" onchange=" resetDBVersion();generateImageName_db();">
                              <option value="">Please select...</option>
                         </select> 

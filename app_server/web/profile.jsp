@@ -24,13 +24,14 @@
                     <td class="td1">First Name:</td><td><input type="text" name="firstname" placeholder="First name" maxlength="30" required="required" value="<%=user1.getFirstname()%>"></td>
                     <td class="td1">Department:</td>
                     <td><select name="department" id="department" required="required" >
-                        <option value="support">Support</option>   
-                        <option value="escalation">Escalation</option>   
-                        <option value="sales">Sales</option>
-                        <option value="rd">RD</option>
                         <option value="csa">CSA</option>
+                        <option value="devops">Devops</option>
+                        <option value="escalations">Escalations</option>
                         <option value="pm">PM</option>
                         <option value="ps">PS</option>
+                        <option value="rd">R&D</option>
+                        <option value="sales">Sales</option>
+                        <option value="support">Support</option>
                     </select></td>
                 </tr>
 		<tr>
