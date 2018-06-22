@@ -105,6 +105,27 @@ osArr['centos'] =
  ];
  osArr['oraclelinux'] =[{txt:'7-slim', val:'7-slim'}];
  
+ //define component version data array
+ var componentArr=[];
+ componentArr['others']=[
+     {txt:'6.0.1', val:'6.0.1'},
+     {txt:'6.1.1', val:'6.1.1'},
+     {txt:'6.2.1', val:'6.2.1'},
+     {txt:'6.3.1', val:'6.3.1'},
+     {txt:'6.4.1', val:'6.4.1'},
+     {txt:'6.5.1', val:'6.5.1'},
+     {txt:'7.0.1', val:'7.0.1'}
+ ];
+ componentArr['remoteengine']=[
+     {txt:'1.5.1', val:'1.5.1'},
+     {txt:'1.8.0', val:'1.8.0'},
+     {txt:'1.8.2', val:'1.8.2'},
+     {txt:'2.0.1', val:'2.0.1'},
+     {txt:'2.1.0', val:'2.1.0'},
+     {txt:'2.2.0', val:'2.2.0'},
+     {txt:'2.3.0', val:'2.3.0'},
+     {txt:'2.3.1', val:'2.3.1'}
+ ];
  //define the database version data array
 var dbArr=[];
 dbArr['mysql'] =
@@ -162,6 +183,7 @@ dbArr['mysql'] =
  [
      {txt:'3.2', val:'3.2'},{txt:'3.4', val:'3.4'},{txt:'3.6', val:'3.6'},{txt:'3.7', val:'3.7'},{txt:'4.0-rc', val:'4.0-rc'}
  ];
+ 
 function setOsVersion(osVersion)
 {
         setSelectOption('osVersion', osArr[osVersion.options[osVersion.selectedIndex].value], 'Please select...');
@@ -173,6 +195,14 @@ function setOsVersion_db(osVersion) //in database table
 
 function setDbVersion_db(db){
         setSelectOption('database_version_db', dbArr[db.options[db.selectedIndex].value], 'Please select...');
+}
+function resetComponentVersion(){
+    var talendComponent=document.getElementById("talendComponent");
+    if(talendComponent.value === 'remoteengine'){
+        setSelectOption('componentVersion', componentArr['remoteengine'], 'Please select...');
+    }else{
+        setSelectOption('componentVersion', componentArr['others'], 'Please select...');
+    }
 }
 function checkTomcat(){
     var versions=[{txt:'7.0', val: '7.0'},{txt:'8.0', val: '8.0'}];
@@ -196,26 +226,28 @@ function checkOsVersion(){
     if(componentVersion.value === '6.0.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
-    }
+    }else
     if(componentVersion.value === '6.1.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
-    }    
+    }else  
     if(componentVersion.value === '6.2.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
-    }     
+    }else     
     if(componentVersion.value === '6.3.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
-    }  
+    }else  
     if(componentVersion.value === '6.4.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
-    }     
+    }else     
     if(componentVersion.value === '6.5.1' || componentVersion.value === '7.0.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
+    }else{
+        //TODO
     }      
 }
 function checkDBVersion(){
@@ -376,10 +408,14 @@ function displayHadoop(){
             <table  id="talend_table"  cellpadding="5px" align="center" style="border:1px solid green;">
                 <tr>
                     <td class="td1">Talend Component :</td>
-                    <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat();  generateImageName();"> 
+                    <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat(); resetComponentVersion(); generateImageName(); "> 
                             <option value="tac">TAC</option>
                             <option value="cmdline">CmdLine</option>
                             <option value="jobserver">Jobserver</option>
+                            <option value="mdm">MDM</option>
+                            <option value="runtime">Runtime</option>
+                            <option value="logserv">Logserver</option>
+                            <option value="remoteengine">Remote Engine</option>
                         </select> 
                     </td>    
                     <td class="td1">Talend Version :</td>
@@ -391,6 +427,7 @@ function displayHadoop(){
                             <option value="6.3.1">6.3.1</option>
                             <option value="6.4.1">6.4.1</option>
                             <option value="6.5.1">6.5.1</option>
+                            <option value="7.0.1">7.0.1</option>
                         </select> 
                     </td>  
                 </tr>                
