@@ -1,4 +1,4 @@
-FROM ubuntu:12.04
+FROM ubuntu:14.04
 
 MAINTAINER Francisco Duran (franciscogd@gatech.edu)
 
@@ -86,11 +86,11 @@ EXPOSE 8081
 WORKDIR /talend
 
 # Install TAC
-ADD Talend-AdministrationCenter-20150908_1633-V6.0.1.zip /talend
+ADD Talend-AdministrationCenter-20151214_1327-V6.1.1.zip /talend
 
-RUN unzip /talend/Talend-AdministrationCenter-20150908_1633-V6.0.1.zip && \
-    mv /talend/Talend-AdministrationCenter-20150908_1633-V6.0.1 /talend/tac-601 && \
-    rm -rf /talend/Talend-AdministrationCenter-20150908_1633-V6.0.1.zip && \
+RUN unzip /talend/Talend-AdministrationCenter-20151214_1327-V6.1.1.zip && \
+    mv /talend/Talend-AdministrationCenter-20151214_1327-V6.1.1 /talend/tac-611 && \
+    rm -rf /talend/Talend-AdministrationCenter-20151214_1327-V6.1.1.zip && \
     mkdir -p /Talend/CommandLine/exports /Talend/Administrator/generatedJobs /Talend/Administrator/executionLogs /Talend/Audit/reports
 
 WORKDIR /opt/tomcat
@@ -99,5 +99,5 @@ USER tomcat
 CMD ["tomcat.sh"]
 
 USER root
-RUN mv /talend/tac-601/org.talend.administrator-6.0.1.war /opt/tomcat/webapps/tac-601.war
+RUN mv /talend/tac-611/org.talend.administrator-6.1.1.war /opt/tomcat/webapps/tac-611.war
 ENTRYPOINT "/opt/tomcat/bin/startup.sh" && /bin/bash
