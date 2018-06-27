@@ -14,8 +14,8 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = 'self-service.talend.com'
 port = '443'
 protocol = 'https'
-#project_dir = '/Users/francisco/talend-dev/self-service/build_server'
-project_dir = '/home/centos/self-service/build_server'
+project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+#project_dir = '/home/centos/self-service/build_server'
 templates_dir = f'{project_dir}/templates'
 docker_build_dir = f'{project_dir}/docker_build'
 docker_user = credentials.docker['docker_user']
@@ -325,6 +325,7 @@ def create_tal_request_dictionary(request):
     _631_version = '20161216_1026-V6.3.1'
     _641_version = '20170623_1246-V6.4.1'
     _651_version = '20180116_1512-V6.5.1'
+    _701_version = '20180411_1414-V7.0.1'
 
     if tomcat_version == '7' or tomcat_version == '7.0':
         # http://mirror.reverse.net/pub/apache/tomcat/tomcat-7/v7.0.88/bin/apache-tomcat-7.0.88.tar.gz
@@ -417,6 +418,14 @@ def create_tal_request_dictionary(request):
             talend_installer = 'Talend-Studio-' + _601_version
         elif talend_component == 'jobserver':
             talend_installer = 'Talend-JobServer-' + _601_version
+        elif talend_component == 'cibuilder':
+            talend_installer = 'Talend-CI-Builder-' + _601_version
+        elif talend_component == 'logserver':
+            talend_installer = 'Talend-LogServer-' + _601_version
+        elif talend_component == 'mdm':
+            talend_installer = 'Talend-MDMServer-' + _601_version
+        elif talend_component == 'runtime':
+            talend_installer = 'Talend-Runtime-' + _601_version
     elif talend_semantic_version == '6.1.1':
         talend_version = '611'
         if talend_component == 'tac':
@@ -425,6 +434,14 @@ def create_tal_request_dictionary(request):
             talend_installer = 'Talend-Studio-' + _611_version
         elif talend_component == 'jobserver':
             talend_installer = 'Talend-JobServer-' + _611_version
+        elif talend_component == 'cibuilder':
+            talend_installer = 'Talend-CI-Builder-' + _611_version
+        elif talend_component == 'logserver':
+            talend_installer = 'Talend-LogServer-' + _611_version
+        elif talend_component == 'mdm':
+            talend_installer = 'Talend-MDMServer-' + _611_version
+        elif talend_component == 'runtime':
+            talend_installer = 'Talend-Runtime-' + _611_version
     elif talend_semantic_version == '6.2.1':
         talend_version = '621'
         if talend_component == 'tac':
@@ -433,6 +450,14 @@ def create_tal_request_dictionary(request):
             talend_installer = 'Talend-Studio-' + _621_version
         elif talend_component == 'jobserver':
             talend_installer = 'Talend-JobServer-' + _621_version
+        elif talend_component == 'cibuilder':
+            talend_installer = 'Talend-CI-Builder-' + _621_version
+        elif talend_component == 'logserver':
+            talend_installer = 'Talend-LogServer-' + _621_version
+        elif talend_component == 'mdm':
+            talend_installer = 'Talend-MDMServer-' + _621_version
+        elif talend_component == 'runtime':
+            talend_installer = 'Talend-Runtime-' + _621_version
     elif talend_semantic_version == '6.3.1':
         talend_version = '631'
         if talend_component == 'tac':
@@ -441,6 +466,14 @@ def create_tal_request_dictionary(request):
             talend_installer = 'Talend-Studio-' + _631_version
         elif talend_component == 'jobserver':
             talend_installer = 'Talend-JobServer-' + _631_version
+        elif talend_component == 'cibuilder':
+            talend_installer = 'Talend-CI-Builder-' + _631_version
+        elif talend_component == 'logserver':
+            talend_installer = 'Talend-LogServer-' + _631_version
+        elif talend_component == 'mdm':
+            talend_installer = 'Talend-MDMServer-' + _631_version
+        elif talend_component == 'runtime':
+            talend_installer = 'Talend-Runtime-' + _631_version
     elif talend_semantic_version == '6.4.1':
         talend_version = '641'
         if talend_component == 'tac':
@@ -449,6 +482,14 @@ def create_tal_request_dictionary(request):
             talend_installer = 'Talend-Studio-' + _641_version
         elif talend_component == 'jobserver':
             talend_installer = 'Talend-JobServer-' + _641_version
+        elif talend_component == 'cibuilder':
+            talend_installer = 'Talend-CI-Builder-' + _641_version
+        elif talend_component == 'logserver':
+            talend_installer = 'Talend-LogServer-' + _641_version
+        elif talend_component == 'mdm':
+            talend_installer = 'Talend-MDMServer-' + _641_version
+        elif talend_component == 'runtime':
+            talend_installer = 'Talend-Runtime-' + _641_version
     elif talend_semantic_version == '6.5.1':
         talend_version = '651'
         if talend_component == 'tac':
@@ -457,6 +498,30 @@ def create_tal_request_dictionary(request):
             talend_installer = 'Talend-Studio-' + _651_version
         elif talend_component == 'jobserver':
             talend_installer = 'Talend-JobServer-' + _651_version
+        elif talend_component == 'cibuilder':
+            talend_installer = 'Talend-CI-Builder-' + _651_version
+        elif talend_component == 'logserver':
+            talend_installer = 'Talend-LogServer-' + _651_version
+        elif talend_component == 'mdm':
+            talend_installer = 'Talend-MDMServer-' + _651_version
+        elif talend_component == 'runtime':
+            talend_installer = 'Talend-Runtime-' + _651_version
+    elif talend_semantic_version == '7.0.1':
+        talend_version = '701'
+        if talend_component == 'tac':
+            talend_installer = 'Talend-AdministrationCenter-' + _701_version
+        elif talend_component == 'cmdline':
+            talend_installer = 'Talend-Studio-' + _701_version
+        elif talend_component == 'jobserver':
+            talend_installer = 'Talend-JobServer-' + _701_version
+        elif talend_component == 'cibuilder':
+            talend_installer = 'Talend-CI-Builder-' + _701_version
+        elif talend_component == 'logserver':
+            talend_installer = 'Talend-LogServer-' + _701_version
+        elif talend_component == 'mdm':
+            talend_installer = 'Talend-MDMServer-' + _701_version
+        elif talend_component == 'runtime':
+            talend_installer = 'Talend-Runtime-' + _701_version
 
     template_dictionary = {'<os_placeholder>': op_sys,
                            '<os_version_placeholder>': os_version,
@@ -467,6 +532,7 @@ def create_tal_request_dictionary(request):
                            '<jdk_distro_arch_placeholder>': jdk_distro_arch,
                            '<add_executables_to_path_place_holder>': add_executables_to_path,
                            '<clean_cached_files_placeholder>': clean_cached_files,
+                           '<talend_component_placeholder>': talend_component,
                            '<talend_installer_placeholder>': talend_installer,
                            '<talend_version_placeholder>': talend_version,
                            '<talend_semantic_version_placeholder>': talend_semantic_version,
