@@ -442,7 +442,7 @@ def create_tal_request_dictionary(request):
                 talend_installer = 'Talend-Runtime-' + _701_version
 
     # TODO: AiMing, add the versions of remote engine and the talend_installer
-    if talend_component == 'remoteengine':
+    # if talend_component == 'remoteengine':
         #     _601_version = ''
         #     _611_version = ''
         #     _621_version = ''
