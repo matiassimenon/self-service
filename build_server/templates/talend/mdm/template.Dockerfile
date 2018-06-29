@@ -40,6 +40,29 @@ RUN wget --no-check-certificate https://github.com/frekele/oracle-java/releases/
 # Add executables to path
 RUN <add_executables_to_path_place_holder>
 
+# Set environment variables for Tomcat version
+ENV CATALINA_HOME /opt/tomcat
+ENV PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/bin:$CATALINA_HOME/scripts
+ENV TOMCAT_MAJOR <tomcat_major_placeholder>
+ENV TOMCAT_VERSION <tomcat_version_placeholder>
+
+# Install Tomcat
+COPY apache-tomcat-${TOMCAT_VERSION}.tar.gz ./
+RUN tar -xvf apache-tomcat-${TOMCAT_VERSION}.tar.gz && \
+    rm apache-tomcat*.tar.gz && \
+    mv apache-tomcat* ${CATALINA_HOME} && \
+    chmod +x ${CATALINA_HOME}/bin/*sh
+
+# Create Tomcat admin user
+ADD create_admin_user.sh $CATALINA_HOME/scripts/create_admin_user.sh
+ADD tomcat.sh $CATALINA_HOME/scripts/tomcat.sh
+RUN chmod +x $CATALINA_HOME/scripts/*.sh
+# Create tomcat user
+RUN groupadd -r tomcat && \
+    useradd -g tomcat -d ${CATALINA_HOME} -s /sbin/nologin  -c "Tomcat user" tomcat && \
+    chown -R tomcat:tomcat ${CATALINA_HOME}
+# Last step of Tomcat install comes after installing TAC
+
 # Clean all cached files
 RUN <clean_cached_files_placeholder>
 
