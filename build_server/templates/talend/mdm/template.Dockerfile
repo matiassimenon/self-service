@@ -44,7 +44,7 @@ RUN <add_executables_to_path_place_holder>
 RUN <clean_cached_files_placeholder>
 
 # Expose Talend Application Ports
-EXPOSE 8000 8001 8888
+EXPOSE 8180
 
 # Define working directory
 WORKDIR /talend
@@ -59,4 +59,4 @@ RUN \
 
 USER root
 # Define Default command
-ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start_rs.sh" && /bin/bash
+ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start_mdm.sh" && /bin/bash
