@@ -1,6 +1,6 @@
 FROM <os_placeholder>:<os_version_placeholder>
 
-MAINTAINER Francisco Duran (franciscogd@gatech.edu)
+MAINTAINER Francisco Duran <franciscogd@gatech.edu>
 
 # Update OS and Install Tools
 RUN <update_os_and_install_tools_placeholder>
@@ -57,6 +57,6 @@ RUN \
   mv /talend/<talend_installer_placeholder> /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
   rm -rf /talend/<talend_installer_placeholder>.zip
 
-USER root
+# USER root
 # Define Default command
-ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start_rs.sh" && /bin/bash
+# ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start_rs.sh" && /bin/bash

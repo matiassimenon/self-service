@@ -1,6 +1,6 @@
 FROM <os_placeholder>:<os_version_placeholder>
 
-MAINTAINER AiMing Chen (achen@talend.com)
+MAINTAINER Francisco Duran <franciscogd@gatech.edu>
 
 # Update OS and Install Tools
 RUN <update_os_and_install_tools_placeholder>
@@ -49,7 +49,7 @@ EXPOSE 8040 8000 8001 8888
 # Define working directory
 WORKDIR /talend
 
-# Install MDM
+# Install <talend_component_placeholder>
 ADD <talend_installer_placeholder>.zip /talend
 
 RUN \

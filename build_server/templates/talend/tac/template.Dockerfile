@@ -1,6 +1,6 @@
 FROM <os_placeholder>:<os_version_placeholder>
 
-MAINTAINER Francisco Duran (franciscogd@gatech.edu)
+MAINTAINER Francisco Duran <franciscogd@gatech.edu>
 
 # Update OS and Install Tools
 RUN <update_os_and_install_tools_placeholder>
@@ -13,7 +13,7 @@ ENV JCE_FOLDER UnlimitedJCEPolicyJDK$JDK_VERSION
 ENV JDK_FOLDER jdk1.$JDK_VERSION.0_$JDK_UPDATE
 ENV JDK_VERSION_UPDATE $JDK_VERSION'u'$JDK_UPDATE
 ENV JDK_VERSION_UPDATE_BUILD $JDK_VERSION_UPDATE'-'$JDK_BUILD
-ENV JDK_VERSION_UPDATE_DISTRO_ARCH git $JDK_VERSION_UPDATE'-'$JDK_DISTRO_ARCH
+ENV JDK_VERSION_UPDATE_DISTRO_ARCH $JDK_VERSION_UPDATE'-'$JDK_DISTRO_ARCH
 ENV JAVA_HOME /opt/java
 ENV JRE_SECURITY_FOLDER $JAVA_HOME/jre/lib/security
 ENV SSL_TRUSTED_CERTS_FOLDER /opt/ssl/trusted
