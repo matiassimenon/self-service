@@ -34,7 +34,7 @@ String greetString=SFUtils.getGreetingString();
     <body onload="noBack();" 	onpageshow="if (event.persisted) noBack();" onunload="">
         <div class="nav-overlay bg-5 alpha-8 gradient"></div><main>
             <div class="container-fluid"><div class="fullscreen row">
-                    <div class="col-lg-4 bg-5-gradient py-4 d-flex flex-column align-items-center justify-content-center justify-content-lg-between">
+                    <div class="col-lg-3 bg-5-gradient py-4 d-flex flex-column align-items-center justify-content-center justify-content-lg-between">
                         <div class="feature-content text-center text-lg-left">
                             <p class=" mb-5"></p>
 
