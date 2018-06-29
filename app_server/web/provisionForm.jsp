@@ -117,14 +117,9 @@ osArr['centos'] =
      {txt:'7.0.1', val:'7.0.1'}
  ];
  componentArr['remoteengine']=[
-     {txt:'1.5.1', val:'1.5.1'},
-     {txt:'1.8.0', val:'1.8.0'},
-     {txt:'1.8.2', val:'1.8.2'},
-     {txt:'2.0.1', val:'2.0.1'},
-     {txt:'2.1.0', val:'2.1.0'},
-     {txt:'2.2.0', val:'2.2.0'},
-     {txt:'2.3.0', val:'2.3.0'},
-     {txt:'2.3.1', val:'2.3.1'}
+     {txt:'2.0.1-79', val:'2.0.1-79'},    
+     {txt:'2.1.0-82', val:'2.1.0-82'},
+     {txt:'2.2.0-90', val:'2.2.0-90'}
  ];
  //define the database version data array
 var dbArr=[];
