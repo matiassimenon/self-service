@@ -1,4 +1,7 @@
 FROM <os_placeholder>:<os_version_placeholder>
+
+MAINTAINER Francisco Duran (franciscogd@gatech.edu)
+
 # Update OS and Install Tools
 RUN <update_os_and_install_tools_placeholder>
 # Set environment variables for Java version
@@ -10,7 +13,7 @@ ENV JCE_FOLDER UnlimitedJCEPolicyJDK$JDK_VERSION
 ENV JDK_FOLDER jdk1.$JDK_VERSION.0_$JDK_UPDATE
 ENV JDK_VERSION_UPDATE $JDK_VERSION'u'$JDK_UPDATE
 ENV JDK_VERSION_UPDATE_BUILD $JDK_VERSION_UPDATE'-'$JDK_BUILD
-ENV JDK_VERSION_UPDATE_DISTRO_ARCH $JDK_VERSION_UPDATE'-'$JDK_DISTRO_ARCH
+ENV JDK_VERSION_UPDATE_DISTRO_ARCH git $JDK_VERSION_UPDATE'-'$JDK_DISTRO_ARCH
 ENV JAVA_HOME /opt/java
 ENV JRE_SECURITY_FOLDER $JAVA_HOME/jre/lib/security
 ENV SSL_TRUSTED_CERTS_FOLDER /opt/ssl/trusted
@@ -86,7 +89,7 @@ WORKDIR /talend
 ADD <talend_installer_placeholder>.zip /talend
 
 RUN unzip /talend/<talend_installer_placeholder>.zip && \
-    mv /talend/<talend_installer_placeholder> /talend/tac-<talend_version_placeholder> && \
+    mv /talend/<talend_installer_placeholder> /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
     rm -rf /talend/<talend_installer_placeholder>.zip && \
     mkdir -p /Talend/CommandLine/exports /Talend/Administrator/generatedJobs /Talend/Administrator/executionLogs /Talend/Audit/reports
 
@@ -96,5 +99,5 @@ USER tomcat
 CMD ["tomcat.sh"]
 
 USER root
-RUN mv /talend/tac-<talend_version_placeholder>/org.talend.administrator-<talend_semantic_version_placeholder>.war /opt/tomcat/webapps/tac-<talend_version_placeholder>.war
+RUN mv /talend/<talend_component_placeholder>-<talend_version_placeholder>/org.talend.administrator-<talend_semantic_version_placeholder>.war /opt/tomcat/webapps/<talend_component_placeholder>-<talend_version_placeholder>.war
 ENTRYPOINT "/opt/tomcat/bin/startup.sh" && /bin/bash

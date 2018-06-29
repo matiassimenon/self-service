@@ -1,4 +1,7 @@
 FROM <os_placeholder>:<os_version_placeholder>
+
+MAINTAINER Francisco Duran (franciscogd@gatech.edu)
+
 # Update OS and Install Tools
 RUN <update_os_and_install_tools_placeholder>
 # Set environment variables for Java version
