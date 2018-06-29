@@ -434,7 +434,7 @@ function displayHadoop(){
                             <option value="centos">CentOS</option>
                         </select> 
                     </td>
-                    <td class="td1">Salesforce Case:</td> <td>  <input type="text" id="salesforceCase" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange=" generateImageName();" ></input> </td>
+                    <td class="td1">Salesforce Case:</td> <td>  <input type="text" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" id="salesforceCase" name="salesforceCase"  pattern="[0-9a-z]+" maxlength="10" value="<%=template.getSalesforce_case()%>" onchange=" generateImageName();" ></input> </td>
                 </tr>
                 <tr>
                     <td class="td1">OS Version:</td>
@@ -493,7 +493,7 @@ function displayHadoop(){
                             <option value="mongo">MongoDB</option>
                         </select> 
                     </td>                                                       
-                    <td class="td1">Salesforce Case:</td> <td>  <input type="text" id="salesforceCase_db" name="salesforceCase"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange="generateImageName_db();" ></input> </td>
+                    <td class="td1">Salesforce Case:</td> <td>  <input type="text" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" id="salesforceCase_db" name="salesforceCase" pattern="[0-9a-z]+"  maxlength="10" value="<%=template.getSalesforce_case()%>" onchange="generateImageName_db();" ></input> </td>
                 </tr>                
                 <tr>
                      <td class="td1">Database Version:</td>

@@ -113,7 +113,7 @@ public class DbHelper {
         template.setDatabase(database);
         template.setDatabase_version(database_version);
         template.setUsername(username);
-        if(salesforce_case!= null)   template.setSalesforce_case(salesforce_case);
+        if(salesforce_case!= null)   template.setSalesforce_case(salesforce_case.toLowerCase());
 
         return template;
     }
