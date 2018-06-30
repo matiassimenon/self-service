@@ -200,19 +200,18 @@ function resetComponentVersion(){
     }
 }
 function checkTomcat(){
-    var versions=[{txt:'7.0', val: '7.0'},{txt:'8.0', val: '8.0'}];
+    var versions=[{txt:'8.0', val: '8.0'},{txt:'7.0', val: '7.0'}];
     var ver=[{txt:'8.0', val: '8.0'}];
     var tomcatVersion=document.getElementById("tomcatVersion");
     var componentVersion=document.getElementById("componentVersion");
-    if(document.getElementById("talendComponent").value ===  "tac"){
+    if(document.getElementById("talendComponent").value ===  "tac" || document.getElementById("talendComponent").value ===  "mdm" ){
         tomcatVersion.removeAttribute("disabled");
-        tomcatVersion.style="background-color:white";
         if(componentVersion.value === "6.5.1" || componentVersion.value === '7.0.1')
             setSelectOption('tomcatVersion',ver);
         else
             setSelectOption('tomcatVersion',versions);
     }else{
-        tomcatVersion.readonly=true;
+        tomcatVersion.disabled=true;
     }
 }
 function checkOsVersion(){
@@ -220,10 +219,10 @@ function checkOsVersion(){
     var componentVersion=document.getElementById("componentVersion");
     if(componentVersion.value === '6.0.1'){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'}]);
-        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
+        if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'}]);
     }else
     if(componentVersion.value === '6.1.1'){
-        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
+        if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.6', val:'6.6'},{txt:'7.1', val:'7.1'}]);
     }else  
     if(componentVersion.value === '6.2.1'){
@@ -403,7 +402,7 @@ function displayHadoop(){
             <table  id="talend_table"  cellpadding="5px" align="center" style="border:1px solid green;">
                 <tr>
                     <td class="td1">Talend Component :</td>
-                    <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat(); resetComponentVersion(); generateImageName(); "> 
+                    <td> <select id="talendComponent" name="talendComponent" onchange="checkTomcat(); checkOsVersion(); resetComponentVersion(); generateImageName(); "> 
                             <option value="tac">TAC</option>
                             <option value="cmdline">CmdLine</option>
                             <option value="jobserver">Jobserver</option>
@@ -428,7 +427,7 @@ function displayHadoop(){
                 </tr>                
                 <tr>
                     <td class="td1" >OS:</td> 
-                    <td> <select id="os" name="os" required="required" onchange="setOsVersion(this); generateImageName();"> 
+                    <td> <select id="os" name="os" required="required" onchange="setOsVersion(this); checkOsVersion(); generateImageName();"> 
                              <option value="">Please select...</option>
                             <option value="ubuntu">Ubuntu</option>
                             <option value="centos">CentOS</option>
@@ -462,8 +461,8 @@ function displayHadoop(){
                 </tr>
                 <tr><td class="td1">Tomcat Version:</td>
                     <td><select id="tomcatVersion" name="tomcatVersion"  onchange="generateImageName();"> 
-                            <option value="7.0">7.0</option>
                             <option value="8.0">8.0</option>
+                            <option value="7.0">7.0</option>                            
                         </select> 
                     </td>                    
                 </tr>
