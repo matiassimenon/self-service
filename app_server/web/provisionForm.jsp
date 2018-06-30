@@ -237,7 +237,7 @@ function checkOsVersion(){
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }else     
-    if(componentVersion.value === '6.5.1' || componentVersion.value === '7.0.1'){
+    if(componentVersion.value === '6.5.1' || componentVersion.value === '7.0.1' || componentVersion.value === '2.0.1-79' || componentVersion.value === '2.1.0-82' || componentVersion.value === '2.2.0-90'){  //2.1.0-82 2.0.1-79 2.2.0-90
         if(os.value === 'ubuntu') setSelectOption('osVersion',[{txt:'12.04', val:'12.04'},{txt:'14.04', val:'14.04'},{txt:'16.04', val:'16.04'},{txt:'17.10', val:'17.10'}]);
         if(os.value === 'centos') setSelectOption('osVersion',[{txt:'6.7', val:'6.7'},{txt:'6.8', val:'6.8'},{txt:'6.9', val:'6.9'},{txt:'7.1', val:'7.1'},{txt:'7.2', val:'7.2'},{txt:'7.3', val:'7.3'}]);
     }else{
