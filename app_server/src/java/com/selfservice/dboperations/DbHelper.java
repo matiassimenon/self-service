@@ -52,7 +52,7 @@ public class DbHelper {
         username = (username == null ? "test" : username);
 
         PreparedStatement ps2 = null, ps = null;
-
+        tomcatVersion=(tomcatVersion==null?"": tomcatVersion);
         //save to TEMPLATE 
 
         String sql = "";
