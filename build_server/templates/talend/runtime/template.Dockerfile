@@ -44,7 +44,7 @@ RUN <add_executables_to_path_place_holder>
 RUN <clean_cached_files_placeholder>
 
 # Expose Talend Application Ports
-EXPOSE 8040 8000 8001 8888
+EXPOSE 8040 8000 8001 8888 9001
 
 # Define working directory
 WORKDIR /talend
