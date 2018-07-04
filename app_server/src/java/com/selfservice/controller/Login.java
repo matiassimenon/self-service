@@ -75,7 +75,7 @@ public class Login extends HttpServlet {
                 resp.sendRedirect(req.getContextPath()+"/authenticated.jsp");    
                 
             } else {
-                req.setAttribute("errMessage", "<User Does Not Exist! <a href='register.jsp'>Register Here</a>");
+                req.setAttribute("errMessage", "User Does Not Exist! <a href='register.jsp'>Register Here</a>");
                 //if no values are found then the User does not exist
                 req.getRequestDispatcher("login.jsp").forward(req, resp);
             }
