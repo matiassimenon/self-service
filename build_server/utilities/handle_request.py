@@ -24,7 +24,7 @@ email_success_file = 'email_success.txt'
 email_failure_to_user_file = 'email_failure_to_user.txt'
 email_failure_to_admin_file = 'email_failure_to_admin.txt'
 admin_email = 'support.devops@talend.com'
-talend_components = ['cmdline', 'tac', 'jobserver', 'cibuilder']
+talend_components = ['cmdline', 'cibuilder', 'jobserver', 'mdm', 'logserver', 'remoteengine', 'runtime', 'tac']
 
 
 def handle_tal_request(request):
