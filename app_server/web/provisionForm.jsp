@@ -408,7 +408,7 @@ function displayHadoop(){
                             <option value="jobserver">Jobserver</option>
                             <option value="mdm">MDM</option>
                             <option value="runtime">Runtime</option>
-                            <option value="logserv">Logserver</option>
+                            <option value="logserver">Logserver</option>
                             <option value="remoteengine">Remote Engine</option>
                         </select> 
                     </td>    
