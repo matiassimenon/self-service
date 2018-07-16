@@ -352,6 +352,15 @@ def create_tal_request_dictionary(request):
     _651_logser_version = 'V6.5.1-linux-x86_64'
     _701_logser_version = 'V7.0.1-linux-x86_64'
 
+    # runtime versions
+    _601_runtime_version = 'V6.0.1-20150909162855'
+    _611_runtime_version = 'V6.1.1-20151211130553'
+    _621_runtime_version = 'V6.2.1-20160630132202'
+    _631_runtime_version = 'V6.3.1-20161215184526'
+    _641_runtime_version = 'V6.4.1-20170626145651'
+    _651_runtime_version = 'V6.5.1-20180110150853'
+    _701_runtime_version = 'V7.0.1-20180411143409'
+
     if talend_component != 'remoteengine':
         if talend_semantic_version == '6.0.1':
             talend_version = '601'
@@ -399,7 +408,7 @@ def create_tal_request_dictionary(request):
         talend_installer += logserver_installer
 
     # Second, concatenate talend version
-    if talend_component != 'logserver' and talend_component != 'remoteengine':
+    if talend_component != 'logserver' and talend_component != 'remoteengine' and talend_component != 'runtime':
         if talend_semantic_version == '6.0.1':
             talend_installer += _601_version
         elif talend_semantic_version == '6.1.1':
@@ -440,6 +449,22 @@ def create_tal_request_dictionary(request):
             talend_installer += _220_re_version
         elif talend_semantic_version == '2.3.0':
             talend_installer += _230_re_version
+
+    elif talend_component == 'runtime':
+        if talend_semantic_version == '6.0.1':
+            talend_installer += _601_runtime_version
+        elif talend_semantic_version == '6.1.1':
+            talend_installer += _611_runtime_version
+        elif talend_semantic_version == '6.2.1':
+            talend_installer += _621_runtime_version
+        elif talend_semantic_version == '6.3.1':
+            talend_installer += _631_runtime_version
+        elif talend_semantic_version == '6.4.1':
+            talend_installer += _641_runtime_version
+        elif talend_semantic_version == '6.5.1':
+            talend_installer += _651_runtime_version
+        elif talend_semantic_version == '7.0.1':
+            talend_installer += _701_runtime_version
 
     # Select appropriate tomcat major and minor versions
     ####################################################################################################################

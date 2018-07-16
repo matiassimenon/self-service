@@ -71,9 +71,9 @@ public class RequestServlet extends HttpServlet {
             template.setTemplate_uuid("");
 
             request.setAttribute("template", template);
-            request.setAttribute("errMessage", "<font color='green'>Request Successfully!!</font>");
+            request.setAttribute("errMessage", "<font color='green'>Successful Request.</font>");
             request.getRequestDispatcher("provisionForm.jsp").forward(request, response);
-            //out.print("<h3 class='save_ok'>Request Successfully!!</h3>");
+            //out.print("<h3 class='save_ok'>Successful Request.</h3>");
 
         } catch (SQLException ex) {
             if (con != null) {

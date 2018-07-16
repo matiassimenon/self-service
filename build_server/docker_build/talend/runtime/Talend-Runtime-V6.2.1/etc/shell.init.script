@@ -1,0 +1,82 @@
+// Copyright (C) 2010 Talend Inc. - www.talend.com
+
+// This script is run each time a shell is created.
+// You can define here closures or variables that will be available
+// in each session.
+//
+ld = { log:display $args } ;
+lde = { log:exception-display $args } ;
+la = { bundle:list -t 0 $args } ;
+ls = { service:list $args } ;
+cl = { config:list "(service.pid=$args)" } ;
+halt = { system:shutdown -h -f $args } ;
+help = { *:help $args | more } ;
+man = { help $args } ;
+log:list = { log:get ALL } ;
+
+// Event Logging - BEGIN
+tesb:start-el-agent = { feature:install tesb-el-agent } ;
+tesb:start-el-dlq = { feature:install tesb-el-dlq } ;
+tesb:start-el-server = { feature:install tesb-el-elasticsearch tesb-el-server } ;
+tesb:start-el-loglistener = { feature:install tesb-el-listener-log } ;
+tesb:start-el-osgilistener = { feature:install tesb-el-listener-osgi } ;
+tesb:start-el-samlistener = { feature:install tesb-el-listener-sam } ;
+tesb:start-el-restsender = { feature:install tesb-el-sender-rest } ;
+tesb:start-el-jmssender = { feature:install tesb-el-sender-jms } ;
+tesb:start-el-restservice = { feature:install tesb-el-collector-direct tesb-el-rest-service } ;
+tesb:start-el-jmsreceiver = { feature:install tesb-el-collector-jms } ;
+tesb:start-el-locatorlistener = { feature:install tesb-locator-monitor } ; // (install locator monitor)
+tesb:stop-el-agent = { feature:uninstall tesb-el-agent } ;
+tesb:stop-el-dlq = { feature:uninstall tesb-el-dlq } ;
+tesb:stop-el-server = { feature:uninstall tesb-el-server tesb-el-elasticsearch } ;
+tesb:stop-el-loglistener = { feature:uninstall tesb-el-listener-log } ;
+tesb:stop-el-osgilistener = { feature:uninstall tesb-el-listener-osgi } ;
+tesb:stop-el-samlistener = { feature:uninstall tesb-el-listener-sam } ;
+tesb:stop-el-restsender = { feature:uninstall tesb-el-sender-rest } ;
+tesb:stop-el-jmssender = { feature:uninstall tesb-el-sender-jms } ;
+tesb:stop-el-restservice = { feature:uninstall tesb-el-rest-service tesb-el-collector-direct } ;
+tesb:stop-el-jmsreceiver = { feature:uninstall tesb-el-collector-jms } ;
+tesb:stop-el-locatorlistener = { feature:uninstall tesb-locator-monitor } ; // (uninstall locator monitor)
+
+// The proper install/uninstall order must be set via start-level of corresponding bundles
+tesb:start-el-default = { tesb:stop-sam; tesb:start-sam-retrieval-service; feature:install tesb-derby-starter tesb-datasource-derby tesb-el-elasticsearch tesb-el-server tesb-el-collector-direct tesb-el-rest-service tesb-el-sender-rest tesb-el-agent tesb-el-listener-log tesb-el-listener-sam tesb-locator-monitor} ;
+tesb:stop-el-default = { feature:uninstall tesb-locator-monitor tesb-el-listener-sam tesb-el-listener-log tesb-el-agent tesb-el-sender-rest tesb-el-rest-service tesb-el-collector-direct tesb-el-server tesb-el-elasticsearch tesb-datasource-derby tesb-derby-starter; tesb:stop-sam-retrieval-service} ;
+tesb:start-el-default-rest = { source scripts/configEventLogging_REST.sh $1} ;
+tesb:start-el-default-jms = { source scripts/configEventLogging_JMS.sh $1} ;
+
+// Event Logging - END
+
+//tesb:start-sts = { feature:install tesb-sts-tidm } ; // (install sts server)
+tesb:start-aux-store = {feature:install tesb-aux } ;
+tesb:start-sam = { feature:install tesb-datasource-derby tesb-derby-starter tesb-sam-service-soap tesb-sam-service-rest } ; // (install derby-starter and sam feature)
+tesb:start-sam-retrieval-service = { feature:install tesb-datasource-derby tesb-derby-starter tesb-sam-service-rest } ; // (install derby-starter and sam rest feature)
+tesb:start-locator = { feature:install tesb-zookeeper-server } ; // (install zookeeper server)
+tesb:start-locator-commands = { feature:install tesb-locator-commands } ; // (install locator commands)
+tesb:start-registry = { feature:install tesb-registry-rest-atom-service tesb-registry-rest-service tesb-registry-server-commands } ;
+tesb:start-provision-server = { feature:install tesb-provisioning-server } ; // (install provision service)
+tesb:start-provision-agent = { feature:install tesb-provisioning-agent } ; // (install provision agent)
+tesb:start-all = { feature:install tesb-datasource-derby tesb-derby-starter tesb-sam-service-soap tesb-sam-service-rest tesb-zookeeper-server tesb-registry-rest-atom-service tesb-registry-rest-service tesb-registry-server-commands tesb-xacmlregistry-rest-atom-service tesb-xacml-pdp cxf-xkms-service tesb-aux tesb-provisioning-server tesb-provisioning-agent tesb-sts-tidm; sleep -s 10; bundle:refresh "Apache CXF JAX-RS Client" } ; // (start all infrastructure services)
+
+//tesb:stop-sts = { feature:uninstall tesb-sts-tidm } ;
+tesb:stop-aux-store  = { feature:uninstall tesb-aux } ;
+tesb:stop-sam = { feature:uninstall tesb-sam-service-rest tesb-sam-service-soap tesb-datasource-derby tesb-derby-starter } ; // (uninstall derby-starter and sam feature)
+tesb:stop-sam-retrieval-service = { feature:uninstall tesb-sam-service-rest tesb-datasource-derby tesb-derby-starter } ; // (uninstall derby-starter and sam rest feature)
+tesb:stop-locator = { feature:uninstall tesb-zookeeper-server } ;
+tesb:stop-locator-commands = { feature:uninstall tesb-locator-commands } ; // (uninstall locator commands)
+tesb:stop-registry = { feature:uninstall tesb-registry-server-commands tesb-registry-rest-service tesb-registry-rest-atom-service  } ;
+tesb:stop-all = { feature:uninstall tesb-sam-service-rest tesb-sam-service-soap tesb-datasource-derby tesb-derby-starter tesb-zookeeper-server tesb-registry-rest-atom-service tesb-registry-rest-service tesb-registry-server-commands tesb-xacmlregistry-rest-atom-service tesb-xacml-pdp cxf-xkms-service tesb-aux tesb-provisioning-server tesb-provisioning-agent tesb-sts-tidm } ;
+
+tesb:start-authz-pdp = { feature:install tesb-xacml-pdp } ;
+tesb:stop-authz-pdp = { feature:uninstall tesb-xacml-pdp } ;
+tesb:start-authz-repo = { feature:install tesb-xacmlregistry-rest-atom-service } ;
+tesb:stop-authz-repo = { feature:uninstall tesb-xacmlregistry-rest-atom-service } ;
+tesb:start-xkms = { feature:install cxf-xkms-service } ;
+tesb:stop-xkms = { feature:uninstall cxf-xkms-service } ;
+tesb:stop-provision-server = { feature:uninstall tesb-provisioning-server } ; 
+tesb:stop-provision-agent = { feature:uninstall tesb-provisioning-agent } ;
+
+
+// tidm:start-server = { feature:install tidm-server } ;
+// tidm:stop-server = { feature:uninstall tidm-server } ;
+// tidm:start-console = { feature:install tidm-console } ;
+// tidm:stop-console = { feature:uninstall tidm-console } ;

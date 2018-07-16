@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="tesb-authorization-6.2.1" xmlns="http://karaf.apache.org/xmlns/features/v1.3.0">
+
+    <feature name='tesb-xacml-pdp-api' version='6.2.1'>
+        <bundle>mvn:org.talend.esb.authorization/tesb-xacml-pdp-api/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-xacml-pdp-rt' version='6.2.1'>
+        <feature>tesb-xacml-pdp-api</feature>
+        <bundle dependency="true">mvn:joda-time/joda-time/2.1</bundle>
+        <bundle dependency="true">mvn:org.apache.felix/org.apache.felix.eventadmin/1.3.2</bundle>
+        <!-- bundle dependency="true">wrap:mvn:c3p0/c3p0/0.9.1.2</bundle-->
+        <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.c3p0/0.9.1.2_1</bundle>
+        <bundle dependency="true">mvn:org.quartz-scheduler/quartz/2.2.1</bundle>
+        <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jdom/1.1_4</bundle>
+        <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.rome/1.0_3</bundle>
+        <bundle dependency="true">mvn:org.herasaf.xacml.core/herasaf-xacml-core/1.0.0.RELEASE</bundle>
+        <bundle>mvn:org.talend.esb.authorization.xacml.registry/common/6.2.1</bundle>
+        <bundle>mvn:org.talend.esb.authorization/tesb-xacml-pdp-rt/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-xacml-pdp' version='6.2.1'>
+        <configfile finalname="/etc/org.talend.esb.authorization.pdp.cfg">mvn:org.talend.esb.authorization/tesb-xacml-pdp-config/6.2.1/cfg/org.talend.esb.authorization.pdp</configfile>
+        <feature>tesb-xacml-pdp-rt</feature>
+        <bundle>mvn:org.talend.esb.authorization/tesb-xacml-pdp-config/6.2.1</bundle>
+        <bundle>mvn:org.talend.esb.authorization/tesb-xacml-pdp-service/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-xacml-rt' version='6.2.1'>
+        <configfile finalname="/etc/org.talend.esb.authorization.pep.cfg">mvn:org.talend.esb.authorization/tesb-xacml-rt/6.2.1/cfg/org.talend.esb.authorization.pep</configfile>
+        <feature prerequisite="true">cxf-rs-security-xml</feature>
+        <feature prerequisite="true">cxf-rt-security</feature>
+        <feature>tesb-xacml-pdp-api</feature>
+        <bundle dependency="true">mvn:org.codehaus.jackson/jackson-core-asl/1.9.12</bundle>
+        <bundle dependency="true">mvn:org.codehaus.jackson/jackson-mapper-asl/1.9.12</bundle>
+        <bundle dependency="true">mvn:org.codehaus.jackson/jackson-jaxrs/1.9.12</bundle>
+        <bundle>mvn:org.talend.esb.authorization/tesb-xacml-rt/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-xacml-syncope' version='6.2.1'>
+        <feature prerequisite="true">cxf-sts</feature>
+        <feature>cxf-jaxrs</feature>
+        <feature>tesb-xacml-rt</feature>
+        <bundle>mvn:org.talend.esb.authorization/tesb-xacml-syncope/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-syncope-common' version='6.2.1'>
+        <feature version="[3.2,4)" prerequisite="true">spring-web</feature>
+        <bundle dependency="true">mvn:javax.validation/validation-api/1.1.0.Final</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/2.4.5</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/2.4.5</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/2.4.5</bundle>
+        <bundle dependency="true">mvn:org.apache.commons/commons-lang3/3.3.2</bundle>
+        <bundle>mvn:org.apache.syncope/syncope-common/1.2.7</bundle>
+    </feature>
+
+    <feature name='tesb-syncope-client' version='6.2.1'>
+        <feature version="[3.2,4)" prerequisite="true">spring-web</feature>
+        <feature>tesb-syncope-common</feature>
+        <bundle dependency="true">mvn:org.apache.httpcomponents/httpcore-osgi/4.2.4</bundle>
+        <bundle dependency="true">mvn:org.apache.httpcomponents/httpclient-osgi/4.2.5</bundle>
+        <bundle dependency="true">mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xstream/1.4.7_1</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.4.5</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.4.5</bundle>
+        <bundle>mvn:org.apache.syncope/syncope-client/1.2.7</bundle>
+    </feature>
+
+    <feature name='tesb-syncope-core' version='6.2.1'>
+        <feature prerequisite="true">war</feature>
+<!--         <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.xerces/2.11.0_1</bundle> -->
+        <bundle>mvn:org.apache.openjpa/openjpa-persistence/2.2.2</bundle>
+        <bundle>mvn:org.apache.openjpa/openjpa-persistence-jdbc/2.2.2</bundle>
+        <bundle>mvn:org.apache.openjpa/openjpa-persistence-lib/2.2.2</bundle>
+        <bundle>mvn:org.apache.openjpa/openjpa-persistence-kernel/2.2.2</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-validation_1.0_spec/1.1</bundle>
+        <bundle>mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.hibernate-validator/4.1.0.Final_3/</bundle>
+        <bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle>
+        <bundle>mvn:org.apache.openjpa/openjpa/2.2.2</bundle>
+        <bundle>mvn:org.mybatis/mybatis/3.2.2</bundle>
+        <bundle>mvn:org.activiti/activiti-bpmn-model/5.12</bundle>
+        <bundle>mvn:org.activiti/activiti-bpmn-converter/5.12</bundle>
+        <bundle>mvn:joda-time/joda-time/2.1</bundle>
+        <bundle>mvn:org.activiti/activiti-engine/5.12</bundle>
+        <bundle>mvn:commons-io/commons-io/2.2</bundle>
+        <bundle>mvn:org.apache.commons/commons-jexl/2.1.1</bundle>
+        <bundle>mvn:org.apache.commons/commons-lang3/3.3.2</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.velocity/1.7_6</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.aspectj/1.7.2_1</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jasypt/1.9.1_1</bundle>
+        <bundle>mvn:org.quartz-scheduler/quartz/2.2.1</bundle>
+        <bundle>mvn:org.springframework/spring-jdbc/3.2.3.RELEASE</bundle>
+        <bundle>mvn:org.springframework/spring-orm/3.2.3.RELEASE</bundle>
+        <bundle>mvn:org.springframework.security/spring-security-core/3.2.3.RELEASE</bundle>
+        <bundle>mvn:org.springframework.security/spring-security-config/3.2.3.RELEASE</bundle>
+        <bundle>mvn:org.springframework.security/spring-security-web/3.2.3.RELEASE</bundle>
+
+    </feature>
+
+    <feature name='tesb-syncope-console' version='6.2.1'>
+        <feature prerequisite="true">war</feature>
+        <bundle>mvn:org.apache.wicket/wicket-util/6.7.0</bundle>
+        <bundle>mvn:org.apache.wicket/wicket-request/6.7.0</bundle>
+        <bundle>mvn:org.apache.wicket/wicket-core/6.7.0</bundle>
+        <bundle>mvn:org.apache.wicket/wicket-datetime/6.7.0</bundle>
+        <bundle>mvn:org.apache.wicket/wicket-extensions/6.7.0</bundle>
+        <bundle>mvn:org.apache.wicket/wicket-auth-roles/6.7.0</bundle>
+        <bundle>mvn:org.apache.wicket/wicket-ioc/6.7.0</bundle>
+        <bundle>mvn:org.apache.wicket/wicket-spring/6.7.0</bundle>
+        <bundle>mvn:org.apache.syncope/syncope-common/1.2.7</bundle>
+        <bundle>mvn:org.apache.syncope/syncope-client/1.2.7</bundle>
+    </feature>
+
+    <feature name='jackrabbit-xacmlregistry-bundles' version='6.2.1'>
+        <bundle>mvn:commons-collections/commons-collections/3.2.2</bundle>
+        <bundle>mvn:commons-io/commons-io/2.2</bundle>
+        <!-- <bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle> -->
+        <bundle>mvn:commons-pool/commons-pool/1.6</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.derby/10.8.1.2_1</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.concurrent/1.3.4_1</bundle>
+        <bundle>mvn:org.apache.tika/tika-core/1.3</bundle>
+        <bundle>mvn:javax.jcr/jcr/2.0</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-api/2.10.1</bundle>
+        <!-- <bundle>wrap:mvn:org.apache.jackrabbit/jackrabbit-core/2.10.1$Require-Bundle=derby</bundle> -->
+		<bundle>mvn:org.apache.jackrabbit/jackrabbit-data/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-jcr-commons/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-jcr-rmi/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-spi/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-spi-commons/2.10.1</bundle>
+    </feature>
+
+    <feature name='tesb-xacmlregistry-server' version='6.2.1'>
+        <configfile finalname="/etc/org.talend.esb.authorization.xacml.registry.server.cfg">mvn:org.talend.esb.authorization.xacml.registry/server/6.2.1/cfg/org.talend.esb.authorization.xacml.registry.server</configfile>
+        <!--configfile finalname="/esbrepo/authorization/repository.xml">mvn:org.talend.esb.authorization.xacml.registry/server/6.2.1/xml/repository</configfile-->
+        <configfile finalname="/etc/org.talend.esb.authorization.repo.xml">mvn:org.talend.esb.authorization.xacml.registry/server/6.2.1/xml/org.talend.esb.authorization.repo</configfile>
+        <feature>jackrabbit-xacmlregistry-bundles</feature>
+        <feature version="[3.2,4)">spring-jdbc</feature>
+        <bundle>mvn:org.talend.esb.authorization.xacml.registry/common/6.2.1</bundle>
+        <bundle>mvn:org.talend.esb.authorization.xacml.registry/server/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-xacmlregistry-rest-atom-service' version='6.2.1'>
+        <configfile finalname="/etc/org.talend.esb.authorization.xacml.registry.service.cfg">mvn:org.talend.esb.authorization.xacml.registry/rest-atom-service/6.2.1/cfg/org.talend.esb.authorization.xacml.registry.service</configfile>
+        <feature>tesb-xacmlregistry-server</feature>
+        <feature>cxf-abdera</feature>
+        <bundle>mvn:org.talend.esb.authorization.xacml.registry/rest-atom-service/6.2.1</bundle>
+    </feature>
+
+</features>

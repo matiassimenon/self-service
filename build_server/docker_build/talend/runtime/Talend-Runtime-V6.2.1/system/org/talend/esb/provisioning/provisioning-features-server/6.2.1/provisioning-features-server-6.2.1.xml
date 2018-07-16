@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+// ============================================================================
+//
+// Copyright (C) 2014 - 2015 Talend Inc. - www.talend.com
+//
+// This source code is available under agreement available at
+// %InstallDIR%\license.txt
+//
+// You should have received a copy of the agreement
+// along with this program; if not, write to Talend SA
+// 9 rue Pages 92150 Suresnes, France
+//
+// ============================================================================
+-->
+<features name="tesb-provisioning-server-6.2.1" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.5/xml/features</repository>
+
+    <feature name='jackrabbit-provisioning-bundles' version='6.2.1'>
+        <bundle>mvn:commons-collections/commons-collections/3.2.2</bundle>
+        <bundle>mvn:commons-io/commons-io/2.2</bundle>
+        <!-- <bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle> -->
+        <bundle>mvn:commons-pool/commons-pool/1.6</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.derby/10.8.1.2_1</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.concurrent/1.3.4_1</bundle>
+        <bundle>mvn:org.apache.tika/tika-core/1.3</bundle>
+        <bundle>mvn:javax.jcr/jcr/2.0</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-api/2.10.1</bundle>
+        <!-- <bundle>wrap:mvn:org.apache.jackrabbit/jackrabbit-core/2.10.1$Require-Bundle=derby</bundle> -->
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-data/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-jcr-commons/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-jcr-rmi/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-spi/2.10.1</bundle>
+        <bundle>mvn:org.apache.jackrabbit/jackrabbit-spi-commons/2.10.1</bundle>
+    </feature>
+
+    <feature name='jackson-databind' version='2.4.5'>
+        <bundle dependency='true'>mvn:com.fasterxml.jackson.core/jackson-core/2.4.5</bundle>
+        <bundle dependency='true'>mvn:com.fasterxml.jackson.core/jackson-annotations/2.4.5</bundle>
+        <bundle dependency='true'>mvn:com.fasterxml.jackson.core/jackson-databind/2.4.5</bundle>
+    </feature>
+
+    <feature name='jackson-jaxrs-json-provider' version='2.4.5'>
+        <feature version='2.4.5'>jackson-databind</feature>
+        <bundle dependency='true'>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.4.5</bundle>
+        <bundle dependency='true'>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.4.5</bundle>
+    </feature>
+
+    <feature name='provisioning-common' version='6.2.1'>
+        <feature version='3.1.5'>cxf-jaxrs</feature>
+        <feature version='2.4.5'>jackson-databind</feature>
+        <bundle>mvn:org.talend.esb.provisioning/provisioning-common/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-provisioning-server-core' version='6.2.1'>
+        <configfile finalname="/etc/org.talend.esb.provisioning.server.cfg">mvn:org.talend.esb.provisioning/provisioning-server/6.2.1/cfg/org.talend.esb.provisioning.server</configfile>
+        <configfile finalname="/esbrepo/provisioning/repository.xml">mvn:org.talend.esb.provisioning/provisioning-server/6.2.1/xml/repository</configfile>
+        <configfile finalname="/etc/org.talend.esb.provisioning.repo.xml">mvn:org.talend.esb.provisioning/provisioning-server/6.2.1/xml/org.talend.esb.provisioning.repo</configfile>
+        <feature>jackrabbit-registry-bundles</feature>
+        <feature version='6.2.1'>provisioning-common</feature>
+        <bundle>mvn:org.talend.esb.provisioning/provisioning-server/6.2.1</bundle>
+        <bundle>mvn:org.talend.esb.provisioning/provisioning-server-commands/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-provisioning-server-service' version='6.2.1'>
+        <configfile finalname="/etc/org.talend.esb.provisioning.service.admin.cfg">mvn:org.talend.esb.provisioning/provisioning-service-admin/6.2.1/cfg/org.talend.esb.provisioning.service.admin</configfile>
+        <configfile finalname="/etc/org.talend.esb.provisioning.service.lookup.cfg">mvn:org.talend.esb.provisioning/provisioning-service-lookup/6.2.1/cfg/org.talend.esb.provisioning.service.lookup</configfile>
+        <feature version='6.2.1'>tesb-provisioning-server-core</feature>
+        <feature version='2.4.5'>jackson-jaxrs-json-provider</feature>
+        <bundle>mvn:org.talend.esb.provisioning/provisioning-service-admin/6.2.1</bundle>
+        <bundle>mvn:org.talend.esb.provisioning/provisioning-service-lookup/6.2.1</bundle>
+    </feature>
+
+    <feature name='tesb-provisioning-server' version='6.2.1'>
+        <feature version='6.2.1'>tesb-provisioning-server-core</feature>
+        <feature version='6.2.1'>tesb-provisioning-server-service</feature>
+    </feature>
+
+</features>
