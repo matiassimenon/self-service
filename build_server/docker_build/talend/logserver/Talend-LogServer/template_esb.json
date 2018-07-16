@@ -1,0 +1,117 @@
+{
+	"template": "talendesb*",
+	"mappings": {
+		"ESB": {
+			"properties": {
+				"agentId": {
+					"type": "string",
+					"index": "not_analyzed"
+				},
+				"agentTimestamp": {
+					"type": "date",
+					"format": "dateOptionalTime"
+				},
+				"audit": {
+					"type": "boolean"
+				},
+				"category": {
+					"type": "string",
+					"index": "not_analyzed"
+				},
+				"customInfo": {
+					"properties": {
+					    "count": {
+							"type": "integer"
+						},
+						"service.qname": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"Content Type": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"Response Code": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"address": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"content.cut": {
+							"type": "boolean"
+						},
+						"event.type": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"flow.id": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"message.id": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"operation.name": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"port.type": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"transport.type": {
+							"type": "string",
+							"index": "not_analyzed"
+						}
+					}
+				},
+				"eventType": {
+					"type": "string",
+					"index": "not_analyzed"
+				},
+				"eventUUID": {
+					"type": "string",
+					"index": "not_analyzed"
+				},
+				"logMessage": {
+					"type": "string"
+				},
+				"logSource": {
+					"properties": {
+						"host.ip": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"host.name": {
+							"type": "string",
+							"index": "not_analyzed"
+						},
+						"process.id": {
+							"type": "string",
+							"index": "not_analyzed"
+						}
+					}
+				},
+				"logTimestamp": {
+					"type": "date",
+					"format": "dateOptionalTime"
+				},
+				"serverTimestamp": {
+					"type": "date",
+					"format": "dateOptionalTime"
+				},
+				"severity": {
+					"type": "string",
+					"index": "not_analyzed"
+				},
+				"subject": {
+					"type": "string",
+					"index": "not_analyzed"
+				}
+			}
+		}
+	}
+}

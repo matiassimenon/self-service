@@ -1,0 +1,486 @@
+<!--
+// ============================================================================
+//
+// Copyright (C) 2011 - 2013 Talend Inc. - www.talend.com
+//
+// This source code is available under agreement available at
+// %InstallDIR%\license.txt
+//
+// You should have received a copy of the agreement
+// along with this program; if not, write to Talend SA
+// 9 rue Pages 92150 Suresnes, France
+//
+// ============================================================================
+-->
+<features name="tesb-event-logging-6.4.1" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.0.0 http://karaf.apache.org/xmlns/features/v1.0.0">
+
+	<repository>mvn:org.apache.cxf.karaf/apache-cxf/3.1.11/xml/features</repository>
+	
+	
+	
+
+    <!-- WARN: it is important to assign bundle start-levels which ensure proper start/stop order. -->
+
+	<!-- Common -->
+
+	<feature name="tesb-el-common" version="6.4.1">
+
+	<!-- Due to a problem in camel-blueprint we cannot let bundles that use it
+		to be refreshed by namespace handler unavailability. In most cases this happens
+		when Karaf refreshes bundles that provide those namespace handlers. To avoid
+		this situation we pre-load dependencies for those bundles. For details see
+		TESB-11244. -->
+
+	<!-- The next bundles must not be refreshed: org.apache.aries.blueprint.core,
+		org.apache.aries.blueprint.cm, camel-blueprint, camel-cxf. -->
+
+		<feature>eventadmin</feature>
+		<feature version="[2.11,3)">camel-blueprint</feature>
+
+		<bundle>mvn:org.talend.esb.event-logging/event-logging-common/6.4.1</bundle>
+	</feature>
+
+	<!-- Server-side -->
+
+	<feature name="jackson-jaxrs" version="2.8.7">
+		<bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.8.7</bundle>
+		<bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.8.7</bundle>
+	</feature>
+
+
+	<feature name="tesb-el-rest-service" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.service.cfg">mvn:org.talend.esb.event-logging/event-logging-service/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.service"># EL Service Authentication method (NO,BASIC)
+eventlogging.authentication = NO
+
+# Set to true to enable the API for events retrieval
+eventlogging.retrieval.api.enabled = false
+</config>
+        
+		<feature>cxf-rs-security-xml</feature>
+		<feature version="6.4.1">tesb-el-server</feature>
+		<feature version="[2.11,3)">camel-cxf</feature>
+		<feature version="[3.2,4)">spring-jdbc</feature>
+		<feature version="2.8.7">jackson-jaxrs</feature>
+        
+		<bundle start-level="93">mvn:org.talend.esb.event-logging/event-logging-service/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-collector-direct" version="6.4.1">
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+		<feature version="[2.11,3)">camel-jackson</feature>
+		<bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/2.8.7</bundle>
+        
+		<bundle start-level="92">mvn:org.talend.esb.event-logging/event-logging-collector-direct/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-collector-jms" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.collector.jms.cfg">mvn:org.talend.esb.event-logging/event-logging-collector-jms/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.collector.jms"># In the part of the Server we can receive events via jms
+# JMS Collector able to read/get events from a JMS Broker
+# JMS connection url
+collector.jms.url=tcp://localhost:61616
+# Name of JMS queue
+collector.jms.queue=event.logging.server
+# JMS Username
+collector.jms.username=tadmin
+# JMS Password
+collector.jms.password=tadmin
+# Name of JMS collector queue
+collectorjms.dlq.buffer.jms.queue = collectorjms.dlq
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[5.8,6)">activemq-client</feature>
+		<feature version="[2.11,3)">camel-jms</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+		<feature version="[2.11,3)">camel-jackson</feature>
+        
+		<bundle start-level="92">mvn:org.talend.esb.event-logging/event-logging-collector-jms/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-server" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.server.cfg">mvn:org.talend.esb.event-logging/event-logging-server/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.server"># Incoming events without a category will be set to the below default category
+preprocessing.eventCategory=system
+
+# Examples of configuration for preprocessing custom routes
+#preprocessing.custom.routeid.default=myCustomPreProcRoute
+#preprocessing.custom.routeid.audit=myCustomrAuditPreProcRoute
+#preprocessing.custom.routeid.sam=myCustomSamPreProcRoute
+
+# Default behaviour for saving events in Event database
+persistence.event.db.active.default=true
+# Behaviour for saving events with audit flag in Event database
+persistence.event.db.active.audit=true
+# Behaviour for saving events with sam category in Event database
+persistence.event.db.active.sam=false
+
+# Default behaviour for saving events in SAM database
+persistence.sam.db.active.default=false
+# Behaviour for saving events with SAM category in Sam database
+persistence.sam.db.active.sam=true
+
+# Default behaviour to index all events in elasticsearch server
+search.active.default=true
+
+# Example of configuration for persistence custom routes
+#persistence.custom.routeid.system=myCustomServerPersistenceRoute
+
+# Example of configuration for postprocessing custom routes
+#postprocessing.custom.routeid.default=myCustomServerPostProcRoute
+
+# Datasource for Event Logging database
+event.logging.db.datasource=ds-derby
+# Dialect for Event Logging database
+event.logging.db.dialect=derbyDialect
+
+# Datasource for SAM database
+sam.db.datasource=ds-derby
+# Dialect for SAM database
+sam.db.dialect=derbyDialect
+
+
+# Set to &quot;true&quot; to enable sending events to elasticsearch (if tesb-el-elasticsearch feature is installed)
+elasticsearch.available=true
+# Host address where elasticsearch instance is started
+elasticsearch.host=localhost
+# Port of elasticsearch server instance
+elasticsearch.port=9200
+# Elasticsearch is secured or not
+elasticsearch.secured=false
+# Optional, Trust store with SSL certificate for secured elasticsearch (any -&gt; no trust check)
+# By default the base dir of the truststore is $tesb.home
+elasticsearch.ssl.truststore=any
+# Optional, Trust store password (none -&gt; no password)
+elasticsearch.ssl.truststore.password=none
+# Optional, Certificate hostname accepted independent from the server URL (any -&gt; no hostname check)
+elasticsearch.ssl.pass.hostname=any
+# Username and password for secured elasticsearch
+elasticsearch.username=es_admin
+elasticsearch.password=es_admin
+# Name of index that will be used in elasticsearch
+elasticsearch.indexname=talendesb
+# Type of the index
+elasticsearch.indextype=ESB
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+		<feature version="[2.11,3)">camel-jackson</feature>
+		<feature version="[2.11,3)">camel-ibatis</feature>
+		<feature version="[3.2,4)">spring-jdbc</feature>
+		<feature version="6.4.1">tesb-sam-common</feature>
+        <feature version="6.4.1">tesb-el-elasticsearch</feature>
+        
+		<bundle start-level="91">mvn:org.talend.esb.event-logging/event-logging-server/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-elasticsearch" version="6.4.1">
+		<bundle>mvn:com.google.code.gson/gson/2.6.2</bundle>
+		<bundle>mvn:org.apache.commons/commons-lang3/3.4</bundle>
+		<bundle>mvn:com.google.guava/guava/19.0</bundle>
+		<bundle>mvn:org.apache.httpcomponents/httpcore-osgi/4.4.4</bundle>
+		<bundle>mvn:org.apache.httpcomponents/httpclient-osgi/4.5.2</bundle>
+		<bundle>mvn:org.apache.httpcomponents/httpasyncclient-osgi/4.1.2</bundle>
+        
+		<bundle start-level="91">mvn:org.talend.esb.event-logging/event-logging-elasticsearch-client/6.4.1</bundle>
+	</feature>
+
+	<!-- Agent-side -->
+
+	<feature name="tesb-el-agent" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.agent.cfg">mvn:org.talend.esb.event-logging/event-logging-agent/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.agent"># Unique agentID (string)
+agent.id=agent1
+
+# The location of file system used to persist the audit sequence number
+agent.sequence.dir=./esbrepo/audit-sequence
+
+#agent.receiver.custom.routeid.default=myCustomReceiverRoute
+#agent.receiver.custom.routeid.audit=myCustomReceiverRoute
+#agent.receiver.custom.routeid.security=myCustomReceiverSecurityRoute
+
+# Receiver buffer configuration
+# for &#39;agent.buffer.jms.queue&#39; (and only for it) it&#39;s possible to
+# reuse other property values defined in this file by closing the
+# property name between ${ and }. For example:
+#     agentid=some-agent-id
+#     agent.buffer.jms.queue=event.logging.${agentid}.cache
+# will be interpreted by EL as &#39;event.logging.some-agent-id.cache&#39;
+agent.buffer.jms.url=vm://eventloggingbroker?create=true&amp;broker.useJmx=false&amp;broker.persistent=true
+agent.buffer.jms.queue=event.logging.${agentid}.cache
+agent.buffer.jms.username=tadmin
+agent.buffer.jms.password=tadmin
+
+# By default, all events will be sent via a memory buffer but the user can change this
+# and configure to use jms instead for audit event and for other event categories.
+agent.receiver.buffer.default=memory
+#agent.receiver.buffer.audit=jms
+#agent.receiver.buffer.security=jms
+
+# Configuration for custom route processing
+#agent.processing.custom.routeid.default=myCustomProcRoute
+#agent.processing.custom.routeid.audit=myCustomProcRoute
+#agent.processing.custom.routeid.security=myCustomProcSecurityRoute
+
+# Signing events default configuration
+agent.processing.signing.default=false
+# configuration for signing audit events.
+agent.processing.signing.audit=true
+# configuration for signing events with security category
+#agent.processing.signing.security=true
+
+# A default local keystore (trun.jks) is provided for the private key, that will be used to sign the events
+agent.signing.keystore.properties =./etc/keystores/trunKeystore.properties
+
+# The Event Logging Sender is responsible to get the messages from the processing part of the Agent and send them to the final destination which can be either a JMS Broker Queue or the Event Logging Collector Service
+agent.sender.destination.default=eventlogsenderrest
+#agent.sender.destination.audit=eventlogsenderjms
+#agent.sender.destination.security=eventlogsenderjms
+
+#********************************************************************************************#
+#********************************** Event Enrichment ****************************************#
+#********************************************************************************************#
+
+# Used to map an attribute to the Subject property in the Event. User can 
+# provide this value in the logs as attributes (e.g. for log events as MDC attribute)
+event.map.subject = Subject
+# Take correlation from custom_Info using the below key
+event.map.correlationid = CorrelationID
+
+# Adding static log event attributes to all log messages processed within this agent.
+# Format: event.add.[attribute-name] = [value]
+# Values defined here will override any previously existing values within the log event.
+# Currently only event.add.logSource.[sub-attribute] and event.add.customInfo.[sub-attribute] is supported.
+#event.add.logSource.country=Germany
+#event.add.logSource.city=Bonn
+#event.add.customInfo.projectID=POC Talend ESB
+
+# Removing log event attributes from all log messages processed within this agent.
+# This feature is especially helpful if you need to remove (customInfo) MDC properties from 3rd party components.
+# Format: event.remove.[attribute-name]
+# Currently only event.remove.logSource.[sub-attribute] and event.remove.customInfo.[sub-attribute] is supported.
+#event.remove.logSource.class.name
+#event.remove.customInfo.activemq.broker</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[5.8,6)">activemq-client</feature>
+		<feature version="[2.11,3)">camel-jms</feature>
+		<feature version="[2.11,3)">camel-xmlsecurity</feature>
+		<!-- <bundle>mvn:org.apache.xbean/xbean-blueprint/3.14</bundle> -->
+        
+		<bundle start-level="97">mvn:org.talend.esb.event-logging/event-logging-agent/6.4.1/jar/tipaas</bundle>
+	</feature>
+	
+	<feature name="tesb-el-dlq" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.dlq.cfg">mvn:org.talend.esb.event-logging/event-logging-dlq/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.dlq"># JMS connection url
+dlq.buffer.jms.url=tcp://localhost:61616
+# Name of JMS queue
+dlq.buffer.jms.queue=event.logging.dlq
+# JMS Username
+dlq.buffer.jms.username=tadmin
+# JMS Password
+dlq.buffer.jms.password=tadmin
+
+dlq.timeout=10000
+
+dlq.destination.jms.url=tcp://localhost:61616
+dlq.destination.jms.queue=event.logging.server
+dlq.destination.jms.username=tadmin
+dlq.destination.jms.password=tadmin
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[5.8,6)">activemq-client</feature>
+		<feature version="[2.11,3)">camel-jms</feature>
+
+		<bundle start-level="96">mvn:org.talend.esb.event-logging/event-logging-dlq/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-sender-rest" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.sender.rest.cfg">mvn:org.talend.esb.event-logging/event-logging-sender-rest/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.sender.rest"># sender destination url
+sender.destination.service.url=http://localhost:8040/services/eventlogging/events
+# Authentication configuration for REST service, by default is NO,
+# if authentication is BASIC, the username and password should be provided
+sender.destination.service.authentication=NO
+sender.destination.service.username=tadmin
+sender.destination.service.password=tadmin
+
+# Aggregation configuration
+# if the number of events reach the value of sender.aggregation.eventcount, the collection
+# of the events will be sent as one REST request
+sender.aggregation.eventcount=10
+# If the total size of the 
+# event collection reaches the defined size of sender.aggregation.eventsize (KB),
+# the event collection will be sent
+sender.aggregation.eventsize=1024
+
+# the event will be sent if the timeout (in milliseconds) is reached
+sender.aggregation.sendtimeout=20000
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[2.11,3)">camel-cxf</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+		<feature version="[2.11,3)">camel-jackson</feature>
+		<feature version="2.8.7">jackson-jaxrs</feature>
+
+		<bundle start-level="95">mvn:org.talend.esb.event-logging/event-logging-sender-rest/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-sender-jms" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.sender.jms.cfg">mvn:org.talend.esb.event-logging/event-logging-sender-jms/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.sender.jms"># JMS connection url
+sender.destination.jms.url=tcp://localhost:61616
+# Name of JMS queue
+sender.destination.jms.queue=event.logging.server
+# JMS Username
+sender.destination.jms.username=tadmin
+# JMS Password
+sender.destination.jms.password=tadmin
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[5.8,6)">activemq-client</feature>
+		<feature version="[2.11,3)">camel-jms</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+		<feature version="[2.11,3)">camel-jackson</feature>
+
+		<bundle start-level="95">mvn:org.talend.esb.event-logging/event-logging-sender-jms/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-listener-log" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.listener.log.cfg">mvn:org.talend.esb.event-logging/event-logging-listener-log/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.listener.log"># Default category of events
+category.default=system
+
+# Define key in MDC attributes which will be used to get EventCategory
+category.attribute=eventCategory
+# Define key in MDC that specify audit
+audit.attribute=audit
+
+# Category mapping configuration, for example, if a log message comes from 
+# package org.apache.cxf, it will be mapped to the service category
+category.mapping.org.apache.cxf=service
+category.mapping.org.apache.cxf.rt.security=security
+category.mapping.org.apache.wss4j=security
+category.mapping.org.talend.esb.sts=security
+category.mapping.org.talend.sts=security
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[2.11,3)">camel-paxlogging</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+
+		<bundle start-level="98">mvn:org.talend.esb.event-logging/event-logging-listener-log/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-listener-osgi" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.listener.osgi.cfg">mvn:org.talend.esb.event-logging/event-logging-listener-osgi/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.listener.osgi"># Default category of events
+category.default=osgi
+# Define key in MDC attributes which will be used to get Event category
+category.attribute=eventCategory
+# Define key in MDC that specify audit
+audit.attribute=audit
+
+# Category mapping configuration
+category.mapping.org/osgi/framework/ServiceEvent=service
+#category.mapping.org/osgi/service=service(audit=true)
+
+# Filter configuration, by default, all events are excluded except 
+# the one defined in the filter.include. properties
+filter.exclude.*
+filter.include.org/osgi/framework/ServiceEvent
+filter.include.org/osgi/framework/BundleEvent
+filter.include.org/osgi/framework/FrameworkEvent
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+		<feature version="[2.11,3)">camel-eventadmin</feature>
+
+		<bundle start-level="99">mvn:org.talend.esb.event-logging/event-logging-listener-osgi/6.4.1</bundle>
+	</feature>
+
+	<feature name="tesb-el-listener-sam" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.listener.sam.cfg">mvn:org.talend.esb.event-logging/event-logging-listener-sam/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.listener.sam"># By default all events captured by the SAM Listener will be assigned 
+# to the sam category
+category=sam
+
+# Configuration for SAM events from this container to be treated as audit events
+audit=false
+
+# To map the subject of the SAML token to the subject attribute of the event
+map.subject.samltoken=false
+# To map the subject of the UsernameToken to the subject attribute of the event
+map.subject.usernametoken=false
+</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[2.11,3)">camel-stream</feature>
+		<feature version="[2.11,3)">camel-cxf</feature>
+		<feature version="[2.11,3)">camel-jaxb</feature>
+<!-- 		<feature version="[2.7,3)">cxf</feature> -->
+<!-- 		<feature version="[2.3,3)">war</feature> -->
+		<feature version="6.4.1">tesb-sam-common</feature>
+
+		<bundle start-level="98">mvn:org.talend.esb.event-logging/event-logging-listener-sam/6.4.1</bundle>
+	</feature>
+	
+	<feature name="tesb-el-listener-rest" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.listener.rest.cfg">mvn:org.talend.esb.event-logging/event-logging-listener-rest/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.listener.rest"># define EventLog attributes that should be matched to JSON property names
+# You can use JsonPath Expressions or any fixed value
+
+eventType = Log4jEvent
+
+logTimestamp = $[&#39;@timestamp&#39;]
+logTimestamp.format = yyyy-MM-dd&#39;T&#39;HH:mm:ss.SSSX
+
+severity = $.level
+
+logMessage = $.message
+
+logSource.logger.name = $.logger_name
+logSource.host.name = $.source_host
+logSource.thread = $.thread_name
+logSource.method.name = $.method
+logSource.class.name = $.class
+logSource.file.name = $.file
+logSource.lineNumber = $.line_number
+
+customInfo.mdc = $.mdc
+customInfo.exception.class = $.exception.exception_class
+customInfo.exception.message = $.exception.exception_message
+customInfo.exception.stacktrace = $.exception.stacktrace
+
+customInfo.version = $[&#39;@version&#39;]</config>
+        
+		<feature version="6.4.1">tesb-el-common</feature>
+		<feature version="[2.11,3)">camel-jsonpath</feature>
+		<feature version="[2.11,3)">camel-cxf</feature>
+
+		<bundle start-level="98">mvn:org.talend.esb.event-logging/event-logging-listener-rest/6.4.1</bundle>
+	</feature>
+	
+	<feature name="tesb-el-mdc-mapper" version="6.4.1">
+		<configfile finalname="/etc/org.talend.eventlogging.mdc.cfg">mvn:org.talend.esb.event-logging/event-logging-mdc-mapper/6.4.1/cfg</configfile>
+		<config name="org.talend.eventlogging.mdc"># MDC key value for CorrelationID
+mdc.correlationId = CorrelationID
+
+# MDC key value for authenticated user name
+mdc.principle = Subject
+</config>
+        
+		<bundle start-level="80">mvn:org.talend.esb.event-logging/event-logging-mdc-mapper/6.4.1</bundle>
+	</feature>
+
+</features>

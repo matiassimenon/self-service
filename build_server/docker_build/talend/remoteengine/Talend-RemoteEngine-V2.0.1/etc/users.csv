@@ -1,0 +1,5 @@
+#This file is used to set username and password for jobServer authorization, and every a couple of username and password in a line and separated by commas.
+#If haven't set or comment all users, jobServer will not check authorization.
+#For example:
+#userName,password
+

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<features name="talend-ipaas-flow-2.0.1" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+
+    <repository>mvn:org.talend.ipaas.rt/ipaas-common-features/2.0.1/xml</repository>
+
+    <feature name='tipaas-flow-container-common' version='2.0.1'>
+        <configfile finalname="/etc/org.talend.ipaas.rt.heartbeat.sender.cfg">mvn:org.talend.ipaas.rt/flow-container-common/2.0.1/cfg/org.talend.ipaas.rt.heartbeat.sender</configfile>
+        <config name="org.talend.ipaas.rt.heartbeat.sender">account.id=TestAccountId
+container.id=TestContainerId
+
+# in seconds
+# Do not set heart interval to more than 360 seconds(6 mins). If Talend Integration Cloud does not 
+# receive a heart beart from the Remote Engine for more than 6 mins, it will show the Remote Engine&#39;s status
+# as unavailable.
+heartbeat.interval=60
+</config>
+        <feature>tipaas-common</feature>
+        <feature>tipaas-container-management-service-common</feature>
+        <bundle>mvn:org.talend.ipaas.rt/flow-container-common/2.0.1</bundle>
+    </feature>
+
+    <feature name='tipaas-deployment-agent' version='2.0.1'>
+        <configfile finalname="/etc/org.talend.ipaas.rt.deployment.agent.cfg">mvn:org.talend.ipaas.rt/deployment-agent/2.0.1/cfg/org.talend.ipaas.rt.deployment.agent</configfile>
+        <config name="org.talend.ipaas.rt.deployment.agent">account.id=TestAccountId
+container.id=TestContainerId
+
+# Queues
+queue.input.name=ipaas.container.TestAccountId.TestContainerId.input
+queue.input.consumers.count=1
+
+queue.response.name=ipaas.container.TestAccountId.TestContainerId.response
+queue.response.consumers.count=1
+
+# Interval in seconds that send container status to the Dispatcher
+status.update.interval=60
+
+# In seconds
+wait.for.connection.parameters.timeout=300
+flow.deployment.timeout=300
+
+# If undeploy flow or not when it completed
+flow.undeploy.after.completed=true
+
+#data.uploader.threads.min=5
+#data.uploader.threads.max=16
+#in milliseconds
+#data.uploader.threads.keep.alive=10000
+
+# if empty System tmp dir will be used.
+#data.temporary.folder=
+
+rejected.rows.file.size.max=2097152
+test.data.file.size.max=2097152
+
+# deployment agent will send all exceeding flows for rescheduling
+# use 0 or lower for infinite number of flows - no limit
+max.deployed.flows=3
+
+register.keypair=true
+</config>
+        <feature>tipaas-event-logging</feature>
+        <feature>tipaas-common</feature>
+        <feature>tipaas-flow-container-common</feature>
+        <feature>tipaas-keypair-manager</feature>
+        <feature>tipaas-amqsource</feature>
+        <feature>tipaas-flow-api</feature>
+        <feature>tipaas-dispatcher-client</feature>
+        <feature>tipaas-data-transfer-service-client</feature>
+        <feature>tipaas-custom-resources-common</feature>
+        <feature>tipaas-dispatcher-common</feature>
+        <feature>tipaas-logs-transfer-service-client</feature>
+        <bundle>mvn:org.talend.ipaas.rt/deployment-agent/2.0.1</bundle>
+    </feature>
+
+    <feature name="tipaas-box-token-generator" version="2.0.1">
+        <!-- https://issues.apache.org/jira/browse/CAMEL-11472 -->
+        <feature>http-whiteboard</feature>
+        <feature version='2.17.6'>camel-box</feature>
+        <feature>tipaas-flow-api</feature>
+        <bundle>mvn:org.talend.ipaas.rt.flow/box-token-generator/2.0.1</bundle>
+    </feature>
+
+    <feature name="tipaas-drive-token-generator" version="2.0.1">
+        <feature version='3.1.11'>cxf-jaxrs</feature>
+        <feature version='2.17.6'>camel-google-drive</feature>
+        <feature>tipaas-flow-api</feature>
+        <bundle dependency="true">mvn:org.jsoup/jsoup/1.8.1</bundle>
+        <bundle>mvn:org.talend.ipaas.rt.flow/drive-token-generator/2.0.1</bundle>
+    </feature>
+
+    <feature name="tipaas-flow-api" version="2.0.1">
+        <feature version='3.1.11'>cxf-jaxrs</feature>
+        <!--bundle>mvn:org.talend.esb.job/org.talend.esb.job.api/6.4.1</bundle-->
+        <bundle>mvn:org.talend.ipaas.rt/flow-api/2.0.1</bundle>
+    </feature>
+
+    <feature name="tipaas-flow-controller" version="2.0.1">
+        <feature>tipaas-flow-api</feature>
+        <feature>tipaas-drive-token-generator</feature>
+        <feature>tipaas-box-token-generator</feature>
+        <bundle>mvn:org.talend.ipaas.rt/tipaas-jobserver-client/2.0.1</bundle>
+        <bundle>mvn:org.talend.ipaas.rt/flow-controller/2.0.1</bundle>
+    </feature>
+
+   <feature name='tipaas-pairing-agent' version='2.0.1'>
+        <configfile finalname="/etc/org.talend.ipaas.rt.pairing.agent.cfg">mvn:org.talend.ipaas.rt.re/pairing-agent/2.0.1/cfg/org.talend.ipaas.rt.pairing.agent</configfile>
+        <configfile finalname="/etc/preauthorized.key.cfg">mvn:org.talend.ipaas.rt.re/pairing-agent/2.0.1/cfg/preauthorized.key</configfile>
+        <config name="org.talend.ipaas.rt.pairing.agent">remote.engine.id=
+</config>
+        <feature version='3.1.11'>cxf-jaxrs</feature>
+        <feature>war</feature>
+        <feature>tipaas-common</feature>
+        <feature>tipaas-flow-container-common</feature>
+        <feature>tipaas-keypair-manager</feature>
+        <feature>tipaas-pairing-service-client</feature>
+        <bundle>mvn:org.talend.ipaas.rt.re/pairing-agent/2.0.1</bundle>
+    </feature>
+
+   <feature name='tipaas-heartbeat-sender-cloud' version='2.0.1'>
+        <configfile finalname="/etc/org.talend.ipaas.rt.heartbeat.sender.cloud.cfg">mvn:org.talend.ipaas.rt.heartbeat/heartbeat-sender-cloud/2.0.1/cfg/org.talend.ipaas.rt.heartbeat.sender.cloud</configfile>
+        <config name="org.talend.ipaas.rt.heartbeat.sender.cloud">account.id=TestAccountId
+container.id=TestContainerId
+
+# in seconds
+heartbeat.interval=180
+
+heartbeat.service.url=http://localhost:8181/services/container-management-service
+heartbeat.service.username=tadmin
+heartbeat.service.password=tadmin
+</config>
+        <feature version='3.1.11'>cxf-jaxrs</feature>
+        <feature>tipaas-common</feature>
+        <feature>tipaas-dispatcher-client</feature>
+        <feature>tipaas-container-management-service-common</feature>
+        <bundle>mvn:org.talend.ipaas.rt.heartbeat/heartbeat-sender-cloud/2.0.1</bundle>
+    </feature>
+
+   <feature name='tipaas-heartbeat-sender-remote' version='2.0.1'>
+        <configfile finalname="/etc/org.talend.ipaas.rt.heartbeat.sender.remote.cfg">mvn:org.talend.ipaas.rt.heartbeat/heartbeat-sender-remote/2.0.1/cfg/org.talend.ipaas.rt.heartbeat.sender.remote</configfile>
+        <config name="org.talend.ipaas.rt.heartbeat.sender.remote">remote.engine.id=TestREId
+
+# in seconds
+# Do not set heart interval to more than 360 seconds(6 mins). If Talend Integration Cloud does not 
+# receive a heart beart from the Remote Engine for more than 6 mins, it will show the Remote Engine&#39;s status
+# as unavailable.
+heartbeat.interval=60
+</config>
+        <feature>tipaas-common</feature>
+        <feature>tipaas-pairing-service-client</feature>
+        <feature>tipaas-pairing-agent</feature>
+        <bundle>mvn:org.talend.ipaas.rt.heartbeat/heartbeat-sender-remote/2.0.1</bundle>
+    </feature>
+
+    <feature name="tipaas-flow-dependencies" version="2.0.1">
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5</bundle>
+        <bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.jaxen/1.1.1_2</bundle>
+        <!-- TIPAAS-2372 -->
+        <feature version='3.1.11'>cxf-jaxws</feature>
+        <bundle>mvn:org.ops4j.base/ops4j-base-lang/1.5.0</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-util-property/1.5.0</bundle>
+        <bundle>mvn:org.ops4j.pax.swissbox/pax-swissbox-property/1.8.2</bundle>
+        <bundle>mvn:org.ops4j.pax.url/pax-url-commons/2.5.2</bundle>
+        <bundle>mvn:org.ops4j.pax.url/pax-url-classpath/2.5.2</bundle>
+    </feature>
+
+    <feature name='tipaas-event-logging' version='2.0.1'>
+        <feature>tesb-el-agent</feature>
+        <feature>tesb-el-sender-jms</feature>
+        <feature>tesb-el-listener-log</feature>
+    </feature>
+
+    <feature name='talend-data-mapper-dependencies' version='6.4.1'>
+        <bundle>mvn:commons-cli/commons-cli/1.2</bundle>
+        <bundle>mvn:joda-time/joda-time/2.9.4</bundle>
+        <bundle dependency="true">mvn:org.eclipse.birt.runtime/com.ibm.icu/50.1.1.v201304230130</bundle>
+    </feature>
+
+    <feature name='tipaas-remote-engine' version='2.0.1'>
+        <feature>tipaas-event-logging</feature>
+        <feature>tipaas-flow-dependencies</feature>
+        <feature>tipaas-deployment-agent</feature>
+        <feature>tipaas-flow-controller</feature>
+        <feature>tipaas-heartbeat-sender-remote</feature>
+        <feature>talend-data-mapper</feature>
+    </feature>
+
+    <feature name='tipaas-cloud-engine' version='2.0.1'>
+        <feature>tipaas-event-logging</feature>
+        <feature>tipaas-flow-dependencies</feature>
+        <feature>tipaas-deployment-agent</feature>
+        <feature>tipaas-flow-controller</feature>
+        <feature>tipaas-heartbeat-sender-cloud</feature>
+        <feature>talend-data-mapper</feature>
+    </feature>
+
+    <feature name="talend-job-server-client">
+        <bundle>mvn:org.talend/org.talend.remote.commons/6.4.1</bundle>
+        <bundle>mvn:org.talend/org.talend.remote.jobserver.commons/6.4.1</bundle>
+        <bundle>mvn:org.talend/org.talend.commons.runtime/6.4.1/jar/minimal/</bundle>
+        <bundle>mvn:org.talend/org.talend.utils.minimal/6.4.1</bundle>
+        <bundle>mvn:org.talend/org.talend.remote.client/6.4.1</bundle>
+        <bundle>mvn:org.talend/org.talend.remote.jobserver.client/6.4.1</bundle>
+        <bundle>mvn:org.talend/org.talend.monitoring.client/6.4.1</bundle>
+    </feature>
+
+</features>

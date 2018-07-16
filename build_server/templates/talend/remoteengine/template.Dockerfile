@@ -55,8 +55,9 @@ ADD <talend_installer_placeholder>.zip /talend
 RUN \
   unzip /talend/<talend_installer_placeholder>.zip && \
   mv /talend/<talend_installer_placeholder> /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
-  rm -rf /talend/<talend_installer_placeholder>.zip
+  rm -rf /talend/<talend_installer_placeholder>.zip \ &&
+  chmod +x /talend/<talend_component_placeholder>-<talend_version_placeholder>/bin/start
 
 USER root
 # Define Default command
-ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start" && /bin/bash
+ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/bin/start" && /bin/bash

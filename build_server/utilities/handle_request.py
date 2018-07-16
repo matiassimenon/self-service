@@ -14,8 +14,8 @@ from utilities.email_operations import send_email, create_email_dictionary
 repo_suffix = 'self-service.talend.com'
 port = '443'
 protocol = 'https'
-#project_dir = '/Users/francisco/talend-dev/self-service/build_server'
-project_dir = '/home/centos/self-service/build_server'
+project_dir = '/Users/francisco/talend-dev/self-service/build_server'
+#project_dir = '/home/centos/self-service/build_server'
 templates_dir = f'{project_dir}/templates'
 docker_build_dir = f'{project_dir}/docker_build'
 docker_user = credentials.docker['docker_user']
@@ -24,7 +24,7 @@ email_success_file = 'email_success.txt'
 email_failure_to_user_file = 'email_failure_to_user.txt'
 email_failure_to_admin_file = 'email_failure_to_admin.txt'
 admin_email = 'support.devops@talend.com'
-talend_components = ['cmdline', 'cibuilder', 'jobserver', 'mdm', 'logserver', 'remoteengine', 'runtime', 'tac']
+talend_components = ['cibuilder', 'cmdline', 'jobserver', 'logserver', 'mdm', 'remoteengine', 'runtime', 'tac']
 
 
 def handle_tal_request(request):
@@ -313,147 +313,136 @@ def create_tal_request_dictionary(request):
     jdk_distro_arch = 'linux-x64'
     jdk_build = None
     tomcat_version = request['tomcat_version']
-    talend_installer = None
+    talend_installer = 'Talend-'
     talend_version = None
     update_os_and_install_tools = None
     add_executables_to_path = None
     clean_cached_files = None
 
-    if talend_component != 'remoteengine':
-        _601_version = '20150908_1633-V6.0.1'
-        _611_version = '20151214_1327-V6.1.1'
-        _621_version = '20160704_1411-V6.2.1'
-        _631_version = '20161216_1026-V6.3.1'
-        _641_version = '20170623_1246-V6.4.1'
-        _651_version = '20180116_1512-V6.5.1'
-        _701_version = '20180411_1414-V7.0.1'
+    cibuilder_installer = 'CI-Builder-'
+    cmdline_installer = 'Studio-'
+    jobserver_installer = 'JobServer-'
+    logserver_installer = 'LogServer-'
+    mdm_installer = 'MDMServer-'
+    remoteengine_installer = 'RemoteEngine-'
+    runtime_installer = 'Runtime-'
+    tac_installer = 'AdministrationCenter-'
 
+    # tac, cmdline, jobserver, cibuilder, mdm, runtime, and remoteengine versions
+    _601_version = '20150908_1633-V6.0.1'
+    _611_version = '20151214_1327-V6.1.1'
+    _621_version = '20160704_1411-V6.2.1'
+    _631_version = '20161216_1026-V6.3.1'
+    _641_version = '20170623_1246-V6.4.1'
+    _651_version = '20180116_1512-V6.5.1'
+    _701_version = '20180411_1414-V7.0.1'
+
+    # remote engine versions
+    _201_re_version = 'V2.0.1-79'
+    _210_re_version = 'V2.1.0-82'
+    _220_re_version = 'V2.2.0-90'
+    _230_re_version = 'V3.3.0-95'
+
+    # log server versions
+    _601_logser_version = 'V6.0.0.4'
+    _611_logser_version = _601_logser_version
+    _621_logser_version = _601_logser_version
+    _631_logser_version = 'V6.3.1-linux-x86_64'
+    _641_logser_version = 'V6.4.1-linux-x86_64'
+    _651_logser_version = 'V6.5.1-linux-x86_64'
+    _701_logser_version = 'V7.0.1-linux-x86_64'
+
+    if talend_component != 'remoteengine':
         if talend_semantic_version == '6.0.1':
             talend_version = '601'
-            if talend_component == 'tac':
-                talend_installer = 'Talend-AdministrationCenter-' + _601_version
-            elif talend_component == 'cmdline':
-                talend_installer = 'Talend-Studio-' + _601_version
-            elif talend_component == 'jobserver':
-                talend_installer = 'Talend-JobServer-' + _601_version
-            elif talend_component == 'cibuilder':
-                talend_installer = 'Talend-CI-Builder-' + _601_version
-            elif talend_component == 'logserver':
-                talend_installer = 'Talend-LogServer-' + _601_version
-            elif talend_component == 'mdm':
-                talend_installer = 'Talend-MDMServer-' + _601_version
-            elif talend_component == 'runtime':
-                talend_installer = 'Talend-Runtime-' + _601_version
         elif talend_semantic_version == '6.1.1':
             talend_version = '611'
-            if talend_component == 'tac':
-                talend_installer = 'Talend-AdministrationCenter-' + _611_version
-            elif talend_component == 'cmdline':
-                talend_installer = 'Talend-Studio-' + _611_version
-            elif talend_component == 'jobserver':
-                talend_installer = 'Talend-JobServer-' + _611_version
-            elif talend_component == 'cibuilder':
-                talend_installer = 'Talend-CI-Builder-' + _611_version
-            elif talend_component == 'logserver':
-                talend_installer = 'Talend-LogServer-' + _611_version
-            elif talend_component == 'mdm':
-                talend_installer = 'Talend-MDMServer-' + _611_version
-            elif talend_component == 'runtime':
-                talend_installer = 'Talend-Runtime-' + _611_version
         elif talend_semantic_version == '6.2.1':
             talend_version = '621'
-            if talend_component == 'tac':
-                talend_installer = 'Talend-AdministrationCenter-' + _621_version
-            elif talend_component == 'cmdline':
-                talend_installer = 'Talend-Studio-' + _621_version
-            elif talend_component == 'jobserver':
-                talend_installer = 'Talend-JobServer-' + _621_version
-            elif talend_component == 'cibuilder':
-                talend_installer = 'Talend-CI-Builder-' + _621_version
-            elif talend_component == 'logserver':
-                talend_installer = 'Talend-LogServer-' + _621_version
-            elif talend_component == 'mdm':
-                talend_installer = 'Talend-MDMServer-' + _621_version
-            elif talend_component == 'runtime':
-                talend_installer = 'Talend-Runtime-' + _621_version
         elif talend_semantic_version == '6.3.1':
             talend_version = '631'
-            if talend_component == 'tac':
-                talend_installer = 'Talend-AdministrationCenter-' + _631_version
-            elif talend_component == 'cmdline':
-                talend_installer = 'Talend-Studio-' + _631_version
-            elif talend_component == 'jobserver':
-                talend_installer = 'Talend-JobServer-' + _631_version
-            elif talend_component == 'cibuilder':
-                talend_installer = 'Talend-CI-Builder-' + _631_version
-            elif talend_component == 'logserver':
-                talend_installer = 'Talend-LogServer-' + _631_version
-            elif talend_component == 'mdm':
-                talend_installer = 'Talend-MDMServer-' + _631_version
-            elif talend_component == 'runtime':
-                talend_installer = 'Talend-Runtime-' + _631_version
         elif talend_semantic_version == '6.4.1':
             talend_version = '641'
-            if talend_component == 'tac':
-                talend_installer = 'Talend-AdministrationCenter-' + _641_version
-            elif talend_component == 'cmdline':
-                talend_installer = 'Talend-Studio-' + _641_version
-            elif talend_component == 'jobserver':
-                talend_installer = 'Talend-JobServer-' + _641_version
-            elif talend_component == 'cibuilder':
-                talend_installer = 'Talend-CI-Builder-' + _641_version
-            elif talend_component == 'logserver':
-                talend_installer = 'Talend-LogServer-' + _641_version
-            elif talend_component == 'mdm':
-                talend_installer = 'Talend-MDMServer-' + _641_version
-            elif talend_component == 'runtime':
-                talend_installer = 'Talend-Runtime-' + _641_version
         elif talend_semantic_version == '6.5.1':
             talend_version = '651'
-            if talend_component == 'tac':
-                talend_installer = 'Talend-AdministrationCenter-' + _651_version
-            elif talend_component == 'cmdline':
-                talend_installer = 'Talend-Studio-' + _651_version
-            elif talend_component == 'jobserver':
-                talend_installer = 'Talend-JobServer-' + _651_version
-            elif talend_component == 'cibuilder':
-                talend_installer = 'Talend-CI-Builder-' + _651_version
-            elif talend_component == 'logserver':
-                talend_installer = 'Talend-LogServer-' + _651_version
-            elif talend_component == 'mdm':
-                talend_installer = 'Talend-MDMServer-' + _651_version
-            elif talend_component == 'runtime':
-                talend_installer = 'Talend-Runtime-' + _651_version
         elif talend_semantic_version == '7.0.1':
             talend_version = '701'
-            if talend_component == 'tac':
-                talend_installer = 'Talend-AdministrationCenter-' + _701_version
-            elif talend_component == 'cmdline':
-                talend_installer = 'Talend-Studio-' + _701_version
-            elif talend_component == 'jobserver':
-                talend_installer = 'Talend-JobServer-' + _701_version
-            elif talend_component == 'cibuilder':
-                talend_installer = 'Talend-CI-Builder-' + _701_version
-            elif talend_component == 'logserver':
-                talend_installer = 'Talend-LogServer-' + _701_version
-            elif talend_component == 'mdm':
-                talend_installer = 'Talend-MDMServer-' + _701_version
-            elif talend_component == 'runtime':
-                talend_installer = 'Talend-Runtime-' + _701_version
+    elif talend_component == 'remoteengine':
+        if talend_semantic_version == '2.0.1':
+            talend_version = '201'
+        elif talend_semantic_version == '2.1.0':
+            talend_version = '201'
+        elif talend_semantic_version == '2.2.0':
+            talend_version = '201'
+        elif talend_semantic_version == '2.3.0':
+            talend_version = '201'
 
-    # TODO: AiMing, add the versions of remote engine and the talend_installer
-    # if talend_component == 'remoteengine':
-        #     _601_version = ''
-        #     _611_version = ''
-        #     _621_version = ''
-        #     _631_version = ''
-        #     _641_version = ''
-        #     _651_version = ''
-        #     _701_version = ''
-        # TODO: talend_installer
-        # if talend_semantic_version == '':
-        #     talend_version = ''
+    # Concatenate strings to create the name of the appropriate binary
+    ####################################################################################################################
 
+    # First, concatenate talend component
+    if talend_component == 'tac':
+        talend_installer += tac_installer
+    elif talend_component == 'cmdline':
+        talend_installer += cmdline_installer
+    elif talend_component == 'jobserver':
+        talend_installer += jobserver_installer
+    elif talend_component == 'cibuilder':
+        talend_installer += cibuilder_installer
+    elif talend_component == 'mdm':
+        talend_installer += mdm_installer
+    elif talend_component == 'runtime':
+        talend_installer += runtime_installer
+    elif talend_component == 'remoteengine':
+        talend_installer += remoteengine_installer
+    elif talend_component == 'logserver':
+        talend_installer += logserver_installer
+
+    # Second, concatenate talend version
+    if talend_component != 'logserver' and talend_component != 'remoteengine':
+        if talend_semantic_version == '6.0.1':
+            talend_installer += _601_version
+        elif talend_semantic_version == '6.1.1':
+            talend_installer += _611_version
+        elif talend_semantic_version == '6.2.1':
+            talend_installer += _621_version
+        elif talend_semantic_version == '6.3.1':
+            talend_installer += _631_version
+        elif talend_semantic_version == '6.4.1':
+            talend_installer += _641_version
+        elif talend_semantic_version == '6.5.1':
+            talend_installer += _651_version
+        elif talend_semantic_version == '7.0.1':
+            talend_installer += _701_version
+
+    elif talend_component == 'logserver':
+        if talend_semantic_version == '6.0.1':
+            talend_installer += _601_logser_version
+        elif talend_semantic_version == '6.1.1':
+            talend_installer += _611_logser_version
+        elif talend_semantic_version == '6.2.1':
+            talend_installer += _621_logser_version
+        elif talend_semantic_version == '6.3.1':
+            talend_installer += _631_logser_version
+        elif talend_semantic_version == '6.4.1':
+            talend_installer += _641_logser_version
+        elif talend_semantic_version == '6.5.1':
+            talend_installer += _651_logser_version
+        elif talend_semantic_version == '7.0.1':
+            talend_installer += _701_logser_version
+
+    elif talend_component == 'remoteengine':
+        if talend_semantic_version == '2.0.1':
+            talend_installer += _201_re_version
+        elif talend_semantic_version == '2.1.0':
+            talend_installer += _210_re_version
+        elif talend_semantic_version == '2.2.0':
+            talend_installer += _220_re_version
+        elif talend_semantic_version == '2.3.0':
+            talend_installer += _230_re_version
+
+    # Select appropriate tomcat major and minor versions
+    ####################################################################################################################
     if tomcat_version == '7' or tomcat_version == '7.0':
         # http://mirror.reverse.net/pub/apache/tomcat/tomcat-7/v7.0.88/bin/apache-tomcat-7.0.88.tar.gz
         tomcat_major = '7'
@@ -474,6 +463,8 @@ def create_tal_request_dictionary(request):
         tomcat_major = None
         tomcat_version = None
 
+    # Select appropriate jdk update and version
+    ####################################################################################################################
     if jdk_version == '8':
         if jdk_update == '141':
             jdk_build = 'b15'
@@ -484,22 +475,19 @@ def create_tal_request_dictionary(request):
         elif jdk_update == '151' or jdk_update == '161' or jdk_update == '162':
             jdk_build = 'b12'
 
+    # Select appropriate OS, OS version, and Dockerfile install commands
+    ####################################################################################################################
     if op_sys == 'centos':
         if os_version == '7.4':
-            os_version = os_version + '.1708'
-
+            os_version += '.1708'
         elif os_version == '7.3':
-            os_version = os_version + '.1611'
-
+            os_version += '.1611'
         elif os_version == '7.2':
-            os_version = os_version + '.1511'
-
+            os_version += '.1511'
         elif os_version == '7.1':
-            os_version = os_version + '.1503'
-
+            os_version += '.1503'
         elif os_version == '7.0':
-            os_version = os_version + '.1406'
-
+            os_version += '.1406'
         if os_version == '7.1.1503':
             update_os_and_install_tools = 'yum swap fakesystemd systemd -y && ' \
                                           'yum update -y && ' \
@@ -537,7 +525,8 @@ def create_tal_request_dictionary(request):
                                   'update-alternatives --set "keytool" "/opt/java/bin/keytool" '
         clean_cached_files = 'apt-get clean all'
 
-
+    # Finally, create template_dictionary and return
+    ####################################################################################################################
     template_dictionary = {'<os_placeholder>': op_sys,
                            '<os_version_placeholder>': os_version,
                            '<update_os_and_install_tools_placeholder>': update_os_and_install_tools,
@@ -599,7 +588,6 @@ def file_into_string(path, filename):
         file_object = open(f'{path}/{filename}', 'r')
         string_from_file = file_object.read()
         file_object.close()
-
     return string_from_file
 
 
