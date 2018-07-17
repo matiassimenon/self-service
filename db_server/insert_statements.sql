@@ -171,7 +171,7 @@ INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `use
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000046', 'ubuntu', '16.04', '6.3.1', 'logserver', '8', '151');
 -- 6.4.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000047', 'logserver6.4.1-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('000000047', 'ubuntu', '14.04', '6.4.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000047', 'ubuntu', '14.04', '6.4.1', 'logserver', '8', '151');
 -- 6.5.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000048', 'logserver6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000048', 'ubuntu', '12.04', '6.5.1', 'logserver', '8', '151');
@@ -413,4 +413,18 @@ INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `reques
 INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000076' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000076');
 INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000077' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000077');
 INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000078' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000078');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000079' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000079');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000080' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000080');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000081' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000081');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000082' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000082');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000083' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000083');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000084' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000084');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000085' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000085');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000086' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000086');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000087' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000087');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000088' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000088');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000089' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000089');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000090' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000090');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000091' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000091');
+INSERT INTO `self_service_db`.`REQUEST` (`request_uuid`, `request_date`, `request_status`, `salesforce_case`, `username`, `template_uuid`) VALUES ('00000092' , '04-03-18', 'pending', '00012345', 'fgalindo', '00000092');
 COMMIT;
