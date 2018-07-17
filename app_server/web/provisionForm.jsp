@@ -117,9 +117,10 @@ osArr['centos'] =
      {txt:'7.0.1', val:'7.0.1'}
  ];
  componentArr['remoteengine']=[
-     {txt:'2.0.1-79', val:'2.0.1-79'},    
-     {txt:'2.1.0-82', val:'2.1.0-82'},
-     {txt:'2.2.0-90', val:'2.2.0-90'}
+     {txt:'2.0.1', val:'2.0.1'},    
+     {txt:'2.1.0', val:'2.1.0'},
+     {txt:'2.2.0', val:'2.2.0'},
+     {txt:'2.3.0', val:'2.3.0'}
  ];
  //define the database version data array
 var dbArr=[];
@@ -408,7 +409,7 @@ function displayHadoop(){
                             <option value="jobserver">Jobserver</option>
                             <option value="mdm">MDM</option>
                             <option value="runtime">Runtime</option>
-                            <option value="logserv">Logserver</option>
+                            <option value="logserver">Logserver</option>
                             <option value="remoteengine">Remote Engine</option>
                         </select> 
                     </td>    
