@@ -140,7 +140,7 @@ INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `use
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000037', 'centos', '6.6', '6.1.1', 'runtime', '8', '151');
 -- 6.2.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000038', 'runtime6.2.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('000000038', 'centos', '6.7', '6.2.1', 'runtime', '8', '151');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000038', 'centos', '6.7', '6.2.1', 'runtime', '8', '151');
 -- 6.3.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000039', 'runtime6.3.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000039', 'centos', '6.7', '6.3.1', 'runtime', '8', '151');
