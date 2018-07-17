@@ -158,179 +158,180 @@ INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_vers
 -- Log Server  --------------------------------------------------------
 -- ubuntu
 -- 6.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000029', 'logserver6.0.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000029', 'ubuntu', '12.04', '6.0.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000043', 'logserver6.0.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000043', 'ubuntu', '12.04', '6.0.1', 'logserver', '8', '151');
 -- 6.1.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000030', 'logserver6.1.1-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000030', 'ubuntu', '14.04', '6.1.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000044', 'logserver6.1.1-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000044', 'ubuntu', '14.04', '6.1.1', 'logserver', '8', '151');
 -- 6.2.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000031', 'logserver6.2.1-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000031', 'ubuntu', '16.04', '6.2.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000045', 'logserver6.2.1-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000045', 'ubuntu', '16.04', '6.2.1', 'logserver', '8', '151');
 -- 6.3.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000032', 'logserver6.3.1-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000032', 'ubuntu', '16.04', '6.3.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000046', 'logserver6.3.1-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000046', 'ubuntu', '16.04', '6.3.1', 'logserver', '8', '151');
 -- 6.4.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000033', 'logserver6.4.1-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('000000033', 'ubuntu', '14.04', '6.4.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000047', 'logserver6.4.1-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('000000047', 'ubuntu', '14.04', '6.4.1', 'logserver', '8', '151');
 -- 6.5.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000034', 'logserver6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000034', 'ubuntu', '12.04', '6.5.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000048', 'logserver6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000048', 'ubuntu', '12.04', '6.5.1', 'logserver', '8', '151');
 -- 7.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000035', 'logserver7.0.1-ubuntu17.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000035', 'ubuntu', '17.04', '7.0.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000049', 'logserver7.0.1-ubuntu17.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000049', 'ubuntu', '17.04', '7.0.1', 'logserver', '8', '151');
 
 -- centos
 -- 6.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000036', 'logserver6.0.1-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000036', 'centos', '6.6', '6.0.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000050', 'logserver6.0.1-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000050', 'centos', '6.6', '6.0.1', 'logserver', '8', '151');
 -- 6.1.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000037', 'logserver6.1.1-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000037', 'centos', '6.6', '6.1.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000051', 'logserver6.1.1-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000051', 'centos', '6.6', '6.1.1', 'logserver', '8', '151');
 -- 6.2.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000038', 'logserver6.2.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000038', 'centos', '6.7', '6.2.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000052', 'logserver6.2.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000052', 'centos', '6.7', '6.2.1', 'logserver', '8', '151');
 -- 6.3.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000039', 'logserver6.3.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000039', 'centos', '6.7', '6.3.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000053', 'logserver6.3.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000053', 'centos', '6.7', '6.3.1', 'logserver', '8', '151');
 -- 6.4.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000040', 'logserver6.4.1-centos6.8-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000040', 'centos', '6.8', '6.4.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000054', 'logserver6.4.1-centos6.8-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000054', 'centos', '6.8', '6.4.1', 'logserver', '8', '151');
 -- 6.5.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000041', 'logserver6.5.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000041', 'centos', '6.7', '6.5.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000055', 'logserver6.5.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000055', 'centos', '6.7', '6.5.1', 'logserver', '8', '151');
 -- 7.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000042', 'logserver7.0.1-centos7.4-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000042', 'centos', '7.4', '7.0.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000056', 'logserver7.0.1-centos7.4-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000056', 'centos', '7.4', '7.0.1', 'logserver', '8', '151');
 
 
 -- Remote Engine  --------------------------------------------------
 -- ubuntu
 -- 2.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000043', 'remoteengine2.0.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000043', 'ubuntu', '12.04', '2.0.1', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000057', 'remoteengine2.0.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000057', 'ubuntu', '12.04', '2.0.1', 'remoteengine', '8', '151');
 -- 2.1.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000044', 'remoteengine2.1.0-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000044', 'ubuntu', '14.04', '2.1.0', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000058', 'remoteengine2.1.0-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000058', 'ubuntu', '14.04', '2.1.0', 'remoteengine', '8', '151');
 -- 2.2.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000045', 'remoteengine2.2.0-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000045', 'ubuntu', '16.04', '2.2.0', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000059', 'remoteengine2.2.0-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000059', 'ubuntu', '16.04', '2.2.0', 'remoteengine', '8', '151');
 -- 2.3.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000046', 'remoteengine2.3.0-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000046', 'ubuntu', '16.04', '2.3.0', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000060', 'remoteengine2.3.0-ubuntu16.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000060', 'ubuntu', '16.04', '2.3.0', 'remoteengine', '8', '151');
 
 -- centos
 -- 2.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000047', 'remoteengine2.0.1-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000047', 'centos', '6.6', '2.0.1', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000061', 'remoteengine2.0.1-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000061', 'centos', '6.6', '2.0.1', 'remoteengine', '8', '151');
 -- 2.1.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000048', 'remoteengine2.1.0-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000048', 'centos', '6.6', '2.1.0', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000062', 'remoteengine2.1.0-centos6.6-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000062', 'centos', '6.6', '2.1.0', 'remoteengine', '8', '151');
 -- 2.2.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000049', 'remoteengine2.2.0-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000049', 'centos', '6.7', '2.2.0', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000063', 'remoteengine2.2.0-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000063', 'centos', '6.7', '2.2.0', 'remoteengine', '8', '151');
 -- 2.3.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000050', 'remoteengine2.3.0-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000050', 'centos', '6.7', '2.3.0', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000064', 'remoteengine2.3.0-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000064', 'centos', '6.7', '2.3.0', 'remoteengine', '8', '151');
+
 
 
 -- INSERT INTO TEMPLATE and DB_TEMPLATE
 -- MySQL --------------------------------------------------------------
 -- 8.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000051', 'mysql8.0-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000051', 'debian', '9-slim', '8.0', 'mysql');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000065', 'mysql8.0-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000065', 'debian', '9-slim', '8.0', 'mysql');
 -- 5.7
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000052', 'mysql5.7-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000052', 'debian', '9-slim', '5.7', 'mysql');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000066', 'mysql5.7-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000066', 'debian', '9-slim', '5.7', 'mysql');
 -- 5.6
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000053', 'mysql5.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000053', 'debian', '9-slim', '5.6', 'mysql');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000067', 'mysql5.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000067', 'debian', '9-slim', '5.6', 'mysql');
 -- 5.5
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000054', 'mysql5.5-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000054', 'debian', '9-slim', '5.5', 'mysql');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000068', 'mysql5.5-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000068', 'debian', '9-slim', '5.5', 'mysql');
 
 -- Oracle --------------------------------------------------------
 -- 11.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000055', 'oracle11.2-oraclelinux7.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000055', 'oraclelinux', '7-slim', '11.2', 'oracle');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000069', 'oracle11.2-oraclelinux7.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000069', 'oraclelinux', '7-slim', '11.2', 'oracle');
 -- 12.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000056', 'oracle12.1-oraclelinux7.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000056', 'oraclelinux', '7-slim', '12.1', 'oracle');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000070', 'oracle12.1-oraclelinux7.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000070', 'oraclelinux', '7-slim', '12.1', 'oracle');
 -- 12.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000057', 'oracle12.2-oraclelinux7.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000057', 'oraclelinux', '7-slim', '12.2', 'oracle');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000071', 'oracle12.2-oraclelinux7.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000071', 'oraclelinux', '7-slim', '12.2', 'oracle');
 
 -- IBM DB2 Express-C --------------------------------------
 -- 5.5
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000058', 'ibmdb2expressc10.5-centos7', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000058', 'centos', '7.1', '10.5', 'ibmdb2expressc');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000072', 'ibmdb2expressc10.5-centos7', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000072', 'centos', '7.1', '10.5', 'ibmdb2expressc');
 
 -- PostgreSQL -----------------------------------------------
 -- 9.3
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000059', 'postgres9.3-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000059', 'debian', '9-slim', '9.3', 'postgres');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000073', 'postgres9.3-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000073', 'debian', '9-slim', '9.3', 'postgres');
 -- 9.4
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000060', 'postgres9.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000060', 'debian', '9-slim', '9.4', 'postgres');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000074', 'postgres9.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000074', 'debian', '9-slim', '9.4', 'postgres');
 -- 9.5
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000061', 'postgres9.5-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000061', 'debian', '9-slim', '9.5', 'postgres');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000075', 'postgres9.5-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000075', 'debian', '9-slim', '9.5', 'postgres');
 -- 9.6
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000062', 'postgres9.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000062', 'debian', '9-slim', '9.6', 'postgres');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000076', 'postgres9.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000076', 'debian', '9-slim', '9.6', 'postgres');
 -- 10
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000063', 'postgres10-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000063', 'debian', '9-slim', '10', 'postgres');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000077', 'postgres10-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000077', 'debian', '9-slim', '10', 'postgres');
 -- 11
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000064', 'postgres11-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000064', 'debian', '9-slim', '11', 'postgres');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000078', 'postgres11-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000078', 'debian', '9-slim', '11', 'postgres');
 
 -- MariaDB ----------------------------------------------------
 -- 10.3
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000065', 'mariadb10.3-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000065', 'debian', '8', '10.3', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000079', 'mariadb10.3-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000079', 'debian', '8', '10.3', 'mariadb');
 -- 10.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000066', 'mariadb10.2-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000066', 'debian', '8', '10.2', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000080', 'mariadb10.2-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000080', 'debian', '8', '10.2', 'mariadb');
 -- 10.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000067', 'mariadb10.1-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000067', 'debian', '8', '10.1', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000081', 'mariadb10.1-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000081', 'debian', '8', '10.1', 'mariadb');
 -- 10.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000068', 'mariadb10.0-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000068', 'debian', '8', '10.0', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000082', 'mariadb10.0-debian8', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000082', 'debian', '8', '10.0', 'mariadb');
 -- 5.5
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000069', 'mariadb5.5-debian7', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000069', 'debian', '7', '5.5', 'mariadb');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000083', 'mariadb5.5-debian7', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000083', 'debian', '7', '5.5', 'mariadb');
 
 -- Apache Cassandra --------------------------------------
 -- 2.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000070', 'cassandra2.1-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000070', 'debian', '8-slim', '2.1', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000084', 'cassandra2.1-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000084', 'debian', '8-slim', '2.1', 'cassandra');
 -- 2.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000071', 'cassandra2.2-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000071', 'debian', '8-slim', '2.2', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000085', 'cassandra2.2-debian8.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000085', 'debian', '8-slim', '2.2', 'cassandra');
 -- 3.0
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000072', 'cassandra3.0-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000072', 'debian', '9-slim', '3.0', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000086', 'cassandra3.0-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000086', 'debian', '9-slim', '3.0', 'cassandra');
 -- 3.11
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000073', 'cassandra3.11-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000073', 'debian', '9-slim', '3.11', 'cassandra');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000087', 'cassandra3.11-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000087', 'debian', '9-slim', '3.11', 'cassandra');
 
 -- MongoDB ---------------------------------------------------
 -- 3.2
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000074', 'mongo3.2-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000074', 'debian', '7', '3.2', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000088', 'mongo3.2-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000088', 'debian', '7', '3.2', 'mongo');
 -- 3.4
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000075', 'mongo3.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000075', 'debian', '7', '3.4', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000089', 'mongo3.4-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000089', 'debian', '7', '3.4', 'mongo');
 -- 3.6
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000076', 'mongo3.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000076', 'debian', '7', '3.6', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000090', 'mongo3.6-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000090', 'debian', '7', '3.6', 'mongo');
 -- 3.7
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000077', 'mongo3.7-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000077', 'debian', '7', '3.7', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000091', 'mongo3.7-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000091', 'debian', '7', '3.7', 'mongo');
 -- 4.0.rc
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000078', 'mongo4.0.rc-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000078', 'debian', '7', '4.0-rc', 'mongo');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000092', 'mongo4.0.rc-debian9.slim', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`DB_TEMPLATE` (`template_uuid`, `os`, `os_version`, `db_version`, `db`) VALUES ('00000092', 'debian', '7', '4.0-rc', 'mongo');
 
 
 -- INSERT REQUESTS 
