@@ -1,12 +1,12 @@
 -- TEST DATA
 
 -- INSERT INTO USER (ADMIN_USER and REGULAR will be updated too)
--- INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Francisco', 'Duran', 'fgalindo', 'fgalindo@talend.com', 'devops', 'atl', '5e884898da28047151d0e56f8dc62927', 'US', '0', '0', '', '');
--- INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Abdoul Karim', 'Diallo', 'adiallo', 'adiallo@talend.com', 'escalations', 'atl', '5e884898da28047151d0e56f8dc62927', 'US', '0', '0', '', '');
--- INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('AiMing', 'Chen', 'achen', 'achen@talend.com', 'escalations', 'atl', '5e884898da28047151d0e56f8dc62927', 'APAC', '0', '0', '', '');
+INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Francisco', 'Duran', 'fgalindo', 'fgalindo@talend.com', 'devops', 'atl', '5e884898da28047151d0e56f8dc62927', 'US', '0', '0', '', '');
+INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Abdoul Karim', 'Diallo', 'adiallo', 'adiallo@talend.com', 'escalations', 'atl', '5e884898da28047151d0e56f8dc62927', 'US', '0', '0', '', '');
+INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('AiMing', 'Chen', 'achen', 'achen@talend.com', 'escalations', 'atl', '5e884898da28047151d0e56f8dc62927', 'APAC', '0', '0', '', '');
 
 -- UPDATE USER SET to admin
--- UPDATE `self_service_db`.`USER` SET `admin`='1' WHERE `username`='fgalindo';
+UPDATE `self_service_db`.`USER` SET `admin`='1' WHERE `username`='fgalindo';
 
 
 -- INSERT INTO TEMPLATE and TALEND_TEMPLATE
@@ -123,7 +123,7 @@ INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `use
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000032', 'ubuntu', '16.04', '6.3.1', 'runtime', '8', '151');
 -- 6.4.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000033', 'runtime6.4.1-ubuntu14.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('000000033', 'ubuntu', '14.04', '6.4.1', 'runtime', '8', '151');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000033', 'ubuntu', '14.04', '6.4.1', 'runtime', '8', '151');
 -- 6.5.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000034', 'runtime6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000034', 'ubuntu', '12.04', '6.5.1', 'runtime', '8', '151');
@@ -188,7 +188,7 @@ INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `use
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000037', 'centos', '6.6', '6.1.1', 'logserver', '8', '151');
 -- 6.2.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000038', 'logserver6.2.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('000000038', 'centos', '6.7', '6.2.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000038', 'centos', '6.7', '6.2.1', 'logserver', '8', '151');
 -- 6.3.1
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000039', 'logserver6.3.1-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000039', 'centos', '6.7', '6.3.1', 'logserver', '8', '151');
@@ -227,7 +227,7 @@ INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `use
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000048', 'centos', '6.6', '2.1.0', 'remoteengine', '8', '151');
 -- 2.2.0
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000049', 'remoteengine2.2.0-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('000000049', 'centos', '6.7', '2.2.0', 'remoteengine', '8', '151');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000049', 'centos', '6.7', '2.2.0', 'remoteengine', '8', '151');
 -- 2.3.0
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000050', 'remoteengine2.3.0-centos6.7-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000050', 'centos', '6.7', '2.3.0', 'remoteengine', '8', '151');
