@@ -52,10 +52,9 @@ WORKDIR /talend
 # Install <talend_component_placeholder>
 ADD <talend_installer_placeholder>.zip /talend
 
-RUN \
-  unzip /talend/<talend_installer_placeholder>.zip -d /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
-  rm -rf /talend/<talend_installer_placeholder>.zip && \
-  chmod +x /talend/<talend_component_placeholder>-<talend_version_placeholder>/bin/*
+RUN unzip /talend/<talend_installer_placeholder>.zip && rm -rf /talend/<talend_installer_placeholder>.zip && \
+    mv /talend/Talend-RemoteEngine-* /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
+    chmod +x /talend/<talend_component_placeholder>-<talend_version_placeholder>/bin/*
 
 USER root
 # Define Default command

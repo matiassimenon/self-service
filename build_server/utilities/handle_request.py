@@ -380,11 +380,11 @@ def create_tal_request_dictionary(request):
         if talend_semantic_version == '2.0.1':
             talend_version = '201'
         elif talend_semantic_version == '2.1.0':
-            talend_version = '201'
+            talend_version = '210'
         elif talend_semantic_version == '2.2.0':
-            talend_version = '201'
+            talend_version = '220'
         elif talend_semantic_version == '2.3.0':
-            talend_version = '201'
+            talend_version = '230'
 
     # Concatenate strings to create the name of the appropriate binary
     ####################################################################################################################

@@ -50,7 +50,7 @@ CREATE TABLE `TALEND_TEMPLATE` (
   `talend_component` VARCHAR(12) NULL,
   `jdk_version` CHAR(2) NOT NULL,
   `jdk_update` CHAR(3) NOT NULL,
-  `tomcat_version` CHAR(4) NOT NULL,
+  `tomcat_version` CHAR(4) NULL,
   PRIMARY KEY (`template_uuid`)
   -- FOREIGN KEY (`template_uuid`) REFERENCES `TEMPLATE` (`template_uuid`)
 );
