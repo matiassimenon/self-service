@@ -49,9 +49,9 @@ public class SaveAsTemplate extends HttpServlet {
             //clear template_uuid;
             
             request.setAttribute("template", template);
-            request.setAttribute("errMessage", "<font color='green'>Save Successfully!!</font>");
+            request.setAttribute("errMessage", "<font color='green'>Successful Save!</font>");
             request.getRequestDispatcher("provisionForm.jsp").include(request, response);
-            //out.print("<h3 class='save_ok'>Save Successfully!!</h3>");
+            //out.print("<h3 class='save_ok'>Successful Save.</h3>");
 
         } catch (SQLException ex) {
             try {

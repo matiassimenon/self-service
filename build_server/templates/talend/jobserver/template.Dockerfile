@@ -53,9 +53,9 @@ WORKDIR /talend
 ADD <talend_installer_placeholder>.zip /talend
 
 RUN \
-  unzip /talend/<talend_installer_placeholder>.zip && \
+  unzip /talend/<talend_installer_placeholder>.zip && rm -rf /talend/<talend_installer_placeholder>.zip \
   mv /talend/<talend_installer_placeholder> /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
-  rm -rf /talend/<talend_installer_placeholder>.zip
+
 
 USER root
 # Define Default command

@@ -44,7 +44,7 @@ RUN <add_executables_to_path_place_holder>
 RUN <clean_cached_files_placeholder>
 
 # Expose Talend Application Ports
-EXPOSE 9200
+EXPOSE 8000 8001 8888
 
 # Define working directory
 WORKDIR /talend
@@ -53,10 +53,10 @@ WORKDIR /talend
 ADD <talend_installer_placeholder>.zip /talend
 
 RUN \
-  unzip /talend/<talend_installer_placeholder>.zip && \
-  mv /talend/<talend_installer_placeholder> /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
-  rm -rf /talend/<talend_installer_placeholder>.zip
+  unzip /talend/<talend_installer_placeholder>.zip -d /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
+  rm -rf /talend/<talend_installer_placeholder>.zip && \
+  chmod +x /talend/<talend_component_placeholder>-<talend_version_placeholder>/*.sh
 
 USER root
 # Define Default command
-ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start_logserver.sh" && /bin/bash
+ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/logserver/start_logserver.sh" && /bin/bash

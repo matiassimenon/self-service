@@ -73,13 +73,10 @@ EXPOSE 8180
 WORKDIR /talend
 
 # Install <talend_component_placeholder>
-ADD <talend_installer_placeholder>.zip /talend
+ADD <talend_installer_placeholder>.jar /talend
 
-RUN \
-  unzip /talend/<talend_installer_placeholder>.zip && \
-  mv /talend/<talend_installer_placeholder> /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
-  rm -rf /talend/<talend_installer_placeholder>.zip
+RUN mv /talend/<talend_installer_placeholder>.jar /talend/<talend_component_placeholder>-<talend_version_placeholder>.jar
 
 USER root
 # Define Default command
-ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start_mdm.sh" && /bin/bash
+ENTRYPOINT "java -jar /talend/<talend_component_placeholder>-<talend_version_placeholder>.jar" && /bin/bash
