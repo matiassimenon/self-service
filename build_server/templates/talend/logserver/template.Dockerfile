@@ -58,4 +58,4 @@ RUN unzip /talend/<talend_installer_placeholder>.zip && rm -rf /talend/<talend_i
 
 USER root
 # Define Default command
-ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/logserver/start_logserver.sh" && /bin/bash
+ENTRYPOINT "/talend/<talend_component_placeholder>-<talend_version_placeholder>/start_logserver.sh" && /bin/bash
