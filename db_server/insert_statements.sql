@@ -1,4 +1,5 @@
 -- TEST DATA
+-- TEST DATA
 
 -- INSERT INTO USER (ADMIN_USER and REGULAR will be updated too)
 INSERT INTO `self_service_db`.`USER` (`firstname`, `lastname`, `username`, `email`, `department`, `city`, `password`, `region`, `admin`, `admin_request`, `question`, `answer`) VALUES ('Francisco', 'Duran', 'fgalindo', 'fgalindo@talend.com', 'devops', 'atl', '5e884898da28047151d0e56f8dc62927', 'US', '0', '0', '', '');
@@ -32,8 +33,8 @@ INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_versi
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000006', 'tac6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`, `tomcat_version`) VALUES ('00000006', 'ubuntu', '12.04', '6.5.1', 'tac', '8', '151', '8.0');
 -- 7.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000007', 'tac7.0.1-ubuntu17.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`, `tomcat_version`) VALUES ('00000007', 'ubuntu', '17.04', '7.0.1', 'tac', '8', '151', '8.0');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000007', 'tac7.0.1-ubuntu17.10-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`, `tomcat_version`) VALUES ('00000007', 'ubuntu', '17.10', '7.0.1', 'tac', '8', '151', '8.0');
 
 -- centos
 -- 6.0.1
@@ -80,8 +81,8 @@ INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_versi
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000020', 'mdm6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`, `tomcat_version`) VALUES ('00000020', 'ubuntu', '12.04', '6.5.1', 'mdm', '8', '151', '8.0');
 -- 7.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000021', 'mdm7.0.1-ubuntu17.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`, `tomcat_version`) VALUES ('00000021', 'ubuntu', '17.04', '7.0.1', 'mdm', '8', '151', '8.0');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000021', 'mdm7.0.1-ubuntu17.10-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`, `tomcat_version`) VALUES ('00000021', 'ubuntu', '17.10', '7.0.1', 'mdm', '8', '151', '8.0');
 
 -- centos
 -- 6.0.1
@@ -128,8 +129,8 @@ INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_versi
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000034', 'runtime6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000034', 'ubuntu', '12.04', '6.5.1', 'runtime', '8', '151');
 -- 7.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000035', 'runtime7.0.1-ubuntu17.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000035', 'ubuntu', '17.04', '7.0.1', 'runtime', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000035', 'runtime7.0.1-ubuntu17.10-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000035', 'ubuntu', '17.10', '7.0.1', 'runtime', '8', '151');
 
 -- centos
 -- 6.0.1
@@ -176,8 +177,8 @@ INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`,`os`, `os_versi
 INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000048', 'logserver6.5.1-ubuntu12.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
 INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000048', 'ubuntu', '12.04', '6.5.1', 'logserver', '8', '151');
 -- 7.0.1
-INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000049', 'logserver7.0.1-ubuntu17.04-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
-INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000049', 'ubuntu', '17.04', '7.0.1', 'logserver', '8', '151');
+INSERT INTO `self_service_db`.`TEMPLATE` (`template_uuid`, `template_name`, `username`, `creation_date`, `last_edit`) VALUES ('00000049', 'logserver7.0.1-ubuntu17.10-jdk8u151', 'fgalindo', '2018-05-29', '2018-05-29');
+INSERT INTO `self_service_db`.`TALEND_TEMPLATE` (`template_uuid`, `os`, `os_version`, `talend_version`, `talend_component`, `jdk_version`, `jdk_update`) VALUES ('00000049', 'ubuntu', '17.10', '7.0.1', 'logserver', '8', '151');
 
 -- centos
 -- 6.0.1
