@@ -341,7 +341,7 @@ def create_tal_request_dictionary(request):
     _201_re_version = 'V2.0.1-79'
     _210_re_version = 'V2.1.0-82'
     _220_re_version = 'V2.2.0-90'
-    _230_re_version = 'V3.3.0-95'
+    _230_re_version = 'V2.3.0-95'
 
     # log server versions
     _601_logser_version = 'V6.0.0.4'
