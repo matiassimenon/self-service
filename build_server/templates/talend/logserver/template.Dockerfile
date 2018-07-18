@@ -53,7 +53,7 @@ WORKDIR /talend
 ADD <talend_installer_placeholder>.zip /talend
 
 RUN unzip /talend/<talend_installer_placeholder>.zip && rm -rf /talend/<talend_installer_placeholder>.zip && \
-    mv /talend/Talend-LogServer /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
+    mv /talend/logserver /talend/<talend_component_placeholder>-<talend_version_placeholder> && \
     chmod +x /talend/<talend_component_placeholder>-<talend_version_placeholder>/*.sh
 
 USER root
